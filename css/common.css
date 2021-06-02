@@ -8,14 +8,13 @@ html, body { margin: 0; padding: 0; height: 100%; }
     }
     .logo{
         float: left;
-        padding: 23px;
+        padding: 25px;
         margin-left: 30px;
         margin-right: 30px;
     }
-
     .dalog-title{
         position: absolute;
-        top: 5%;
+        top: 7%;
         left: 50%;
         margin-left: -250px;
         width:500px;
