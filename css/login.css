@@ -19,11 +19,11 @@ html, body { margin: 0; padding: 0; height: 100%; }
             width:300px;
             height:300px;
             text-align:center;
-            top:70%;
+            top:65%;
             left:50%;
             transform: translate(-50%,-50%);
             border-radius: 15px;
-            font-family: 'Spoqa Han Sans Neo', sans-serif
+            font-family: 'Spoqa Han Sans Neo', sans-serif;
         }
 
         .idForm{
@@ -78,4 +78,35 @@ html, body { margin: 0; padding: 0; height: 100%; }
           
         .btn:hover {
             background-position: right;
+        }
+
+        .join{
+            position:absolute;
+            top: 78%;
+            left: 50%;
+            margin-left: -33px;
+        }
+
+        .sns-login{
+            position: absolute;
+            top: 84%;
+            left:50%;
+            margin-left: -168px;
+        }
+
+        a:link {
+            color : #d4d2af;
+            text-decoration: none;
+        }
+        a:visited {
+            color : #d4d2af;
+            text-decoration: none;
+        }
+        a:hover {
+            color : #fcf8bd;
+            text-decoration: underline;
+        }
+        a:active {
+            color : #fcf8bd;
+            text-decoration: none;
         }
