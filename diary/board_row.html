@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>달:로그</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+    <link rel="stylesheet" type="text/css" href="../css/board_row.css" />
+    <link
+      href="https://spoqa.github.io/spoqa-han-sans/"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <script src="./board_row.js" defer></script>
+    <header class="header">
+      <div class="wrapper">
+        <img
+          src="../media/logo4.jpg"
+          class="logo"
+          onclick="location.href='index.html'"
+          style="cursor: pointer"
+        />
+        <input class="dalog-title" type="text" value="유진이의 일기" />
+        <nav>
+          <ul class="main-menu">
+            <li>
+              <a
+                href="./write.html"
+                target="_self"
+                style="text-decoration: none; cursor: pointer"
+              >
+                <img
+                  src="../media/write.png"
+                  style="cursor: pointer; margin-top: 7px"
+                  alt="글쓰기"
+                />
+              </a>
+            </li>
+            <li>
+              <a
+                href="./view.html"
+                target="_self"
+                style="text-decoration: none; cursor: pointer"
+              >
+                <img
+                  src="../media/view.png"
+                  style="cursor: pointer; margin-top: 7px"
+                  alt="게시판"
+                />
+              </a>
+            </li>
+            <li>
+              <a href="#"
+                ><img
+                  src="../media/profile.png"
+                  style="cursor: pointer; margin-top: 7px"
+              /></a>
+              <ul class="sub-menu">
+                <li>
+                  <a
+                    href="../user/modify.html"
+                    target="_self"
+                    style="text-decoration: none; cursor: pointer"
+                    >정보수정</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="../user/login.html"
+                    target="_self"
+                    style="text-decoration: none; cursor: pointer"
+                    >로그아웃</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="bodyContainer">
+      <div class="body__top">
+        <div class="icons">
+          <a href="./board_grid.html">
+            <img class="board__top-grid" src="../media/grid_icon.svg" />
+          </a>
+          <a href="./board_row.html">
+            <img class="board__top-row" src="../media/row_icon.svg" />
+          </a>
+        </div>
+        <input class="searchInput" placeholder="검색어를 입력하세요" />
+      </div>
+
+      <div class="body__contents" id="contents"></div>
+    </div>
+  </body>
+</html>
