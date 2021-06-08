@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>달:로그</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+    <link rel="stylesheet" type="text/css" href="../css/view.css">
+    <link href="https://spoqa.github.io/spoqa-han-sans/" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="wrapper">
+            <img src="../media/logo4.jpg" class="logo" onclick="location.href='../index.html'" style="cursor: pointer" />
+            <input class="dalog-title" type="text" value="유진이의 일기" />
+            <nav>
+                <ul class="main-menu">
+                    <li>
+                        <a href="../diary/write.html" target="_self" style="text-decoration: none; cursor: pointer">
+                            <img src="../media/write.png" style="cursor: pointer; margin-top: 7px" alt="글쓰기" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="board_grid.html" target="_self" style="text-decoration: none; cursor: pointer">
+                            <img src="../media/view.png" style="cursor: pointer; margin-top: 7px" alt="게시판" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="../media/profile.png" style="cursor: pointer; margin-top: 7px" /></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="../user/modify.html" target="_self"
+                                    style="text-decoration: none; cursor: pointer">정보수정</a>
+                            </li>
+                            <li>
+                                <a href="../user/login.html" target="_self"
+                                    style="text-decoration: none; cursor: pointer">로그아웃</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <div id="container">
+        <div id="wrap">
+            <div id="date">
+                <p>2021-06-04</p>
+                <div id="weather_box">
+                    <div id="temperature">
+                        <div id="temper_night">
+                            <p>-10</p>
+                        </div>
+                        <div id="temper_day">
+                            <p>20</p>
+                        </div>
+                    </div>
+                    <div id="weather">
+                        <img src="../media/icon_sun.png" title="맑음">
+                    </div>
+                    <div id="manual_button">
+                    </div>
+                </div>
+            </div>
+            <div id="title">
+                <p>너무 배고픈 하루</p>
+            </div>
+            <div id="photo">
+                <img src="../media/view_photo_example.jpg" alt="오늘의 이미지">
+            </div>
+            <div id="content">
+                <p>
+                    에베베베베베베베베우아아아아아악
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure magnam ea architecto excepturi voluptatum omnis, magni obcaecati enim ad, laboriosam quia animi delectus ut similique consectetur culpa ducimus, aliquid dolores!
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint vero, numquam labore cum dignissimos doloremque itaque earum non quis nisi quasi sequi blanditiis, eius enim sapiente quam adipisci eligendi doloribus.
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus, esse, alias pariatur, optio velit recusandae commodi atque minus distinctio dolor tempora ad deserunt fugiat. Quidem perspiciatis omnis voluptate mollitia quasi!
+                </p>
+            </div>
+            <div id="edit_delete">
+                <div id="edit">
+                    <button id="edit_btn">수정</button>
+                </div>
+                <div id="delete">
+                    <button id="delete_btn">삭제</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

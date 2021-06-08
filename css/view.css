@@ -1,0 +1,136 @@
+
+@media screen and (min-width: 1366px) {
+    html {
+        font-size: 10px;
+    }
+}
+@media screen and (min-width: 1024px) and (max-width: 1365px) {
+    html {
+        font-size: 8px;
+    }
+}
+@media screen and (min-width: 500px) and (max-width: 1024px) {
+    html {
+    font-size: 6px;
+    }
+}
+@media screen and (max-width: 500px) {
+    html {
+    font-size: 6px;
+    }
+}
+
+* { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; box-sizing: border-box;}
+.header * {box-sizing: content-box !important;}
+
+#container {
+    padding-top: 10rem; padding-bottom: 10rem;
+}
+#wrap {
+    border: 2px solid #ddd;
+    width: 95rem;
+    margin: 5rem auto;
+}
+
+
+#date {
+    padding: 4rem 4rem 0;
+}
+#date p {
+    padding: 1.5rem; margin: 0;
+    font-size: 3rem; font-weight: bold;
+    display: inline-block;
+}
+
+#weather_box {
+    float: right;
+}
+#weather_box #temperature {
+    display: inline-block;
+    position: relative; top: -1rem;
+}
+#weather_box #temperature div {
+    display: block;
+    padding: 0.2rem; padding-left: 3.5rem;
+}
+#weather_box #temperature p {
+    padding: 0;
+    font-size: 2rem; font-weight: normal;
+    text-align: right;
+    display: block;
+}
+#weather_box #temperature div:nth-child(1) {
+    background: url(../media/icon_temperature_night.png) no-repeat left center;
+    background-size: 2.5rem 2.5rem;
+}
+#weather_box #temperature div:nth-child(2) {
+    background: url(../media/icon_temperature_day.png) no-repeat left center;
+    background-size: 2.5rem 2.5rem;
+}
+#weather_box #weather {
+    display: inline-block;
+}
+#weather_box #weather img {
+    width: 7rem; height: 7rem;
+}
+
+#title {
+    border-bottom: 2px solid #ddd; 
+}
+#title p {
+    font-size: 3rem;
+    color: #333;
+    padding: 1.5rem; margin: 0 4rem 2rem;
+    width: 87rem;
+}
+
+#photo {
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+}
+#photo img{
+    max-width: 80rem; max-height: 80rem;
+    margin: 3rem 0;
+}
+
+#content {
+    border-bottom: 2px solid #999;
+    padding: 4rem 5rem; margin-bottom: 4rem;
+}
+#content p {
+    font-size: 1.8rem;
+}
+
+#edit_delete {
+    text-align: right;
+}
+#edit_delete #edit {
+    display: inline-block;
+}
+#edit_delete #edit #edit_btn {
+    border: none;
+    background-color: #104c7c;
+    color: #fcf8bd; 
+    font-size: 2rem; font-weight: normal;
+    padding: 1.2rem 2.2rem; margin: 2rem 0;
+    border-radius: 3px 3px;
+    cursor: pointer;
+}
+#edit_delete #edit #edit_btn:hover {
+    background-color: #104b7cd3;
+}
+#edit_delete #delete {
+    display: inline-block;
+}
+#edit_delete #delete #delete_btn {
+    border: none;
+    background-color: #104c7c;
+    color: #fcf8bd; 
+    font-size: 2rem; font-weight: normal;
+    padding: 1.2rem 2.2rem; margin: 2rem 3rem;
+    border-radius: 3px 3px;
+    cursor: pointer;
+}
+#edit_delete #delete #delete_btn:hover {
+    background-color: #104b7cd3;
+}
