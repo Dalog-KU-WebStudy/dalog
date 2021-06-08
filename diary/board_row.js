@@ -65,15 +65,15 @@ const renderInit = () => {
     titledom.innerText = diary.title;
     flex.appendChild(titledom);
 
-    const weatherdom = document.createElement("div");
-    weatherdom.className = "diary__weather";
-    weatherdom.innerText = diary.weather;
-    flex.appendChild(weatherdom);
-
     const datedom = document.createElement("div");
     datedom.className = "diary__date";
     datedom.innerText = diary.date;
-    diaryDom.appendChild(datedom);
+    flex.appendChild(datedom);
+
+    const imagedom = document.createElement("div");
+    imagedom.setAttribute("src", diary.img);
+    imagedom.className = "diary__image";
+    diaryDom.appendChild(imagedom);
 
     diaryFragment.appendChild(diaryDom);
     contentsContainer.appendChild(diaryFragment);
