@@ -3,7 +3,8 @@
   <head>
     <title>달:로그</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+    <link rel="stylesheet" type="text/css" href="../css/board_grid.css" />
     <link
       href="https://spoqa.github.io/spoqa-han-sans/"
       rel="stylesheet"
@@ -16,13 +17,12 @@
     />
   </head>
   <body>
+    <script src="./board_grid.js" defer></script>
     <header class="header">
       <div class="wrapper">
         <img
-          src="media/logo4.jpg"
+          src="../media/logo4.jpg"
           class="logo"
-          width="150px"
-          height="40px"
           onclick="location.href='index.html'"
           style="cursor: pointer"
         />
@@ -31,14 +31,12 @@
           <ul class="main-menu">
             <li>
               <a
-                href="diary/write.html"
+                href="./write.html"
                 target="_self"
                 style="text-decoration: none; cursor: pointer"
               >
                 <img
-                  src="media/write.png"
-                  width="40px"
-                  height="40px"
+                  src="../media/write.png"
                   style="cursor: pointer; margin-top: 7px"
                   alt="글쓰기"
                 />
@@ -46,14 +44,12 @@
             </li>
             <li>
               <a
-                href="diary/view.html"
+                href="./view.html"
                 target="_self"
                 style="text-decoration: none; cursor: pointer"
               >
                 <img
-                  src="media/view.png"
-                  width="40px"
-                  height="40px"
+                  src="../media/view.png"
                   style="cursor: pointer; margin-top: 7px"
                   alt="게시판"
                 />
@@ -62,15 +58,13 @@
             <li>
               <a href="#"
                 ><img
-                  src="media/profile.png"
-                  width="40px"
-                  height="40px"
+                  src="../media/profile.png"
                   style="cursor: pointer; margin-top: 7px"
               /></a>
               <ul class="sub-menu">
                 <li>
                   <a
-                    href="user/modify.html"
+                    href="../user/modify.html"
                     target="_self"
                     style="text-decoration: none; cursor: pointer"
                     >정보수정</a
@@ -78,7 +72,7 @@
                 </li>
                 <li>
                   <a
-                    href="user/login.html"
+                    href="../user/login.html"
                     target="_self"
                     style="text-decoration: none; cursor: pointer"
                     >로그아웃</a
@@ -90,5 +84,20 @@
         </nav>
       </div>
     </header>
+    <div class="bodyContainer">
+      <div class="body__top">
+        <div class="icons">
+          <a href="./board_grid.html">
+            <img class="board__top-grid" src="../media/grid_icon.svg" />
+          </a>
+          <a href="./board_row.html">
+            <img class="board__top-row" src="../media/row_icon.svg" />
+          </a>
+        </div>
+        <input class="searchInput" placeholder="검색어를 입력하세요" />
+      </div>
+
+      <div class="body__contents" id="contents"></div>
+    </div>
   </body>
 </html>

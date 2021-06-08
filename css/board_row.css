@@ -1,0 +1,76 @@
+.bodyContainer {
+  padding: 14rem 0 0 0;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.body__top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5rem;
+}
+.icons {
+  display: flex;
+}
+
+.board__top-grid,
+.board__top-row {
+  width: 3rem;
+  height: 3rem;
+  margin-right: 0.8rem;
+}
+
+.searchInput {
+  font-size: 2rem;
+  width: 18rem;
+  padding: 5px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  /* box-shadow: 2px 2px 4px rgb(0 0 0 / 25%); */
+}
+.searchInput:focus {
+  outline: none;
+}
+
+.body__contents {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.diary {
+  margin: 2rem;
+  width: 70vw;
+  border-radius: 1.5rem;
+  box-shadow: 4px 4px 4px rgb(0 0 0 / 25%);
+}
+
+.diary:hover {
+  transform: translateY(-2%);
+  box-shadow: 4px 4px 4px rgb(0 0 0 /50%);
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.diary__title {
+  padding: 1rem 2rem 0 2rem;
+  font-size: 19px;
+  font-weight: 600;
+  white-space: nowrap;
+  width: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.diary__date {
+  padding: 1rem 2rem 0 2rem;
+  font-size: 16px;
+  white-space: nowrap;
+  width: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
