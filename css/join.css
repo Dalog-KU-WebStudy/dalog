@@ -69,7 +69,7 @@ body {
 .join-form{
     font-family: "Noto Serif KR", sans-serif;
     position: absolute;
-    margin-top: 23rem;
+    margin-top: 13rem;
     /*top: 25%;*/    
     left: 50%;
     transform: translateX(-50%);
