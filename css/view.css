@@ -28,22 +28,33 @@
 }
 #wrap {
     border: 2px solid #ddd;
-    width: 95rem;
-    margin: 5rem auto;
+    max-width: 95rem;
+    width: 97%;
+    margin: 5rem auto 0;
 }
 
 
+#layout_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#layout_left {
+    display: inline-flex;
+    flex-direction: column;
+}
 #date {
-    padding: 4rem 4rem 0;
+    padding: 3.5rem 4rem 0;
+    display: inline-block;
 }
 #date p {
     padding: 1.5rem; margin: 0;
-    font-size: 3rem; font-weight: bold;
+    font-size: 3rem;
     display: inline-block;
 }
 
 #weather_box {
-    float: right;
+    margin-right: 4rem;
 }
 #weather_box #temperature {
     display: inline-block;
@@ -54,7 +65,7 @@
     padding: 0.2rem; padding-left: 3.5rem;
 }
 #weather_box #temperature p {
-    padding: 0;
+    padding: 0; margin: 0;
     font-size: 2rem; font-weight: normal;
     text-align: right;
     display: block;
@@ -75,26 +86,27 @@
 }
 
 #title {
-    border-bottom: 2px solid #ddd; 
+    display: inline;
+    padding: 1rem 4rem 4rem;
 }
 #title p {
-    font-size: 3rem;
+    font-size: 3rem; font-weight: bold;
     color: #333;
-    padding: 1.5rem; margin: 0 4rem 2rem;
+    padding: 1.5rem;
     width: 87rem;
+    display: inline;
 }
 
 #photo {
     text-align: center;
-    border-bottom: 2px solid #ddd;
+    border-bottom: 2px solid #ddd; border-top: 2px solid #ddd;
 }
 #photo img{
-    max-width: 80rem; max-height: 80rem;
+    max-width: 72rem; max-height: 72rem;
     margin: 3rem 0;
 }
 
 #content {
-    border-bottom: 2px solid #999;
     padding: 4rem 5rem; margin-bottom: 4rem;
 }
 #content p {
@@ -103,6 +115,9 @@
 
 #edit_delete {
     text-align: right;
+    max-width: 95rem;
+    width: 97%;
+    margin: 2rem auto;
 }
 #edit_delete #edit {
     display: inline-block;
@@ -110,8 +125,8 @@
 #edit_delete #edit #edit_btn {
     border: none;
     background-color: #104c7c;
-    color: #fcf8bd; 
-    font-size: 2rem; font-weight: normal;
+    color: #fff; 
+    font-size: 1.8rem; font-weight: normal;
     padding: 1.2rem 2.2rem; margin: 2rem 0;
     border-radius: 3px 3px;
     cursor: pointer;
@@ -125,12 +140,38 @@
 #edit_delete #delete #delete_btn {
     border: none;
     background-color: #104c7c;
-    color: #fcf8bd; 
-    font-size: 2rem; font-weight: normal;
+    color: #fff; 
+    font-size: 1.8rem; font-weight: normal;
     padding: 1.2rem 2.2rem; margin: 2rem 3rem;
     border-radius: 3px 3px;
     cursor: pointer;
 }
 #edit_delete #delete #delete_btn:hover {
     background-color: #104b7cd3;
+}
+
+
+@media screen and (max-width: 500px) {
+    #layout_head {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    #date {
+        padding: 3rem 0 0 1.5rem;
+    }
+    #title {
+        padding: 1rem 0 2.5rem 1.5rem;
+    }
+    #weather_box {
+        margin-left: 3rem; margin-bottom: 2rem;
+    }
+    #content {
+        padding: 2rem 3rem;
+    }
+    #edit_delete #delete #delete_btn {
+        margin-left: 1rem;
+    }
+    #photo img {
+        width: 97%;
+    }
 }
