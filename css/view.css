@@ -34,11 +34,44 @@
 
 
 #date {
-    padding-top: 4rem; padding-left: 4rem;
+    padding: 4rem 4rem 0;
 }
 #date p {
     padding: 1.5rem; margin: 0;
     font-size: 3rem; font-weight: bold;
+    display: inline-block;
+}
+
+#weather_box {
+    float: right;
+}
+#weather_box #temperature {
+    display: inline-block;
+    position: relative; top: -1rem;
+}
+#weather_box #temperature div {
+    display: block;
+    padding: 0.2rem; padding-left: 3.5rem;
+}
+#weather_box #temperature p {
+    padding: 0;
+    font-size: 2rem; font-weight: normal;
+    text-align: right;
+    display: block;
+}
+#weather_box #temperature div:nth-child(1) {
+    background: url(../media/icon_temperature_night.png) no-repeat left center;
+    background-size: 2.5rem 2.5rem;
+}
+#weather_box #temperature div:nth-child(2) {
+    background: url(../media/icon_temperature_day.png) no-repeat left center;
+    background-size: 2.5rem 2.5rem;
+}
+#weather_box #weather {
+    display: inline-block;
+}
+#weather_box #weather img {
+    width: 7rem; height: 7rem;
 }
 
 #title {

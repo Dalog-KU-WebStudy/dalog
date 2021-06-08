@@ -53,6 +53,28 @@
                 <div id="write_date">
                     <input type="text" id="input_date" value="2021-06-04">
                     <img src="../media/icon_calendar.png">
+                    <div id="weather_box">
+                        <div id="temperature">
+                            <div id="temper_night">
+                                <input type="text" value="-10" readonly>
+                            </div>
+                            <div id="temper_day">
+                                <input type="text" value="20" readonly>
+                            </div>
+                        </div>
+                        <div id="weather">
+                            <img src="../media/icon_sun.png" title="맑음">
+                            <select>
+                                <option>맑음</option>
+                                <option>흐림</option>
+                                <option>비</option>
+                                <option>눈</option>
+                            </select>
+                        </div>
+                        <div id="manual_button">
+                            <button>직접 설정</button>
+                        </div>
+                    </div>
                 </div>
                 <div id="write_title">
                     <input type="text" id="input_title" placeholder="제목을 입력해주세요">
@@ -73,16 +95,38 @@
                             <span>T</span>
                             <span id="selected_color"></span>
                             <div id="color_select_box">
-                                <button style="background-color: #000;"></button>
-                                <button style="background-color: #444;" id="checked"></button>
-                                <button style="background-color: #888;"></button>
-                                <button style="background-color: #bbb;"></button>
-                                <button style="background-color: #fff;" class="white"></button>
-                                <button style="background-color: red;"></button>
-                                <button style="background-color: yellow;"></button>
-                                <button style="background-color: green;"></button>
-                                <button style="background-color: blue;"></button>
-                                <button style="background-color: purple;"></button>
+                                <ul id="color_button_list">
+                                    <li>
+                                        <button style="background-color: #000;"></button>
+                                    </li>
+                                    <li>
+                                        <button style="background-color: #444;" id="checked"></button>
+                                    </li>
+                                    <li>
+                                        <button style="background-color: #888;"></button>
+                                    </li>
+                                    <li>
+                                        <button style="background-color: #bbb;"></button>
+                                    </li>
+                                    <li>
+                                        <button style="background-color: #fff;" class="white"></button>
+                                    </li>
+                                    <li>
+                                        <button style="background-color: red;"></button>
+                                    </li>
+                                    <li>
+                                        <button style="background-color: yellow;"></button>
+                                    </li>
+                                    <li>
+                                        <button style="background-color: green;"></button>
+                                    </li>
+                                    <li>
+                                        <button style="background-color: blue;"></button>
+                                    </li>
+                                    <li>
+                                        <button style="background-color: purple;"></button>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         <div id="select_bold"></div>

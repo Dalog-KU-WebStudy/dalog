@@ -34,7 +34,7 @@
 
 
 #write_date {
-    padding-top: 4rem; padding-left: 4rem;
+    padding: 4rem 4rem 0 4rem;
 }
 #write_date #input_date{
     font-size: 3rem; font-weight: bold;
@@ -51,6 +51,50 @@
 }
 #write_date img:hover {
     cursor: pointer;
+}
+
+#weather_box {
+    float: right;
+}
+#weather_box #temperature {
+    display: inline-block;
+    position: relative; top: -0.8rem;
+}
+#weather_box #temperature div {
+    display: block;
+    padding-left: 3rem;
+}
+#weather_box #temperature div:nth-child(1) {
+    background: url(../media/icon_temperature_night.png) no-repeat left center;
+    background-size: 2.5rem 2.5rem;
+}
+#weather_box #temperature div:nth-child(2) {
+    background: url(../media/icon_temperature_day.png) no-repeat left center;
+    background-size: 2.5rem 2.5rem;
+}
+#weather_box #temperature input {
+    width: 4rem;
+    font-size: 2rem;
+    border: none;
+    outline: none;
+}
+#weather_box #weather {
+    display: inline-block;
+}
+#weather_box #weather img {
+    width: 7rem; height: 7rem;
+}
+#weather_box #weather select {
+    font-size: 1.2rem;
+}
+#weather_box #manual_button {
+    display: inline-block;
+}
+#weather_box #manual_button button {
+    font-size: 1rem;
+    background-color: white;
+    padding: 0.1rem;
+    border: 1px solid #999;
 }
 
 
@@ -139,6 +183,13 @@
     border-bottom: 10px solid white;
     content:"";
     position:absolute; top:-10px; left:7.5rem;
+}
+#write_content #text_deco #color_select_box ul {
+    margin: 0; padding: 0;
+}
+#write_content #text_deco #color_select_box li {
+    display: inline-block;
+    margin: 0; padding: 0;
 }
 #write_content #text_deco #color_select_box button{
     width: 2rem; height: 2rem;
