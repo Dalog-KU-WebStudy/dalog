@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>달:로그</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+    <link rel="stylesheet" type="text/css" href="../css/write.css">
+    <link href="https://spoqa.github.io/spoqa-han-sans/" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="wrapper">
+            <img src="../media/logo4.jpg" class="logo" onclick="location.href='../index.html'" style="cursor: pointer" />
+            <input class="dalog-title" type="text" value="유진이의 일기" />
+            <nav>
+                <ul class="main-menu">
+                    <li>
+                        <a href="../diary/write.html" target="_self" style="text-decoration: none; cursor: pointer">
+                            <img src="../media/write.png" style="cursor: pointer; margin-top: 7px" alt="글쓰기" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="board_grid.html" target="_self" style="text-decoration: none; cursor: pointer">
+                            <img src="../media/view.png" style="cursor: pointer; margin-top: 7px" alt="게시판" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="../media/profile.png" style="cursor: pointer; margin-top: 7px" /></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="../user/modify.html" target="_self"
+                                    style="text-decoration: none; cursor: pointer">정보수정</a>
+                            </li>
+                            <li>
+                                <a href="../user/login.html" target="_self"
+                                    style="text-decoration: none; cursor: pointer">로그아웃</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <div id="container">
+        <div id="wrap">
+            <form action="" method="POST" id="write_form">
+                <div id="write_date">
+                    <input type="text" id="input_date" value="2021-06-04">
+                    <img src="../media/icon_calendar.png">
+                </div>
+                <div id="write_title">
+                    <input type="text" id="input_title" placeholder="제목을 입력해주세요" value="오늘도 배가 고픈 하루">
+                </div>
+                <div id="attach_photo">
+                    <label for="input_photo" title="사진 첨부"></label>
+                    <input type="file" id="input_photo">
+                </div>
+                <div id="write_content">
+                    <div id="text_deco">
+                        <select id="select_fontSize">
+                            <option>10</option>
+                            <option>12</option>
+                            <option>14</option>
+                            <option>16</option>
+                        </select>
+                        <div id="select_fontColor">
+                            <span>T</span>
+                            <span id="selected_color"></span>
+                            <div id="color_select_box">
+                                <button style="background-color: #000;"></button>
+                                <button style="background-color: #444;" id="checked"></button>
+                                <button style="background-color: #888;"></button>
+                                <button style="background-color: #bbb;"></button>
+                                <button style="background-color: #fff;" class="white"></button>
+                                <button style="background-color: red;"></button>
+                                <button style="background-color: yellow;"></button>
+                                <button style="background-color: green;"></button>
+                                <button style="background-color: blue;"></button>
+                                <button style="background-color: purple;"></button>
+                            </div>
+                        </div>
+                        <div id="select_bold"></div>
+                        <div id="select_italic"></div>
+                        <div id="select_underline"></div>
+                    </div>
+                    <textarea name="content" id="input_content" placeholder="내용을 입력해주세요">색상 변경하는 탭은 js 구현할때 클릭할 때마다 나타나고 없애고 할거라서 
+지금은 그냥 보이게 했습니다.
+폰트 사이즈 선택하는것.. 디자인을 너무 바꾸고싶은데 바꿀 방법을 못찾았습니다..</textarea>
+                </div>
+                <div id="submit_button">
+                    <input type="submit" id="submit_btn" value="등록">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
