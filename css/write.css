@@ -28,8 +28,9 @@
 }
 #wrap {
     border: 2px solid #ddd;
-    width: 95rem;
-    margin: 5rem auto;
+    max-width: 95rem;
+    width: 97%;
+    margin: 5rem auto 0;
 }
 
 
@@ -37,7 +38,7 @@
     padding: 4rem 4rem 0 4rem;
 }
 #write_date #input_date{
-    font-size: 3rem; font-weight: bold;
+    font-size: 3rem;
     border: none; 
     padding: 1.5rem;
     width: 20rem;
@@ -52,9 +53,13 @@
 #write_date img:hover {
     cursor: pointer;
 }
+#date{
+    display: inline-block;
+}
 
 #weather_box {
     float: right;
+    text-align: right;
 }
 #weather_box #temperature {
     display: inline-block;
@@ -79,37 +84,49 @@
     outline: none;
 }
 #weather_box #weather {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
 }
 #weather_box #weather img {
     width: 7rem; height: 7rem;
 }
 #weather_box #weather select {
     font-size: 1.2rem;
+    /* display: none; */
 }
 #weather_box #manual_button {
     display: inline-block;
+    text-align: center;
+    width: 7rem;
 }
 #weather_box #manual_button button {
     font-size: 1rem;
-    background-color: white;
     padding: 0.1rem;
-    border: 1px solid #999;
+    border:none; border-bottom: 1px solid #000;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
 }
 
 
+#write_title {
+    text-align: center;
+}
 #write_title #input_title {
     font-size: 3rem;
     border: none; border-bottom: 2px solid #999;
     color: #333;
-    padding: 1.5rem; margin: 0 4rem 2rem;
-    width: 87rem;
+    padding: 1.5rem; margin-bottom: 1rem;
+    width: 90%;
 }
 #write_title #input_title:focus {
     outline: none;
 }
 
 
+#attach_photo {
+    padding: 2rem 4rem;
+}
 #attach_photo #input_photo {
     position: absolute;
     clip: rect(0, 0, 0, 0);
@@ -119,7 +136,11 @@
     display: block;
     background: url(../media/icon_image.png) no-repeat center; background-size: 100%;
     cursor: pointer;
-    margin-left: 4rem; margin-bottom: 2rem;
+}
+#attach_photo img {
+    max-width: 40rem;
+    max-height: 40rem;
+    margin-top: 1rem;
 }
 
 
@@ -127,7 +148,7 @@
     text-align: right;
 }
 #write_content #text_deco {
-    border-top: 2px solid #999;
+    border-top: 2px solid #bbb;
     padding: 1.7rem 2rem;
     background-color: #f6f6f6;
     line-height: 3.1rem;
@@ -241,8 +262,8 @@
 #write_content #input_content {
     width: 100%; height: 40rem;
     resize: none;
-    border: none; border-top: 2px solid #bbb; border-bottom: 2px solid #999;
-    padding: 4rem 5rem; margin-bottom: 4rem;
+    border: none; border-top: 2px solid #bbb; 
+    padding: 4rem 5rem;
     font-size: 1.8rem;
 }
 #write_content #input_content:focus {
@@ -251,17 +272,49 @@
 
 
 #submit_button {
+    max-width: 95rem;
+    width: 97%;
     text-align: right;
+    margin: 2rem auto;
 }
 #submit_button #submit_btn {
     border: none;
     background-color: #104c7c;
-    color: #fcf8bd; 
-    font-size: 2rem; font-weight: normal;
+    color: #fff; 
+    font-size: 1.8rem; font-weight: normal;
     padding: 1.2rem 2.2rem; margin: 2rem 3rem;
     border-radius: 3px 3px;
     cursor: pointer;
 }
 #submit_button #submit_btn:hover {
     background-color: #104b7cd3;
+}
+
+
+@media screen and (max-width: 500px) {
+    #date {
+        display: block;
+    }
+    #write_date {
+        padding: 2rem 2rem 1rem 2rem;
+    }
+    #weather_box {
+        float: none;
+        display: inline-block;
+        padding: 1rem;
+        text-align: right;
+    }
+    #weather_icon {
+        display: block;
+    }
+    #write_title #input_title {
+        width: 90%;
+        margin: 0 2rem 1rem;
+    }
+    #attach_photo img {
+        width: 90%;
+    }
+    #write_content #input_content {
+        padding: 2rem 3rem;
+    }
 }
