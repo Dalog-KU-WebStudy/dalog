@@ -1,0 +1,216 @@
+
+@media screen and (min-width: 1366px) {
+    html {
+        font-size: 10px;
+    }
+}
+@media screen and (min-width: 1024px) and (max-width: 1365px) {
+    html {
+        font-size: 8px;
+    }
+}
+@media screen and (min-width: 500px) and (max-width: 1024px) {
+    html {
+    font-size: 6px;
+    }
+}
+@media screen and (max-width: 500px) {
+    html {
+    font-size: 6px;
+    }
+}
+
+* { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; box-sizing: border-box;}
+.header * {box-sizing: content-box !important;}
+
+#container {
+    padding-top: 10rem; padding-bottom: 10rem;
+}
+#wrap {
+    border: 2px solid #ddd;
+    width: 95rem;
+    margin: 5rem auto;
+}
+
+
+#write_date {
+    padding-top: 4rem; padding-left: 4rem;
+}
+#write_date #input_date{
+    font-size: 3rem; font-weight: bold;
+    border: none; 
+    padding: 1.5rem;
+    width: 20rem;
+}
+#write_date #input_date:focus {
+    outline: none;
+}
+#write_date img {
+    display: inline-block;
+    width: 2.5rem; height: 2.5rem;
+}
+#write_date img:hover {
+    cursor: pointer;
+}
+
+
+#write_title #input_title {
+    font-size: 3rem;
+    border: none; border-bottom: 2px solid #999;
+    color: #333;
+    padding: 1.5rem; margin: 0 4rem 2rem;
+    width: 87rem;
+}
+#write_title #input_title:focus {
+    outline: none;
+}
+
+
+#attach_photo #input_photo {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+}
+#attach_photo label {
+    width: 8rem; height: 8rem;
+    display: block;
+    background: url(../media/icon_image.png) no-repeat center; background-size: 100%;
+    cursor: pointer;
+    margin-left: 4rem; margin-bottom: 2rem;
+}
+
+
+#write_content {
+    text-align: right;
+}
+#write_content #text_deco {
+    border-top: 2px solid #999;
+    padding: 1.7rem 2rem;
+    background-color: #f6f6f6;
+    line-height: 3.1rem;
+}
+#write_content #text_deco #select_fontSize {
+    display: inline-block;
+    margin-right: 1rem;
+    vertical-align: middle;
+    font-size: 1.7rem;
+    padding: 0.5rem; padding-right: 0.8rem;
+    background-color: #f6f6f6;
+    border: none;
+    cursor: pointer;
+}
+#write_content #text_deco #select_fontSize:hover {
+    background-color: #eee;
+}
+
+#write_content #text_deco #select_fontColor{
+    display: inline-block;
+    font-size: 2.1rem;
+    padding: 0.2rem; padding-left: 1rem; margin-right: 1rem;
+    width: 3.5rem;
+    text-align: left;
+    position: relative;
+    vertical-align: middle;
+}
+#write_content #text_deco #select_fontColor:hover {
+    background-color: #eee;
+}
+#write_content #text_deco #select_fontColor:focus {
+    background-color: black;
+}
+#write_content #text_deco #select_fontColor #selected_color {
+    background-color: black;
+    width: 0.6rem; height: 0.6rem;
+    border-radius: 50% 50%;
+    display: inline-block;
+    position: absolute; bottom: 0.6rem; right: 0.6rem;
+}
+#write_content #text_deco #color_select_box {
+    position:absolute; bottom: -10.3rem; left: -6.9rem;
+    width:17rem; height:9rem;
+    background:white;
+    border: 1px solid #ddd; border-radius: 3px;
+    padding: 1rem;
+    text-align: center;
+}
+#write_content #text_deco #color_select_box:after {
+    border-top:0px solid transparent;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid white;
+    content:"";
+    position:absolute; top:-10px; left:7.5rem;
+}
+#write_content #text_deco #color_select_box button{
+    width: 2rem; height: 2rem;
+    border: 1px solid #aaa; border-radius: 50% 50%;
+    vertical-align: middle;
+    cursor: pointer;
+    position: relative;
+}
+#write_content #text_deco #color_select_box button#checked{
+    background: url(../media/icon_check_white.png) no-repeat center;
+    background-size: cover;
+}
+#write_content #text_deco #color_select_box button#checked.white {
+    background-image: url(../media/icon_check.png);
+}
+
+#write_content #text_deco #select_bold {
+    background: url(../media/icon_text_bold.png) no-repeat center; background-size: 2.1rem 2.1rem;
+    display: inline-block;
+    width: 3.2rem; height: 3.2rem;
+    vertical-align: middle;
+    margin-right: 1rem;
+}
+#write_content #text_deco #select_bold:hover {
+    background-color: #f0f0f0;
+}
+#write_content #text_deco #select_italic {
+    background: url(../media/icon_text_italic.png) no-repeat center; background-size: 2.1rem 2.1rem;
+    display: inline-block;
+    width: 3.2rem; height: 3.2rem;
+    vertical-align: middle;
+    margin-right: 1rem;
+}
+#write_content #text_deco #select_underline {
+    background: url(../media/icon_text_underline.png) no-repeat center; background-size: 2.1rem 2.1rem;
+    display: inline-block;
+    width: 3.2rem; height: 3.2rem;
+    vertical-align: middle;
+    margin-right: 1rem;
+}
+#write_content #text_deco #select_underline:hover {
+    background-color: #f0f0f0;
+}
+#write_content #text_deco #select_italic:hover {
+    background-color: #f0f0f0;
+}
+
+
+#write_content #input_content {
+    width: 100%; height: 40rem;
+    resize: none;
+    border: none; border-top: 2px solid #bbb; border-bottom: 2px solid #999;
+    padding: 4rem 5rem; margin-bottom: 4rem;
+    font-size: 1.8rem;
+}
+#write_content #input_content:focus {
+    outline: none;
+}
+
+
+#submit_button {
+    text-align: right;
+}
+#submit_button #submit_btn {
+    border: none;
+    background-color: #104c7c;
+    color: #fcf8bd; 
+    font-size: 2rem; font-weight: normal;
+    padding: 1.2rem 2.2rem; margin: 2rem 3rem;
+    border-radius: 3px 3px;
+    cursor: pointer;
+}
+#submit_button #submit_btn:hover {
+    background-color: #104b7cd3;
+}
