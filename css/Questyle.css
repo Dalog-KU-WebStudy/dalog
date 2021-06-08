@@ -1,0 +1,57 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body{
+    margin : 0;
+    padding: 0;
+    height : 100%;    
+}
+
+.Area {
+    position: relative;
+    width: 1535px;
+    height : 150px;    
+    /*top 위치 설정 필요..!!!*/  
+}
+.Box {
+    position: absolute;
+    width: 1100px;
+    height : 120px;
+    top: 15px;
+    left : 215px;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+
+}
+.Question{
+    position: absolute;
+    width: 950px;
+    height: 30px;
+    top : 20px;
+    left : 25px;
+}
+
+.WriteAnswer{
+    height: 40px; 
+    width: 950px; 
+    font-weight: bold; 
+    opacity: 0.7;
+}
+.Answer {
+    position: absolute;
+    width: 950px;
+    height: 40px;
+    bottom: 20px;
+    left : 25px;
+}
+.enroll {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    bottom: 20px;
+    right : 25px;
+}
