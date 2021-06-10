@@ -1,152 +1,71 @@
 * {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    box-sizing: border-box;
-  }
-  
-  body {
-    display: flex;    
-    align-items: center;
-    min-height: 100vh;
-  }
-  
-  .calendar {
-    width: 1120px;  
-    margin-left: 207.5px; 
-  }
-  
-  .header {
-    align-items: center;
-  }
-  
-  .year-month {
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 1366px) {
+  .year-month  {
     font-size: 35px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 30px;
-    left : 50%;
   }
-  
-  .nav {
-    display: inline-block;
-    margin-left: 970px;
-    border: 1px solid #333333;
-  }
-  
-  .nav-btn {
-    width: 28px;
-    height: 30px;
-    padding-bottom: 35px;
-    text-align: center;
-    border: none;
-    font-size: 16px;
-    line-height: 34px;
-    background-color: transparent;
-    cursor: pointer;
-  }
-  
-  .main{
-      margin-top: 45px;
-  }
-
-  .go-today {
-    width: 75px;
-    border-left: 1px solid #333333;
-    border-right: 1px solid #333333;
-  }
-  .days { 
-    display: flex;
-    margin: 25px 0 10px;
-  }
-  
-  .day {
-    display:inline-block;
-    width: calc(100%/7);
-    height: 25px;
-    top : 0px;
-    text-align: center;
-  }
-  
-  .dates {  
-    display: flex;
-    flex-flow: row wrap;
-    text-align: center;
-    border-top: 1px solid #333333;
-    border-right: 1px solid #333333;
-  }
-  
-  .date {
-    width: calc(100%/7);
-    height: 150px;
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #333333;
-    border-left: 1px solid #333333;
-  }
-  
-  .day:nth-child(7n + 1),
-  .date:nth-child(7n + 1) {
-    color: #D13E3E;
-  }
-  
-  .day:nth-child(7n),
-  .date:nth-child(7n) {
-    color: #396EE2;
-  }
-  
-  .other {
-    opacity: 0.3;
-  }
-  
-  .today {
-    position: relative;
-    color: #FFFFFF;
-  }
-  
-  .today::before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    width: 30px;
-    height: 30px;
-    display: block;
-    background-color: #FF0000;
-    border-radius: 50%;
-    content: '';
-  }
-
-
-  @media screen and (max-width: 800px){
-    .mobile{
+}
+@media screen and (min-width: 1024px) and (max-width: 1365px) {
+  .year-month {
+      font-size: 33px;
     }
-    .calendar{
-      display: none;
-    }
-    .year{
-      bottom: 650px;
-      margin-left: 190px;
-      font-size: 17.5px;
+}
 
+@media screen and (min-width: 880px) and (max-width: 1024px) {
+  .year-month {
+      font-size: 31px;
     }
-    .a {
-    border: 1px solid #333333;
-    margin-bottom: 1650px;
-    margin-left: 190px;
-  }
+}
+@media screen and (max-width: 880px) {
+  .year-month {
+      font-size: 29px;
+    }
+}
+
+.calendar {
+  position: absolute;
+  width: 80%; 
+  margin-left: 10%; 
+  margin-right: 10%;
+  top : 30rem
+}
+.header {
+  align-items: center;
+}
+.year-month {
+  /*미디어 처리 필요*/  
+  font-weight: bold;
+  text-align: center;
+  right: 30%;
+  position: absolute;
+  width: 40%;
+  margin-top: 1.875rem;  
+}
+
+.nav {
+  display: inline-block;
+  position: absolute;
+  right: 0%;
+  margin-top: 2rem;
+  border: 0.063rem solid #333333;
   
-  .a-btn {
-    border: none;
-    font-size: 16px;
-    background-color: transparent;
-    cursor: pointer;
-  }
+}
 
+.nav-btn {
+  width: 1.75rem;
+  height: 1.875rem;
+  padding-bottom: 2.188rem;;
+  text-align: center;
+  border: none;
+  font-size: 1rem;
+  line-height: 2.125rem;
+  background-color: transparent;
+  cursor: pointer;
+}
 
-
-  .b{
+.main{
     margin-top: 45px;
 }
 
@@ -155,12 +74,12 @@
   border-left: 1px solid #333333;
   border-right: 1px solid #333333;
 }
-.c { 
+.days { 
   display: flex;
   margin: 25px 0 10px;
 }
 
-.d {
+.day {
   display:inline-block;
   width: calc(100%/7);
   height: 25px;
@@ -168,7 +87,7 @@
   text-align: center;
 }
 
-.e {  
+.dates {  
   display: flex;
   flex-flow: row wrap;
   text-align: center;
@@ -185,12 +104,12 @@
   border-left: 1px solid #333333;
 }
 
-.c:nth-child(7n + 1),
+.day:nth-child(7n + 1),
 .date:nth-child(7n + 1) {
   color: #D13E3E;
 }
 
-.c:nth-child(7n),
+.day:nth-child(7n),
 .date:nth-child(7n) {
   color: #396EE2;
 }
@@ -217,5 +136,3 @@
   border-radius: 50%;
   content: '';
 }
-
-  }

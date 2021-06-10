@@ -4,6 +4,8 @@
     <title>달:로그</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type= "text/css" href="css/Questyle.css">
+    <link rel="stylesheet" type= "text/css" href="css/calstyle.css">
     <link
       href="https://spoqa.github.io/spoqa-han-sans/"
       rel="stylesheet"
@@ -82,5 +84,40 @@
         </nav>
       </div>
     </header>
+
+      <div class="Area">
+        <div class = "Box">
+            <div class="Question">
+                <p>Q. (질문)</p>
+            </div>
+            <div class = "Answer">
+                <p><input type="text" placeholder="A. " class="WriteAnswer"> </p>    
+                <input type="button" value="등록" class="dd">       
+            </div>       
+          </div>
+      </div>
+
+      <div class ="calendar">
+        
+        <div class ="header">
+            <div class="year-month"></div>
+            <div class="nav">
+              <button class = "nav-btn go-prev" onclick="prevMonth()">&lt;</button>
+              <button class = "nav-btn go-today" onclick="goToday()">Today</button>
+              <button class = "nav-btn go-next" onclick="nextMonth()">&gt;</button>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="days">
+                <span class="day">일</span><span class="day">월</span><span class="day">화</span><span class="day">수</span><span class="day">목</span><span class="day">금</span><span class="day">토</span>
+            </div>
+            <div class="dates"></div>
+        </div>
+
+    </div>
+    <script src="/diary/calendarjs.js"></script>  
+
+    
   </body>
 </html>

@@ -1,57 +1,100 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
+ @media screen and (min-width: 1366px) {
+    .Question p {
+      font-size: 20px;
+    }
+  }
+  @media screen and (min-width: 1024px) and (max-width: 1365px) {
+    .Question p {
+        font-size: 17px;
+      }
+  }
 
-html,body{
-    margin : 0;
-    padding: 0;
-    height : 100%;    
-}
+  @media screen and (min-width: 880px) and (max-width: 1024px) {
+    .Question p {
+        font-size: 15px;
+      }
+  }
+  @media screen and (max-width: 880px) {
+    .Question p {
+        font-size: 13px;
+      }
+  }
+  
 
 .Area {
-    position: relative;
-    width: 1535px;
-    height : 150px;    
-    /*top 위치 설정 필요..!!!*/  
+    position: absolute;
+    width: 100%;
+    height : 18.75rem;
+    margin-left: 9.7%;
+    top: 10rem;    
 }
 .Box {
-    position: absolute;
-    width: 1100px;
-    height : 120px;
-    top: 15px;
-    left : 215px;
-    border-width: 1px;
-    border-color: black;
-    border-style: solid;
-
+    width: 80%;
+    height : 80%;
+    padding-top: 2px;
+    margin-bottom: 20px; 
+    box-shadow: 0.5px 2px 10px 0.5px rgb(165, 161, 161);
+    border-radius: 10px;
+    margin-top: 12px;
 }
 .Question{
-    position: absolute;
-    width: 950px;
-    height: 30px;
-    top : 20px;
-    left : 25px;
+    width: 60%;
+    height: 20%;
+    margin-top: 20px;
+    margin-left: 4%;
 }
 
 .WriteAnswer{
-    height: 40px; 
-    width: 950px; 
+    height: 30px; 
+    width: 400%; 
     font-weight: bold; 
     opacity: 0.7;
+    position: relative;
+    outline: none;
+    border: none;
+    border-bottom: 1px black solid;
+    bottom: 0px;
+    left: 0px;
+    
+
 }
 .Answer {
-    position: absolute;
-    width: 950px;
+    position: relative;
+    width: 20%;
     height: 40px;
-    bottom: 20px;
-    left : 25px;
+    margin-top: 5px;
+    margin-left: 4%;
+
 }
-.enroll {
+.dd {
+    width: 30%;
+    height: 77%;
+    bottom: 2.5rem;
+    margin-left: 415%;
     position: absolute;
-    width: 80px;
-    height: 80px;
-    bottom: 20px;
-    right : 25px;
 }
+.Box:hover{
+    box-shadow: 0.2px 1px 5px 0.2px rgb(165, 161, 161);
+
+}
+.WriteAnswer:hover{
+    transition: all 0.3s ease;
+}
+.WriteAnswer::after{
+    content: "";
+    position: absolute;
+    left: 0px;
+    bottom: -1px;
+    height: 100%;
+    width: 100%;
+    border-bottom: 3px solid #5fa8d3;
+    transform: translateX(-100%);
+    transition: all 0.3s ease;
+}
+
