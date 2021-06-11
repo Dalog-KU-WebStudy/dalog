@@ -23,6 +23,18 @@ body {
   html {
     font-size: 6px;
   }
+  .board{
+    display: none;
+  }
+  .write{
+    display:none;
+  }
+  .main-menu{
+    width:14%;
+  }
+  .dalog-title{
+    display: none;
+  }
 }
 .header {
   width: 100%;
@@ -98,6 +110,7 @@ body {
   position: fixed;
   opacity: 0.8;
   right: 0;
+  padding-inline-start: 0;
 }
 .main-menu li {
   float: left;
@@ -154,12 +167,15 @@ ul li ul li {
   float: left;
   position: relative;
   text-decoration: none;
+  padding: 0;
   left: 0;
 }
 .sub-menu a {
   text-decoration: none;
   color: black;
   padding-left: 0;
+  padding-right: 0;
+  font-size: 1.4rem;
 }
 a {
   text-decoration: none;
