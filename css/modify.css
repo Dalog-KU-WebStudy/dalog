@@ -4,6 +4,7 @@ body {
   padding: 0;
   height: 100%;
 }
+
 @media screen and (min-width: 1366px) {
   html {
     font-size: 10px;
@@ -24,48 +25,7 @@ body {
     font-size: 6px;
   }
 }
-.header {
-  width: 100%;
-  height: 9rem;
-}
-.section {
-  width: 80%;
-  height: 70%;
-  float: center;
-  margin: auto;
-  margin-top: 2%;
-}
-.footer {
-  width: 100%;
-  height: 7%;
-  clear: both;
-}
 
-.wrapper {
-  margin: 0 auto;
-}
-.logo {
-  float: left;
-  padding: 2.5rem;
-  margin-left: 3rem;
-  margin-right: 3rem;
-  width: 15rem;
-  height: 4rem;
-}
-.dalog-title {
-  position: absolute;
-  top: 7%;
-  left: 50%;
-  margin-left: -20rem;
-  width: 40rem;
-  height: 7rem;
-  font-size: 3rem;
-  font-family: "Noto Serif KR", sans-serif;
-  text-align: center;
-  border: none;
-  background-color: #fcf8bd;
-  color: #104c7c;
-}
 .join-form{
     font-family: "Noto Serif KR", sans-serif;
     position: absolute;
