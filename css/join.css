@@ -146,6 +146,7 @@ select {
     width: 100%;
     padding: 2.1rem 0 1.7rem;
     border: 0;
+    border-radius: 3px 3px;
     cursor: pointer;
     color: #fff;
     background-color: #104c7c;
