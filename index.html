@@ -16,6 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap"
       rel="stylesheet"
     />
+    <!--<script src="index.js" defer></script>-->
   </head>
   <body>
     <header class="header">
@@ -26,7 +27,8 @@
           onclick="location.href='index.html'"
           style="cursor: pointer"
         />
-        <input class="dalog-title" type="text" value="유진이의 일기" />
+        <!--<p id="title" class="dalog-title"></p>-->
+        <input id="titleInput" class="dalog-title" type="text" value="유진이의 일기" />
         <nav>
           <ul class="main-menu">
             <li>
@@ -38,7 +40,7 @@
                 <img
                   src="media/write.png"
                   class="write"
-                  style="cursor: pointer;"
+                  style="cursor: pointer; margin-top: 1rem;"
                   alt="글쓰기"
                 />
               </a>
@@ -52,7 +54,7 @@
                 <img
                   src="media/board.png"
                   class="board"
-                  style="cursor: pointer;"
+                  style="cursor: pointer; margin-top: 1rem;"
                   alt="게시판"
                 />
               </a>
@@ -61,7 +63,7 @@
               <a href="#"
                 ><img
                   src="media/profile.png"
-                  style="cursor: pointer;"
+                  style="cursor: pointer; margin-top: 1rem;"
               /></a>
               <ul class="sub-menu">
                 <li>
@@ -94,7 +96,7 @@
             </div>
             <div class = "Answer">
                 <p><input type="text" placeholder="A. " class="WriteAnswer"> </p>    
-                <input type="button" value="등록" class="dd">       
+                <input type="button" value="등록" class="buttons">       
             </div>       
           </div>
       </div>
@@ -118,7 +120,7 @@
         </div>
 
     </div>
-    <script src="/diary/calendarjs.js"></script>  
+    <script src="diary/calendarjs.js"></script>  
 
     
   </body>
