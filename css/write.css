@@ -80,8 +80,9 @@
 #weather_box #temperature input {
     width: 4rem;
     font-size: 2rem;
-    border: none;
+    border: none; border-radius: 2px;
     outline: none;
+    text-align: right;
 }
 #weather_box #weather {
     display: inline-flex;
@@ -92,7 +93,7 @@
 }
 #weather_box #weather select {
     font-size: 1.2rem;
-    /* display: none; */
+    display: none;
 }
 #weather_box #manual_button {
     display: inline-block;
