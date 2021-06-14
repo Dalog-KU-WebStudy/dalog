@@ -1,8 +1,5 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+*{
+  font-family: "Noto Serif KR", sans-serif; 
 }
  @media screen and (min-width: 1366px) {
     .Question p {
@@ -28,18 +25,19 @@ body {
   
 
 .Area {
-    position: absolute;
+    position: relative;
     width: 100%;
     height : 18.75rem;
-    margin-left: 9.7%;
-    top: 10rem;    
+    margin-top: 11rem;    
 }
 .Box {
-    width: 80%;
+    width: 84%;
     height : 80%;
+    left:8%;
+    position: absolute;
     padding-top: 2px;
     margin-bottom: 20px; 
-    box-shadow: 0.5px 2px 10px 0.5px rgb(165, 161, 161);
+    box-shadow: 0.2px 1px 5px 0.2px rgb(165, 161, 161);
     border-radius: 10px;
     margin-top: 12px;
 }
@@ -60,27 +58,30 @@ body {
     border: none;
     border-bottom: 1px black solid;
     bottom: 0px;
-    left: 0px;
-    
-
+    left: 0px;  
 }
+
 .Answer {
     position: relative;
     width: 20%;
     height: 40px;
     margin-top: 5px;
     margin-left: 4%;
-
 }
-.dd {
+
+.buttons {    
     width: 30%;
     height: 77%;
     bottom: 2.5rem;
     margin-left: 415%;
+    background-color: #104c7c;
+    color: #fff;
+    border-radius: 3px;
     position: absolute;
 }
+
 .Box:hover{
-    box-shadow: 0.2px 1px 5px 0.2px rgb(165, 161, 161);
+    box-shadow: 0.5px 2px 10px 0.5px rgb(165, 161, 161);
 
 }
 .WriteAnswer:hover{
