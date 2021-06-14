@@ -37,11 +37,17 @@
 #write_date {
     padding: 4rem 4rem 0 4rem;
 }
+#write_date label {
+    background: url(../media/icon_calendar.png) no-repeat right;
+    background-size: cover;
+    width: 2.5rem; height: 2.5rem;
+    display: inline-block;
+}
 #write_date #input_date{
     font-size: 3rem;
     border: none; 
-    padding: 1.5rem;
-    width: 20rem;
+    padding: 1.5rem 0.5rem 1.5rem 1.5rem;
+    width: 19rem;
 }
 #write_date #input_date:focus {
     outline: none;
@@ -148,11 +154,13 @@
 #write_content {
     text-align: right;
 }
+/*
 #write_content #text_deco {
     border-top: 2px solid #bbb;
     padding: 1.7rem 2rem;
     background-color: #f6f6f6;
     line-height: 3.1rem;
+    display: none;
 }
 #write_content #text_deco #select_fontSize {
     display: inline-block;
@@ -269,6 +277,34 @@
 }
 #write_content #input_content:focus {
     outline: none;
+} */
+
+
+#write_content .note-editor {
+    border-left: none; border-right: none; border-bottom: none;
+    border-radius: 0;
+}
+#write_content .note-placeholder {
+    padding: 4rem 5rem; margin-top: 1em;
+    font-size: 1.8rem;
+}
+#write_content .note-editable {
+    text-align: left;
+    resize: none;
+    height: 70rem;
+    padding: 4rem 5rem;
+    font-size: 1.8rem;
+    border: none;
+}
+#write_content .note-editable p {
+    word-wrap: break-word;
+}
+#write_content .note-dropdown-menu {
+    width: auto;
+    min-width:auto;
+}
+#write_content .note-statusbar {
+    display: none;
 }
 
 

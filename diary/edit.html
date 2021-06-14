@@ -9,6 +9,11 @@
     <link href="https://spoqa.github.io/spoqa-han-sans/" rel="stylesheet" type="text/css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="../summernote/summernote-lite.js"></script>
+    <script src="../summernote/summernote-ko-KR.js"></script>
+    <link rel="stylesheet" href="../summernote/summernote-lite.css">
     <script src="./write.js"></script>
     <script src="./edit.js" defer></script>
 </head>
@@ -54,8 +59,8 @@
             <form action="" method="POST" id="write_form">
                 <div id="write_date">
                     <div id="date">
-                        <input type="text" id="input_date" readonly>
-                        <img src="../media/icon_calendar.png">
+                        <input type="text" id="input_date" value="2021-06-04" >
+                        <label for="input_date"></label>
                     </div>
                     <div id="weather_box">
                         <div id="weather_icon">
@@ -91,7 +96,7 @@
                     <img alt="오늘의 사진" title="오늘의 사진" id="today_photo">
                 </div>
                 <div id="write_content">
-                    <div id="text_deco">
+                    <!-- <div id="text_deco">
                         <select id="select_fontSize">
                             <option>10</option>
                             <option>12</option>
@@ -117,7 +122,7 @@
                         <div id="select_bold"></div>
                         <div id="select_italic"></div>
                         <div id="select_underline"></div>
-                    </div>
+                    </div> -->
                     <textarea name="content" id="input_content" placeholder="내용을 입력해주세요"></textarea>
                 </div>
             </form>

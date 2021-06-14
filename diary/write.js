@@ -40,3 +40,22 @@ function weather_select_change() {
     document.getElementById('weather').childNodes[1].src=`../media/icon_${selected_weather}.png`;
     document.getElementById('weather').childNodes[1].title=weatherType[selected_weather];
 }
+
+
+document.write('<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script><script src="../summernote/summernote-lite.js"></script><script src="../summernote/summernote-ko-KR.js"></script>');
+$(document).ready(function() {
+    $('#input_content').summernote({
+        focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+        lang: "ko-KR",					// 한글 설정
+        placeholder: '내용을 입력해주세요',	//placeholder 설정
+        toolbar: [
+        ['Font Style', ['fontname']],
+        ['style', ['bold', 'italic', 'underline']],
+        ['color', ['color']],
+        ['font', ['strikethrough']],
+        ['fontsize', ['fontsize']],
+        ['para', ['paragraph']],
+        ['height', ['height']]
+        ]
+    });
+});
