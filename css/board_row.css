@@ -1,3 +1,7 @@
+a {
+  color: #000;
+}
+
 .bodyContainer {
   padding: 14rem 0 0 0;
   width: 90%;
@@ -20,13 +24,22 @@
   margin-right: 0.8rem;
 }
 
-.searchInput {
-  font-size: 2rem;
-  width: 18rem;
-  padding: 5px;
+.searchContainer {
+  display: flex;
   border: 1px solid #000000;
   border-radius: 5px;
-  /* box-shadow: 2px 2px 4px rgb(0 0 0 / 25%); */
+  padding: 2px;
+}
+
+.searchIcon {
+  height: 3rem;
+}
+
+.searchInput {
+  margin-left: 5px;
+  font-size: 2.5rem;
+  width: 18rem;
+  border: none;
 }
 .searchInput:focus {
   outline: none;
@@ -44,6 +57,7 @@
   width: 70vw;
   border-radius: 1.5rem;
   box-shadow: 4px 4px 4px rgb(0 0 0 / 25%);
+  display: flex;
 }
 
 .diary:hover {
@@ -51,13 +65,21 @@
   box-shadow: 4px 4px 4px rgb(0 0 0 /50%);
 }
 
+.right {
+  flex: auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .flex {
   display: flex;
   justify-content: space-between;
+  flex: none;
 }
 
 .diary__title {
-  padding: 1rem 2rem 0 2rem;
   font-size: 19px;
   font-weight: 600;
   white-space: nowrap;
@@ -67,10 +89,33 @@
 }
 
 .diary__date {
-  padding: 1rem 2rem 0 2rem;
   font-size: 16px;
   white-space: nowrap;
   width: inherit;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.diary__img {
+  flex: none;
+  height: 20rem;
+  width: 20rem;
+  border-top-left-radius: 1.5rem;
+  border-bottom-left-radius: 1.5rem;
+}
+
+.contentwrapper {
+  flex: auto;
+  display: flex;
+  align-items: center;
+}
+
+.diary__content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 라인수 */
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  font-size: 2rem;
 }
