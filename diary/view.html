@@ -9,6 +9,7 @@
     <link href="https://spoqa.github.io/spoqa-han-sans/" rel="stylesheet" type="text/css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet" />
+    <script src="./view.js" defer></script>
 </head>
 
 <body>
@@ -20,12 +21,12 @@
                 <ul class="main-menu">
                     <li>
                         <a href="../diary/write.html" target="_self" style="text-decoration: none; cursor: pointer">
-                            <img src="../media/write.png" style="cursor: pointer; margin-top: 7px" alt="글쓰기" />
+                            <img src="../media/write.png" class="write" style="cursor: pointer; margin-top: 7px" alt="글쓰기" />
                         </a>
                     </li>
                     <li>
                         <a href="board_grid.html" target="_self" style="text-decoration: none; cursor: pointer">
-                            <img src="../media/view.png" style="cursor: pointer; margin-top: 7px" alt="게시판" />
+                            <img src="../media/board.png" class="board" style="cursor: pointer; margin-top: 7px" alt="게시판" />
                         </a>
                     </li>
                     <li>
@@ -49,46 +50,45 @@
 
     <div id="container">
         <div id="wrap">
-            <div id="date">
-                <p>2021-06-04</p>
+            <div id="layout_head">
+                <div id="layout_left">
+                    <div id="date">
+                        <p></p>
+                    </div>
+                    <div id="title">
+                        <p></p>
+                    </div>
+                </div>
                 <div id="weather_box">
                     <div id="temperature">
                         <div id="temper_night">
-                            <p>-10</p>
+                            <p></p>
                         </div>
                         <div id="temper_day">
-                            <p>20</p>
+                            <p></p>
                         </div>
                     </div>
                     <div id="weather">
-                        <img src="../media/icon_sun.png" title="맑음">
-                    </div>
-                    <div id="manual_button">
+                        <img />
                     </div>
                 </div>
-            </div>
-            <div id="title">
-                <p>너무 배고픈 하루</p>
             </div>
             <div id="photo">
-                <img src="../media/view_photo_example.jpg" alt="오늘의 이미지">
+                <img alt="오늘의 사진" title="오늘의 사진">
             </div>
             <div id="content">
-                <p>
-                    에베베베베베베베베우아아아아아악
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure magnam ea architecto excepturi voluptatum omnis, magni obcaecati enim ad, laboriosam quia animi delectus ut similique consectetur culpa ducimus, aliquid dolores!
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint vero, numquam labore cum dignissimos doloremque itaque earum non quis nisi quasi sequi blanditiis, eius enim sapiente quam adipisci eligendi doloribus.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus, esse, alias pariatur, optio velit recusandae commodi atque minus distinctio dolor tempora ad deserunt fugiat. Quidem perspiciatis omnis voluptate mollitia quasi!
-                </p>
+                <p></p>
             </div>
-            <div id="edit_delete">
-                <div id="edit">
-                    <button id="edit_btn">수정</button>
-                </div>
-                <div id="delete">
-                    <button id="delete_btn">삭제</button>
-                </div>
+        </div>
+        <div id="edit_delete">
+            <div id="edit">
+                <button id="edit_btn" onclick="onEdit()">수정</button>
+            </div>
+            <div id="delete">
+                <button id="delete_btn" onclick="onDelete()">삭제</button>
             </div>
         </div>
     </div>
 </body>
+
+</html>

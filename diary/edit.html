@@ -9,6 +9,13 @@
     <link href="https://spoqa.github.io/spoqa-han-sans/" rel="stylesheet" type="text/css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="../summernote/summernote-lite.js"></script>
+    <script src="../summernote/summernote-ko-KR.js"></script>
+    <link rel="stylesheet" href="../summernote/summernote-lite.css">
+    <script src="./write.js"></script>
+    <script src="./edit.js" defer></script>
 </head>
 
 <body>
@@ -20,12 +27,12 @@
                 <ul class="main-menu">
                     <li>
                         <a href="../diary/write.html" target="_self" style="text-decoration: none; cursor: pointer">
-                            <img src="../media/write.png" style="cursor: pointer; margin-top: 7px" alt="글쓰기" />
+                            <img src="../media/write.png" class="write" style="cursor: pointer; margin-top: 7px" alt="글쓰기" />
                         </a>
                     </li>
                     <li>
                         <a href="board_grid.html" target="_self" style="text-decoration: none; cursor: pointer">
-                            <img src="../media/view.png" style="cursor: pointer; margin-top: 7px" alt="게시판" />
+                            <img src="../media/board.png" class="board" style="cursor: pointer; margin-top: 7px" alt="게시판" />
                         </a>
                     </li>
                     <li>
@@ -51,40 +58,45 @@
         <div id="wrap">
             <form action="" method="POST" id="write_form">
                 <div id="write_date">
-                    <input type="text" id="input_date" value="2021-06-04">
-                    <img src="../media/icon_calendar.png">
+                    <div id="date">
+                        <input type="text" id="input_date" value="2021-06-04" >
+                        <label for="input_date"></label>
+                    </div>
                     <div id="weather_box">
-                        <div id="temperature">
-                            <div id="temper_night">
-                                <input type="text" value="-10" readonly>
+                        <div id="weather_icon">
+                            <div id="temperature">
+                                <div id="temper_night">
+                                    <input type="text" id="input_temper_night" readonly>
+                                </div>
+                                <div id="temper_day">
+                                    <input type="text" id="input_temper_day" readonly>
+                                </div>
                             </div>
-                            <div id="temper_day">
-                                <input type="text" value="20" readonly>
+                            <div id="weather">
+                                <img src="../media/icon_sun.png" title="맑음">
+                                <select id="weather_select" onchange="weather_select_change()">
+                                    <option value="sun">맑음</option>
+                                    <option value="cloud">흐림</option>
+                                    <option value="rain">비</option>
+                                    <option value="snow">눈</option>
+                                </select>
                             </div>
-                        </div>
-                        <div id="weather">
-                            <img src="../media/icon_sun.png" title="맑음">
-                            <select>
-                                <option>맑음</option>
-                                <option>흐림</option>
-                                <option>비</option>
-                                <option>눈</option>
-                            </select>
                         </div>
                         <div id="manual_button">
-                            <button>직접 설정</button>
+                            <button type="button" onclick="changeWeather()">변경</button>
                         </div>
                     </div>
                 </div>
                 <div id="write_title">
-                    <input type="text" id="input_title" placeholder="제목을 입력해주세요" value="오늘도 배가 고픈 하루">
+                    <input type="text" id="input_title" placeholder="제목을 입력해주세요">
                 </div>
                 <div id="attach_photo">
                     <label for="input_photo" title="사진 첨부"></label>
                     <input type="file" id="input_photo">
+                    <img alt="오늘의 사진" title="오늘의 사진" id="today_photo">
                 </div>
                 <div id="write_content">
-                    <div id="text_deco">
+                    <!-- <div id="text_deco">
                         <select id="select_fontSize">
                             <option>10</option>
                             <option>12</option>
@@ -110,19 +122,14 @@
                         <div id="select_bold"></div>
                         <div id="select_italic"></div>
                         <div id="select_underline"></div>
-                    </div>
-                    <textarea name="content" id="input_content" placeholder="내용을 입력해주세요">색상 변경하는 탭은 js 구현할때 클릭할 때마다 나타나고 없애고 할거라서 
-지금은 그냥 보이게 했습니다.
-폰트 사이즈 선택하는것.. 디자인을 너무 바꾸고싶은데 바꿀 방법을 못찾았습니다..
-날씨부분은 select를 없앤 상태로 보여줬다가 직접설정 버튼 누르면 select를 보여주고 설정하도록 하려구요
-직접설정 버튼 누르면 최저/최고온도도 border 나타내서 수정할수있도록 알려줄 예정이어요</textarea>
-                </div>
-                <div id="submit_button">
-                    <input type="submit" id="submit_btn" value="등록">
+                    </div> -->
+                    <textarea name="content" id="input_content" placeholder="내용을 입력해주세요"></textarea>
                 </div>
             </form>
         </div>
+        <div id="submit_button">
+            <input type="submit" id="submit_btn" value="등록" onclick="onSubmit()">
+        </div>
     </div>
 </body>
-
 </html>
