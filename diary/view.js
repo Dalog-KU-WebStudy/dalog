@@ -2,8 +2,7 @@ const diaryArr = [
   {
     id: 1,
     title: "일기1",
-    content:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure magnam ea architecto excepturi voluptatum omnis, magni obcaecati enim ad, laboriosam quia animi delectus ut similique consectetur culpa ducimus, aliquid dolores! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint vero, numquam labore cum dignissimos doloremque itaque earum non quis nisi quasi sequi blanditiis, eius enim sapiente quam adipisci eligendi doloribus Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus, esse, alias pariatur, optio velit recusandae commodi atque minus distinctio dolor tempora ad deserunt fugiat. Quidem perspiciatis omnis voluptate mollitia quasi! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure magnam ea architecto excepturi voluptatum omnis, magni obcaecati enim ad, laboriosam quia animi delectus ut similique consectetur culpa ducimus, aliquid dolores! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint vero, numquam labore cum dignissimos doloremque itaque earum non quis nisi quasi sequi blanditiis, eius enim sapiente quam adipisci eligendi doloribus Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus, esse, alias pariatur, optio velit recusandae commodi atque minus distinctio dolor tempora ad deserunt fugiat. Quidem perspiciatis omnis voluptate mollitia quasi!",
+    content: "내용내용1",
     date: "20210607",
     img: "https://images.velog.io/images/sukong/post/a85cd36f-9da3-48ad-87e3-044119fd8618/IMG_0910.JPG",
     weather: "맑음",
@@ -12,9 +11,10 @@ const diaryArr = [
     id: 2,
     weather: "맑음",
     title: "일기2",
-    content: "내용내용2",
+    content:
+      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure magnam ea architecto excepturi voluptatum omnis, magni obcaecati enim ad, laboriosam quia animi delectus ut similique consectetur culpa ducimus, aliquid dolores! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint vero, numquam labore cum dignissimos doloremque itaque earum non quis nisi quasi sequi blanditiis, eius enim sapiente quam adipisci eligendi doloribus Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus, esse, alias pariatur, optio velit recusandae commodi atque minus distinctio dolor tempora ad deserunt fugiat. Quidem perspiciatis omnis voluptate mollitia quasi! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure magnam ea architecto excepturi voluptatum omnis, magni obcaecati enim ad, laboriosam quia animi delectus ut similique consectetur culpa ducimus, aliquid dolores! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint vero, numquam labore cum dignissimos doloremque itaque earum non quis nisi quasi sequi blanditiis, eius enim sapiente quam adipisci eligendi doloribus Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus, esse, alias pariatur, optio velit recusandae commodi atque minus distinctio dolor tempora ad deserunt fugiat. Quidem perspiciatis omnis voluptate mollitia quasi!",
     date: "20210607",
-    img: "https://images.velog.io/images/sukong/post/e82e3053-beb4-4fa9-b97e-88f46263fe78/Atto3.jpg",
+    img: "",
   },
   {
     id: 3,
@@ -95,7 +95,13 @@ document.getElementById(
 ).childNodes[1].src = `../media/icon_${diaryContent.weather}.png`;
 document.getElementById("weather").childNodes[1].title =
   diaryArr[diaryId - 1].weather;
-document.getElementById("photo").childNodes[1].src = diaryArr[diaryId - 1].img;
+if (diaryArr[diaryId - 1].img != "") {
+  document.getElementById("photo").childNodes[1].src =
+    diaryArr[diaryId - 1].img;
+} else {
+  document.getElementById("photo").style = "display : none";
+}
+
 document.getElementById("content").childNodes[1].innerText =
   diaryArr[diaryId - 1].content;
 

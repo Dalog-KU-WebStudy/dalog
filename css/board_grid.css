@@ -70,6 +70,7 @@ a {
 .flex {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .diary__title {
@@ -83,18 +84,13 @@ a {
 }
 
 .diary__weather {
-  padding: 1rem 2rem 0 2rem;
-  font-size: 16px;
-  white-space: nowrap;
-  width: inherit;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: #104c7c;
+  width: 40px;
+  padding-right: 0.5rem;
 }
 
 .diary__date {
   padding: 1rem 2rem;
-  font-size: 2.5rem;
+  font-size: 10px;
   width: inherit;
   text-align: right;
   font-size: 16px;
@@ -129,7 +125,7 @@ a {
   top: 3rem;
   left: 2rem;
   width: 91%;
-  font-size: 2.5rem;
+  font-size: 15px;
 
   overflow: hidden;
   text-overflow: ellipsis;
