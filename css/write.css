@@ -69,6 +69,16 @@
     outline:none;
 }
 
+#write_date #date #datepicker-date{
+    font-size: 3rem;
+    border: none; 
+    padding: 1.5rem 0.5rem 1.5rem 1.5rem;
+    width: 19rem;
+}
+#write_date #date #datepicker-date:focus{
+    outline:none;
+}
+
 
 #write_date img {
     display: inline-block;

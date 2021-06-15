@@ -12,7 +12,7 @@ Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus, esse, 
 }
 
 
-document.getElementById('input_date').value=diaryContent.date;
+document.getElementById('datepicker-date').value=diaryContent.date;
 document.getElementById('input_temper_night').value=diaryContent.temper_night;
 document.getElementById('input_temper_day').value=diaryContent.temper_day;
 document.getElementById('weather').childNodes[1].src=`../media/icon_${diaryContent.weather}.png`;
@@ -43,9 +43,5 @@ $(function() {
     });
 
     //input을 datepicker로 선언
-    $("#write_date #date #datepicker").datepicker();                    
-
-    //초기값을 오늘 날짜로 설정
-    $('#write_date #date #datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
-    
+    $("#write_date #date #datepicker-date").datepicker();                    
 });

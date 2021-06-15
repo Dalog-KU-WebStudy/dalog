@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../summernote/summernote-lite.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="./write.js"></script>
-    <script src="./edit.js" defer></script>
+    
 </head>
 
 <body>
@@ -62,16 +62,16 @@
             <form action="" method="POST" id="write_form">
                 <div id="write_date">
                     <div id="date">
-                        <input type="text" id="datepicker">
+                        <input type="text" id="datepicker-date">
                     </div>
                     <div id="weather_box">
                         <div id="weather_icon">
                             <div id="temperature">
                                 <div id="temper_night">
-                                    <input type="text" value="-10" id="input_temper_night" readonly>
+                                    <input type="text" id="input_temper_night" readonly>
                                 </div>
                                 <div id="temper_day">
-                                    <input type="text" value="20" id="input_temper_day" readonly>
+                                    <input type="text" id="input_temper_day" readonly>
                                 </div>
                             </div>
                             <div id="weather">
@@ -95,7 +95,7 @@
                 <div id="attach_photo">
                     <label for="input_photo" title="사진 첨부"></label>
                     <input type="file" id="input_photo">
-                    <img src="../media/view_photo_example.jpg" alt="오늘의 사진" title="오늘의 사진" id="today_photo">
+                    <img alt="오늘의 사진" title="오늘의 사진" id="today_photo">
                 </div>
                 <div id="write_content">
                     <!-- <div id="text_deco">
@@ -134,4 +134,5 @@
         </div>
     </div>
 </body>
+<script src="./edit.js"></script>
 </html>
