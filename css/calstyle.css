@@ -2,6 +2,7 @@
   box-sizing: border-box;
   font-family: "NanumSquare", sans-serif;
 }
+.header * {box-sizing: content-box !important;}
 @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
 @media screen and (min-width: 1366px) {
   .year-month  {
