@@ -29,9 +29,6 @@ body {
   .write{
     display:none;
   }
-  .main-menu{
-    width:14%;
-  }
   .dalog-title{
     display: none;
   }
@@ -106,31 +103,30 @@ body {
   font-family: "Spoqa Han Sans Neo", sans-serif;
 }
 .main-menu {
-  float: right;
+  display: inline-flex;
   position: fixed;
   opacity: 0.8;
-  right: 0;
+  right: 2rem;
   padding-inline-start: 0;
-}
-.main-menu li {
-  float: left;
+  margin: 0;
+  height: 9rem;
 }
 .main-menu li a:hover {
-  color: #1975c0;
+  color: #104c7c;
   cursor: pointer;
 }
 .main-menu a {
-  line-height: 7rem;
   color: black;
   padding: 0 2rem;
   display: block;
-  font-family: "Times New Roman", Times, serif;
+  /* font-family: "Times New Roman", Times, serif; */
   font-size: 1.6rem;
   font-weight: bold;
 }
 .main-menu li a > img {
   width: 4rem;
-  height: 4rem;
+  height: 9rem;
+  object-fit: contain;
 }
 .main-menu li a:hover > .sub-menu li {
   opacity: 1;
@@ -142,41 +138,39 @@ body {
   color: #1975c0;
   cursor: pointer;
 }
-.main-menu li:hover > .sub-menu,
-.main-menu li:focus-within > .sub-menu,
-.main-menu li .sub-menu:hover {
-  opacity: 1;
-  visibility: visible;
-  display: block;
-  min-width: 5rem;
-  left: 0%;
-  padding: 0.5rem;
-  border: #104c7c;
-  position: relative;
-  float: left;
-}
-ul li ul li {
-  clear: both;
-  width: 100%;
-}
 .sub-menu {
   display: none;
-  visibility: hidden;
-  opacity: 0;
-  background-color: #fcf8bd;
-  float: left;
-  position: relative;
-  text-decoration: none;
-  padding: 0;
-  left: 0;
-  border-radius: 0px 0px 15px 0px
+  padding:0;
+  position:absolute;
+  right: -1rem; top: 8rem;
+  width:10rem; height:10rem;
+  background:white;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+.sub-menu:after{
+  border-top:0px solid transparent;
+  border-left: 1rem solid transparent;
+  border-right: 1rem solid transparent;
+  border-bottom: 1rem solid white;
+  content:"";
+  position:absolute; right: 3rem;
+  top: -1rem; right: 4rem;
 }
 .sub-menu a {
   text-decoration: none;
-  color: black;
-  padding-left: 0;
-  padding-right: 0;
-  font-size: 1.4rem;
+  color: #333;
+  padding: 2rem 1rem 1rem;
+}
+.sub-menu li:last-child a{
+  padding: 1rem 1rem 2rem;
+  /* border-top: 1px solid #ddd; */
+}
+.main-menu li:hover > .sub-menu,
+.main-menu li:focus-within > .sub-menu,
+.main-menu li .sub-menu:hover{
+  display: block;
 }
 a {
   text-decoration: none;
