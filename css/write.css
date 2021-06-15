@@ -23,6 +23,11 @@
 * { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; box-sizing: border-box;}
 .header * {box-sizing: content-box !important;}
 
+/*datepicker 버튼 롤오버 시 손가락 모양 표시*/
+.ui-datepicker-trigger{cursor: pointer;}
+/*datepicker input 롤오버 시 손가락 모양 표시*/
+.hasDatepicker{cursor: pointer;}
+
 #container {
     padding-top: 10rem; padding-bottom: 10rem;
 }
@@ -33,10 +38,11 @@
     margin: 5rem auto 0;
 }
 
-
 #write_date {
     padding: 4rem 4rem 0 4rem;
 }
+
+/*
 #write_date label {
     background: url(../media/icon_calendar.png) no-repeat right;
     background-size: cover;
@@ -52,6 +58,18 @@
 #write_date #input_date:focus {
     outline: none;
 }
+*/
+#write_date #date #datepicker{
+    font-size: 3rem;
+    border: none; 
+    padding: 1.5rem 0.5rem 1.5rem 1.5rem;
+    width: 19rem;
+}
+#write_date #date #datepicker:focus{
+    outline:none;
+}
+
+
 #write_date img {
     display: inline-block;
     width: 2.5rem; height: 2.5rem;
