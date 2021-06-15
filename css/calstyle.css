@@ -1,42 +1,73 @@
-* {
+* { 
   box-sizing: border-box;
+  font-family: "NanumSquare", sans-serif;
 }
-
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
 @media screen and (min-width: 1366px) {
   .year-month  {
-    font-size: 35px;
+    font-size: 34px;
   }
+  .day{
+    font-size: 16px;
+  }
+  .date{
+    font-size: 14px;
+  }
+  
 }
 @media screen and (min-width: 1024px) and (max-width: 1365px) {
   .year-month {
-      font-size: 33px;
+      font-size: 32px;
     }
+    .day{
+      font-size: 14px;
+    } 
+    .date{
+      font-size: 12px;
+    } 
+  
+    
 }
 
 @media screen and (min-width: 880px) and (max-width: 1024px) {
   .year-month {
-      font-size: 31px;
+      font-size: 30px;
     }
+    .day{
+      font-size: 12px;
+    }
+    .date{
+      font-size: 10px;
+    }
+  
 }
 @media screen and (max-width: 880px) {
   .year-month {
-      font-size: 29px;
-    }
+     font-size: 28px;
+  }
+  .day{
+    font-size: 10px;
+  }
+  .date{
+    font-size: 8px;
+  }
+ 
 }
 
 .calendar {
   position: absolute;
   width: 80%; 
-  margin-left: 10%; 
-  margin-right: 10%;
-  top : 30rem
+  left: 10%; 
+  right: 10%;
+  top : 30rem;
 }
 .header {
   align-items: center;
 }
 .year-month {
-  /*미디어 처리 필요*/  
+  
   font-weight: bold;
+  color: #104c7c;
   text-align: center;
   right: 30%;
   position: absolute;
@@ -66,7 +97,7 @@
 }
 
 .main{
-    margin-top: 45px;
+    margin-top: 2.813rem;
 }
 
 .go-today {
@@ -76,7 +107,8 @@
 }
 .days { 
   display: flex;
-  margin: 25px 0 10px;
+  margin: 1.563rem 0 0.625rem;
+  font-weight: bold; 
 }
 
 .day {
@@ -91,17 +123,33 @@
   display: flex;
   flex-flow: row wrap;
   text-align: center;
-  border-top: 1px solid #333333;
-  border-right: 1px solid #333333;
+  border-top: 1px solid rgb(184, 180, 180);
+  border-right: 1px solid rgb(184, 180, 180);
 }
 
 .date {
   width: calc(100%/7);
   height: 150px;
-  padding: 15px;
+  padding: 0.938rem;
   text-align: left;
-  border-bottom: 1px solid #333333;
-  border-left: 1px solid #333333;
+  border-bottom: 1px solid rgb(184, 180, 180);
+  border-left: 1px solid rgb(184, 180, 180);
+}
+
+.diaryImg { 
+  position: absolute; 
+  height: 1.875rem;
+  width: 1.875rem;
+  margin-left: 11.5rem;
+  margin-top: 0rem;
+}
+
+.plus{
+  position: absolute;
+  height: 1.875rem;
+  width: 1.875rem;
+  margin-top: 10rem;
+  margin-left: 0.05rem;
 }
 
 .day:nth-child(7n + 1),
