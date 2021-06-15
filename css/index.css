@@ -105,7 +105,6 @@ body {
 .main-menu {
   display: inline-flex;
   position: fixed;
-  opacity: 0.8;
   right: 2rem;
   padding-inline-start: 0;
   margin: 0;
