@@ -129,6 +129,7 @@
 }
 
 .date {
+  position: relative;
   width: calc(100%/7);
   height: 150px;
   padding: 0.938rem;
@@ -141,16 +142,14 @@
   position: absolute; 
   height: 1.875rem;
   width: 1.875rem;
-  margin-left: 11.5rem;
-  margin-top: 0rem;
+  top: 1rem; right: 1rem;
 }
 
 .plus{
   position: absolute;
   height: 1.875rem;
   width: 1.875rem;
-  margin-top: 10rem;
-  margin-left: 0.05rem;
+  bottom: 1rem; left: 1rem;
 }
 
 .day:nth-child(7n + 1),
