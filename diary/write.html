@@ -14,10 +14,14 @@
     <script src="../summernote/summernote-lite.js"></script>
     <script src="../summernote/summernote-ko-KR.js"></script>
     <link rel="stylesheet" href="../summernote/summernote-lite.css">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js" defer></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" defer></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="./write.js"></script>
 </head>
 
-<body>
+<body>    
     <header class="header">
         <div class="wrapper">
             <img src="../media/logo4.jpg" class="logo" onclick="location.href='../index.html'" style="cursor: pointer" />
@@ -58,8 +62,7 @@
             <form action="" method="POST" id="write_form">
                 <div id="write_date">
                     <div id="date">
-                        <input type="text" id="input_date" value="2021-06-04" >
-                        <label for="input_date"></label>
+                        <input type="text" id="datepicker">
                     </div>
                     <div id="weather_box">
                         <div id="weather_icon">
