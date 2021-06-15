@@ -10,12 +10,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet" />
 
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="../summernote/summernote-lite.js"></script>
     <script src="../summernote/summernote-ko-KR.js"></script>
     <link rel="stylesheet" href="../summernote/summernote-lite.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="./write.js"></script>
-    <script src="./edit.js" defer></script>
+    
 </head>
 
 <body>
@@ -59,8 +62,7 @@
             <form action="" method="POST" id="write_form">
                 <div id="write_date">
                     <div id="date">
-                        <input type="text" id="input_date" value="2021-06-04" >
-                        <label for="input_date"></label>
+                        <input type="text" id="datepicker-date">
                     </div>
                     <div id="weather_box">
                         <div id="weather_icon">
@@ -132,4 +134,5 @@
         </div>
     </div>
 </body>
+<script src="./edit.js"></script>
 </html>
