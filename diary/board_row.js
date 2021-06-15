@@ -59,10 +59,14 @@ const renderInit = () => {
     diaryDom.setAttribute("href", "view.html?" + diary.id);
     diaryDom.className = "diary";
 
-    const imgdom = document.createElement("img");
-    imgdom.className = "diary__img";
-    imgdom.setAttribute("src", diary.img);
-    diaryDom.appendChild(imgdom);
+    if (diary.img != "") {
+      const imgdom = document.createElement("img");
+      imgdom.className = "diary__img";
+      imgdom.setAttribute("src", diary.img);
+      diaryDom.appendChild(imgdom);
+    } else {
+      diaryDom.appendChild(noneImg());
+    }
 
     const right = document.createElement("div");
     right.className = "right";
@@ -94,6 +98,20 @@ const renderInit = () => {
     diaryFragment.appendChild(diaryDom);
     contentsContainer.appendChild(diaryFragment);
   });
+};
+
+const noneImg = () => {
+  const background = document.createElement("div");
+  background.className = "diary__noneBackground";
+  background.setAttribute("src", "../media/noneImg_back.jpg");
+
+  const noneImg = document.createElement("img");
+  noneImg.className = "diary__noneImg";
+  noneImg.setAttribute("src", "../media/noneImg_row.svg");
+
+  background.appendChild(noneImg);
+
+  return background;
 };
 
 renderInit();

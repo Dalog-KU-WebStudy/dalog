@@ -7,11 +7,11 @@ const diaryArr = [
     content: "내용내용1",
     date: "20210607",
     img: "https://images.velog.io/images/sukong/post/a85cd36f-9da3-48ad-87e3-044119fd8618/IMG_0910.JPG",
-    weather: "맑음",
+    weather: "sun",
   },
   {
     id: 2,
-    weather: "맑음",
+    weather: "cloud",
     title: "일기2",
     content:
       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure magnam ea architecto excepturi voluptatum omnis, magni obcaecati enim ad, laboriosam quia animi delectus ut similique consectetur culpa ducimus, aliquid dolores! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint vero, numquam labore cum dignissimos doloremque itaque earum non quis nisi quasi sequi blanditiis, eius enim sapiente quam adipisci eligendi doloribus Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus, esse, alias pariatur, optio velit recusandae commodi atque minus distinctio dolor tempora ad deserunt fugiat. Quidem perspiciatis omnis voluptate mollitia quasi! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure magnam ea architecto excepturi voluptatum omnis, magni obcaecati enim ad, laboriosam quia animi delectus ut similique consectetur culpa ducimus, aliquid dolores! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint vero, numquam labore cum dignissimos doloremque itaque earum non quis nisi quasi sequi blanditiis, eius enim sapiente quam adipisci eligendi doloribus Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus, esse, alias pariatur, optio velit recusandae commodi atque minus distinctio dolor tempora ad deserunt fugiat. Quidem perspiciatis omnis voluptate mollitia quasi!",
@@ -20,7 +20,7 @@ const diaryArr = [
   },
   {
     id: 3,
-    weather: "맑음",
+    weather: "rain",
     title: "일기3",
     content: "내용내용3",
     date: "20210607",
@@ -28,7 +28,7 @@ const diaryArr = [
   },
   {
     id: 4,
-    weather: "맑음",
+    weather: "snow",
     title: "일기4",
     content: "내용내용4",
     date: "20210607",
@@ -36,7 +36,7 @@ const diaryArr = [
   },
   {
     id: 5,
-    weather: "맑음",
+    weather: "sun",
     title: "일기5",
     content: "내용내용4",
     date: "20210607",
@@ -44,13 +44,20 @@ const diaryArr = [
   },
   {
     id: 6,
-    weather: "맑음",
+    weather: "cloud",
     title: "일기6",
     content: "내용내용4",
     date: "20210607",
     img: "https://images.velog.io/images/sukong/post/c9e731a5-ba8c-4782-9f6a-0a25dfef978e/Atto1.JPG",
   },
 ];
+
+const weatherType = {
+  sun: "맑음",
+  cloud: "흐림",
+  rain: "비",
+  snow: "눈",
+};
 
 const renderInit = () => {
   diaryArr.map((diary) => {
@@ -77,9 +84,9 @@ const renderInit = () => {
     titledom.innerText = diary.title;
     flex.appendChild(titledom);
 
-    const weatherdom = document.createElement("div");
+    const weatherdom = document.createElement("img");
     weatherdom.className = "diary__weather";
-    weatherdom.innerText = diary.weather;
+    weatherdom.setAttribute("src", `../media/icon_${diary.weather}.png`);
     flex.appendChild(weatherdom);
 
     const datedom = document.createElement("div");

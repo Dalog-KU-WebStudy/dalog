@@ -102,6 +102,24 @@ a {
   width: 20rem;
   border-top-left-radius: 1.5rem;
   border-bottom-left-radius: 1.5rem;
+  object-fit: cover;
+}
+
+.diary__noneBackground {
+  flex: none;
+  height: 20rem;
+  width: 20rem;
+  border-top-left-radius: 1.5rem;
+  border-bottom-left-radius: 1.5rem;
+  position: relative;
+  background-image: url("../media/noneImg_back.jpg");
+}
+
+.diary__noneImg {
+  width: 5rem;
+  position: absolute;
+  top: 7.5rem;
+  left: 7.5rem;
 }
 
 .contentwrapper {
