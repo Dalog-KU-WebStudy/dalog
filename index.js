@@ -2,6 +2,7 @@ const express = require('express');
 const static = require('serve-static');
 const path = require('path');
 const router = express.Router();
+const naver_login = require('./user/passport/naver');
 
 const app = express();
 app.listen(3000, function(){
@@ -17,6 +18,7 @@ app.use('/summernote',express.static(path.join(__dirname,'/summernote')));
 
 
 app.use(router);
+naver_login(app);
 app.get('/', function(req,res){
     res.sendFile(path.join(__dirname, './index.html'));
 })
