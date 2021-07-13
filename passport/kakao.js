@@ -102,23 +102,5 @@ router.get('/',(req,res)=>{
  
 router.get(kakao.redirectUri)
 
-/*
-passport.use('kakao', new KakaoStrategy({
-    clientID: '169381b5824258f2de96b86eb52f827a',
-    callbackURL: 'http://localhost:3000/user/login/kakao',     // 위에서 설정한 Redirect URI
-  }, async (accessToken, refreshToken, profile, done) => {
-    //console.log(profile);
-    console.log('access token : ' + accessToken);
-    console.log('refresh token : ' + refreshToken);
-}));
 
-
-router.get('/kakao', passport.authenticate('kakao'));
-
-router.get('/user/login/kakao/callback', passport.authenticate('kakao', {
-  failureRedirect: '/',
-}), (res, req) => {
-  res.redirect('/');
-});
-*/
 module.exports = router;
