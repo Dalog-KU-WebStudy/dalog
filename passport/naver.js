@@ -1,7 +1,6 @@
 const passport = require('passport');
 const naverStrategy = require('passport-naver').Strategy;
 const config = require('./naver_config');
-const request = require('request');
 
 module.exports = function(app){
     app.get('/login/naver', function(req,res){
@@ -22,14 +21,14 @@ module.exports = function(app){
             url: api_url,
             headers: {'X-Naver-Client-Id':config.clientID, 'X-Naver-Client-Secret': config.clientSecret}
         };
-        request.get(options, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
-                res.end(body);
-            } else {
-                res.status(response.statusCode).end();
-                console.log('error = ' + response.statusCode);
-            }
-        });
+        // request.get(options, function (error, response, body) {
+        //     if (!error && response.statusCode == 200) {
+        //         res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
+        //         res.end(body);
+        //     } else {
+        //         res.status(response.statusCode).end();
+        //         console.log('error = ' + response.statusCode);
+        //     }
+        // });
     });
 }
