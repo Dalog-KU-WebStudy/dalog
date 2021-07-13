@@ -2,6 +2,7 @@ const express = require('express');
 const static = require('serve-static');
 const path = require('path');
 const router = express.Router();
+const naver_login = require('./user/passport/naver');
 var passport = require('passport')
 const KakaoStrategy = require('passport-kakao').Strategy;
 const naverStrategy = require('passport-naver').Strategy;
@@ -32,6 +33,7 @@ app.use(passport.session())
 app.use(flash())
 
 app.use(router);
+naver_login(app);
 app.get('/', function(req,res){
     res.sendFile(path.join(__dirname, './index.html'));
 })
