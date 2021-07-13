@@ -88,16 +88,16 @@ router.get('/user/login/kakao/callback', async(req,res)=>{
 
 
 // 정보 페이지 설정
-router.get('/user/join.html',(req,res)=>{
+router.get('/public/user/join.html',(req,res)=>{
     let {profile_nickname,account_email,birthday}=req.session.kakao.properties;
-    res.render('/user/join.html',{
+    res.render('/public/user/join.html',{
         profile_nickname, account_email, birthday,
     })
 })
  
  
 router.get('/',(req,res)=>{   
-    res.render('main');
+    res.render('index');
 });
  
 router.get(kakao.redirectUri)
