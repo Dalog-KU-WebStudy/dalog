@@ -33,4 +33,16 @@ router.use(session({
 router.use('/kakao', require('../passport/kakao'));
 router.use('/naver', require('../passport/naver'));
 
+// naver 로그인
+router.get('/login/naver',
+    passport.authenticate('naver')
+);
+// naver 로그인 연동 콜백
+router.get('/login/naver/callback',
+    passport.authenticate('naver', {
+        successRedirect: '/',
+        failureRedirect: '/login'
+    })
+);
+
 module.exports = router;

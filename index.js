@@ -31,3 +31,15 @@ naver_login(app);
 app.get('/', function(req,res){
     res.sendFile(path.join(__dirname, '/public/index.html'));
 })
+
+// naver 로그인
+router.get('/login/naver',
+    passport.authenticate('naver')
+);
+// naver 로그인 연동 콜백
+router.get('/login/naver/callback',
+    passport.authenticate('naver', {
+        successRedirect: '/',
+        failureRedirect: '/login'
+    })
+);
