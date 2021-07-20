@@ -1,80 +1,81 @@
 let date = new Date();
 
-const renderCalendar = () =>
-{
-    const viewYear = date.getFullYear();
-    const viewMonth = date.getMonth();
-    
-    document.querySelector('.year-month').textContent = `${viewYear}년 ${viewMonth + 1}월`;    
+const renderCalendar = () => {
+  const viewYear = date.getFullYear();
+  const viewMonth = date.getMonth();
 
+  document.querySelector(".year-month").textContent = `${viewYear}년 ${
+    viewMonth + 1
+  }월`;
 
-    //지난달 마지막 날, 이번달 마지막 날
-    const prevLast = new Date(viewYear, viewMonth, 0);
-    const thisLast = new Date(viewYear, viewMonth + 1, 0);
-    //지난달 마지막 날짜, 요일 (요일은 숫자로 받아온다.)
-    const PLDate = prevLast.getDate();
-    const PLDay = prevLast.getDay();
+  //지난달 마지막 날, 이번달 마지막 날
+  const prevLast = new Date(viewYear, viewMonth, 0);
+  const thisLast = new Date(viewYear, viewMonth + 1, 0);
+  //지난달 마지막 날짜, 요일 (요일은 숫자로 받아온다.)
+  const PLDate = prevLast.getDate();
+  const PLDay = prevLast.getDay();
 
-    //이번달 마지막 날짜, 요일
-    const TLDate = thisLast.getDate();
-    const TLDay = thisLast.getDay();
+  //이번달 마지막 날짜, 요일
+  const TLDate = thisLast.getDate();
+  const TLDay = thisLast.getDay();
 
-    //전체 달력에 필요한 날짜들을 담아둘 배열
-    const prevDates = [];
-    const thisDates = [...Array(TLDate + 1).keys()].slice(1);
-    const nextDates = []
+  //전체 달력에 필요한 날짜들을 담아둘 배열
+  const prevDates = [];
+  const thisDates = [...Array(TLDate + 1).keys()].slice(1);
+  const nextDates = [];
 
-    //prevDates 계산
-    if (PLDay !== 6) {
-        for (let i = 0; i < PLDay + 1; i++) {
-        prevDates.unshift(PLDate - i);
-        }
+  //prevDates 계산
+  if (PLDay !== 6) {
+    for (let i = 0; i < PLDay + 1; i++) {
+      prevDates.unshift(PLDate - i);
     }
-    
-    //nextDates 계산
-    for (let i = 1; i < 7 - TLDay; i++) {
-        nextDates.push(i);
+  }
+
+  //nextDates 계산
+  for (let i = 1; i < 7 - TLDay; i++) {
+    nextDates.push(i);
+  }
+
+  const dates = prevDates.concat(thisDates, nextDates);
+  const firstDateIndex = dates.indexOf(1);
+  const lastDateIndex = dates.lastIndexOf(TLDate);
+
+  dates.forEach((date, i) => {
+    const condition =
+      i >= firstDateIndex && i < lastDateIndex + 1 ? "this" : "other";
+    dates[i] = `<div class="date">
+                        <div class="${condition} dateNum">${date}</div>
+                        <img class="diaryImg" src="./media/diary.svg"/>
+                        <div class="plus">+</div>
+                    </div>`;
+  });
+
+  document.querySelector(".dates").innerHTML = dates.join("");
+
+  const today = new Date();
+  if (viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
+    for (let date of document.querySelectorAll(".this")) {
+      if (+date.innerText === today.getDate()) {
+        date.classList.add("today");
+        break;
+      }
     }
-
-    const dates = prevDates.concat(thisDates, nextDates);
-    const firstDateIndex = dates.indexOf(1);
-    const lastDateIndex = dates.lastIndexOf(TLDate);
-
-    dates.forEach((date, i) => {
-        const condition = i >= firstDateIndex && i < lastDateIndex + 1
-                        ? 'this'
-                        : 'other';
-        dates[i] = `<div class="date"><span class=${condition}>${date}</span><img class="diaryImg" src="./media/diary.svg"/><img class="plus" src="./media/plus.svg"/></div>`;
-    });
-
-    document.querySelector('.dates').innerHTML = dates.join('');
-
-    const today = new Date();
-    if (viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
-        for (let date of document.querySelectorAll('.this')) {
-            if (+date.innerText === today.getDate()) {
-                date.classList.add('today');
-                break;
-            }
-        }
-    }       
+  }
 };
 
 renderCalendar();
 
-const prevMonth = () =>
-{
-    date.setMonth(date.getMonth()-1);
-    renderCalendar();
+const prevMonth = () => {
+  date.setMonth(date.getMonth() - 1);
+  renderCalendar();
 };
 
-const nextMonth = () =>
-{
-    date.setMonth(date.getMonth()+1);
-    renderCalendar();
+const nextMonth = () => {
+  date.setMonth(date.getMonth() + 1);
+  renderCalendar();
 };
 
-const goToday = () =>{
-    date = new Date();
-    renderCalendar();
+const goToday = () => {
+  date = new Date();
+  renderCalendar();
 };
