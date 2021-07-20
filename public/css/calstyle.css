@@ -1,94 +1,90 @@
-* { 
+* {
   box-sizing: border-box;
   font-family: "NanumSquare", sans-serif;
 }
-.header * {box-sizing: content-box !important;}
+.header * {
+  box-sizing: content-box !important;
+}
 @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
 @media screen and (min-width: 1366px) {
-  .year-month  {
+  .year-month {
     font-size: 34px;
   }
-  .day{
+  .day {
     font-size: 16px;
   }
-  .date{
+  .date {
     font-size: 14px;
   }
-  
 }
 @media screen and (min-width: 1024px) and (max-width: 1365px) {
   .year-month {
-      font-size: 32px;
-    }
-    .day{
-      font-size: 14px;
-    } 
-    .date{
-      font-size: 12px;
-    } 
-  
-    
+    font-size: 32px;
+  }
+  .day {
+    font-size: 14px;
+  }
+  .date {
+    font-size: 12px;
+  }
 }
 
 @media screen and (min-width: 880px) and (max-width: 1024px) {
   .year-month {
-      font-size: 30px;
-    }
-    .day{
-      font-size: 12px;
-    }
-    .date{
-      font-size: 10px;
-    }
-  
+    font-size: 30px;
+  }
+  .day {
+    font-size: 12px;
+  }
+  .date {
+    font-size: 10px;
+  }
 }
 @media screen and (max-width: 880px) {
   .year-month {
-     font-size: 28px;
+    font-size: 28px;
   }
-  .day{
+  .day {
     font-size: 10px;
   }
-  .date{
+  .date {
     font-size: 8px;
   }
- 
 }
 
 .calendar {
   position: absolute;
-  width: 80%; 
-  left: 10%; 
+  width: 80%;
+  left: 10%;
   right: 10%;
-  top : 30rem;
+  top: 30rem;
 }
 .header {
   align-items: center;
 }
 .year-month {
-  
   font-weight: bold;
   color: #104c7c;
   text-align: center;
   right: 30%;
   position: absolute;
   width: 40%;
-  margin-top: 1.875rem;  
+  margin-top: 1.875rem;
 }
 
 .nav {
-  display: inline-block;
+  display: flex;
+  align-items: center;
   position: absolute;
   right: 0%;
   margin-top: 2rem;
   border: 0.063rem solid #333333;
-  
 }
 
 .nav-btn {
   width: 1.75rem;
   height: 1.875rem;
-  padding-bottom: 2.188rem;;
+  padding: 1.3rem 1rem;
   text-align: center;
   border: none;
   font-size: 1rem;
@@ -97,8 +93,8 @@
   cursor: pointer;
 }
 
-.main{
-    margin-top: 2.813rem;
+.main {
+  margin-top: 2.813rem;
 }
 
 .go-today {
@@ -106,21 +102,21 @@
   border-left: 1px solid #333333;
   border-right: 1px solid #333333;
 }
-.days { 
+.days {
   display: flex;
   margin: 1.563rem 0 0.625rem;
-  font-weight: bold; 
+  font-weight: bold;
 }
 
 .day {
-  display:inline-block;
-  width: calc(100%/7);
+  display: inline-block;
+  width: calc(100% / 7);
   height: 25px;
-  top : 0px;
+  top: 0px;
   text-align: center;
 }
 
-.dates {  
+.dates {
   display: flex;
   flex-flow: row wrap;
   text-align: center;
@@ -130,7 +126,7 @@
 
 .date {
   position: relative;
-  width: calc(100%/7);
+  width: calc(100% / 7);
   height: 150px;
   padding: 0.938rem;
   text-align: left;
@@ -138,28 +134,61 @@
   border-left: 1px solid rgb(184, 180, 180);
 }
 
-.diaryImg { 
-  position: absolute; 
-  height: 1.875rem;
-  width: 1.875rem;
-  top: 1rem; right: 1rem;
+.date:hover > .plus,
+.date:hover > .diaryImg {
+  visibility: visible;
+  display: block;
 }
 
-.plus{
+.dateNum {
   position: absolute;
   height: 1.875rem;
   width: 1.875rem;
-  bottom: 1rem; left: 1rem;
+  top: 1rem;
+  right: 1rem;
+}
+
+.diaryImg {
+  position: absolute;
+  height: 1.875rem;
+  width: 1.875rem;
+  top: 1rem;
+  left: 3.5rem;
+  filter: rgb(184, 180, 180);
+  display: none;
+}
+
+.plus {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: rgb(184, 180, 180);
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  text-align: center;
+  flex-shrink: 0;
+  border-radius: 3px;
+  height: 2rem;
+  width: 2rem;
+  line-height: 2.18rem;
+  background: white;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 2px 4px;
+}
+
+.plus:hover {
+  background-color: rgba(184, 180, 180, 0.308);
 }
 
 .day:nth-child(7n + 1),
 .date:nth-child(7n + 1) {
-  color: #D13E3E;
+  color: #d13e3e;
 }
 
 .day:nth-child(7n),
 .date:nth-child(7n) {
-  color: #396EE2;
+  color: #396ee2;
 }
 
 .other {
@@ -167,8 +196,7 @@
 }
 
 .today {
-  position: relative;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .today::before {
@@ -180,7 +208,7 @@
   width: 30px;
   height: 30px;
   display: block;
-  background-color: #FF0000;
+  background-color: #ff0000;
   border-radius: 50%;
-  content: '';
+  content: "";
 }
