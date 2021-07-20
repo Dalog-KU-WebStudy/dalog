@@ -9,41 +9,25 @@ const passport = require('passport')
 const path = require('path');
 const KakaoStrategy = require('passport-kakao').Strategy;
 
-
-
-// nunjucks 세팅
-router.set('view engine', 'html');
-nunjucks.configure('views', {
-    express:app,
-})
-
-// session 세팅
-router.use(session({
-    secret:'ras',
-    resave:true,
-    secure:false,
-    saveUninitialized:false,
-}))
-
 // kakao 객체 생성
 const kakao={
     clientID: '169381b5824258f2de96b86eb52f827a',
     clientSecret: 'lBsCL5TbPK0yI8Epfyi4QMU2uCqWHgYW',
-    redirectUri: 'http://localhost:3000/user/login/kakao'
+    redirectUri: 'http://localhost:3000/login/kakao/callback'
 };
 
 
 // 카카오 로그인 페이지 연결 만들기
 // profile, account_email
-router.get('/user/login/kakao',(req,res)=>{
-    const kakaoAuthURL = 'https://kauth.kakao.com/oauth/authorize?client_id=169381b5824258f2de96b86eb52f827a&redirect_uri=http://localhost:3000/user/login/kakao&response_type=code&scope=profile_nickname,account_email,birthday'
+router.get('/login/kakao',(req,res)=>{
+    const kakaoAuthURL = 'https://kauth.kakao.com/oauth/authorize?client_id='+ kakao.clientID +'&redirect_uri=' + kakao.redirectUri + '&response_type=code&scope=profile_nickname,account_email,birthday';
     res.redirect(kakaoAuthURL);
 })
 
 
 // 로그인 이후 나올 페이지 설정 - axios를 통한 비동기통신 
 // 페이지가 바뀌지 않고도 정보를 주고 받을 수 있다
-router.get('/user/login/kakao/callback', async(req,res)=>{
+router.get('/login/kakao/callback', async(req,res)=>{
     //axios>>promise object
     try{// access 토큰을 받기 위한 코드
         token = await axios({
@@ -83,7 +67,7 @@ router.get('/user/login/kakao/callback', async(req,res)=>{
 
     req.session.kakao = user.data;
 
-    res.send('success');
+    res.send('success'); // 일단 연결성공 시 브라우저에 success 표시, 추후 수정예정
 })
 
 
@@ -97,7 +81,7 @@ router.get('/public/user/join.html',(req,res)=>{
  
  
 router.get('/',(req,res)=>{   
-    res.render('index');
+    res.render('../public/index.html');
 });
  
 router.get(kakao.redirectUri)
