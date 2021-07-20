@@ -4,7 +4,8 @@ const path = require('path');
 const router = express.Router();
 const naver_login = require('./passport/naver');
 const google_login = require('./passport/google');
-var passport = require('passport');
+const kakao_login = require('./passport/kakao');
+var passport = require('passport')
 const KakaoStrategy = require('passport-kakao').Strategy;
 const naverStrategy = require('passport-naver').Strategy;
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
@@ -34,7 +35,7 @@ app.use(router);
 
 naver_login(app);
 google_login(app);
-
+app.use(kakao_login);
 app.get('/', function(req,res){
     res.sendFile(path.join(__dirname, '/public/index.html'));
 })
