@@ -37,4 +37,5 @@ router.use(session({
 router.use('/kakao', require('../passport/kakao'));
 router.use('/naver', require('../passport/naver'));
 
-module.exports = router;*/
+
+module.exports = router;
