@@ -130,9 +130,16 @@ const renderCalendar = () => {
   const plusBtns = document.querySelectorAll(".plus");
   for (const plus of plusBtns) {
     plus.addEventListener("click", (event) => {
-      const memo = prompt("메모를 입력하세요");
-      memo && memoMockData.push({ date: event.target.value, memo: memo });
-      renderMemo();
+      const memoNum = memoMockData.filter((value) => {
+        return value.date === event.target.value;
+      }).length;
+      if (memoNum >= 3) {
+        alert("3개이상의 메모를 입력할 수 없습니다");
+      } else {
+        const memo = prompt("메모를 입력하세요");
+        memo && memoMockData.push({ date: event.target.value, memo: memo });
+        renderMemo();
+      }
     });
   }
 
