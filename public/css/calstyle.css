@@ -51,6 +51,19 @@
     font-size: 8px;
   }
 }
+button {
+  background: inherit;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+  cursor: pointer;
+}
+
+ul {
+  padding: 0;
+}
 
 .calendar {
   position: absolute;
@@ -125,53 +138,58 @@
 }
 
 .date {
-  position: relative;
   width: calc(100% / 7);
-  height: 150px;
-  padding: 0.938rem;
+  height: 25rem;
+  padding: 1rem;
   text-align: left;
   border-bottom: 1px solid rgb(184, 180, 180);
   border-left: 1px solid rgb(184, 180, 180);
 }
 
-.date:hover > .plus,
-.date:hover > .diaryImg {
+.date:hover > .dateTop > .flex > .plus,
+.date:hover > .dateTop > .flex > .diaryImg {
   visibility: visible;
   display: block;
 }
 
+.dateTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
+}
+
 .dateNum {
-  position: absolute;
-  height: 1.875rem;
-  width: 1.875rem;
+  height: 3rem;
+  text-align: right;
   top: 1rem;
   right: 1rem;
+  font-size: 2.7rem;
 }
 
 .diaryImg {
-  position: absolute;
-  height: 1.875rem;
-  width: 1.875rem;
-  top: 1rem;
-  left: 3.5rem;
-  filter: rgb(184, 180, 180);
+  height: 2.5rem;
+  width: 2.5rem;
+  margin-left: 0.5rem;
   display: none;
+}
+.flex {
+  display: flex;
+  align-items: center;
 }
 
 .plus {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
   color: rgb(184, 180, 180);
   display: none;
-  font-size: 2rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.2rem;
   cursor: pointer;
   text-align: center;
-  flex-shrink: 0;
   border-radius: 3px;
-  height: 2rem;
-  width: 2rem;
-  line-height: 2.18rem;
+  height: 3.3rem;
+  width: 3.3rem;
+  line-height: 3.3rem;
   background: white;
   box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
     rgba(15, 15, 15, 0.1) 0px 2px 4px;
@@ -197,18 +215,30 @@
 
 .today {
   color: #ffffff;
+  background-color: #ff5151;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 100%;
+  line-height: 4rem;
+  text-align: center;
 }
 
-.today::before {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: -1;
-  width: 30px;
-  height: 30px;
-  display: block;
-  background-color: #ff0000;
-  border-radius: 50%;
-  content: "";
+.memo {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.memo_one {
+  width: 100%;
+  font-size: 2rem;
+  box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px,
+    rgba(15, 15, 15, 0.1) 0px 2px 4px;
+  border-radius: 1rem;
+  padding: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #000;
 }

@@ -44,13 +44,26 @@ const renderCalendar = () => {
     const condition =
       i >= firstDateIndex && i < lastDateIndex + 1 ? "this" : "other";
     dates[i] = `<div class="date">
+                    <div class="dateTop">
+                        <div class = "flex">
+                            <button class="plus" onclick = "plusHandler">+</button>
+                            <img class="diaryImg" src="./media/diary.svg"/>
+                        </div>
                         <div class="${condition} dateNum">${date}</div>
-                        <img class="diaryImg" src="./media/diary.svg"/>
-                        <div class="plus">+</div>
-                    </div>`;
+                    </div>
+                    <ul class="memo">
+                        <li class="memo_one">아리라랑아리랑아리랑아리랑아리랑아리랑</li>
+                        <li class="memo_one">아리라랑</li>
+                        <li class="memo_one">아리라랑</li>
+                    </ul>
+                </div>`;
   });
 
   document.querySelector(".dates").innerHTML = dates.join("");
+
+  const plusHandler = (date) => {
+    console.log(date);
+  };
 
   const today = new Date();
   if (viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
