@@ -1,5 +1,4 @@
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
-const fs = require("fs");
 var passport = require('passport');
 
 const option = {
@@ -9,6 +8,8 @@ const option = {
     password : "dalog1234!",
     database : "dalog",
 }
+
+const sessionStore = new MySQLStore(option);
 
 passport.serializeUser(function (user, done) {
     done(null, user);
