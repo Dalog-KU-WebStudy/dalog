@@ -1,21 +1,73 @@
+const passport = require('passport');
 const express = require('express');
 const app = express();
-const nunjucks  =require('nunjucks');
+const nunjucks = require('nunjucks');
 const axios = require('axios');
 const qs = require('qs');
-const session = require('express-session');
+const mysql = require('mysql');
 const router = express.Router();
-const passport = require('passport')
 const path = require('path');
+const kakao_config = require('./kakao_config');
+const connection = mysql.createConnection(kakao_config.db);
 const KakaoStrategy = require('passport-kakao').Strategy;
+const sha256 = require('sha256');
+
+connection.connect();
 
 // kakao 객체 생성
 const kakao={
-    clientID: '169381b5824258f2de96b86eb52f827a',
-    clientSecret: 'lBsCL5TbPK0yI8Epfyi4QMU2uCqWHgYW',
-    redirectUri: 'http://localhost:3000/login/kakao/callback'
+    clientID: kakao_config.clientID,
+    clientSecret: kakao_config.clientSecret,
+    redirectUri: kakao_config.callback_url
 };
 
+/*
+passport.use(
+    "kakao",
+    new KakaoStrategy(kakaoKey, (accessToken, refreshToken, profile, done) => {
+        console.log(profile);
+
+        const NewUserId = "kakao:" + profile.id;
+        const NewUserPassword = sha256.x2(NewUserId);
+        //해당 id를 가진 user가 존재하는지 찾아본다.
+        const sql = "select * from user where username = ?";
+        const post = [NewUserId];
+        connection.query(sql, post, (err, results, fields) => {
+        if (err) {
+            console.log(err);
+            done(err);
+        }
+        //만약 해당 유저가 존재하지 않는다면,
+        //새로운 아이디를 하나 만들어주고 로그인을 시켜줌.
+        if (results.length === 0) {
+            const sql = "INSERT user(username, password) values(?,?)";
+            const post = [NewUserId, NewUserPassword];
+            connection.query(sql, post, (err, results, fields) => {
+            if (err) {
+                console.log(err);
+                done(err);
+            }
+            //가입이 되었다면 해당 유저로 바로 로그인시켜줌
+            const sql = "SELECT * FROM user where username =?";
+            const post = [NewUserId];
+            connection.query(sql, post, (err, results, fields) => {
+                if (err) {
+                console.log(err);
+                done(err);
+                }
+                const user = results[0];
+                return done(null, user);
+            });
+            });
+        } else {
+            //이미 유저가 존재한다면 바로 로그인시켜줌.
+            const user = results[0];
+            return done(null, user);
+        }
+        });
+    })
+);
+*/
 
 // 카카오 로그인 페이지 연결 만들기
 // profile, account_email
@@ -28,6 +80,10 @@ router.get('/login/kakao',(req,res)=>{
 // 로그인 이후 나올 페이지 설정 - axios를 통한 비동기통신 
 // 페이지가 바뀌지 않고도 정보를 주고 받을 수 있다
 router.get('/login/kakao/callback', async(req,res)=>{
+
+    const { session, query } = req;
+    const { code } = query;
+
     //axios>>promise object
     try{// access 토큰을 받기 위한 코드
         token = await axios({
@@ -48,43 +104,166 @@ router.get('/login/kakao/callback', async(req,res)=>{
         res.json(err.data);
     }
 
+    const { access_token } = token.data;
+
     // access 정보를 사용하여 사용자의 정보를 카카오측에 요청
     let user;
     try{
+        console.log("=====token info====");
         console.log(token); //access정보를 가지고 또 요청해야 정보를 가져올 수 있음.
         user = await axios({
             method:'get',
             url:'https://kapi.kakao.com/v2/user/me',
             headers:{
-                Authorization: `Bearer ${token.data.access_token}`
+                Authorization: `Bearer ${access_token}`
             }//헤더에 내용을 보고 보내주겠다.
         })
     }catch(e){
         res.json(e.data);
     }
 
+    console.log("======user info======");
     console.log(user);
+
+    const authData = {
+        ...token.data,
+        ...user.data
+    };
+
+    const result = linkUser(session, "kakao", authData);
+
+    if(result){
+        console.info("계정에 연결되었습니다.");
+    } else{
+        console.warn("이미 연결된 계정입니다.");
+    }
 
     req.session.kakao = user.data;
 
-    res.send('success'); // 일단 연결성공 시 브라우저에 success 표시, 추후 수정예정
+    if(!user) res.redirect('/login');
+    else res.redirect('/');
+
 })
 
+// 사용자 앱 연결 해제
+
+/*
+router.get("/unlink", async(req, res) => {
+    const{ session } = req;
+    const {access_token} = session.authData.kakao;
+
+    let unlinkResponse;
+    try{
+        unlinkResponse = await axios({
+            method: "POST",
+            url: "https://kapi.kakao.com/v1/user/unlink",
+            headers: {
+                Authorization: `Bearer ${access_token}`
+            }
+        });
+    } catch(err){
+        return res.json(err.data);
+    }
+
+    console.log("==== unlinkResponse.data ====");
+    console.log(unlinkResponse.data);
+
+    const { id } = unlinkResponse.data;
+
+    const result = unlinkUser(session, "kakao", id);
+
+    if (result) {
+        console.log("연결 해제되었습니다.");
+    } else {
+        console.log("카카오와 연동된 계정이 아닙니다.");
+    }
+
+    res.redirect("/");
+})
+*/
 
 // 정보 페이지 설정
-router.get('/public/user/join.html',(req,res)=>{
+router.get('/user/join.html',(req,res)=>{
     let {profile_nickname,account_email,birthday}=req.session.kakao.properties;
-    res.render('/public/user/join.html',{
+    res.render('/user/join.html',{
         profile_nickname, account_email, birthday,
     })
 })
- 
- 
-router.get('/',(req,res)=>{   
-    res.render('../public/index.html');
-});
- 
-router.get(kakao.redirectUri)
 
 
 module.exports = router;
+
+function userLogin(accessToken, refreshToken, user, done){
+    const NewUserId = "kakao:" + user.data.id;
+    const NewUserPassword = sha256.x2(NewUserId);
+    //해당 id를 가진 user가 존재하는지 찾아본다.
+    const sql = "select * from dalog_user where user_name = ?";
+    const post = [NewUserId];
+    connection.query(sql, post, (err, results, fields) => {
+    if (err) {
+        console.log(err);
+        done(err);
+    }
+    //만약 해당 유저가 존재하지 않는다면,
+    //새로운 아이디를 하나 만들어주고 로그인을 시켜줌.
+    if (results.length === 0) {
+        const sql = "INSERT dalog_user(user_name, user_pw) values(?,?)";
+        const post = [NewUserId, NewUserPassword];
+        connection.query(sql, post, (err, results, fields) => {
+        if (err) {
+            console.log(err);
+            done(err);
+        }
+        //가입이 되었다면 해당 유저로 바로 로그인시켜줌
+        const sql = "SELECT * FROM dalog_user where user_name =?";
+        const post = [NewUserId];
+        connection.query(sql, post, (err, results, fields) => {
+            if (err) {
+            console.log(err);
+            done(err);
+            }
+            const user = results[0];
+            return done(null, user);
+        });
+        });
+    } else {
+        //이미 유저가 존재한다면 바로 로그인시켜줌.
+        const user = results[0];
+        return done(null, user);
+    }
+})
+}
+
+function linkUser(session, provider, authData){
+    let result = false;
+    if(session.authData) {
+        if(session.authData[provider]){
+            // 이미 계정에 provider가 연결되어 있는 경우
+            return result;
+        }
+
+        session.authData[provider] = authData;
+    } else{
+        session.authData = {
+            [provider] : authData
+        };
+    }
+
+    result = true;
+
+    return result;
+}
+
+function unlinkUser(session, provider, userId) {
+    let result = false;
+  
+    if (
+      session.authData &&
+      session.authData[provider] &&
+      session.authData[provider].id === userId
+    ) {
+      delete session.authData[provider];
+      result = true;
+    }
+    return result;
+}
