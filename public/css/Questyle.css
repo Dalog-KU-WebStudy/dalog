@@ -1,0 +1,101 @@
+*{
+  font-family: "Noto Serif KR", sans-serif; 
+}
+ @media screen and (min-width: 1366px) {
+    .Question p {
+      font-size: 20px;
+    }
+  }
+  @media screen and (min-width: 1024px) and (max-width: 1365px) {
+    .Question p {
+        font-size: 17px;
+      }
+  }
+
+  @media screen and (min-width: 880px) and (max-width: 1024px) {
+    .Question p {
+        font-size: 15px;
+      }
+  }
+  @media screen and (max-width: 880px) {
+    .Question p {
+        font-size: 13px;
+      }
+  }
+  
+
+.Area {
+    position: relative;
+    width: 100%;
+    height : 18.75rem;
+    margin-top: 11rem;    
+}
+.Box {
+    width: 84%;
+    height : 80%;
+    left:8%;
+    position: absolute;
+    padding-top: 2px;
+    margin-bottom: 20px; 
+    box-shadow: 0.2px 1px 5px 0.2px rgb(165, 161, 161);
+    border-radius: 10px;
+    margin-top: 12px;
+}
+.Question{
+    width: 60%;
+    height: 20%;
+    margin-top: 20px;
+    margin-left: 4%;
+}
+
+.WriteAnswer{
+    height: 30px; 
+    width: 400%; 
+    font-weight: bold; 
+    opacity: 0.7;
+    position: relative;
+    outline: none;
+    border: none;
+    border-bottom: 1px black solid;
+    bottom: 0px;
+    left: 0px;  
+}
+
+.Answer {
+    position: relative;
+    width: 20%;
+    height: 40px;
+    margin-top: 5px;
+    margin-left: 4%;
+}
+
+.buttons {    
+    width: 30%;
+    height: 77%;
+    bottom: 2.5rem;
+    margin-left: 415%;
+    background-color: #104c7c;
+    color: #fff;
+    border-radius: 3px;
+    position: absolute;
+}
+
+.Box:hover{
+    box-shadow: 0.5px 2px 10px 0.5px rgb(165, 161, 161);
+
+}
+.WriteAnswer:hover{
+    transition: all 0.3s ease;
+}
+.WriteAnswer::after{
+    content: "";
+    position: absolute;
+    left: 0px;
+    bottom: -1px;
+    height: 100%;
+    width: 100%;
+    border-bottom: 3px solid #5fa8d3;
+    transform: translateX(-100%);
+    transition: all 0.3s ease;
+}
+

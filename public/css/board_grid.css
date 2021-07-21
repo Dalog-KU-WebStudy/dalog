@@ -1,0 +1,136 @@
+a {
+  color: #000;
+}
+
+.bodyContainer {
+  padding: 14rem 0 0 0;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.body__top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5rem;
+}
+.icons {
+  display: flex;
+}
+
+.board__top-grid,
+.board__top-row {
+  width: 3rem;
+  height: 3rem;
+  margin-right: 0.8rem;
+}
+
+.searchContainer {
+  display: flex;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.searchIcon {
+  height: 3rem;
+}
+
+.searchInput {
+  margin-left: 5px;
+  font-size: 2.5rem;
+  width: 18rem;
+  border: none;
+}
+.searchInput:focus {
+  outline: none;
+}
+
+.body__contents {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  row-gap: 2.5rem;
+  column-gap: 2.5rem;
+  place-items: center;
+}
+
+.diary {
+  margin: 2rem;
+  min-width: 220px;
+  max-width: 400px;
+  border-radius: 1.5rem;
+  box-shadow: 4px 4px 4px rgb(0 0 0 / 25%);
+}
+
+.diary:hover {
+  transform: translateY(-2%);
+  box-shadow: 4px 4px 4px rgb(0 0 0 /50%);
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.diary__title {
+  padding: 1rem 2rem 0 2rem;
+  font-size: 19px;
+  font-weight: 600;
+  white-space: nowrap;
+  width: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.diary__weather {
+  width: 40px;
+  padding-right: 0.5rem;
+}
+
+.diary__date {
+  padding: 1rem 2rem;
+  font-size: 10px;
+  width: inherit;
+  text-align: right;
+  font-size: 16px;
+}
+
+.diary__img {
+  width: 100%;
+  height: 270px;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  object-fit: cover;
+}
+
+.diary__noneContainer {
+  position: relative;
+  width: 100%;
+  height: 270px;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+.diary__noneimg {
+  width: 100%;
+  height: 270px;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  object-fit: cover;
+}
+
+.diary__none_contentprev {
+  position: absolute;
+  top: 3rem;
+  left: 2rem;
+  width: 91%;
+  font-size: 15px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6; /* 라인수 */
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+}

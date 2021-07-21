@@ -1,0 +1,385 @@
+
+@media screen and (min-width: 1366px) {
+    html {
+        font-size: 10px;
+    }
+}
+@media screen and (min-width: 1024px) and (max-width: 1365px) {
+    html {
+        font-size: 8px;
+    }
+}
+@media screen and (min-width: 500px) and (max-width: 1024px) {
+    html {
+    font-size: 6px;
+    }
+}
+@media screen and (max-width: 500px) {
+    html {
+    font-size: 6px;
+    }
+}
+
+* { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; box-sizing: border-box;}
+.header * {box-sizing: content-box !important;}
+
+/*datepicker 버튼 롤오버 시 손가락 모양 표시*/
+.ui-datepicker-trigger{cursor: pointer;}
+/*datepicker input 롤오버 시 손가락 모양 표시*/
+.hasDatepicker{cursor: pointer;}
+
+#container {
+    padding-top: 10rem; padding-bottom: 10rem;
+}
+#wrap {
+    border: 2px solid #ddd;
+    max-width: 95rem;
+    width: 97%;
+    margin: 5rem auto 0;
+}
+
+#write_date {
+    padding: 4rem 4rem 0 4rem;
+}
+
+/*
+#write_date label {
+    background: url(../media/icon_calendar.png) no-repeat right;
+    background-size: cover;
+    width: 2.5rem; height: 2.5rem;
+    display: inline-block;
+}
+#write_date #input_date{
+    font-size: 3rem;
+    border: none; 
+    padding: 1.5rem 0.5rem 1.5rem 1.5rem;
+    width: 19rem;
+}
+#write_date #input_date:focus {
+    outline: none;
+}
+*/
+#write_date #date #datepicker{
+    font-size: 3rem;
+    border: none; 
+    padding: 1.5rem 0.5rem 1.5rem 1.5rem;
+    width: 19rem;
+}
+#write_date #date #datepicker:focus{
+    outline:none;
+}
+
+#write_date #date #datepicker-date{
+    font-size: 3rem;
+    border: none; 
+    padding: 1.5rem 0.5rem 1.5rem 1.5rem;
+    width: 19rem;
+}
+#write_date #date #datepicker-date:focus{
+    outline:none;
+}
+
+
+#write_date img {
+    display: inline-block;
+    width: 2.5rem; height: 2.5rem;
+}
+#write_date img:hover {
+    cursor: pointer;
+}
+#date{
+    display: inline-block;
+}
+
+#weather_box {
+    float: right;
+    text-align: right;
+}
+#weather_box #temperature {
+    display: inline-block;
+    position: relative; top: -0.8rem;
+}
+#weather_box #temperature div {
+    display: block;
+    padding-left: 3rem;
+}
+#weather_box #temperature div:nth-child(1) {
+    background: url(../media/icon_temperature_night.png) no-repeat left center;
+    background-size: 2.5rem 2.5rem;
+}
+#weather_box #temperature div:nth-child(2) {
+    background: url(../media/icon_temperature_day.png) no-repeat left center;
+    background-size: 2.5rem 2.5rem;
+}
+#weather_box #temperature input {
+    width: 4rem;
+    font-size: 2rem;
+    border: none; border-radius: 2px;
+    outline: none;
+    text-align: right;
+}
+#weather_box #weather {
+    display: inline-flex;
+    align-items: center;
+}
+#weather_box #weather img {
+    width: 7rem; height: 7rem;
+}
+#weather_box #weather select {
+    font-size: 1.2rem;
+    display: none;
+}
+#weather_box #manual_button {
+    display: inline-block;
+    text-align: center;
+    width: 7rem;
+}
+#weather_box #manual_button button {
+    font-size: 1rem;
+    padding: 0.1rem;
+    border:none; border-bottom: 1px solid #000;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+}
+
+
+#write_title {
+    text-align: center;
+}
+#write_title #input_title {
+    font-size: 3rem;
+    border: none; border-bottom: 2px solid #999;
+    color: #333;
+    padding: 1.5rem; margin-bottom: 1rem;
+    width: 90%;
+}
+#write_title #input_title:focus {
+    outline: none;
+}
+
+
+#attach_photo {
+    padding: 2rem 4rem;
+}
+#attach_photo #input_photo {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+}
+#attach_photo label {
+    width: 8rem; height: 8rem;
+    display: block;
+    background: url(../media/icon_image.png) no-repeat center; background-size: 100%;
+    cursor: pointer;
+}
+#attach_photo img {
+    max-width: 40rem;
+    max-height: 40rem;
+    margin-top: 1rem;
+}
+
+
+#write_content {
+    text-align: right;
+}
+/*
+#write_content #text_deco {
+    border-top: 2px solid #bbb;
+    padding: 1.7rem 2rem;
+    background-color: #f6f6f6;
+    line-height: 3.1rem;
+    display: none;
+}
+#write_content #text_deco #select_fontSize {
+    display: inline-block;
+    margin-right: 1rem;
+    vertical-align: middle;
+    font-size: 1.7rem;
+    padding: 0.5rem; padding-right: 0.8rem;
+    background-color: #f6f6f6;
+    border: none;
+    cursor: pointer;
+}
+#write_content #text_deco #select_fontSize:hover {
+    background-color: #eee;
+}
+
+#write_content #text_deco #select_fontColor{
+    display: inline-block;
+    font-size: 2.1rem;
+    padding: 0.2rem; padding-left: 1rem; margin-right: 1rem;
+    width: 3.5rem;
+    text-align: left;
+    position: relative;
+    vertical-align: middle;
+}
+#write_content #text_deco #select_fontColor:hover {
+    background-color: #eee;
+}
+#write_content #text_deco #select_fontColor:focus {
+    background-color: black;
+}
+#write_content #text_deco #select_fontColor #selected_color {
+    background-color: black;
+    width: 0.6rem; height: 0.6rem;
+    border-radius: 50% 50%;
+    display: inline-block;
+    position: absolute; bottom: 0.6rem; right: 0.6rem;
+}
+#write_content #text_deco #color_select_box {
+    position:absolute; bottom: -10.3rem; left: -6.9rem;
+    width:17rem; height:9rem;
+    background:white;
+    border: 1px solid #ddd; border-radius: 3px;
+    padding: 1rem;
+    text-align: center;
+}
+#write_content #text_deco #color_select_box:after {
+    border-top:0px solid transparent;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid white;
+    content:"";
+    position:absolute; top:-10px; left:7.5rem;
+}
+#write_content #text_deco #color_select_box ul {
+    margin: 0; padding: 0;
+}
+#write_content #text_deco #color_select_box li {
+    display: inline-block;
+    margin: 0; padding: 0;
+}
+#write_content #text_deco #color_select_box button{
+    width: 2rem; height: 2rem;
+    border: 1px solid #aaa; border-radius: 50% 50%;
+    vertical-align: middle;
+    cursor: pointer;
+    position: relative;
+}
+#write_content #text_deco #color_select_box button#checked{
+    background: url(../media/icon_check_white.png) no-repeat center;
+    background-size: cover;
+}
+#write_content #text_deco #color_select_box button#checked.white {
+    background-image: url(../media/icon_check.png);
+}
+
+#write_content #text_deco #select_bold {
+    background: url(../media/icon_text_bold.png) no-repeat center; background-size: 2.1rem 2.1rem;
+    display: inline-block;
+    width: 3.2rem; height: 3.2rem;
+    vertical-align: middle;
+    margin-right: 1rem;
+}
+#write_content #text_deco #select_bold:hover {
+    background-color: #f0f0f0;
+}
+#write_content #text_deco #select_italic {
+    background: url(../media/icon_text_italic.png) no-repeat center; background-size: 2.1rem 2.1rem;
+    display: inline-block;
+    width: 3.2rem; height: 3.2rem;
+    vertical-align: middle;
+    margin-right: 1rem;
+}
+#write_content #text_deco #select_underline {
+    background: url(../media/icon_text_underline.png) no-repeat center; background-size: 2.1rem 2.1rem;
+    display: inline-block;
+    width: 3.2rem; height: 3.2rem;
+    vertical-align: middle;
+    margin-right: 1rem;
+}
+#write_content #text_deco #select_underline:hover {
+    background-color: #f0f0f0;
+}
+#write_content #text_deco #select_italic:hover {
+    background-color: #f0f0f0;
+}
+
+
+#write_content #input_content {
+    width: 100%; height: 40rem;
+    resize: none;
+    border: none; border-top: 2px solid #bbb; 
+    padding: 4rem 5rem;
+    font-size: 1.8rem;
+}
+#write_content #input_content:focus {
+    outline: none;
+} */
+
+
+#write_content .note-editor {
+    border-left: none; border-right: none; border-bottom: none;
+    border-radius: 0;
+}
+#write_content .note-placeholder {
+    padding: 4rem 5rem; margin-top: 1em;
+    font-size: 1.8rem;
+}
+#write_content .note-editable {
+    text-align: left;
+    resize: none;
+    height: 70rem;
+    padding: 4rem 5rem;
+    font-size: 1.8rem;
+    border: none;
+}
+#write_content .note-editable p {
+    word-wrap: break-word;
+}
+#write_content .note-dropdown-menu {
+    width: auto;
+    min-width:auto;
+}
+#write_content .note-statusbar {
+    display: none;
+}
+
+
+#submit_button {
+    max-width: 95rem;
+    width: 97%;
+    text-align: right;
+    margin: 2rem auto;
+}
+#submit_button #submit_btn {
+    border: none;
+    background-color: #104c7c;
+    color: #fff; 
+    font-size: 1.8rem; font-weight: normal;
+    padding: 1.2rem 2.2rem; margin: 2rem 3rem;
+    border-radius: 3px 3px;
+    cursor: pointer;
+}
+#submit_button #submit_btn:hover {
+    background-color: #104b7cd3;
+}
+
+
+@media screen and (max-width: 500px) {
+    #date {
+        display: block;
+    }
+    #write_date {
+        padding: 2rem 2rem 1rem 2rem;
+    }
+    #weather_box {
+        float: none;
+        display: inline-block;
+        padding: 1rem;
+        text-align: right;
+    }
+    #weather_icon {
+        display: block;
+    }
+    #write_title #input_title {
+        width: 90%;
+        margin: 0 2rem 1rem;
+    }
+    #attach_photo img {
+        width: 90%;
+    }
+    #write_content #input_content {
+        padding: 2rem 3rem;
+    }
+}
