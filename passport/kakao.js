@@ -84,7 +84,7 @@ router.get('/login/kakao/callback', async(req,res)=>{
     const { session, query } = req;
     const { code } = query;
 
-    //axios>>promise object
+    // axios>>promise object
     try{// access 토큰을 받기 위한 코드
         token = await axios({
             method:'POST',
@@ -93,11 +93,11 @@ router.get('/login/kakao/callback', async(req,res)=>{
                 'content-type':'application/x-www-form-urlencoded'
             },
             data:qs.stringify({
-                grant_type: 'authorization_code',//특정 스트링
+                grant_type: 'authorization_code',   // 특정 스트링
                 client_id:kakao.clientID,
                 client_secret:kakao.clientSecret,
                 redirect_uri:kakao.redirectUri,
-                code:req.query.code,//결과값을 반환했다. 안됐다.
+                code:req.query.code,    // 결과값을 반환했다. 안됐다.
             })// 객체를 string으로 변환
         })
     } catch(err){
@@ -109,21 +109,25 @@ router.get('/login/kakao/callback', async(req,res)=>{
     // access 정보를 사용하여 사용자의 정보를 카카오측에 요청
     let user;
     try{
+        /*
         console.log("=====token info====");
         console.log(token); //access정보를 가지고 또 요청해야 정보를 가져올 수 있음.
+        */
         user = await axios({
             method:'get',
             url:'https://kapi.kakao.com/v2/user/me',
             headers:{
                 Authorization: `Bearer ${access_token}`
-            }//헤더에 내용을 보고 보내주겠다.
+            }// 헤더에 내용을 보고 보내주겠다.
         })
     }catch(e){
         res.json(e.data);
     }
 
+    /*
     console.log("======user info======");
     console.log(user);
+    */
 
     const authData = {
         ...token.data,
@@ -131,9 +135,65 @@ router.get('/login/kakao/callback', async(req,res)=>{
     };
 
     const result = linkUser(session, "kakao", authData);
+    console.log("=== link user ===");
+    console.log(result);
+    console.log("==== AuthData ====");
+    console.log(authData);
 
     if(result){
         console.info("계정에 연결되었습니다.");
+        
+        const NewUserId = authData.kakao_account.email;
+        const NewUserPassword = String(sha256.x2(String(authData.id)));
+        const NewUserName = authData.properties.nickname;
+
+        // birthday 형식 수정
+        // 근데 연도를 못 가져오네...
+        // 초기 연도 : 0000
+        const str = authData.kakao_account.birthday;
+        var output = [str.slice(0, 2), '-', str.slice(2)].join('');
+        // console.log(output);
+        const NewUserBirth = "0000-" + output;
+
+        // 해당 id를 가진 user가 존재하는지 찾아본다.
+        const sql = "select * from dalog_user where user_id = ?";
+        const post = [NewUserId];
+        connection.query(sql, post, (err, results, fields) => {
+        if (err) {
+            console.log(err);
+            // done(err);
+        }
+
+        // 만약 해당 유저가 존재하지 않는다면,
+        // 새로운 아이디를 하나 만들어주고 로그인을 시켜줌.
+        if (results.length === 0) {
+            const sql = "INSERT dalog_user(user_id, user_pw, user_name, birth) values(?,?,?,?)";
+            const post = [NewUserId, NewUserPassword, NewUserName, NewUserBirth];
+            connection.query(sql, post, (err, results, fields) => {
+            if (err) {
+                console.log(err);
+                // done(err);
+            }
+
+            // 가입이 되었다면 해당 유저로 바로 로그인시켜줌 
+            const sql = "SELECT * FROM dalog_user where user_id =?";
+            const post = [NewUserId];
+            connection.query(sql, post, (err, results, fields) => {
+                if (err) {
+                console.log(err);
+                // done(err);
+                }
+                const user = results[0];
+                return user;
+            });
+            });
+        } else {
+            // 이미 유저가 존재한다면 바로 로그인시켜줌.
+            const user = results[0];
+            console.log("이미 존재하는 유저입니다. ");
+            return user;
+        }
+        })
     } else{
         console.warn("이미 연결된 계정입니다.");
     }
