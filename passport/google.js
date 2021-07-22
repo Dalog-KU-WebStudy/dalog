@@ -9,7 +9,7 @@ const option = {
     database : "dalog",
 }
 
-const sessionStore = new MySQLStore(option);
+// const sessionStore = new MySQLStore(option);
 
 passport.serializeUser(function (user, done) {
     done(null, user);
