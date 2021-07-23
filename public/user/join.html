@@ -8,6 +8,8 @@
         <link href='https://spoqa.github.io/spoqa-han-sans/' rel='stylesheet' type='text/css'>
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+        <script src="./join.js" defer></script>
     </head>
     <body>
         <header class="header">
@@ -84,7 +86,7 @@
             <!-- Email -->
 
             <div>
-              <h3 class="join_title"><label for="email">이메일<span class="optional"></span></label></h3>
+              <h3 class="join_title"><label for="email">이메일 *<span class="optional"></span></label></h3>
               <span class="box int_email">
                   <input type="text" id="email" class="int" maxlength="100" placeholder="이메일 입력" style="outline: none;">
               </span>
@@ -93,9 +95,10 @@
 
             <!-- PW1 -->
             <div>
-                <h3 class="join_title"><label for="pswd1">비밀번호</label></h3>
+                <h3 class="join_title"><label for="pswd1">비밀번호 *</label></h3>
                 <span class="box int_pass">
-                    <input type="text" id="pswd1" class="int" maxlength="20" placeholder="비밀번호" style="outline: none;">
+                    <input type="password" id="pswd1" class="int" maxlength="20" placeholder="비밀번호" style="outline: none;">
+                    <i class="fa fa-eye fa-lg" id="togglePw1"></i>
                     <span id="alertTxt">사용불가</span>
                 </span>
                 <span class="error_next_box"></span>
@@ -103,16 +106,17 @@
 
             <!-- PW2 -->
             <div>
-                <h3 class="join_title"><label for="pswd2">비밀번호 재확인</label></h3>
+                <h3 class="join_title"><label for="pswd2">비밀번호 재확인 *</label></h3>
                 <span class="box int_pass_check">
-                    <input type="text" id="pswd2" class="int" maxlength="20" placeholder="비밀번호 확인" style="outline: none;">
+                    <input type="password" id="pswd2" class="int" maxlength="20" placeholder="비밀번호 확인" style="outline: none;">
+                    <i class="fa fa-eye fa-lg" id="togglePw2"></i>
                 </span>
                 <span class="error_next_box"></span>
             </div>
 
             <!-- NAME -->
             <div>
-                <h3 class="join_title"><label for="name">이름</label></h3>
+                <h3 class="join_title"><label for="name">이름 *</label></h3>
                 <span class="box int_name">
                     <input type="text" id="name" class="int" maxlength="20" style="outline: none;">
                 </span>
@@ -185,14 +189,20 @@
                 <span class="error_next_box"></span>    
             </div>
 
+            <!--Personal information collection check-->
+            <div class="info_check">
+              <form name="form">
+                <span class="info-check-msg">개인정보수집 동의</span>
+                <input type="checkbox" id="info-checkbox" name="info-check" value="개인정보수집 동의" onchange="joinCheck()">
+              </form>
+            </div>
 
             <!-- JOIN BTN-->
             <div class="btn_area">
-                <button type="button" id="btnJoin" onclick="location.href='../index.html'">
+                <button type="button" id="btnJoin" onclick="return checkAll()">
                     <span>가입하기</span>
                 </button>
-            </div>
-
+              </div>
         </div> 
     </body>
 </html>
