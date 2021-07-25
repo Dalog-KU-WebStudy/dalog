@@ -2,7 +2,8 @@ const express = require('express');
 const static = require('serve-static');
 const path = require('path');
 const router = express.Router();
-const naver_login = require('./passport/naver');
+const router_index = require('./router/index');
+// const naver_login = require('./passport/naver');
 const google_login = require('./passport/google');
 const kakao_login = require('./passport/kakao');
 var passport = require('passport')
@@ -30,24 +31,24 @@ app.use(passport.session())
 app.use(flash())
 
 app.use(router);
+app.use(router_index);
 
 
-
-naver_login(app);
+// naver_login(app);
 google_login(app);
 app.use(kakao_login);
-app.get('/', function(req,res){
-    res.sendFile(path.join(__dirname, '/public/index.html'));
-})
+// app.get('/', function(req,res){
+//     res.sendFile(path.join(__dirname, '/public/index.html'));
+// })
 
-// naver 로그인
-router.get('/login/naver',
-    passport.authenticate('naver')
-);
-// naver 로그인 연동 콜백
-router.get('/login/naver/callback',
-    passport.authenticate('naver', {
-        successRedirect: '/',
-        failureRedirect: '/login'
-    })
-);
+// // naver 로그인
+// router.get('/login/naver',
+//     passport.authenticate('naver')
+// );
+// // naver 로그인 연동 콜백
+// router.get('/login/naver/callback',
+//     passport.authenticate('naver', {
+//         successRedirect: '/',
+//         failureRedirect: '/login'
+//     })
+// );

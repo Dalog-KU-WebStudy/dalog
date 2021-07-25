@@ -39,3 +39,17 @@ router.use('/naver', require('../passport/naver'));
 
 
 module.exports = router;
+*/
+
+const express = require('express');
+const router = express.Router();
+const path = require('path');
+
+router.get('/', function(req,res){
+    res.sendFile(path.join(__dirname, '/public/index.html'));
+})
+
+const naver_login = require('../passport/naver');
+router.use('/login/naver', naver_login);
+
+module.exports = router;
