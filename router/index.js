@@ -39,3 +39,4 @@ router.use('/naver', require('../passport/naver'));
 
 
 module.exports = router;
+*/
