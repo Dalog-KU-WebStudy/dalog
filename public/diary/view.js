@@ -51,12 +51,12 @@ const diaryArr = [
 ];
 
 function onEdit() {
-  location.href = `./edit.html`;
+  location.href = `/diary/edit`;
 }
 function onDelete() {
   if (confirm("일기를 삭제하시겠습니까?")) {
     //삭제 구현
-    location.href = `./board_grid.html`;
+    location.href = `/diary/board_grid`;
   }
 }
 
