@@ -8,12 +8,12 @@ const path = require('path');
 // const app = express();
 
 module.exports = function(router,passport){
-passport.serializeUser(function (user, done) {
-    done(null, user);
-});
-passport.deserializeUser(function (obj, done) {
-    done(null, obj);
-});
+// passport.serializeUser(function (user, done) {
+//     done(null, user);
+// });
+// passport.deserializeUser(function (obj, done) {
+//     done(null, obj);
+// });
 
 
 const naver_login = require('../passport/naver');
@@ -46,7 +46,7 @@ router.get('/', function(req,res){
 })
 
 
-const user_join = require('./join/index');
+const user_join = require('./user/join/index');
 router.use('/user/join', user_join);
 
 
