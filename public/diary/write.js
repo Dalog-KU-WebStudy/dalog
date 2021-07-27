@@ -1,5 +1,5 @@
 function onSubmit() {
-    location.href=`./view.html`;
+    location.href=`/diary/view`;
 }
 
 let changeWeather_flag = 0;

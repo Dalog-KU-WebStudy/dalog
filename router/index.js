@@ -22,6 +22,30 @@ naver_login(passport);
 // passport.use('naver', new naver_login(passport));
 
 
+//라우터 등록
+router.get('/', function(req,res){
+    res.sendFile(path.join(__dirname, '../public/index.html'));
+})
+router.get('/user/login', function(req,res){
+    res.sendFile(path.join(__dirname, '../public/user/login.html'));
+})
+router.get('/diary/write', function(req,res){
+    res.sendFile(path.join(__dirname, '../public/diary/write.html'));
+})
+router.get('/diary/view', function(req,res){
+    res.sendFile(path.join(__dirname, '../public/diary/view.html'));
+})
+router.get('/diary/edit', function(req,res){
+    res.sendFile(path.join(__dirname, '../public/diary/edit.html'));
+})
+router.get('/diary/board_grid', function(req,res){
+    res.sendFile(path.join(__dirname, '../public/diary/board_grid.html'));
+})
+router.get('/diary/board_row', function(req,res){
+    res.sendFile(path.join(__dirname, '../public/diary/board_row.html'));
+})
+
+
 // naver 로그인
 router.get('/login/naver',
     passport.authenticate('naver')
@@ -41,10 +65,6 @@ router.get('/profile', function(req,res){
 })
 console.log('profile: '+profile);
 
-router.get('/', function(req,res){
-    res.sendFile(path.join(__dirname, '/public/index.html'));
-})
-
 
 const user_join = require('./user/join/index');
 router.use('/user/join', user_join);
@@ -57,7 +77,7 @@ user_modify(router, profile);
 // router.use('/user/modify', user_modify);
 
 const logout = require('./user/logout');
-router.use('/logout', logout);
+router.use('/user/logout', logout);
 }
 
 // module.exports = router;
