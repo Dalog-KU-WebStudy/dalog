@@ -206,6 +206,7 @@ router.get('/user/join.html',(req,res)=>{
 
 module.exports = router;
 
+/*
 function userLogin(accessToken, refreshToken, user, done){
     const NewUserId = "kakao:" + user.data.id;
     const NewUserPassword = sha256.x2(NewUserId);
@@ -246,7 +247,7 @@ function userLogin(accessToken, refreshToken, user, done){
     }
 })
 }
-
+*/
 function linkUser(session, provider, authData){
     let result = false;
     if(session.authData) {
@@ -267,6 +268,7 @@ function linkUser(session, provider, authData){
     return result;
 }
 
+/*
 function unlinkUser(session, provider, userId) {
     let result = false;
   
@@ -280,3 +282,4 @@ function unlinkUser(session, provider, userId) {
     }
     return result;
 }
+*/

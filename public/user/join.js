@@ -213,7 +213,7 @@ function checkAll(){
             console.log("name : " + userName.value);
             console.log("birth : " + yy.value + "-" + mm.value + "-" + dd.value);
             console.log("phone : " + mobile.value);
-            // location.href='../index.html';
+            location.href='../index.html';
         }
         
         // return true;
