@@ -24,7 +24,7 @@ fetch('https://httpbin.org/post', {
 
 router.get('/', function(req,res){
     console.log('get join url')
-    res.sendFile(path.join(__dirname, '../../public/user/join.html'))
+    res.sendFile(path.join(__dirname, '../../../public/user/join.html'))
 })
 
 
