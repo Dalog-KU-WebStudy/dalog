@@ -19,6 +19,7 @@ var mobile = document.querySelector('#mobile');
 
 var error = document.querySelectorAll('.error_next_box');
 
+var join = document.querySelector('#btnJoin');
  
 togglePW1.addEventListener('click', function (e) {
     // toggle the type attribute
@@ -46,7 +47,7 @@ yy.addEventListener("change", isBirthCompleted);
 mm.addEventListener("change", isBirthCompleted);
 dd.addEventListener("change", isBirthCompleted);
 mobile.addEventListener("change", checkPhone);
-
+join.addEventListener("mousedown", checkAll);
 
 function isEmailCorrect() {
     var emailPattern = /[a-z0-9]{2,}@[a-z0-9-]{2,}\.[a-z0-9]{2,}/;
@@ -54,10 +55,13 @@ function isEmailCorrect() {
     if(email.value === ""){ 
         error[0].innerHTML = "필수 정보입니다."; 
         error[0].style.display = "block";
+        join.disabled = true;
     } else if(!emailPattern.test(email.value)) {
         error[0].style.display = "block";
+        join.disabled = true;
     } else {
         error[0].style.display = "none"; 
+        join.disabled = false;
     }
 
 }
@@ -68,8 +72,9 @@ function checkPw(){
     if(pw1.value == "") {
         error[1].innerHTML = "필수 정보입니다.";
         pwMsg.style.display = "block";
-        pwMsgArea.style.paddingRight = "40px";
+        pwMsgArea.style.paddingRight = "4rem";
         error[1].style.display = "block";
+        join.disabled = true;
     }
     else if(!pwPattern.test(pw1.value)) {
         error[1].innerHTML = "8~16자 영문 대/소문자, 숫자, 특수문자를 사용하세요.";
@@ -79,7 +84,9 @@ function checkPw(){
         error[1].style.display = "block";
         pwMsg.style.color = "red";
         pwMsg.style.display = "block";
-    } else if(pw1.value == email.value){
+        join.disabled = true;
+    } 
+    else if(pw1.value == email.value){
         error[1].innerHTML = "이메일과 같은 비밀번호는 사용할 수 없습니다.";
         pwMsg.innerHTML = "사용불가";
         pwMsgArea.style.paddingRight = "9.3rem";
@@ -87,6 +94,7 @@ function checkPw(){
         error[1].style.display = "block";
         pwMsg.style.color = "red";
         pwMsg.style.display = "block";
+        join.disabled = true;
     }
     else {
         error[1].style.display = "none";
@@ -94,20 +102,24 @@ function checkPw(){
         pwMsgArea.style.paddingRight = "9.3rem";
         pwMsg.style.color = "#03c75a";
         pwMsg.style.display = "block";
+        join.disabled = false;
     }
 }
 
 function comparePw() {
     if(pw2.value === pw1.value) {
         error[2].style.display = "none";
+        join.disabled = false;
     } else if(pw2.value !== pw1.value) {
         error[2].innerHTML = "비밀번호가 일치하지 않습니다.";
         error[2].style.display = "block";
+        join.disabled = true;
     } 
 
     if(pw2.value === "") {
         error[2].innerHTML = "필수 정보입니다.";
         error[2].style.display = "block";
+        join.disabled = true;
     }
 }
 
@@ -116,11 +128,14 @@ function checkName() {
     if(userName.value === "") {
         error[3].innerHTML = "필수 정보입니다.";
         error[3].style.display = "block";
+        join.disabled = true;
     } else if(!namePattern.test(userName.value) || userName.value.indexOf(" ") > -1) {
         error[3].innerHTML = "한글과 영문 대/소문자를 사용하세요. (특수기호, 공백 사용 불가)";
         error[3].style.display = "block";
+        join.disabled = true;
     } else {
         error[3].style.display = "none";
+        join.disabled = false;
     }
 }
 
@@ -154,7 +169,10 @@ function isBirthCompleted() {
 
 function isBirthRight() {
     var datePattern = /\d{1,2}/;
-    if(!datePattern.test(dd.value) || Number(dd.value)<1 || Number(dd.value)>31) {
+    if(yy.value == "" || mm.value == "" || dd.value == ""){
+        join.disabled = false;
+    }
+    else if(!datePattern.test(dd.value) || Number(dd.value)<1 || Number(dd.value)>31) {
         error[4].innerHTML = "생년월일이 올바르지 않습니다. 다시 확인해주세요.";
     }
 }
@@ -179,21 +197,30 @@ function checkPhone() {
 
 function checkAll(){
     if(document.getElementById("info-checkbox").checked == true){
-        var i;
-        for( i=0 ; i<6 ; i++){
-            if(error[i].style.display == "block"){
-                alert("필수 정보를 모두 입력해주세요.");
-                return false;
-            }
+
+        if(email.value == "" || pw1.value == "" || pw2.value == "" || userName.value == ""){
+            alert("필수 정보를 모두 입력해주세요.");
+            // return false;
+        }
+        else if(join.getAttribute("disabled") == "true"){
+            alert("정보를 올바르게 입력해주세요.");
+            // return false;
+        }
+        else{
+            alert("가입이 완료되었습니다. 새로운 아이디로 다시 로그인해주세요. ");
+            console.log("email : " + email.value);
+            console.log("pw : " + pw1.value);
+            console.log("name : " + userName.value);
+            console.log("birth : " + yy.value + "-" + mm.value + "-" + dd.value);
+            console.log("phone : " + mobile.value);
+            // location.href='../index.html';
         }
         
-        location.href='../index.html';
-        return true;
+        // return true;
     }
     else{
         alert("개인정보수집에 동의하지 않으시면 가입이 불가합니다.");
-        document.getElementById("btnJoin").disabled = true;
-        return false;
+        // return false;
     }
 
 }

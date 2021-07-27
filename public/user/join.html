@@ -71,7 +71,7 @@
                           href="../user/login.html"
                           target="_self"
                           style="text-decoration: none; cursor: pointer"
-                          >로그아웃</a
+                          >로그인</a
                         >
                       </li>
                     </ul>
@@ -83,113 +83,114 @@
           <div class="join-form">
             <p style="font-size: 3rem; color: #104c7c; font-weight: bold; font-family: 'Noto Serif KR', sans-serif; margin-bottom: 5rem;">회원정보 입력</p>
             
-            <!-- Email -->
+            <form action="/join" method="post">
 
-            <div>
-              <h3 class="join_title"><label for="email">이메일 *<span class="optional"></span></label></h3>
-              <span class="box int_email">
-                  <input type="text" id="email" name="email" class="int" maxlength="100" placeholder="이메일 입력" style="outline: none;">
-              </span>
-              <span class="error_next_box" id="emailMsg" style aria-live="assertive">이메일 정보가 올바르지 않습니다.</span>    
-          </div>
+              <!-- Email -->
 
-            <!-- PW1 -->
-            <div>
-                <h3 class="join_title"><label for="pswd1">비밀번호 *</label></h3>
-                <span class="box int_pass">
-                    <input type="password" name="password" id="pswd1" class="int" maxlength="20" placeholder="비밀번호" style="outline: none;">
-                    <i class="fa fa-eye fa-lg" id="togglePw1"></i>
-                    <span id="alertTxt">사용불가</span>
+              <div>
+                <h3 class="join_title"><label for="email">이메일 *<span class="optional"></span></label></h3>
+                <span class="box int_email">
+                    <input type="text" id="email" name="userEmail" class="int" maxlength="100" placeholder="이메일 입력" style="outline: none;" required>
                 </span>
-                <span class="error_next_box" id="pswd1Msg" style aria-live="assertive"></span>
-            </div>
-
-            <!-- PW2 -->
-            <div>
-                <h3 class="join_title"><label for="pswd2">비밀번호 재확인 *</label></h3>
-                <span class="box int_pass_check">
-                    <input type="password" id="pswd2" class="int" maxlength="20" placeholder="비밀번호 확인" style="outline: none;">
-                    <i class="fa fa-eye fa-lg" id="togglePw2"></i>
-                </span>
-                <span class="error_next_box" id="pswd2Msg" style aria-live="assertive"></span>
-            </div>
-
-            <!-- NAME -->
-            <div>
-                <h3 class="join_title"><label for="name">이름 *</label></h3>
-                <span class="box int_name">
-                    <input type="text" id="name" name="name" class="int" maxlength="20" style="outline: none;">
-                </span>
-                <span class="error_next_box" id="pswd2Msg" style aria-live="assertive"></span>
-            </div>
-
-            <!-- BIRTH -->
-            <div>
-                <h3 class="join_title"><label for="yy">생년월일</label></h3>
-
-                <div id="bir_wrap">
-                    <!-- BIRTH_YY -->
-                    <div id="bir_yy">
-                        <span class="box">
-                            <input type="text" id="yy" name="yy" class="int" maxlength="4" placeholder="년(4자)" style="outline: none;">
-                        </span>
-                    </div>
-
-                    <!-- BIRTH_MM -->
-                    <div id="bir_mm">
-                        <span class="box">
-                            <select id="mm" name="mm" class="sel">
-                                <option>월</option>
-                                <option value="01">1</option>
-                                <option value="02">2</option>
-                                <option value="03">3</option>
-                                <option value="04">4</option>
-                                <option value="05">5</option>
-                                <option value="06">6</option>
-                                <option value="07">7</option>
-                                <option value="08">8</option>
-                                <option value="09">9</option>                                    
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                            </select>
-                        </span>
-                    </div>
-
-                    <!-- BIRTH_DD -->
-                    <div id="bir_dd">
-                        <span class="box">
-                            <input type="text" id="dd" name="dd" class="int" maxlength="2" placeholder="일" style="outline: none;">
-                        </span>
-                    </div>
-
-                </div>
-                <span class="error_next_box"></span>    
-            </div>
-
-           <!-- MOBILE -->
-            <div>
-                <h3 class="join_title"><label for="phoneNo">휴대전화 ('-' 제외하고 입력)</label></h3>
-                <span class="box int_mobile">
-                    <input type="tel" id="mobile" name="phone" class="int" maxlength="16" placeholder="전화번호 입력" style="outline: none;">
-                </span>
-                <span class="error_next_box"></span>    
-            </div>
-
-            <!--Personal information collection check-->
-            <div class="info_check">
-              <form name="form">
-                <span class="info-check-msg">개인정보수집 동의</span>
-                <input type="checkbox" id="info-checkbox" name="info-check" value="개인정보수집 동의" onchange="joinCheck()">
-              </form>
-            </div>
-
-            <!-- JOIN BTN-->
-            <div class="btn_area">
-                <button type="button" id="btnJoin" onclick="return checkAll()">
-                    <span>가입하기</span>
-                </button>
+                <span class="error_next_box" name="email_error" id="emailMsg" style aria-live="assertive">이메일 정보가 올바르지 않습니다.</span>    
               </div>
+
+              <!-- PW1 -->
+              <div>
+                  <h3 class="join_title"><label for="pswd1">비밀번호 *</label></h3>
+                  <span class="box int_pass">
+                      <input type="password" name="userPW" id="pswd1" class="int" maxlength="20" placeholder="비밀번호" style="outline: none;" required>
+                      <i class="fa fa-eye fa-lg" id="togglePw1"></i>
+                      <span id="alertTxt">사용불가</span>
+                  </span>
+                  <span class="error_next_box" id="pswd1Msg" style aria-live="assertive"></span>
+              </div>
+
+              <!-- PW2 -->
+              <div>
+                  <h3 class="join_title"><label for="pswd2">비밀번호 재확인 *</label></h3>
+                  <span class="box int_pass_check">
+                      <input type="password" id="pswd2" class="int" maxlength="20" placeholder="비밀번호 확인" style="outline: none;">
+                      <i class="fa fa-eye fa-lg" id="togglePw2"></i>
+                  </span>
+                  <span class="error_next_box" id="pswd2Msg" style aria-live="assertive"></span>
+              </div>
+
+              <!-- NAME -->
+              <div>
+                  <h3 class="join_title"><label for="name">이름 *</label></h3>
+                  <span class="box int_name">
+                      <input type="text" id="name" name="userName" class="int" maxlength="20" style="outline: none;" required>
+                  </span>
+                  <span class="error_next_box" id="pswd2Msg" style aria-live="assertive"></span>
+              </div>
+
+              <!-- BIRTH -->
+              <div>
+                  <h3 class="join_title"><label for="yy">생년월일</label></h3>
+
+                  <div id="bir_wrap">
+                      <!-- BIRTH_YY -->
+                      <div id="bir_yy">
+                          <span class="box">
+                              <input type="text" id="yy" name="yy" class="int" maxlength="4" placeholder="년(4자)" style="outline: none;" required>
+                          </span>
+                      </div>
+
+                      <!-- BIRTH_MM -->
+                      <div id="bir_mm">
+                          <span class="box">
+                              <select id="mm" name="mm" class="sel" required>
+                                  <option>월</option>
+                                  <option value="01">1</option>
+                                  <option value="02">2</option>
+                                  <option value="03">3</option>
+                                  <option value="04">4</option>
+                                  <option value="05">5</option>
+                                  <option value="06">6</option>
+                                  <option value="07">7</option>
+                                  <option value="08">8</option>
+                                  <option value="09">9</option>                                    
+                                  <option value="10">10</option>
+                                  <option value="11">11</option>
+                                  <option value="12">12</option>
+                              </select>
+                          </span>
+                      </div>
+
+                      <!-- BIRTH_DD -->
+                      <div id="bir_dd">
+                          <span class="box">
+                              <input type="text" id="dd" name="dd" class="int" maxlength="2" placeholder="일" style="outline: none;" required>
+                          </span>
+                      </div>
+
+                  </div>
+                  <span class="error_next_box"></span>    
+              </div>
+
+            <!-- MOBILE -->
+              <div>
+                  <h3 class="join_title"><label for="phoneNo">휴대전화 ('-' 제외하고 입력)</label></h3>
+                  <span class="box int_mobile">
+                      <input type="tel" id="mobile" name="phone" class="int" maxlength="16" placeholder="전화번호 입력" style="outline: none;" required>
+                  </span>
+                  <span class="error_next_box"></span>    
+              </div>
+
+              <!--Personal information collection check-->
+              <div class="info_check">
+                <form name="form">
+                  <span class="info-check-msg">개인정보수집 동의</span>
+                  <input type="checkbox" id="info-checkbox" name="info-check" value="개인정보수집 동의">
+                </form>
+              </div>
+
+              <!-- JOIN BTN-->
+              <div class="btn_area">
+                  <input type="submit" id="btnJoin" value="가입하기">
+              </div>
+          </form>
         </div> 
     </body>
 </html>
