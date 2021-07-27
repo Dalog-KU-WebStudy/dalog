@@ -1,5 +1,66 @@
 let date = new Date();
 
+const memoMockData = [
+  {
+    date: "2021.6.3",
+    memo: "6월메모1",
+  },
+  {
+    date: "2021.6.3",
+    memo: "6월메모2",
+  },
+  {
+    date: "2021.6.3",
+    memo: "6월메모3",
+  },
+  {
+    date: "2021.6.4",
+    memo: "아리랑아리랑아라리오",
+  },
+  {
+    date: "2021.6.4",
+    memo: "아리랑아리랑아라리오",
+  },
+  {
+    date: "2021.7.1",
+    memo: "아리랑아리랑아라리오",
+  },
+  {
+    date: "2021.7.30",
+    memo: "웅레ㅔㄹ",
+  },
+  {
+    date: "2021.6.30",
+    memo: "호롤로",
+  },
+  {
+    date: "2021.6.30",
+    memo: "호롤로",
+  },
+  {
+    date: "2021.5.30",
+    memo: "이미미ㅣ",
+  },
+];
+
+const renderMemo = () => {
+  const memoUl = document.querySelectorAll(".memo");
+  for (const ul of memoUl) {
+    while (ul.hasChildNodes()) {
+      ul.removeChild(ul.firstChild);
+    }
+  }
+  memoMockData.map((data) => {
+    const thisMemoUl = document.getElementById(`${data.date}`);
+    if (thisMemoUl) {
+      const memoli = document.createElement("li");
+      memoli.innerText = data.memo;
+      memoli.className = "memo_one";
+      thisMemoUl.appendChild(memoli);
+    }
+  });
+};
+
 const renderCalendar = () => {
   const viewYear = date.getFullYear();
   const viewMonth = date.getMonth();
@@ -43,14 +104,44 @@ const renderCalendar = () => {
   dates.forEach((date, i) => {
     const condition =
       i >= firstDateIndex && i < lastDateIndex + 1 ? "this" : "other";
-    dates[i] = `<div class="date">
-                        <div class="${condition} dateNum">${date}</div>
-                        <img class="diaryImg" src="./media/diary.svg"/>
-                        <div class="plus">+</div>
-                    </div>`;
+    if (i >= firstDateIndex && i < lastDateIndex + 1) {
+      dates[i] = `<div class="date">
+        <div class="dateTop">
+            <div class = "flex">
+                <button class="plus" 
+                value="${viewYear}.${viewMonth}.${date}">+</button>
+                <img class="diaryImg" src="./media/diary.svg"/>
+            </div>
+            <div class="${condition} dateNum">${date}</div>
+        </div>
+        <ul class="memo" id ="${viewYear}.${viewMonth}.${date}" ></ul>
+    </div>`;
+    } else {
+      dates[i] = `<div class="date">
+        <div class="dateTop">
+            <div class = "flex"></div>
+            <div class="${condition} dateNum">${date}</div>
+        </div>
+    </div>`;
+    }
   });
 
   document.querySelector(".dates").innerHTML = dates.join("");
+  const plusBtns = document.querySelectorAll(".plus");
+  for (const plus of plusBtns) {
+    plus.addEventListener("click", (event) => {
+      const memoNum = memoMockData.filter((value) => {
+        return value.date === event.target.value;
+      }).length;
+      if (memoNum >= 3) {
+        alert("3개이상의 메모를 입력할 수 없습니다");
+      } else {
+        const memo = prompt("메모를 입력하세요");
+        memo && memoMockData.push({ date: event.target.value, memo: memo });
+        renderMemo();
+      }
+    });
+  }
 
   const today = new Date();
   if (viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
@@ -61,6 +152,7 @@ const renderCalendar = () => {
       }
     }
   }
+  renderMemo();
 };
 
 renderCalendar();
