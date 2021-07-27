@@ -57,6 +57,7 @@ function isEmailCorrect() {
         error[0].style.display = "block";
         join.disabled = true;
     } else if(!emailPattern.test(email.value)) {
+        error[0].innerHTML = "email 형식이 올바르지 않습니다."
         error[0].style.display = "block";
         join.disabled = true;
     } else {
