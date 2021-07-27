@@ -31,15 +31,17 @@ app.use(passport.session())
 app.use(flash())
 
 app.use(router);
-app.use(router_index);
+router_index(router, passport);
+// app.use(router_index);
 
 
 // naver_login(app);
 google_login(app);
 app.use(kakao_login);
-// app.get('/', function(req,res){
-//     res.sendFile(path.join(__dirname, '/public/index.html'));
-// })
+app.get('/', function(req,res){
+    console.log('?????');
+    res.sendFile(path.join(__dirname, '/public/index.html'));
+})
 
 // // naver 로그인
 // router.get('/login/naver',

@@ -1,21 +1,21 @@
-const express = require('express');
-const router = express.Router();
-const path = require('path');
-const passport = require('passport');
+// const express = require('express');
+// const router = express.Router();
+// const path = require('path');
+// const passport = require('passport');
 const NaverStrategy = require('passport-naver').Strategy;
 const config = require('./naver_config');
 const mysql = require('mysql');
 const connection = mysql.createConnection(config.db);
 connection.connect();
 
+module.exports = function(passport) {
+// passport.serializeUser(function (user, done) {
+//     done(null, user);
+// });
 
-passport.serializeUser(function (user, done) {
-    done(null, user);
-});
-
-passport.deserializeUser(function (obj, done) {
-    done(null, obj);
-});
+// passport.deserializeUser(function (obj, done) {
+//     done(null, obj);
+// });
 
 passport.use(new NaverStrategy({
     clientID: config.clientID,
@@ -60,18 +60,18 @@ passport.use(new NaverStrategy({
         })
     });
 }));
+}
 
+// // naver 로그인
+// router.get('/',
+//     passport.authenticate('naver')
+// );
+// // naver 로그인 연동 콜백
+// router.get('/callback',
+//     passport.authenticate('naver', {
+//         successRedirect: '/',
+//         failureRedirect: '/login'
+//     })
+// );
 
-// naver 로그인
-router.get('/',
-    passport.authenticate('naver')
-);
-// naver 로그인 연동 콜백
-router.get('/callback',
-    passport.authenticate('naver', {
-        successRedirect: '/',
-        failureRedirect: '/login'
-    })
-);
-
-module.exports = router;
+// module.exports = router;
