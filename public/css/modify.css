@@ -26,7 +26,7 @@ body {
   }
 }
 
-.join-form{
+.mod-form{
     font-family: "Noto Serif KR", sans-serif;
     position: absolute;
     margin-top: 13rem;
@@ -71,8 +71,22 @@ input {
     padding-right: 4rem;
 }
 
+.box.int_pass i{
+  position: absolute;
+  left: 93%;
+  top: 45%;
+  color: black;
+}
+
 .box.int_pass_check {
     padding-right: 4rem;
+}
+
+.box.int_pass_check i{
+  position: absolute;
+  left: 93%;
+  top: 45%;
+  color: black;
 }
 
 #bir_wrap {
@@ -133,13 +147,22 @@ select {
     display: none;
 }
 
+#alertTxt_new {
+  position: absolute;
+  top: 1.9rem;
+  right: 3.8rem;
+  font-size: 1.2rem;
+  color: red;
+  display: none;
+}
+
 /* 버튼 */
 
 .btn_area {
     margin: 3rem 0 9.1rem;
 }
 
-#btnJoin {
+#btnMod {
     width: 100%;
     padding: 2.1rem 0 1.7rem;
     border: 0;
