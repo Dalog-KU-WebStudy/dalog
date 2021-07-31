@@ -1,16 +1,21 @@
 const express = require('express')
 const router = express.Router()
 const path = require('path')
+const bodyParser = require('body-parser');
 const mysql = require('mysql')
 const fetch = require('node-fetch');
 const config = require('./join_config');
+const passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 const connection = mysql.createConnection(config.db);
-
 connection.connect();
 
 
 router.use(express.json());
 router.use(express.urlencoded({ extended : true}));
+
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended : true}));
 
 fetch('https://httpbin.org/post', {
         method: 'post',
@@ -22,14 +27,48 @@ fetch('https://httpbin.org/post', {
 .then(res => res.json());
 // .then(json => console.log(json));
 
-router.get('/', function(req,res){
+router.get('/', function(req,res){     
+    
     console.log('get join url')
     res.sendFile(path.join(__dirname, '../../../public/user/join.html'))
 })
 
+passport.serializeUser(function(user,done){
+    console.log('passport session save : ',user.id);
+    done(null,user.id)
+})
+
+passport.deserializeUser(function(id,done){
+    console.log('passport session get id : ',id);
+    done(null,id);
+})
+
+
+// passport.use('local-join', new LocalStrategy({
+//     emailField : 'email',
+//     passwordField : 'password',
+//     nameField : 'name',
+//     phoneField : 'phone',
+//     passReqToCallback : true
+// },function(res,email,password,name,phone,done){
+
+//     var query = connection.query('select * from dalog_user where email=?',[email],function(err,rows){
+//         if(err) return done(err);
+
+//         if(rows.length){
+//             console.log('existed user')
+//             return done (null,false)
+//         }else{
+//             var sql = {email:email, password:password, name:name, phone:phone};
+//             var query = connection.query('insert into dalog_user set ?',sql,(err,rows)=>{
+//                 if(err) throw err
+//             })
+//         }
+//     })
+// }))
 
 // 회원가입정보 DB에 넣기
-router.post('/join', function(req,res,done){
+router.post('/join', async function(req,res,done){
 
     console.log("\n====== insert into db ======\n");
     console.log(req.headers);
@@ -49,6 +88,12 @@ router.post('/join', function(req,res,done){
     if(birth_dd == null) birth_dd = "00";
     
     var birth = birth_yy + "-" + birth_mm + "-" + birth_dd;
+
+    console.log(email)
+    console.log(name)
+    console.log(passwd)
+    console.log(birth)
+    console.log(phone)
 
     // 해당 id를 가진 user가 존재하는지 찾아본다.
     const sql = "select * from dalog_user where user_id = ?";
