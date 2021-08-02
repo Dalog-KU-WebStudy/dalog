@@ -12,12 +12,42 @@ passport.use(new GoogleStrategy(
             callbackURL : config.callbackURL
         },
         function (accessToken, refreshToken, profile, done) {
-            console.log(profile);
-            console.log(accessToken);
-            return done(null, profile);
-        }
-    )
-)
+          
+          process.nextTick(function(){
+              user = {
+                name : profile.family_name+profile.given_name,
+                email : profile.given_name+profile.sub%256538472+'@gmail.com',
+                provider:'google',
+                google : profile._json
+              } 
+              console.log(user);
+
+              const query = connection.query(`select * from dalog_user where user_id=?`, user.email, (err, results) => {
+                  if(err){
+                      return done(err);
+                  }else{
+                      // 새로운 사용자 -> insert 필요
+                      if(results.length==0){
+                          console.log('google new user')
+                          const sql = 'insert into dalog_user (user_id,user_name) values(?,?)';
+                          connection.query(sql,[user.email,user.name],(err,result)=>{
+                            if(err) return done(err)
+                            else{
+                              console.log('login!_success');
+                              done(null,profile);
+                            }
+                          })    
+
+                      } 
+                      //이미 가입된 유저
+                      else{
+                        done(null,profile);
+                      }
+                    }
+                  })
+              });
+          }));
+          
 
 const authenticateUser = (req, res, next) => {
     if (req.isAuthenticated()) {
