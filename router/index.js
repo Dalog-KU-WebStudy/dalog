@@ -22,6 +22,13 @@ module.exports = function(router,passport){
     const kakao_login = require('../passport/kakao');
     kakao_login(passport);
 
+    router.get('/login/kakao', passport.authenticate('kakao-login'));
+
+    router.get('/login/kakao/callback', passport.authenticate('kakao-login', {
+        successRedirect: '/profile',
+        failureRedirect: '/login'
+    }));
+
 
     //라우터 등록
     router.get('/', function(req,res){
@@ -46,15 +53,27 @@ module.exports = function(router,passport){
         res.sendFile(path.join(__dirname, '../public/diary/board_row.html'));
     })
 
-    const user_join = require('./user/join/join_alter');
-    router.use('/user/join', user_join);
+    // const user_join = require('./user/join/join_alter');
+    const user_join = require('./user/join');
+    // router.use('/user/join', user_join);
+    user_join(passport);
 
-    router.get('/login/kakao', passport.authenticate('kakao-login'));
+    //라우터 처리 
+    router.get('/user/join', (req, res)=>{
+        console.log('get join url');//로그인 인증 실패시 다시 이리로 들어옴. 
+        var msg; 
+        var errMsg = req.flash('error'); 
+        if(errMsg) msg = errMsg; 
+        res.sendFile(path.join(__dirname, '../public/user/join.html'))
+    }); 
 
-    router.get('/login/kakao/callback', passport.authenticate('kakao-login', {
-        successRedirect: '/profile',
-        failureRedirect: '/login'
-    }));
+    router.post('/user/join', passport.authenticate('local-join',{ 
+        // successRedirect : '/', //인증성공시 이동하는화면주소 
+        failureRedirect : '/user/join', //인증실패시 이동하는화면주소 
+        failureFlash : true //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨. 
+    }), function(req, res){
+        res.redirect('/profile');
+    });
 
     // naver 로그인
     router.get('/login/naver',
