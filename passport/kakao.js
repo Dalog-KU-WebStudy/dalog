@@ -321,7 +321,7 @@ module.exports = function(passport){
                     if (result.length == 0) {
                         // 신규 유저 회원가입 이후 로그인
                         console.log('new user')
-                        const sql = 'insert into dalog_user (user_id, user_pw, user_name, birthday) values (?,?,?)';
+                        const sql = 'insert into dalog_user (user_id, user_pw, user_name, birth) values (?,?,?,?)';
                         connection.query(sql, [user.email, user.password, user.name, user.birthday], (err, result) => {
                             if (err) {
                                 return done(err);

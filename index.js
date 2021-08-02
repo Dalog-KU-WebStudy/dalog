@@ -13,7 +13,7 @@ var GoogleStrategy = require('passport-google-oauth2').Strategy;
 var LocalStrategy = require("passport-local").Strategy;
 var session = require('express-session')
 var flash = require('connect-flash')
-var user_join = require("./router/user/join/join_alter");
+var user_join = require("./router/user/join");
 const MySQLStore = require('express-mysql-session');
 
 const app = express();
