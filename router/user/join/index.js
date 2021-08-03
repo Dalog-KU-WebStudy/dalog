@@ -86,10 +86,9 @@
 // module.exports = router;
 
 const mysql = require('mysql')
-const config = require('./join_config');
+const dbconfig = require('../../../config/dbconfig');
 const passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-const connection = mysql.createConnection(config.db);
+const connection = mysql.createConnection(dbconfig);
 const LocalStrategy = require("passport-local").Strategy;
 
 connection.connect();

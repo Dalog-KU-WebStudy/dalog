@@ -285,9 +285,10 @@
 // */
 
 var KakaoStrategy = require('passport-kakao').Strategy;
-const kakao_config = require('./kakao_config');
+const kakao_config = require('../config/kakao_config');
+const dbconfig = require('../config/dbconfig');
 const mysql = require('mysql');
-const connection = mysql.createConnection(kakao_config.db);
+const connection = mysql.createConnection(dbconfig);
 const sha256 = require('sha256');
 connection.connect();
 

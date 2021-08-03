@@ -1,7 +1,8 @@
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
-const config = require('./google_config');
+const config = require('../config/google_config');
+const dbconfig = require('../config/dbconfig');
 const mysql = require('mysql');
-const connection = mysql.createConnection(config.db);
+const connection = mysql.createConnection(dbconfig);
 var passport = require('passport');
 connection.connect();
 

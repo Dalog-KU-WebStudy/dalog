@@ -1,5 +1,5 @@
 const express = require('express');
-const dbconfig = require('../../passport/dbconfig');
+const dbconfig = require('../../config/dbconfig');
 const mysql = require('mysql');
 const connection = mysql.createConnection(dbconfig);
 connection.connect();
