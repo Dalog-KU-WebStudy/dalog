@@ -1,3 +1,12 @@
+function onDelete(){
+    console.log('ondelete 실행');
+    if(confirm('정말로 탈퇴하시겠습니까?')==true){
+        document.form.submit();
+    } else {
+        return;
+    }
+}
+
 const togglePW1 = document.querySelector('#togglePw1');
 const togglePW2 = document.querySelector('#togglePw2');
 const togglePW3 = document.querySelector('#togglePw3');

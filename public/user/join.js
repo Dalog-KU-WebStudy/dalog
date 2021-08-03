@@ -57,7 +57,7 @@ function isEmailCorrect() {
         error[0].style.display = "block";
         join.disabled = true;
     } else if(!emailPattern.test(email.value)) {
-        error[0].innerHTML = "email 형식이 올바르지 않습니다."
+        error[0].innerHTML = "이메일 형식이 올바르지 않습니다. (ex. username@dalog.com)"
         error[0].style.display = "block";
         join.disabled = true;
     } else {
@@ -214,7 +214,7 @@ function checkAll(){
             console.log("name : " + userName.value);
             console.log("birth : " + yy.value + "-" + mm.value + "-" + dd.value);
             console.log("phone : " + mobile.value);
-            location.href='../index.html';
+            // location.href='../index.html';
         }
         
         // return true;
@@ -223,5 +223,5 @@ function checkAll(){
         alert("개인정보수집에 동의하지 않으시면 가입이 불가합니다.");
         // return false;
     }
-
+    
 }
