@@ -71,13 +71,12 @@ module.exports = function(app, router,passport){
             failureRedirect: '/login'
         })
     );
-    let profile;
+
     router.get('/profile', function(req,res){
         console.log(req.user);
         profile = req.user;
         res.redirect('/');
     })
-    console.log('profile: '+profile);
 
     const user_modify = require('./user/modify');
     user_modify(router);
