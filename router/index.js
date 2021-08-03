@@ -53,14 +53,12 @@ module.exports = function(router,passport){
         res.sendFile(path.join(__dirname, '../public/diary/board_row.html'));
     })
 
-    // const user_join = require('./user/join/join_alter');
     const user_join = require('./user/join');
-    // router.use('/user/join', user_join);
     user_join(passport);
 
     //라우터 처리 
     router.get('/user/join', (req, res)=>{
-        console.log('get join url');//로그인 인증 실패시 다시 이리로 들어옴. 
+        console.log('get join url');
         var msg; 
         var errMsg = req.flash('error'); 
         if(errMsg) msg = errMsg; 

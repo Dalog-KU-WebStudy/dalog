@@ -149,14 +149,16 @@ module.exports = function(passport){
                     // 가입이 되었다면 메인페이지로
                     // res.redirect('/');
                         
-                    // user.save(function(err){
+                    user.save(function(err){
                     
-                    //     if(err) {throw err;} // 북마크 - 여기서 에러남
+                        if(err) {throw err;} // 북마크 - 여기서 에러남
                         
-                    //     console.log("사용자 데이터 추가 완료");
+                        console.log("사용자 데이터 추가 완료");
                         
-                    //     return done(null, user);
-                    // });
+                        res.redirect('/');
+                        
+                        return done(null, user);
+                    });
                 } // end...if
     
             });
