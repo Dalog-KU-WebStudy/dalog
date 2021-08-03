@@ -3,9 +3,10 @@
 // const path = require('path');
 // const passport = require('passport');
 const NaverStrategy = require('passport-naver').Strategy;
-const config = require('./naver_config');
+const naverConfig = require('./naver_config');
+const dbconfig = require('./dbconfig');
 const mysql = require('mysql');
-const connection = mysql.createConnection(config.db);
+const connection = mysql.createConnection(dbconfig);
 connection.connect();
 
 module.exports = function(passport) {
@@ -18,9 +19,9 @@ module.exports = function(passport) {
 // });
 
 passport.use(new NaverStrategy({
-    clientID: config.clientID,
-    clientSecret: config.clientSecret,
-    callbackURL: config.callback_url,
+    clientID: naverConfig.clientID,
+    clientSecret: naverConfig.clientSecret,
+    callbackURL: naverConfig.callback_url,
     //svcType: 0  // optional. see http://gamedev.naver.com/index.php/%EC%98%A8%EB%9D%BC%EC%9D%B8%EA%B2%8C%EC%9E%84:OAuth_2.0_API
 }, function (accessToken, refreshToken, profile, done) {
     process.nextTick(function () {

@@ -9,9 +9,21 @@
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-        <script src="./modify.js" defer></script>
+        <script src="../public/user/modify.js" defer></script>
     </head>
     <body>
+      <script>
+        console.dir('<%=profile%>')
+        let profile = "<%=JSON.stringify(profile)%>";
+        profile = profile.replaceAll('&#34;','\"');
+        profile = JSON.parse(profile);
+        console.dir(profile);
+        
+        const birth = profile.birth.split('-');
+        console.log(birth);
+        const phone = profile.phone.replaceAll('-','');
+      </script>
+
         <header class="header">
             <div class="wrapper">
               <img
@@ -163,7 +175,7 @@
               <div>
                   <h3 class="join_title"><label for="namel">이름</label></h3>
                   <span class="box int_name">
-                      <input type="text" id="name" class="int" maxlength="20" placeholder="이름 입력" style="outline: none;">
+                      <input type="text" id="name" class="int" maxlength="20" placeholder="이름 입력" style="outline: none;" value="<%=profile.user_name%>">
                   </span>
                   <span class="error_next_box" id="pswd2Msg" style aria-live="assertive"></span>    
               </div>
@@ -172,7 +184,7 @@
               <div>
                   <h3 class="join_title"><label for="phoneNo">휴대전화 ('-' 제외하고 입력)</label></h3>
                   <span class="box int_mobile">
-                      <input type="tel" id="mobile" class="int" maxlength="16" placeholder="전화번호 입력" style="outline: none;">
+                      <input type="tel" id="mobile" class="int" maxlength="16" placeholder="전화번호 입력" style="outline: none;" >
                   </span>
                   <span class="error_next_box"></span>    
               </div>
@@ -180,9 +192,29 @@
 
               <!-- MODIFY BTN-->
               <div class="btn_area">
-                  <input type="submit" id="btnMod" value="수정하기" onclick="location.href='../index.html'">
+                  <input type="submit" id="btnMod" value="수정하기" onclick="location.href='/'">
               </div>
             </form>
+
+            <div id="delete_area">
+              <form action="/user/delete" method="POST" onsubmit="return confirm('정말로 탈퇴하시겠습니까?')">
+                <input type="submit" id="delete_btn" value="회원탈퇴">
+              </form>
+            </div>
         </div> 
     </body>
+    <script>
+      document.getElementById('yy').value = birth[0];
+      document.getElementById('dd').value = birth[2];
+      document.getElementById('mobile').value = phone;
+
+      const selectBox = document.getElementById('mm');
+      for (i=0; i<13; i++){
+        if(selectBox.options[i].value==birth[1]){
+          selectBox.options[i].selected=true;
+          console.log(i);
+        }
+      }
+
+    </script>
 </html>

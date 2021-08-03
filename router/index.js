@@ -2,35 +2,22 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 
-// const passport = require('passport');
-// const app = express();
-
-module.exports = function(router,passport){
-// passport.serializeUser(function (user, done) {
-//     done(null, user);
-// });
-// passport.deserializeUser(function (obj, done) {
-//     done(null, obj);
-// });
-
-
+module.exports = function(app, router,passport){
     const naver_login = require('../passport/naver');
     naver_login(passport);
-    // router.use('/login/naver', naver_login);
-    // passport.use('naver', new naver_login(passport));
 
     const kakao_login = require('../passport/kakao');
     kakao_login(passport);
 
     router.get('/login/kakao', passport.authenticate('kakao-login'));
-
     router.get('/login/kakao/callback', passport.authenticate('kakao-login', {
         successRedirect: '/profile',
         failureRedirect: '/login'
     }));
-
-
-    //라우터 등록
+    router.get('/profile', function(req,res){
+        console.log(req.user);
+        res.redirect('/');
+    })
     router.get('/', function(req,res){
         res.sendFile(path.join(__dirname, '../public/index.html'));
     })
@@ -92,16 +79,15 @@ module.exports = function(router,passport){
     })
     console.log('profile: '+profile);
 
-
     const user_modify = require('./user/modify');
-    // router.get('/user/modify', function(req,res){
-        // })
-    user_modify(router, profile);
-    // router.use('/user/modify', user_modify);
+    user_modify(router);
+
+    const user_delete = require('./user/delete');
+    router.use('/user/delete', user_delete);
 
     const logout = require('./user/logout');
     router.use('/user/logout', logout);
+  
+    const diary_write = require('./diary/write');
+    diary_write(router);
 }
-
-// module.exports = router;
-
