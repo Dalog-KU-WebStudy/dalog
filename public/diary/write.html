@@ -20,6 +20,23 @@
     <link rel="stylesheet" href="../css/jquery-ui.css">
     <!--<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
     <script src="./write.js"></script>
+    <script>
+        $(function(){
+            $('#input_photo').change(function(){
+                readURL(this);
+            })
+        });
+        
+        function readURL(input){
+            if(input.files && input.files[0]){
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#today_photo').attr('src',e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 </head>
 
 <body>    
@@ -60,7 +77,8 @@
 
     <div id="container">
         <div id="wrap">
-            <form action="" method="POST" id="write_form">
+            <form action="/diary/write" method="POST" id="write_form" enctype="multipart/form-data">
+                <div id="inner_wrap">
                 <div id="write_date">
                     <div id="date">
                         <input type="text" id="datepicker">
@@ -96,15 +114,16 @@
                 <div id="attach_photo">
                     <label for="input_photo" title="사진 첨부"></label>
                     <input type="file" id="input_photo">
-                    <img src="../media/view_photo_example.jpg" alt="오늘의 사진" title="오늘의 사진" id="today_photo">
+                    <img src="" id="today_photo">
                 </div>
                 <div id="write_content">
                     <textarea name="content" id="input_content" placeholder="내용을 입력해주세요"></textarea>
                 </div>
+                </div>
+                <div id="submit_button">
+                    <input type="submit" id="submit_btn" value="등록">
+                </div>
             </form>
-        </div>
-        <div id="submit_button">
-            <input type="submit" id="submit_btn" value="등록" onclick="onSubmit()">
         </div>
     </div>
 </body>

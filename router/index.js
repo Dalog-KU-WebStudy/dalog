@@ -7,7 +7,7 @@ const path = require('path');
 // const passport = require('passport');
 // const app = express();
 
-module.exports = function(router,passport){
+module.exports = function(app, router,passport){
 // passport.serializeUser(function (user, done) {
 //     done(null, user);
 // });
@@ -57,28 +57,29 @@ router.get('/login/naver/callback',
         failureRedirect: '/login'
     })
 );
-let profile;
+
 router.get('/profile', function(req,res){
     console.log(req.user);
-    profile = req.user;
     res.redirect('/');
 })
-console.log('profile: '+profile);
 
 
 const user_join = require('./user/join/index');
 router.use('/user/join', user_join);
 
-
 const user_modify = require('./user/modify');
-// router.get('/user/modify', function(req,res){
-    // })
-user_modify(router, profile);
-// router.use('/user/modify', user_modify);
+user_modify(router);
+
+const user_delete = require('./user/delete');
+router.use('/user/delete', user_delete);
 
 const logout = require('./user/logout');
 router.use('/user/logout', logout);
 }
+
+const diary_write = require('./diary/write');
+diary_write(router);
+// router.use('/diary/write', diary_write);
 
 // module.exports = router;
 
