@@ -127,5 +127,34 @@ router.post('/join', async function(req,res,done){
     })
 })
 
+passport.use('local-login',new LocalStrategy({
+    usernameField : 'email',
+    passwordField : 'password',
+    passReqToCallback : true
+}, function(res,email,password,done){
+    var query = connection.query('select * from dalog_user where email=?',[email],function(err,rows){
+        if(err) return done(err);
+
+        if(rows.length){
+            return done(null,{'email' : email, 'password' : password})
+        }else{
+            console.log("fail!")
+            return done(null, false, {'message':'not found'})
+        }
+    })
+}))
+
+router.post('/',function(req,res,next){
+    passport.authenticate('local-login',function(err,user,info){
+        if(err) {res.status(500).json(err);} 
+        if(!user) {return res.status(401).json(info.message);}
+        
+        req.logIn(user,function(err){
+            if(err) {return next(err);}
+            return res.json(user);
+        });    
+    }) (req,res,next);
+})
+
 
 module.exports = router;
