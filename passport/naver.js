@@ -3,8 +3,8 @@
 // const path = require('path');
 // const passport = require('passport');
 const NaverStrategy = require('passport-naver').Strategy;
-const naverConfig = require('./naver_config');
-const dbconfig = require('./dbconfig');
+const naverConfig = require('../config/naver_config');
+const dbconfig = require('../config/dbconfig');
 const mysql = require('mysql');
 const connection = mysql.createConnection(dbconfig);
 connection.connect();
