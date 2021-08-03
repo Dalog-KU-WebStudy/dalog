@@ -1,39 +1,53 @@
-var GoogleStrategy = require('passport-google-oauth2').Strategy;
+const GoogleStrategy = require('passport-google-oauth2').Strategy;
+const config = require('./google_config');
+const mysql = require('mysql');
+const connection = mysql.createConnection(config.db);
 var passport = require('passport');
-
-const option = {
-    host : "dalog.cd8bwymbnzsj.ap-northeast-2.rds.amazonaws.com",
-    port : 3306,
-    user : "daloguser",
-    password : "dalog1234!",
-    database : "dalog",
-}
-
-// const sessionStore = new MySQLStore(option);
-
-passport.serializeUser(function (user, done) {
-    done(null, user);
-});
-
-passport.deserializeUser(function (user, done) {
-    done(null, user);
-});
+connection.connect();
 
 passport.use(new GoogleStrategy(
         {
-            clientID : '32143467552-12l49nuqf2df6u6ubh234lb7qo1td7be.apps.googleusercontent.com',
-            clientSecret : 'wShMkLgGkZfRLL6m2Df3WFp1',
-            callbackURL : 'http://localhost:3000/login/google/callback',
-            passReqToCallback : true
+            clientID : config.clientID,
+            clientSecret : config.clientSecret,
+            callbackURL : config.callbackURL
         },
-        function (request, accessToken, refreshToken, profile, done) {
-            console.log(profile);
-            console.log(accessToken);
+        function (accessToken, refreshToken, profile, done) {
+          
+          process.nextTick(function(){
+              user = {
+                name : profile.family_name+profile.given_name,
+                email : profile.given_name+profile.sub%256538472+'@gmail.com',
+                provider:'google',
+                google : profile._json
+              } 
+              console.log(user);
 
-            return done(null, profile);
-        }
-    )
-)
+              const query = connection.query(`select * from dalog_user where user_id=?`, user.email, (err, results) => {
+                  if(err){
+                      return done(err);
+                  }else{
+                      // 새로운 사용자 -> insert 필요
+                      if(results.length==0){
+                          console.log('google new user')
+                          const sql = 'insert into dalog_user (user_id,user_name) values(?,?)';
+                          connection.query(sql,[user.email,user.name],(err,result)=>{
+                            if(err) return done(err)
+                            else{
+                              console.log('login!_success');
+                              done(null,profile);
+                            }
+                          })    
+
+                      } 
+                      //이미 가입된 유저
+                      else{
+                        done(null,profile);
+                      }
+                    }
+                  })
+              });
+          }));
+          
 
 const authenticateUser = (req, res, next) => {
     if (req.isAuthenticated()) {

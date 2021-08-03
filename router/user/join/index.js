@@ -86,14 +86,15 @@
 // module.exports = router;
 
 const mysql = require('mysql')
-// const fetch = require('node-fetch');
 const config = require('./join_config');
+const passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 const connection = mysql.createConnection(config.db);
 const LocalStrategy = require("passport-local").Strategy;
+
 connection.connect();
 
 module.exports = function(passport){
-
     passport.use('local-join', new LocalStrategy({
         usernameField : "email",
         passwordField : "password",
