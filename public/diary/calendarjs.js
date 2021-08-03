@@ -63,7 +63,8 @@ const modalClose = (date, content, id) => {
   if (id !== null) {
   }
   //수정
-  else memoMockData.push({ date: date, memo: content, id: null }); //삽입
+  else
+    memoMockData.push({ date: date, memo: content, id: memoMockData.length }); //삽입
   modal.classList.add("hidden");
   renderMemo();
 };
