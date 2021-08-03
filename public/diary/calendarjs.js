@@ -1,46 +1,21 @@
 let date = new Date();
+const modal = document.querySelector(".modal");
+const modalBack = document.querySelector(".modal_background");
+const modalDate = document.querySelector(".modal_date");
+const modalContent = document.querySelector(".modal_content");
+const closeBtn = document.querySelector(".modal_closeBtn");
 
 const memoMockData = [
-  {
-    date: "2021.6.3",
-    memo: "6월메모1",
-  },
-  {
-    date: "2021.6.3",
-    memo: "6월메모2",
-  },
-  {
-    date: "2021.6.3",
-    memo: "6월메모3",
-  },
-  {
-    date: "2021.6.4",
-    memo: "아리랑아리랑아라리오",
-  },
-  {
-    date: "2021.6.4",
-    memo: "아리랑아리랑아라리오",
-  },
-  {
-    date: "2021.7.1",
-    memo: "아리랑아리랑아라리오",
-  },
-  {
-    date: "2021.7.30",
-    memo: "웅레ㅔㄹ",
-  },
-  {
-    date: "2021.6.30",
-    memo: "호롤로",
-  },
-  {
-    date: "2021.6.30",
-    memo: "호롤로",
-  },
-  {
-    date: "2021.5.30",
-    memo: "이미미ㅣ",
-  },
+  { id: 0, date: "2021.6.3", memo: "6월메모1" },
+  { id: 1, date: "2021.6.3", memo: "6월메모2" },
+  { id: 2, date: "2021.6.3", memo: "6월메모3" },
+  { id: 3, date: "2021.6.4", memo: "아리랑아리랑아라리오" },
+  { id: 4, date: "2021.6.4", memo: "아리랑아리랑아라리오" },
+  { id: 5, date: "2021.7.1", memo: "아리랑아리랑아라리오" },
+  { id: 6, date: "2021.7.30", memo: "웅레ㅔㄹ" },
+  { id: 7, date: "2021.6.30", memo: "호롤로" },
+  { id: 8, date: "2021.6.30", memo: "호롤로" },
+  { id: 9, date: "2021.5.30", memo: "이미미ㅣ" },
 ];
 
 const renderMemo = () => {
@@ -56,9 +31,42 @@ const renderMemo = () => {
       const memoli = document.createElement("li");
       memoli.innerText = data.memo;
       memoli.className = "memo_one";
+      memoli.addEventListener("click", () => {
+        openModal(data.date, data.memo, data.id);
+      });
       thisMemoUl.appendChild(memoli);
     }
   });
+};
+
+const openModal = (date, content, id) => {
+  modal.classList.remove("hidden");
+  modalDate.innerText = date;
+  modalContent.value = content;
+  closeBtn.addEventListener(
+    "click",
+    () => {
+      modalClose(date, modalContent.value, id);
+    },
+    { once: true }
+  );
+  modalBack.addEventListener(
+    "click",
+    () => {
+      modalClose(date, modalContent.value, id);
+    },
+    { once: true }
+  );
+};
+
+const modalClose = (date, content, id) => {
+  if (id !== null) {
+  }
+  //수정
+  else
+    memoMockData.push({ date: date, memo: content, id: memoMockData.length }); //삽입
+  modal.classList.add("hidden");
+  renderMemo();
 };
 
 const renderCalendar = () => {
@@ -136,9 +144,7 @@ const renderCalendar = () => {
       if (memoNum >= 3) {
         alert("3개이상의 메모를 입력할 수 없습니다");
       } else {
-        const memo = prompt("메모를 입력하세요");
-        memo && memoMockData.push({ date: event.target.value, memo: memo });
-        renderMemo();
+        openModal(event.target.value, null, null);
       }
     });
   }
