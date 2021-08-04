@@ -5,9 +5,7 @@ const ejs = require('ejs');
 const router = express.Router();
 var passport = require('passport')
 const router_index = require('./router/index');
-// const naver_login = require('./passport/naver');
 const google_login = require('./passport/google');
-const kakao_login = require('./passport/kakao');
 const KakaoStrategy = require('passport-kakao').Strategy;
 const naverStrategy = require('passport-naver').Strategy;
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
@@ -38,6 +36,9 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
 passport.serializeUser(function (user, done) {
     done(null, user);
 });
@@ -52,8 +53,3 @@ router_index(app, router, passport);
 
 
 google_login(app);
-// app.use(kakao_login);
-// app.get('/', function(req,res){
-//     console.log('?????');
-//     res.sendFile(path.join(__dirname, '/public/index.html'));
-// })
