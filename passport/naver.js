@@ -25,54 +25,42 @@ passport.use(new NaverStrategy({
     //svcType: 0  // optional. see http://gamedev.naver.com/index.php/%EC%98%A8%EB%9D%BC%EC%9D%B8%EA%B2%8C%EC%9E%84:OAuth_2.0_API
 }, function (accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
+        const str = profile._json.birthday;
+        const output = [str.slice(0, 2), '-', str.slice(2)].join('');
+        const birth = "1111-" + output;
         user = {
+            user_id: profile.emails[0].value,
             name: profile.name,
-            email: profile.emails[0].value,
-            birthday: profile._json.birthday,
+            birth: birth,
             mobile: profile._json.mobile,
-            provider: 'naver',
-            naver: profile._json
+            provider: 'naver'
         };
         console.log(user);
         
 
-        const query = connection.query(`select * from dalog_user where user_id=?`, user.email, (err, result) => {
+        const query = connection.query(`select * from dalog_user where user_id=?`, user.user_id, (err, result) => {
             if (err) {
                 return done(err);
             } else {
                 if (result.length == 0) {
                     // 신규 유저 회원가입 이후 로그인
                     console.log('new user')
-                    const sql = 'insert into dalog_user (user_id, user_name, phone) values (?,?,?)';
-                    connection.query(sql, [user.email, user.name, user.mobile], (err, result) => {
+                    const sql = 'insert into dalog_user (user_id, user_name, birth, phone) values (?,?,?,?)';
+                    connection.query(sql, [user.user_id, user.name, user.birth, user.mobile], (err, result) => {
                         if (err) {
                             return done(err);
                         } else {
                             console.log('new user login');
-                            done(null, profile);
+                            done(null, user);
                         }
                     })
                 } else {
                     //기존 유저 로그인
                     console.log('old user');
-                    done(null, profile);
+                    done(null, user);
                 }
             }
         })
     });
 }));
 }
-
-// // naver 로그인
-// router.get('/',
-//     passport.authenticate('naver')
-// );
-// // naver 로그인 연동 콜백
-// router.get('/callback',
-//     passport.authenticate('naver', {
-//         successRedirect: '/',
-//         failureRedirect: '/login'
-//     })
-// );
-
-// module.exports = router;

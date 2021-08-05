@@ -21,9 +21,11 @@
     <script>
         console.dir('<%=profile%>')
         let profile = "<%=JSON.stringify(profile)%>";
+        if(profile){
         profile = profile.replaceAll('&#34;','\"');
         profile = JSON.parse(profile);
         console.dir(profile);
+        }
     </script>
     <header class="header">
       <div class="wrapper">
@@ -38,7 +40,7 @@
           id="titleInput"
           class="dalog-title"
           type="text"
-          value="유진이의 일기"
+          value="유진이의 일기?"
         />
         <nav>
           <ul class="main-menu">
@@ -70,7 +72,7 @@
                 />
               </a>
             </li>
-            <li>
+            <li id="after_login">
               <a href="#"
                 ><img src="media/profile.png" style="cursor: pointer"
               /></a>
@@ -89,6 +91,29 @@
                     target="_self"
                     style="text-decoration: none; cursor: pointer"
                     >로그아웃</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li id="before_login">
+              <a href="#"
+                ><img src="media/profile.png" style="cursor: pointer"
+              /></a>
+              <ul class="sub-menu">
+                <li>
+                  <a
+                    href="/user/login"
+                    target="_self"
+                    style="text-decoration: none; cursor: pointer"
+                    >로그인</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/user/join"
+                    target="_self"
+                    style="text-decoration: none; cursor: pointer"
+                    >회원가입</a
                   >
                 </li>
               </ul>
@@ -143,4 +168,15 @@
     </div>
     <script src="diary/calendarjs.js"></script>
   </body>
+  <script>
+    if(!profile){
+      console.log('profile 없음')
+      document.getElementById('before_login').style.display = 'block';
+      document.getElementById('after_login').style.display = 'none';
+    } else {
+      console.log('profile 있음')
+      document.getElementById('before_login').style.display = 'none';
+      document.getElementById('after_login').style.display = 'block';
+    }
+  </script>
 </html>

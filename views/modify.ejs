@@ -19,9 +19,15 @@
         profile = JSON.parse(profile);
         console.dir(profile);
         
-        const birth = profile.birth.split('-');
-        console.log(birth);
-        const phone = profile.phone.replaceAll('-','');
+        let birth, phone;
+        if (profile.birth) {
+          birth = profile.birth.split('-');
+          console.log(birth);
+        }
+        if (profile.phone) {
+          phone = profile.phone.replaceAll('-','');
+        }
+        const provider = profile.provider;
       </script>
 
         <header class="header">
@@ -95,9 +101,9 @@
           <div class="mod-form">
             <p style="font-size: 3rem; color: #104c7c; font-weight: bold; font-family: 'Noto Serif KR', sans-serif; margin-bottom: 5rem;">회원정보 수정</p>
             
-            <form action="/modify" method="post">
+            <form action="/user/modify" method="post">
               <!-- PW1 -->
-              <div>
+              <div class="password_area" id="pw1">
                   <h3 class="join_title"><label for="pswd1">현재 비밀번호</label></h3>
                   <span class="box int_pass">
                       <input type="password" id="pswd1" class="int" maxlength="20" placeholder="현재 비밀번호" style="outline: none;">
@@ -108,17 +114,17 @@
               </div>
 
               <!-- PW2 -->
-              <div>
+              <div class="password_area" id="pw2">
                   <h3 class="join_title"><label for="pswd1">새 비밀번호</label></h3>
                   <span class="box int_pass">
-                      <input type="password" id="new_pswd1" class="int" maxlength="20" placeholder="새 비밀번호" style="outline: none;">
+                      <input type="password" id="new_pswd1" class="int" name="new_password" maxlength="20" placeholder="새 비밀번호" style="outline: none;">
                       <i class="fa fa-eye fa-lg" id="togglePw2"></i>
                       <span id="alertTxt_new"></span>
                   </span>
                   <span class="error_next_box"></span>
               </div>
 
-              <div>
+              <div class="password_area"  id="pw3">
                   <h3 class="join_title"><label for="pswd2">비밀번호 재확인</label></h3>
                   <span class="box int_pass_check">
                       <input type="password" id="new_pswd2" class="int" maxlength="20" placeholder="비밀번호 확인" style="outline: none;">
@@ -135,14 +141,14 @@
                       <!-- BIRTH_YY -->
                       <div id="bir_yy">
                           <span class="box">
-                              <input type="text" id="yy" class="int" maxlength="4" placeholder="년(4자)" style="outline: none;">
+                              <input type="text" id="yy" class="int" name="yy" maxlength="4" placeholder="년(4자)" style="outline: none;">
                           </span>
                       </div>
 
                       <!-- BIRTH_MM -->
                       <div id="bir_mm">
                           <span class="box">
-                              <select id="mm" class="sel">
+                              <select id="mm" class="sel" name="mm">
                                   <option>월</option>
                                   <option value="01">1</option>
                                   <option value="02">2</option>
@@ -163,7 +169,7 @@
                       <!-- BIRTH_DD -->
                       <div id="bir_dd">
                           <span class="box">
-                              <input type="text" id="dd" class="int" maxlength="2" placeholder="일" style="outline: none;">
+                              <input type="text" id="dd" class="int" name="dd" maxlength="2" placeholder="일" style="outline: none;">
                           </span>
                       </div>
 
@@ -175,7 +181,7 @@
               <div>
                   <h3 class="join_title"><label for="namel">이름</label></h3>
                   <span class="box int_name">
-                      <input type="text" id="name" class="int" maxlength="20" placeholder="이름 입력" style="outline: none;" value="<%=profile.user_name%>">
+                      <input type="text" id="name" class="int" name="user_name" maxlength="20" placeholder="이름 입력" style="outline: none;" value="<%=profile.user_name%>">
                   </span>
                   <span class="error_next_box" id="pswd2Msg" style aria-live="assertive"></span>    
               </div>
@@ -184,7 +190,7 @@
               <div>
                   <h3 class="join_title"><label for="phoneNo">휴대전화 ('-' 제외하고 입력)</label></h3>
                   <span class="box int_mobile">
-                      <input type="tel" id="mobile" class="int" maxlength="16" placeholder="전화번호 입력" style="outline: none;" >
+                      <input type="tel" id="mobile" class="int" name="phone" maxlength="16" placeholder="전화번호 입력" style="outline: none;" >
                   </span>
                   <span class="error_next_box"></span>    
               </div>
@@ -204,15 +210,27 @@
         </div> 
     </body>
     <script>
-      document.getElementById('yy').value = birth[0];
-      document.getElementById('dd').value = birth[2];
-      document.getElementById('mobile').value = phone;
-
-      const selectBox = document.getElementById('mm');
-      for (i=0; i<13; i++){
-        if(selectBox.options[i].value==birth[1]){
-          selectBox.options[i].selected=true;
-          console.log(i);
+      if(birth){
+        if(birth[0]!='1111'){
+          document.getElementById('yy').value = birth[0];
+        }
+        document.getElementById('dd').value = birth[2];
+        const selectBox = document.getElementById('mm');
+        for (i=0; i<13; i++){
+          if(selectBox.options[i].value==birth[1]){
+            selectBox.options[i].selected=true;
+            console.log(i);
+          }
+        }
+      }
+      if(phone){
+        document.getElementById('mobile').value = phone;
+      }
+      if(provider=='naver' || provider=='kakao' || provider=='google'){
+        console.log('password_area 삭제' + provider);
+        const password_area = document.getElementsByClassName('password_area');
+        for(i=0; i<3; i++){
+          password_area[i].style.display = 'none';
         }
       }
 
