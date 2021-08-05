@@ -27,7 +27,7 @@ passport.use(new NaverStrategy({
     process.nextTick(function () {
         const str = profile._json.birthday;
         const output = [str.slice(0, 2), '-', str.slice(2)].join('');
-        const birth = "1111-" + output;
+        const birth = "0000-" + output;
         user = {
             user_id: profile.emails[0].value,
             name: profile.name,

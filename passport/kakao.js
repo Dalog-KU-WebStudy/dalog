@@ -306,7 +306,7 @@ module.exports = function(passport){
             const str = profile._json.kakao_account.birthday;
             var output = [str.slice(0, 2), '-', str.slice(2)].join('');
             // console.log(output);
-            const NewUserBirth = "1111-" + output;
+            const NewUserBirth = "0000-" + output;
             user = {
                 user_id: profile._json.kakao_account.email,
                 name: profile.username,

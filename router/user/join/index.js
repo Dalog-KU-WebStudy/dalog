@@ -61,6 +61,7 @@ module.exports = function(passport){
                     profile.user_name = name;
                     profile.birth = birth;
                     profile.phone = phone;
+                    profile.provider = 'local';
                                             
                     var query = connection.query('insert into dalog_user (user_id, user_pw, user_name, birth, phone) values ("' + email + '","' + password + '","' + name + '","' + birth + '","' + phone + '")', function(err, rows) {
                         if(err) { throw err;}

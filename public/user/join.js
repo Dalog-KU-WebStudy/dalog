@@ -215,6 +215,7 @@ function checkAll(){
             console.log("birth : " + yy.value + "-" + mm.value + "-" + dd.value);
             console.log("phone : " + mobile.value);
             // location.href='../index.html';
+            document.getElementById('form').submit();
         }
         
         // return true;
