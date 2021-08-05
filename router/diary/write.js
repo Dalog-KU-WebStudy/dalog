@@ -22,7 +22,7 @@ module.exports = function(router) {
     const upload = multer({
         storage: storage,
         limits: {
-            files:1,
+            files:2,
             fileSize: 1024*1024*100
         }
     })
@@ -51,7 +51,4 @@ module.exports = function(router) {
         res.redirect('/diary/view');
     })
 
-    router.post('/diary/write', function(req,res){
-        console.log('/diary/write 호출');
-    })
 }
