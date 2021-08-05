@@ -19,6 +19,13 @@
     <!--<script src="index.js" defer></script>-->
   </head>
   <body>
+    <script>
+      console.dir('<%=profile%>')
+      let profile = "<%=JSON.stringify(profile)%>";
+      profile = profile.replaceAll('&#34;','\"');
+      profile = JSON.parse(profile);
+      console.dir(profile);
+    </script>
     <header class="header">
       <div class="wrapper">
         <img

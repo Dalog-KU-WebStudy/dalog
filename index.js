@@ -12,8 +12,7 @@ var GoogleStrategy = require('passport-google-oauth2').Strategy;
 var LocalStrategy = require("passport-local").Strategy;
 var session = require('express-session')
 var flash = require('connect-flash')
-var user_join = require("./router/user/join");
-const MySQLStore = require('express-mysql-session');
+var cors = require('cors');
 
 const app = express();
 app.listen(3000, function(){
@@ -39,14 +38,16 @@ app.use(flash())
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
+app.use(cors({
+    origin: '*',
+}));
+
 passport.serializeUser(function (user, done) {
     done(null, user);
 });
 passport.deserializeUser(function (obj, done) {
     done(null, obj);
 });
-
-passport.use("local-join", user_join);
 
 app.use(router);
 router_index(app, router, passport);
