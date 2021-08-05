@@ -102,22 +102,26 @@ module.exports = function(passport){
         passReqToCallback : true
     
     }, function(req, email, password, done) {
+
+        console.log("=== req.body ===");
+        console.log(req.body);
+
+        console.log("passport의 local-join 호출");
+
+        let profile={};
     
         // 사용자가 입력한 것들 입력받는다.
-        var name = req.body.name || req.query.name;
-        var birth_yy = req.body.yy || req.query.yy;
-        var birth_mm = req.body.mm || req.query.mm;
-        var birth_dd = req.body.dd || req.query.dd;
-        var phone = req.body.phone || req.query.phone;
+        var name = req.body.name;
+        var birth_yy = req.body.yy;
+        var birth_mm = req.body.mm;
+        var birth_dd = req.body.dd;
+        var phone = req.body.phone;
     
         if(birth_yy == null) birth_yy = "0000";
         if(birth_mm == "월") birth_mm = "00";
         if(birth_dd == null) birth_dd = "00";
         
         var birth = birth_yy + "-" + birth_mm + "-" + birth_dd;
-    
-        console.log("passport의 local-join 호출");
-        console.log(email + ":" + pwd);
     
         process.nextTick(function(){
     
@@ -138,27 +142,32 @@ module.exports = function(passport){
                 } else {
                     // 2. 등록되지 않은 경우
                     console.log("등록된 사용자가 없으므로 회원가입 진행");
+
+                    profile.user_id = email;
+                    profile.user_pw = password;
+                    profile.user_name = name;
+                    profile.birth = birth;
+                    profile.phone = phone;
                                             
                     var query = connection.query('insert into dalog_user (user_id, user_pw, user_name, birth, phone) values ("' + email + '","' + password + '","' + name + '","' + birth + '","' + phone + '")', function(err, rows) {
                         if(err) { throw err;}
                         console.log("Data inserted!");
                         console.log(rows);
-                        return done(null, rows);
+                        // renderJoin(res, profile);
+                        return done(null, profile);
                     })
     
                     // 가입이 되었다면 메인페이지로
                     // res.redirect('/');
                         
-                    user.save(function(err){
+                    // user.save(function(err){
                     
-                        if(err) {throw err;} // 북마크 - 여기서 에러남
+                    //     if(err) {throw err;}
                         
-                        console.log("사용자 데이터 추가 완료");
+                    //     console.log("사용자 데이터 추가 완료");
                         
-                        res.redirect('/');
-                        
-                        return done(null, user);
-                    });
+                    //     return done(null, profile);
+                    // });
                 } // end...if
     
             });
