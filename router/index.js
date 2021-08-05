@@ -69,9 +69,9 @@ module.exports = function(app, router,passport){
     })
 
     const user_join = require('./user/join');
+    // router.use(user_join);
     user_join(passport);
-
-    //라우터 처리 
+ 
     router.get('/user/join', (req, res)=>{
         console.log('get join url');
         var msg; 
@@ -80,13 +80,12 @@ module.exports = function(app, router,passport){
         res.render('join.ejs', {'message' : msg});
     }); 
 
-    router.post('/user/join', function(req, res) {
+    router.post('/user/join',
         passport.authenticate('local-join',{ 
             successRedirect : '/profile', //인증성공시 이동하는화면주소 
             failureRedirect : '/user/join', //인증실패시 이동하는화면주소 
             failureFlash : true //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨. 
-        })(req,res)
-    });
+    }));
 
     // naver 로그인
     router.get('/login/naver',
