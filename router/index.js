@@ -14,27 +14,57 @@ module.exports = function(app, router,passport){
         successRedirect: '/profile',
         failureRedirect: '/login'
     }));
+    
 
     router.get('/', function(req,res){
-        res.sendFile(path.join(__dirname, '../public/index.html'));
+        console.log('main page');
+        res.render('index.ejs',{profile:req.user});
     })
     router.get('/user/login', function(req,res){
-        res.sendFile(path.join(__dirname, '../public/user/login.html'));
+        if(req.user){
+            res.send("<script>alert('이미 로그인 되었습니다.');history.back();</script>");
+        } else {
+            res.sendFile(path.join(__dirname, '../public/user/login.html'));
+        }
     })
     router.get('/diary/write', function(req,res){
-        res.sendFile(path.join(__dirname, '../public/diary/write.html'));
+        if(!req.user){
+            res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
+        } else {
+            res.sendFile(path.join(__dirname, '../public/diary/write.html'));
+        }
     })
     router.get('/diary/view', function(req,res){
+        // if(!req.user){
+        //     res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
+        // } else {
+        //     res.sendFile(path.join(__dirname, '../public/diary/view.html'));
+        // }
         res.sendFile(path.join(__dirname, '../public/diary/view.html'));
     })
     router.get('/diary/edit', function(req,res){
+        // if(!req.user){
+        //     res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
+        // } else {
+        //     res.sendFile(path.join(__dirname, '../public/diary/edit.html'));
+        // }
         res.sendFile(path.join(__dirname, '../public/diary/edit.html'));
     })
     router.get('/diary/board_grid', function(req,res){
+        // if(!req.user){
+        //     res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
+        // } else {
+        //     res.sendFile(path.join(__dirname, '../public/diary/board_grid.html'));
+        // }
         res.sendFile(path.join(__dirname, '../public/diary/board_grid.html'));
     })
     router.get('/diary/board_row', function(req,res){
-        res.sendFile(path.join(__dirname, '../public/diary/board_row.html'));
+        if(!req.user){
+            res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
+        } else {
+            res.sendFile(path.join(__dirname, '../public/diary/board_row.html'));
+        }
+        // res.sendFile(path.join(__dirname, '../public/diary/board_row.html'));
     })
 
     const user_join = require('./user/join');
@@ -72,10 +102,6 @@ module.exports = function(app, router,passport){
     router.get('/profile', function(req,res){
         console.log("router get profile");
         console.log(req.user);
-        profile = req.user;
-        req.session.user_profile = {
-            user_id:req.user.user_id
-        }
         res.redirect('/');
     })
 
@@ -87,7 +113,9 @@ module.exports = function(app, router,passport){
 
     const logout = require('./user/logout');
     router.use('/user/logout', logout);
-  
+
     const diary_write = require('./diary/write');
     diary_write(router);
+
+    
 }

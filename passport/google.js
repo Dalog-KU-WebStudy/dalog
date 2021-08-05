@@ -17,13 +17,12 @@ passport.use(new GoogleStrategy(
           process.nextTick(function(){
               user = {
                 name : profile.family_name+profile.given_name,
-                email : profile.given_name+profile.sub%256538472+'@gmail.com',
-                provider:'google',
-                google : profile._json
+                user_id : profile.given_name+profile.sub%256538472+'@gmail.com',
+                provider:'google'
               } 
               console.log(user);
 
-              const query = connection.query(`select * from dalog_user where user_id=?`, user.email, (err, results) => {
+              const query = connection.query(`select * from dalog_user where user_id=?`, user.user_id, (err, results) => {
                   if(err){
                       return done(err);
                   }else{
@@ -31,18 +30,18 @@ passport.use(new GoogleStrategy(
                       if(results.length==0){
                           console.log('google new user')
                           const sql = 'insert into dalog_user (user_id,user_name) values(?,?)';
-                          connection.query(sql,[user.email,user.name],(err,result)=>{
+                          connection.query(sql,[user.user_id,user.name],(err,result)=>{
                             if(err) return done(err)
                             else{
                               console.log('login!_success');
-                              done(null,profile);
+                              done(null,user);
                             }
                           })    
 
                       } 
                       //이미 가입된 유저
                       else{
-                        done(null,profile);
+                        done(null,user);
                       }
                     }
                   })
@@ -64,7 +63,7 @@ module.exports = function(app){
     });
     
     app.get('/login', (req, res, next)  => {
-       res.render('login', { title: 'Login' })
+      res.render('login', { title: 'Login' })
     });
     
     app.get('/login/google',
@@ -74,6 +73,6 @@ module.exports = function(app){
     app.get('/login/google/callback',
     passport.authenticate('google',{
         failureRedirect: '/login',
-          successRedirect: '/'
+          successRedirect: '/profile'
     }));
 }

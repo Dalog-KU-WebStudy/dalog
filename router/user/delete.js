@@ -7,14 +7,14 @@ connection.connect();
 
 router.post('/', (req,res)=>{
     console.log('delete router 호출');
-    console.dir(req.user);
     
     if(req.user){
-        const query = connection.query(`delete from dalog_user where user_id=?`, req.user._json.email, (err,result)=>{
+        console.dir(req.user);
+        const query = connection.query(`delete from dalog_user where user_id=?`, req.user.user_id, (err,result)=>{
             if(err){
                 return done(err);
             } else {
-                console.log(req.user._json.email+ '회원 삭제');
+                console.log(req.user.user_id+ '회원 삭제');
 
                 res.redirect('/user/logout');
             }
