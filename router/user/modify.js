@@ -9,6 +9,8 @@ module.exports = function(router) {
 router.get('/user/modify', function(req,res){
     console.log('modify')
     console.log(req.user._json.email);
+
+    console.log('session: '+ req.session.user_profile.user_id);
     
     // res.sendFile(path.join(__dirname, '../../public/user/modify.html'));
 

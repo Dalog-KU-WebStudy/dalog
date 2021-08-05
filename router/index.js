@@ -14,7 +14,20 @@ module.exports = function(app, router,passport){
         successRedirect: '/profile',
         failureRedirect: '/login'
     }));
+<<<<<<< Updated upstream
 
+=======
+    router.get('/profile', function(req,res){
+        console.log('profile router 접근');
+        console.dir(req.user);
+        
+        // req.session.user_profile = {
+        //     user_id:req.user._json.email
+        // }
+        // console.log(req.session.user_profile.user_id);
+        res.redirect('/');
+    })
+>>>>>>> Stashed changes
     router.get('/', function(req,res){
         res.sendFile(path.join(__dirname, '../public/index.html'));
     })
@@ -68,6 +81,7 @@ module.exports = function(app, router,passport){
             failureRedirect: '/login'
         })
     );
+<<<<<<< Updated upstream
 
     router.get('/profile', function(req,res){
         console.log("router get profile");
@@ -78,6 +92,13 @@ module.exports = function(app, router,passport){
         }
         res.redirect('/');
     })
+=======
+    // router.get('/profile', function(req,res){
+    //     console.log(req.user);
+    //     profile = req.user;
+    //     res.redirect('/');
+    // })
+>>>>>>> Stashed changes
 
     const user_modify = require('./user/modify');
     user_modify(router);
