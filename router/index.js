@@ -79,13 +79,8 @@ module.exports = function(app, router,passport){
         if(errMsg) msg = errMsg; 
         res.render('join.ejs', {'message' : msg});
     }); 
-
-<<<<<<< Updated upstream
-    router.post('/user/join',
-        passport.authenticate('local-join',{ 
-=======
+    
     router.post('/user/join', passport.authenticate('local-join',{             
->>>>>>> Stashed changes
             successRedirect : '/profile', //인증성공시 이동하는화면주소 
             failureRedirect : '/user/join', //인증실패시 이동하는화면주소 
             failureFlash : true //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨. 

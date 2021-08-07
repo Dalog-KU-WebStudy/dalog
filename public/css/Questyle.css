@@ -2,25 +2,58 @@
   font-family: "Noto Serif KR", sans-serif; 
 }
  @media screen and (min-width: 1366px) {
-    .Question p {
+    .Question select {
       font-size: 20px;
+    }
+    .WriteAnswer{
+      font-size: 20px;    
+      margin-top: 15px;      
+    }
+
+    .buttons{
+      margin-top: -50px;
     }
   }
   @media screen and (min-width: 1024px) and (max-width: 1365px) {
-    .Question p {
+    .Question select {
         font-size: 17px;
-      }
+    }
+
+    .WriteAnswer{
+      font-size: 17px;
+      margin-top: 12px;
+    }
+
+    .buttons{
+      margin-top: -50px;
+    }
   }
 
   @media screen and (min-width: 880px) and (max-width: 1024px) {
-    .Question p {
+    .Question select {
         font-size: 15px;
-      }
+    }
+    .WriteAnswer{
+      font-size: 15px;
+      margin-top: 9px;
+    }
+
+    .buttons{
+      margin-top: -50px;
+    }
   }
   @media screen and (max-width: 880px) {
-    .Question p {
+    .Question select {
         font-size: 13px;
-      }
+    }
+    .WriteAnswer{
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    .buttons{
+      margin-top: -50px;
+    }
   }
   
 
@@ -45,7 +78,16 @@
     width: 60%;
     height: 20%;
     margin-top: 20px;
-    margin-left: 4%;
+    margin-left: 4%;    
+}
+
+.Question > select {
+  width: 130%;
+  border: none;
+  height: 130%;
+  margin-top: 0px;
+  font-weight: bold;
+
 }
 
 .WriteAnswer{
@@ -71,8 +113,7 @@
 
 .buttons {    
     width: 30%;
-    height: 77%;
-    bottom: 2.5rem;
+    height: 100%;    
     margin-left: 415%;
     background-color: #104c7c;
     color: #fff;
