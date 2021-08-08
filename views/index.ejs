@@ -16,6 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap"
       rel="stylesheet"
     />
+    <script src="./user/title.js"></script>
   </head>
   <body>
     <script>
@@ -35,13 +36,18 @@
           onclick="location.href='/'"
           style="cursor: pointer"
         />
-        <!--<p id="title" class="dalog-title"></p>-->
-        <input
-          id="titleInput"
-          class="dalog-title"
-          type="text"
-          value="유진이의 일기?"
-        />
+        <form action="/title" method="post">
+          <input
+            id="titleInput"
+            name="titleInput"
+            class="dalog-title"
+            type="text"
+            value="여기를 눌러 타이틀을 수정하세요!"
+            onfocus="document.getElementById('title-submit').style.display='block'"
+            onblur="document.getElementById('title-submit').style.display='none'"
+          />
+          <input type="image" id="title-submit" class="title-submit" src="./media/title-edit.png" value="" />
+        </form>
         <nav>
           <ul class="main-menu">
             <li>

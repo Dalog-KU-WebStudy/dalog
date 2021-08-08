@@ -117,5 +117,6 @@ module.exports = function(app, router,passport){
     const diary_write = require('./diary/write');
     diary_write(router);
 
-    
+    const title_change = require('./user/title');
+    title_change(router);
 }
