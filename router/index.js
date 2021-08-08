@@ -51,12 +51,11 @@ module.exports = function(app, router,passport){
 
 
     router.get('/diary/write', function(req,res){
-        // if(!req.user){
-        //     res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
-        // } else {
-        //     res.sendFile(path.join(__dirname, '../public/diary/write.html'));
-        // }
-        res.sendFile(path.join(__dirname, '../public/diary/write.html'));
+        if(!req.user){
+            res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
+        } else {
+            res.sendFile(path.join(__dirname, '../public/diary/write.html'));
+        }
     })
     router.get('/diary/view', function(req,res){
         // if(!req.user){
@@ -94,7 +93,7 @@ module.exports = function(app, router,passport){
     const user_join = require('./user/join');
     // router.use(user_join);
     user_join(passport);
- 
+
     router.get('/user/join', (req, res)=>{
         console.log('get join url');
         var msg; 

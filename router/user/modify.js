@@ -10,7 +10,6 @@ module.exports = function(router) {
 router.get('/user/modify', function(req,res){
     console.log('modify')
     
-    //naver 경우 req.user의 email값으로 db가져오기
     if (req.user) {
         console.log(req.user.user_id);
         const query = connection.query(`select * from dalog_user where user_id=?`, req.user.user_id, (err, result) => {

@@ -81,21 +81,21 @@
                 <div id="inner_wrap">
                 <div id="write_date">
                     <div id="date">
-                        <input type="text" id="datepicker">
+                        <input type="text" id="datepicker" name="date">
                     </div>
                     <div id="weather_box">
                         <div id="weather_icon">
                             <div id="temperature">
                                 <div id="temper_night">
-                                    <input type="text" value="-10" id="input_temper_night" readonly>
+                                    <input type="text" value="-10" id="input_temper_night" name="temp_low" readonly>
                                 </div>
                                 <div id="temper_day">
-                                    <input type="text" value="20" id="input_temper_day" readonly>
+                                    <input type="text" value="20" id="input_temper_day" name="temp_high" readonly>
                                 </div>
                             </div>
                             <div id="weather">
                                 <img src="../media/icon_sun.png" title="맑음">
-                                <select id="weather_select" onchange="weather_select_change()">
+                                <select id="weather_select" onchange="weather_select_change()" name="weather">
                                     <option value="sun">맑음</option>
                                     <option value="cloud">흐림</option>
                                     <option value="rain">비</option>
@@ -109,7 +109,7 @@
                     </div>
                 </div>
                 <div id="write_title">
-                    <input type="text" id="input_title" placeholder="제목을 입력해주세요">
+                    <input type="text" id="input_title" name="title" placeholder="제목을 입력해주세요">
                 </div>
                 <div id="attach_photo">
                     <label for="input_photo" title="사진 첨부"></label>
@@ -117,7 +117,7 @@
                     <img src="" id="today_photo">
                 </div>
                 <div id="write_content">
-                    <textarea name="content" id="input_content" placeholder="내용을 입력해주세요"></textarea>
+                    <textarea name="content" id="input_content" name="content" placeholder="내용을 입력해주세요"></textarea>
                 </div>
                 </div>
                 <div id="submit_button">
