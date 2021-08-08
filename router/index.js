@@ -175,7 +175,7 @@ module.exports = function(app, router,passport){
     const user_join = require('./user/join');
     // router.use(user_join);
     user_join(passport);
- 
+
     router.get('/user/join', (req, res)=>{
         console.log('get join url');
         var msg; 
