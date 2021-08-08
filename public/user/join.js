@@ -220,7 +220,7 @@ function checkAll(){
             return false;
         }
         else{
-            alert("가입이 완료되었습니다. 새로운 아이디로 다시 로그인해주세요. ");
+            // alert("가입이 완료되었습니다. 새로운 아이디로 다시 로그인해주세요. ");
             console.log("email : " + email.value);
             console.log("pw : " + pw1.value);
             console.log("name : " + userName.value);

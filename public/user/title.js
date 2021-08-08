@@ -1,6 +1,6 @@
 var title = document.getElementById("titleInput");
 
-title.addEventListener("change", submitTitle());
+title.addEventListener("focus", submitTitle());
 
 function submitTitle() {
     if(title.value !== "")

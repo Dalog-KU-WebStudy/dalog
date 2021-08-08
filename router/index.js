@@ -75,7 +75,7 @@ module.exports = function(app, router,passport){
     router.get('/user/join', (req, res)=>{
         console.log('get join url');
         var msg; 
-        var errMsg = req.flash('error'); 
+        var errMsg = req.flash('joinMessage'); 
         if(errMsg) msg = errMsg; 
         res.render('join.ejs', {'message' : msg});
     }); 
@@ -102,6 +102,7 @@ module.exports = function(app, router,passport){
     router.get('/profile', function(req,res){
         console.log("router get profile");
         console.log(req.user);
+        res.send("<script>alert('"+req.user.user_name+"님, 환영합니다.');location.href='/';</script>")
         res.redirect('/');
     })
 

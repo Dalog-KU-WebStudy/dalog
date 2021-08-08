@@ -7,14 +7,17 @@ module.exports = function(router){
 
     router.get('/title', function(req, res){
         console.log('get title edit');
+
         if(req.user){
             console.log(req.user.user_id);
-            const query = connection.query(`select title from title where user_id=?`, req.user.user_id, (err, result) => {
+            const query = connection.query(`select * from title where user_id=?`, req.user.user_id, (err, result) => {
                 if (err) {
                     return done(err);
                 } else {
                     console.log('title query 실행');
                     console.dir(result[0]);
+
+                    res.render('index.ejs');
                 }
             })
         }

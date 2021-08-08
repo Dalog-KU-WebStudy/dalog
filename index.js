@@ -10,6 +10,7 @@ const KakaoStrategy = require('passport-kakao').Strategy;
 const naverStrategy = require('passport-naver').Strategy;
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
 var LocalStrategy = require("passport-local").Strategy;
+const cookieParser = require("cookie-parser");
 var session = require('express-session')
 var flash = require('connect-flash')
 var cors = require('cors');
@@ -54,3 +55,5 @@ router_index(app, router, passport);
 
 
 google_login(app);
+
+app.use(cookieParser);

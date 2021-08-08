@@ -13,7 +13,10 @@
     </head>
     <body>
         <script>
-            console.dir('<%=message%>')
+          console.dir('<%=message%>');
+          let msg = '<%=message%>';
+            if(msg)
+              alert(msg);
         </script>
         <header class="header">
             <div class="wrapper">
@@ -192,6 +195,6 @@
                   <input type="submit" id="btnJoin" value="가입하기">
               </div>
           </form>
-        </div> 
+        </div>
     </body>
 </html>
