@@ -14,9 +14,9 @@ module.exports = function(router){
                 if(err){ throw err; }
                 else{
                     console.log(rows);
-                    if(!title){
+                    if(!rows[0]){
                         console.log("No title");
-                        /* 삽입해주자. */
+                        /* insert title */
                         var query2 = connection.query('insert into title (user_id, title) values (?,?)', [req.user.user_id, req.body.titleInput], function(err, roww){
                             if(err) { throw err; }
                             console.log("Title Inserted!");
@@ -26,6 +26,7 @@ module.exports = function(router){
                         })
                     }
                     else {
+                        /* update title */
                         var query2 = connection.query('update title set title =? where user_id=?;', [req.body.titleInput, req.user.user_id], function(err, rowss) {
                             if(err) { throw err;}
                             console.log("Title Changed!");

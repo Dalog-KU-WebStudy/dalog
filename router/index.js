@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+const dbconfig = require('../config/dbconfig');
+const mysql = require('mysql');
+const connection = mysql.createConnection(dbconfig);
+connection.connect();
 
 module.exports = function(app, router,passport){
     const naver_login = require('../passport/naver');
@@ -19,11 +23,21 @@ module.exports = function(app, router,passport){
     router.get('/', function(req,res){
         console.log('main page');
         if(req.user){
-            console.log(req.user);
-            res.render('index.ejs', {profile:req.user, title:req.user.title});
+            var query = connection.query("select title from title where user_id=?", [req.user.user_id], function(err, rows){
+                if(err) { throw err; }
+                if(rows[0]){
+                    console.log(rows[0]);
+                    req.user.title = rows[0].title;
+                }
+                else{
+                    req.user.title = "여기를 눌러 타이틀을 수정하세요!";   
+                }
+                console.log(req.user);
+                res.render('index.ejs', {profile:req.user, title:req.user.title});
+            })
         }
         else
-            res.render('index.ejs',{profile:req.user, title:"여기를 눌러 수정하세요!"});
+            res.render('index.ejs',{profile:req.user, title:"여기를 눌러 타이틀을 수정하세요!"});
     })
     router.get('/user/login', function(req,res){
         if(req.user){
