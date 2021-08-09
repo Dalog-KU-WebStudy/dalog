@@ -58,7 +58,7 @@ module.exports = function(passport){
 
                     profile.user_id = email;
                     profile.user_pw = password;
-                    profile.user_name = name;
+                    profile.name = name;
                     profile.birth = birth;
                     profile.phone = phone;
                     profile.provider = 'local';

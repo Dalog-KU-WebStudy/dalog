@@ -102,8 +102,8 @@ module.exports = function(app, router,passport){
     router.get('/profile', function(req,res){
         console.log("router get profile");
         console.log(req.user);
-        res.send("<script>alert('"+req.user.user_name+"님, 환영합니다.');location.href='/';</script>")
-        res.redirect('/');
+        res.send("<script>alert('"+req.user.name+"님, 환영합니다.');location.href='/';</script>")
+        // res.redirect('/');
     })
 
     const user_modify = require('./user/modify');
