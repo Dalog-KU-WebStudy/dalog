@@ -52,7 +52,24 @@ module.exports = function(app, router,passport){
         // } else {
         //     res.sendFile(path.join(__dirname, '../public/diary/write.html'));
         // }
-        res.sendFile(path.join(__dirname, '../public/diary/write.html'));
+        console.log("write get");
+        if(req.user){
+            var query = connection.query("select title from title where user_id=?", [req.user.user_id], function(err, rows){
+                if(err) { throw err; }
+                if(rows[0]){
+                    console.log(rows[0]);
+                    req.user.title = rows[0].title;
+                }
+                else{
+                    req.user.title = "여기를 눌러 타이틀을 수정하세요!";   
+                }
+                console.log(req.user);
+                res.render('write.ejs', {profile:req.user, title:req.user.title});
+            })
+        }
+        else
+            res.render('write.ejs',{profile:req.user, title:"여기를 눌러 타이틀을 수정하세요!"});
+        // res.sendFile(path.join(__dirname, '../public/diary/write.html'));
     })
     router.get('/diary/view', function(req,res){
         // if(!req.user){
@@ -60,6 +77,23 @@ module.exports = function(app, router,passport){
         // } else {
         //     res.sendFile(path.join(__dirname, '../public/diary/view.html'));
         // }
+        // console.log("view get");
+        // if(req.user){
+        //     var query = connection.query("select title from title where user_id=?", [req.user.user_id], function(err, rows){
+        //         if(err) { throw err; }
+        //         if(rows[0]){
+        //             console.log(rows[0]);
+        //             req.user.title = rows[0].title;
+        //         }
+        //         else{
+        //             req.user.title = "여기를 눌러 타이틀을 수정하세요!";   
+        //         }
+        //         console.log(req.user);
+        //         res.render('view.ejs', {profile:req.user, title:req.user.title});
+        //     })
+        // }
+        // else
+        //     res.render('view.ejs',{profile:req.user, title:"여기를 눌러 타이틀을 수정하세요!"});
         res.sendFile(path.join(__dirname, '../public/diary/view.html'));
     })
     router.get('/diary/edit', function(req,res){
@@ -68,7 +102,24 @@ module.exports = function(app, router,passport){
         // } else {
         //     res.sendFile(path.join(__dirname, '../public/diary/edit.html'));
         // }
-        res.sendFile(path.join(__dirname, '../public/diary/edit.html'));
+        console.log("edit get");
+        if(req.user){
+            var query = connection.query("select title from title where user_id=?", [req.user.user_id], function(err, rows){
+                if(err) { throw err; }
+                if(rows[0]){
+                    console.log(rows[0]);
+                    req.user.title = rows[0].title;
+                }
+                else{
+                    req.user.title = "여기를 눌러 타이틀을 수정하세요!";   
+                }
+                console.log(req.user);
+                res.render('edit.ejs', {profile:req.user, title:req.user.title});
+            })
+        }
+        else
+            res.render('edit.ejs',{profile:req.user, title:"여기를 눌러 타이틀을 수정하세요!"});
+        // res.sendFile(path.join(__dirname, '../public/diary/edit.html'));
     })
     router.get('/diary/board_grid', function(req,res){
         // if(!req.user){
@@ -76,7 +127,24 @@ module.exports = function(app, router,passport){
         // } else {
         //     res.sendFile(path.join(__dirname, '../public/diary/board_grid.html'));
         // }
-        res.sendFile(path.join(__dirname, '../public/diary/board_grid.html'));
+        console.log("board grid get");
+        if(req.user){
+            var query = connection.query("select title from title where user_id=?", [req.user.user_id], function(err, rows){
+                if(err) { throw err; }
+                if(rows[0]){
+                    console.log(rows[0]);
+                    req.user.title = rows[0].title;
+                }
+                else{
+                    req.user.title = "여기를 눌러 타이틀을 수정하세요!";   
+                }
+                console.log(req.user);
+                res.render('board_grid.ejs', {profile:req.user, title:req.user.title});
+            })
+        }
+        else
+            res.render('board_grid.ejs',{profile:req.user, title:"여기를 눌러 타이틀을 수정하세요!"});
+        // res.sendFile(path.join(__dirname, '../public/diary/board_grid.html'));
     })
     router.get('/diary/board_row', function(req,res){
         // if(!req.user){
@@ -84,7 +152,24 @@ module.exports = function(app, router,passport){
         // } else {
         //     res.sendFile(path.join(__dirname, '../public/diary/board_row.html'));
         // }
-        res.sendFile(path.join(__dirname, '../public/diary/board_row.html'));
+        console.log("board row get");
+        if(req.user){
+            var query = connection.query("select title from title where user_id=?", [req.user.user_id], function(err, rows){
+                if(err) { throw err; }
+                if(rows[0]){
+                    console.log(rows[0]);
+                    req.user.title = rows[0].title;
+                }
+                else{
+                    req.user.title = "여기를 눌러 타이틀을 수정하세요!";   
+                }
+                console.log(req.user);
+                res.render('board_row.ejs', {profile:req.user, title:req.user.title});
+            })
+        }
+        else
+            res.render('board_row.ejs',{profile:req.user, title:"여기를 눌러 타이틀을 수정하세요!"});
+        // res.sendFile(path.join(__dirname, '../public/diary/board_row.html'));
     })
 
     const user_join = require('./user/join');

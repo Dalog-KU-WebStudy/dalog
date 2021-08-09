@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>달:로그</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+    <link rel="stylesheet" type="text/css" href="../css/write.css">
+    <link href="https://spoqa.github.io/spoqa-han-sans/" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="../summernote/summernote-lite.js"></script>
+    <script src="../summernote/summernote-ko-KR.js"></script>
+    <link rel="stylesheet" href="../summernote/summernote-lite.css">
+    <!--<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
+    <link rel="stylesheet" href="../css/jquery-ui.css">
+    <script src="./write.js"></script>
+    <script src="../user/title.js" defer></script>
+</head>
+
+<body>
+    <script>
+        console.dir('<%=profile%>')
+        let profile = "<%=JSON.stringify(profile)%>";
+        if(profile){
+          profile = profile.replaceAll('&#34;','\"');
+          profile = JSON.parse(profile);
+          console.dir(profile);
+        }
+    </script>
+    <header class="header">
+        <div class="wrapper">
+            <img src="../media/logo4.jpg" class="logo" onclick="location.href='/'" style="cursor: pointer" />
+            <form action="/" method="post" id="title_form">
+                <input
+                  id="titleInput"
+                  name="titleInput"
+                  class="dalog-title"
+                  type="text"
+                  value="여기를 눌러 타이틀을 수정하세요!"
+                  onfocus="document.getElementById('title-submit').style.display='block';"
+                />
+                <input type="image" id="title-submit" class="title-submit" src="../media/title-edit.png" value="" />
+            </form>
+            <script>
+                if(profile){
+                  if("<%=title%>" != "")
+                    document.getElementById("titleInput").value = "<%=title%>";
+                }
+            </script>
+            <nav>
+                <ul class="main-menu">
+                    <li>
+                        <a href="/diary/write" target="_self" style="text-decoration: none; cursor: pointer">
+                            <img src="../media/write.png" class="write" style="cursor: pointer;" alt="글쓰기" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/diary/board_grid" target="_self" style="text-decoration: none; cursor: pointer">
+                            <img src="../media/board.png" class="board" style="cursor: pointer;" alt="게시판" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="../media/profile.png" style="cursor: pointer;" /></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="/user/modify" target="_self"
+                                    style="text-decoration: none; cursor: pointer">정보수정</a>
+                            </li>
+                            <li>
+                                <a href="/user/logout" target="_self"
+                                    style="text-decoration: none; cursor: pointer">로그아웃</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <div id="container">
+        <div id="wrap">
+            <form action="" method="POST" id="write_form">
+                <div id="write_date">
+                    <div id="date">
+                        <input type="text" id="datepicker-date">
+                    </div>
+                    <div id="weather_box">
+                        <div id="weather_icon">
+                            <div id="temperature">
+                                <div id="temper_night">
+                                    <input type="text" id="input_temper_night" readonly>
+                                </div>
+                                <div id="temper_day">
+                                    <input type="text" id="input_temper_day" readonly>
+                                </div>
+                            </div>
+                            <div id="weather">
+                                <img src="../media/icon_sun.png" title="맑음">
+                                <select id="weather_select" onchange="weather_select_change()">
+                                    <option value="sun">맑음</option>
+                                    <option value="cloud">흐림</option>
+                                    <option value="rain">비</option>
+                                    <option value="snow">눈</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="manual_button">
+                            <button type="button" onclick="changeWeather()">변경</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="write_title">
+                    <input type="text" id="input_title" placeholder="제목을 입력해주세요">
+                </div>
+                <div id="attach_photo">
+                    <label for="input_photo" title="사진 첨부"></label>
+                    <input type="file" id="input_photo">
+                    <img alt="오늘의 사진" title="오늘의 사진" id="today_photo">
+                </div>
+                <div id="write_content">
+                    <!-- <div id="text_deco">
+                        <select id="select_fontSize">
+                            <option>10</option>
+                            <option>12</option>
+                            <option>14</option>
+                            <option>16</option>
+                        </select>
+                        <div id="select_fontColor">
+                            <span>T</span>
+                            <span id="selected_color"></span>
+                            <div id="color_select_box">
+                                <button style="background-color: #000;"></button>
+                                <button style="background-color: #444;" id="checked"></button>
+                                <button style="background-color: #888;"></button>
+                                <button style="background-color: #bbb;"></button>
+                                <button style="background-color: #fff;" class="white"></button>
+                                <button style="background-color: red;"></button>
+                                <button style="background-color: yellow;"></button>
+                                <button style="background-color: green;"></button>
+                                <button style="background-color: blue;"></button>
+                                <button style="background-color: purple;"></button>
+                            </div>
+                        </div>
+                        <div id="select_bold"></div>
+                        <div id="select_italic"></div>
+                        <div id="select_underline"></div>
+                    </div> -->
+                    <textarea name="content" id="input_content" placeholder="내용을 입력해주세요"></textarea>
+                </div>
+            </form>
+        </div>
+        <div id="submit_button">
+            <input type="submit" id="submit_btn" value="등록" onclick="onSubmit()">
+        </div>
+    </div>
+</body>
+<script src="./edit.js"></script>
+</html>
