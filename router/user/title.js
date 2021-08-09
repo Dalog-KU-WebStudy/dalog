@@ -14,10 +14,16 @@ module.exports = function(router){
                 if(err){ throw err; }
                 else{
                     console.log(rows);
-                    if(rows === "[]"){
+                    if(!title){
                         console.log("No title");
                         /* 삽입해주자. */
-                        /* Code */ 
+                        var query2 = connection.query('insert into title (user_id, title) values (?,?)', [req.user.user_id, req.body.titleInput], function(err, roww){
+                            if(err) { throw err; }
+                            console.log("Title Inserted!");
+                            req.user.title = req.body.titleInput;
+                            console.log(req.user);
+                            res.render('index.ejs', {profile:req.user, title:req.user.title});
+                        })
                     }
                     else {
                         var query2 = connection.query('update title set title =? where user_id=?;', [req.body.titleInput, req.user.user_id], function(err, rowss) {
@@ -32,7 +38,7 @@ module.exports = function(router){
             })
         }
         else {
-            console.log("로그인해야 타이틀 수정하지");
+            console.log("no user");
             res.send("<script>alert('로그인이 필요한 서비스입니다.');history.back();</script>");
         }
     })
