@@ -87,7 +87,10 @@
   height: 130%;
   margin-top: 0px;
   font-weight: bold;
+}
 
+.Question>select:focus{
+  outline: none;
 }
 
 .WriteAnswer{
