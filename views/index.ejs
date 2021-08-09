@@ -23,9 +23,9 @@
         console.dir('<%=profile%>')
         let profile = "<%=JSON.stringify(profile)%>";
         if(profile){
-        profile = profile.replaceAll('&#34;','\"');
-        profile = JSON.parse(profile);
-        console.dir(profile);
+          profile = profile.replaceAll('&#34;','\"');
+          profile = JSON.parse(profile);
+          console.dir(profile);
         }
     </script>
     <header class="header">
@@ -36,7 +36,7 @@
           onclick="location.href='/'"
           style="cursor: pointer"
         />
-        <form action="/title" method="post">
+        <form action="/" method="post">
           <input
             id="titleInput"
             name="titleInput"
@@ -44,10 +44,14 @@
             type="text"
             value="여기를 눌러 타이틀을 수정하세요!"
             onfocus="document.getElementById('title-submit').style.display='block'"
-            onblur="document.getElementById('title-submit').style.display='none'"
           />
           <input type="image" id="title-submit" class="title-submit" src="./media/title-edit.png" value="" />
         </form>
+        <script>
+          if(profile){
+            document.getElementById("titleInput").value = "<%=title%>";
+          }
+        </script>
         <nav>
           <ul class="main-menu">
             <li>

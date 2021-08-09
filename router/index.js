@@ -18,7 +18,12 @@ module.exports = function(app, router,passport){
 
     router.get('/', function(req,res){
         console.log('main page');
-        res.render('index.ejs',{profile:req.user});
+        if(req.user){
+            console.log(req.user);
+            res.render('index.ejs', {profile:req.user, title:req.user.title});
+        }
+        else
+            res.render('index.ejs',{profile:req.user, title:"여기를 눌러 수정하세요!"});
     })
     router.get('/user/login', function(req,res){
         if(req.user){

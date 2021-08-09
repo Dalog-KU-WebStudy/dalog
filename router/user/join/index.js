@@ -67,12 +67,13 @@ module.exports = function(passport){
                         if(err) { throw err;}
                         console.log("Data inserted!");
                         // console.log(rows);
-                        done(null, profile);
+                        // done(null, profile);
                     })
 
                     var query2 = connection.query('insert into title (user_id, title) values ("' + email + '","' + "여기를 눌러 타이틀을 수정하세요!" + '")', function(err, rows){
                         if(err) { throw err;}
                         console.log("Title inserted!");
+                        profile.title = "여기를 눌러 타이틀을 수정하세요!";
                         return done(null, profile);
                     })
                 } // end...if
