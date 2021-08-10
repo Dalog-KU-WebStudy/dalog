@@ -40,7 +40,7 @@ module.exports = function(router){
         }
         else {
             console.log("no user");
-            res.send("<script>alert('로그인이 필요한 서비스입니다.');history.back();</script>");
+            res.send("<script>alert('로그인이 필요한 서비스입니다.');location.href='/user/login';</script>");
         }
     })
 }
