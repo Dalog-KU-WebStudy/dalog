@@ -1,5 +1,19 @@
-function onSubmit() {
-    location.href=`/diary/view`;
+function onsubmit() {
+    const title = document.getElementById('input_title').value;
+    const content = document.getElementById('input_content').innerHTML;
+
+    console.log(title, content);
+
+    if(title===''){
+        alert('제목을 입력해주세요');
+        return false;
+    } else if(content ===''){
+        alert('내용을 입력해주세요.');
+        return false;
+    } else {
+    }
+    
+    return false;
 }
 
 let changeWeather_flag = 0;
@@ -88,3 +102,4 @@ $(function() {
     $('#write_date #date #datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
     
 });
+
