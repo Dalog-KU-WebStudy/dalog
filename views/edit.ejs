@@ -42,7 +42,8 @@
                   class="dalog-title"
                   type="text"
                   value="여기를 눌러 타이틀을 수정하세요!"
-                  onfocus="document.getElementById('title-submit').style.display='block';"
+                  onfocus="document.getElementById('title-submit').style.display='block';document.getElementById('title-submit').style.opacity=1;"
+                  onblur="document.getElementById('title-submit').style.opacity=0;"
                 />
                 <input type="image" id="title-submit" class="title-submit" src="../media/title-edit.png" value="" />
             </form>
