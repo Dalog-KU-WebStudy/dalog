@@ -47,23 +47,20 @@ module.exports = function (app, router, passport) {
 
   app.get("/calendar/memo", function (req, res) {
     console.log("calendar/memo get 실행");
-    var query2 = connection.query(
-      "select * from calendar where user_id=?",
-      [req.user.user_id],
-      function (err, rows) {
-        if (err) {
-          throw err;
+    req.user &&
+      connection.query(
+        "select * from calendar where user_id=?",
+        [req.user.user_id],
+        function (err, rows) {
+          if (err) {
+            throw err;
+          }
+          if (rows) {
+            console.log(rows);
+            res.send(rows);
+          }
         }
-        if (rows) {
-          console.log(rows);
-          res.send(rows);
-        } else {
-          console.log("반환값없음");
-        }
-        // console.log(req.user);
-        // res.render("index.ejs", { profile: req.user, title: req.user.title });
-      }
-    );
+      );
   });
 
   router.get("/diary/write", function (req, res) {
