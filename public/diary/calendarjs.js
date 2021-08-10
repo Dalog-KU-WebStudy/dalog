@@ -41,7 +41,7 @@ const renderMemo = () => {
 
 const openModal = (date, content, id) => {
   modal.classList.remove("hidden");
-  modalDate.innerText = date;
+  modalDate.value = date;
   modalContent.value = content;
   closeBtn.addEventListener(
     "click",
