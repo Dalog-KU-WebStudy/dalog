@@ -39,13 +39,36 @@ module.exports = function(app, router,passport){
         else
             res.render('index.ejs',{profile:req.user, title:"여기를 눌러 타이틀을 수정하세요!"});
     })
-    router.get('/user/login', function(req,res){
-        if(req.user){
-            res.send("<script>alert('이미 로그인 되었습니다.');history.back();</script>");
-        } else {
-            res.sendFile(path.join(__dirname, '../public/user/login.html'));
-        }
+    
+    const user_login = require('./user/login');
+    user_login(passport)
+ 
+
+    router.get('/user/login',(req,res)=>{
+        var msg;
+        var errMsg = req.flash('error');
+        if(errMsg) msg = errMsg;
+        
+        console.log('login page');
+        res.render('login.ejs',{'message':msg})
     })
+
+    router.post('/user/login',passport.authenticate('local-login',{
+        successRedirect:'/profile',
+        failureRedirect: '/user/login',
+        failureRedirect : true
+    }))
+
+//    router.get('/user/login', function(req,res){
+//        console.log('loginpage');
+//        if(req.user){
+//            res.send("<script>alert('이미 로그인 되었습니다.');history.back();</script>");
+//        } else {
+//           res.sendFile(path.join(__dirname, '../public/user/login.html'));
+//        }
+//    })
+
+
     router.get('/diary/write', function(req,res){
         // if(!req.user){
         //     res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
@@ -189,6 +212,7 @@ module.exports = function(app, router,passport){
             failureRedirect : '/user/join', //인증실패시 이동하는화면주소 
             failureFlash : true //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨. 
     }));
+
 
     // naver 로그인
     router.get('/login/naver',

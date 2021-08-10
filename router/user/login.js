@@ -5,11 +5,23 @@ const connection = mysql.createConnection(dbConfig);
 const LocalStrategy = require("passport-local").Strategy;
 connection.connect();
 
-passport.use('local-join',new LocalStrategy({
-    usernameField : "email",
-    passwordField:"password",
-    passReqToCallback : true
-}, function(req, emial, password, done){
-    console("LOGIN_check start");
-    console(req.body);
-}))
+module.exports = function(passport){
+    passport.use('local-login',new LocalStrategy({
+        usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true
+    }, function(res, email, password, done){
+       console.log('login start');
+       var query = connection.query('select * from dalog_user where email=?',[email],function(err,rows){
+           if (err) return done(err);
+    
+           if(rows.length){
+               return done(null,{'email' : email, 'id' : rows[0].UID})
+           }else{
+               console.log("fialldld")
+               return done(null,false,{'message' : 'your login info is not found'})
+            }     
+           
+       })
+    }));
+}
