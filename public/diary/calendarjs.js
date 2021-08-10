@@ -5,34 +5,29 @@ const modalDate = document.querySelector(".modal_date");
 const modalContent = document.querySelector(".modal_content");
 const closeBtn = document.querySelector(".modal_closeBtn");
 
-const memoMockData = [
-  { id: 0, date: "2021.6.3", memo: "6월메모1" },
-  { id: 1, date: "2021.6.3", memo: "6월메모2" },
-  { id: 2, date: "2021.6.3", memo: "6월메모3" },
-  { id: 3, date: "2021.6.4", memo: "아리랑아리랑아라리오" },
-  { id: 4, date: "2021.6.4", memo: "아리랑아리랑아라리오" },
-  { id: 5, date: "2021.7.1", memo: "아리랑아리랑아라리오" },
-  { id: 6, date: "2021.7.30", memo: "웅레ㅔㄹ" },
-  { id: 7, date: "2021.6.30", memo: "호롤로" },
-  { id: 8, date: "2021.6.30", memo: "호롤로" },
-  { id: 9, date: "2021.5.30", memo: "이미미ㅣ" },
-];
+const memoData = async () => {
+  const response = await fetch("/calendar/memo");
+  const data = await response.json();
+  console.log(data);
+  return data;
+};
 
-const renderMemo = () => {
+const renderMemo = async () => {
   const memoUl = document.querySelectorAll(".memo");
   for (const ul of memoUl) {
     while (ul.hasChildNodes()) {
       ul.removeChild(ul.firstChild);
     }
   }
-  memoMockData.map((data) => {
-    const thisMemoUl = document.getElementById(`${data.date}`);
+  const memoMockData = await memoData();
+  memoMockData?.map((data) => {
+    const thisMemoUl = document.getElementById(`${data.cal_date}`);
     if (thisMemoUl) {
       const memoli = document.createElement("li");
       memoli.innerText = data.memo;
       memoli.className = "memo_one";
       memoli.addEventListener("click", () => {
-        openModal(data.date, data.memo, data.id);
+        openModal(data.cal_date, data.memo, data.cal_id);
       });
       thisMemoUl.appendChild(memoli);
     }
@@ -69,6 +64,11 @@ const modalClose = (date, content, id) => {
   }
   modal.classList.add("hidden");
   renderMemo();
+};
+
+const numberFormat = (number) => {
+  if (String(number).length == 1) return `0${number}`;
+  else return String(number);
 };
 
 const renderCalendar = () => {
@@ -119,12 +119,16 @@ const renderCalendar = () => {
         <div class="dateTop">
             <div class = "flex">
                 <button class="plus" 
-                value="${viewYear}.${viewMonth}.${date}">+</button>
+                value="${viewYear}-${numberFormat(viewMonth)}-${numberFormat(
+        date
+      )}">+</button>
                 <img class="diaryImg" src="./media/diary.svg"/>
             </div>
             <div class="${condition} dateNum">${date}</div>
         </div>
-        <ul class="memo" id ="${viewYear}.${viewMonth}.${date}" ></ul>
+        <ul class="memo" id ="${viewYear}-${numberFormat(
+        viewMonth
+      )}-${numberFormat(date)}" ></ul>
     </div>`;
     } else {
       dates[i] = `<div class="date">

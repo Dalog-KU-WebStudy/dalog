@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const path = require('path');
-const dbconfig = require('../config/dbconfig');
-const mysql = require('mysql');
+const path = require("path");
+const dbconfig = require("../config/dbconfig");
+const mysql = require("mysql");
 const connection = mysql.createConnection(dbconfig);
 connection.connect();
 
@@ -43,6 +43,27 @@ module.exports = function (app, router, passport) {
         }
       );
     } else res.render("index.ejs", { profile: req.user, title: "여기를 눌러 타이틀을 수정하세요!" });
+  });
+
+  app.get("/calendar/memo", function (req, res) {
+    console.log("calendar/memo get 실행");
+    var query2 = connection.query(
+      "select * from calendar where user_id=?",
+      [req.user.user_id],
+      function (err, rows) {
+        if (err) {
+          throw err;
+        }
+        if (rows) {
+          console.log(rows);
+          res.send(rows);
+        } else {
+          console.log("반환값없음");
+        }
+        // console.log(req.user);
+        // res.render("index.ejs", { profile: req.user, title: req.user.title });
+      }
+    );
   });
 
   router.get("/diary/write", function (req, res) {
@@ -275,6 +296,9 @@ module.exports = function (app, router, passport) {
     );
     // res.redirect('/');
   });
+
+  //메모부분
+
   router.post("/calendar/write", function (req, res) {
     console.log("calendar write post router 호출");
     if (req.user) {
@@ -285,6 +309,7 @@ module.exports = function (app, router, passport) {
           if (err) {
             return done(err);
           } else {
+            console.log("메모 post 성공");
             res.redirect("/");
           }
         }
