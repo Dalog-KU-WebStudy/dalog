@@ -11,7 +11,7 @@ const togglePW1 = document.querySelector('#togglePw1');
 const togglePW2 = document.querySelector('#togglePw2');
 const togglePW3 = document.querySelector('#togglePw3');
 
-var pw1 = document.querySelector('#pswd1');
+var pw1 = document.querySelector('#old_pswd1');
 var pwMsg = document.querySelector('#alertTxt');
 
 var new_pw1 = document.querySelector('#new_pswd1');
@@ -129,11 +129,11 @@ function comparePw() {
 function checkName() {
     var namePattern = /[a-zA-Z가-힣]/;
     if(!namePattern.test(userName.value) || userName.value.indexOf(" ") > -1) {
-        error[3].innerHTML = "한글과 영문 대/소문자를 사용하세요. (특수기호, 공백 사용 불가)";
-        error[3].style.display = "block";
+        error[4].innerHTML = "한글과 영문 대/소문자를 사용하세요. (특수기호, 공백 사용 불가)";
+        error[4].style.display = "block";
         mod.disabled = true;
     } else {
-        error[3].style.display = "none";
+        error[4].style.display = "none";
         mod.disabled = false;
     }
 }
@@ -142,8 +142,8 @@ function isBirthCompleted() {
     var yearPattern = /[0-9]{4}/;
 
     if(!yearPattern.test(yy.value)) {
-        error[4].innerHTML = "태어난 년도 4자리를 정확하게 입력하세요.";
-        error[4].style.display = "block";
+        error[3].innerHTML = "태어난 년도 4자리를 정확하게 입력하세요.";
+        error[3].style.display = "block";
     } else {
         isMonthSelected();
     }
@@ -151,7 +151,7 @@ function isBirthCompleted() {
 
     function isMonthSelected() {
         if(mm.value === "월") {
-            error[4].innerHTML = "태어난 월을 선택하세요.";
+            error[3].innerHTML = "태어난 월을 선택하세요.";
         } else {
             isDateCompleted();
         }
@@ -159,7 +159,7 @@ function isBirthCompleted() {
 
     function isDateCompleted() {
         if(dd.value === "") {
-            error[4].innerHTML = "태어난 일(날짜) 2자리를 정확하게 입력하세요.";
+            error[3].innerHTML = "태어난 일(날짜) 2자리를 정확하게 입력하세요.";
         } else {
             isBirthRight();
         }
@@ -172,7 +172,10 @@ function isBirthRight() {
         mod.disabled = false;
     }
     else if(!datePattern.test(dd.value) || Number(dd.value)<1 || Number(dd.value)>31) {
-        error[4].innerHTML = "생년월일이 올바르지 않습니다. 다시 확인해주세요.";
+        error[3].innerHTML = "생년월일이 올바르지 않습니다. 다시 확인해주세요.";
+    }
+    else{
+        error[3].style.display = "none";
     }
 }
 
