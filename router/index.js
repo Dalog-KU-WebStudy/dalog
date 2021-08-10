@@ -21,30 +21,6 @@ module.exports = function(app, router,passport){
         res.render('index.ejs',{profile:req.user});
     })
     
-    const user_login = require('./user/login');
-    user_login(passport);
-
-    router.get('/user/login',(req,res)=>{
-        var msg;
-        var errMsg = req.flash('error');
-        if(errMsg) msg = errMsg;
-        
-        console.log('login page', msg);
-        res.render('login.ejs',{'message':msg})
-    })
-
-    router.post('/user/login', function(req,res,next){
-        passport.authenticate('local-login', function(err,user,info){
-            if(err) res.send("<script>alert('오류가 발생하였습니다.');location.href='/user/login';</script>");
-            if(!user) return res.send("<script>alert('아이디 또는 비밀번호를 확인해주세요.');history.back();</script>");;
-    
-            req.logIn(user, function(err){
-                if(err) return next(err);
-                return res.redirect('/');
-            })
-        })(req,res,next);
-    })
-
 
     router.get('/diary/write', function(req,res){
         if(!req.user){
@@ -125,6 +101,9 @@ module.exports = function(app, router,passport){
 
     const user_modify = require('./user/modify');
     user_modify(router);
+
+    const user_login = require('./user/login');
+    user_login(router, passport);
 
     const user_delete = require('./user/delete');
     router.use('/user/delete', user_delete);
