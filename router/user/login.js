@@ -11,17 +11,24 @@ module.exports = function(passport){
         passwordField : 'password',
         passReqToCallback : true
     }, function(res, email, password, done){
-       console.log('login start');
-       var query = connection.query('select * from dalog_user where email=?',[email],function(err,rows){
-           if (err) return done(err);
-    
-           if(rows.length){
-               return done(null,{'email' : email, 'id' : rows[0].UID})
-           }else{
-               console.log("fialldld")
-               return done(null,false,{'message' : 'your login info is not found'})
+        console.log('login start');
+        var query = connection.query('select * from dalog_user where user_id=? and user_pw=?',[email, password],function(err,rows){
+            if (err) return done(err);
+        
+            if(rows.length){
+                const profile ={
+                    user_id:rows[0].user_id,
+                    user_name:rows[0].user_name,
+                    birth:rows[0].birth,
+                    phone:rows[0].phone,
+                    provider:'local'
+                }
+                return done(null,profile);
+            }else{
+                console.log("fialldld");
+                return done(null,false,{'message':'로그인 실패'})
             }     
-           
-       })
+            
+        })
     }));
 }

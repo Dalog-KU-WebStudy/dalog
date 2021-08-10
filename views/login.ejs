@@ -15,12 +15,12 @@
         <img src="../media/logo.jpg" style="margin-left: auto; margin-right: auto; display: block; width:350px; height:350px;"/>
         <form action="/user/login" method="post" class="loginForm">
             <div class="idForm">
-                <input type="text" class="id" placeholder="ID">
+                <input type="text" class="id" name="email" placeholder="ID">
             </div>
             <div class="passForm">
-                <input type="password" class="pw" placeholder="PW">
+                <input type="password" class="pw" name="password" placeholder="PW">
             </div>
-            <button type="button" class="btn" >
+            <button type="submit" class="btn" >
                 로그인
             </button>
         </form>
