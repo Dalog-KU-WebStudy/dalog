@@ -43,6 +43,7 @@ module.exports = function (app, router, passport) {
         }
       );
     } else res.render("index.ejs", { profile: req.user, title: "여기를 눌러 타이틀을 수정하세요!" });
+
   });
 
   //메모부분
@@ -315,4 +316,7 @@ module.exports = function (app, router, passport) {
 
   const title_change = require("./user/title");
   title_change(router);
+
+  const diary_simple_write = require("./diary/simple_write");
+  diary_simple_write(router);
 };
