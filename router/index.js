@@ -49,10 +49,11 @@ module.exports = function (app, router, passport) {
 
   router.post("/calendar/write", function (req, res) {
     console.log("calendar write post router 호출");
+    console.log(req.body);
     if (req.user) {
       const query = connection.query(
         `insert into calendar (user_id, cal_date, memo) values (?,?,?)`,
-        [req.user.user_id, req.body.date, req.body.content],
+        [req.user.user_id, req.body.date, req.body.memo],
         (err, result) => {
           if (err) {
             return done(err);
@@ -69,7 +70,7 @@ module.exports = function (app, router, passport) {
     }
   });
 
-  app.get("/calendar/memo", function (req, res) {
+  router.get("/calendar/memo", function (req, res) {
     console.log("calendar/memo get 실행");
     req.user &&
       connection.query(
@@ -80,7 +81,6 @@ module.exports = function (app, router, passport) {
             throw err;
           }
           if (rows) {
-            console.log(rows);
             res.send(rows);
           }
         }
@@ -307,7 +307,7 @@ module.exports = function (app, router, passport) {
   const logout = require("./user/logout");
   router.use("/user/logout", logout);
 
-  const diary_write = require('./diary/write');
+  const diary_write = require("./diary/write");
   diary_write(router);
 
   const diary_view = require("./diary/view");

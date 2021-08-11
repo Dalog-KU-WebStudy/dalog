@@ -196,18 +196,15 @@
       </div>
     </div>
     <div class="modal hidden">
-      <form action="/calendar/write" method="POST">
-        <input type="submit" class="modal_background"></input>
+        <div class="modal_background"></div>
         <div class="modal_container">
-          <input class="modal_date" name = "date" readonly></input>
+          <input class="modal_date"readonly></input>
           <textarea
-            name = "content"
             class="modal_content"
             placeholder="메모를 입력하세요"
           ></textarea>
-          <input type="submit" value="- close -" class="modal_closeBtn"></input>
+          <input value="- close -" class="modal_closeBtn"></input>
         </div>
-      </form>
     </div>
     <script src="diary/calendarjs.js"></script>
   </body>

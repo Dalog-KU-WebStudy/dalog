@@ -42,26 +42,38 @@ const openModal = (date, content, id) => {
   closeBtn.addEventListener(
     "click",
     () => {
-      modalClose(date, modalContent.value, id);
+      modalClose(date, modalContent.value, id, true);
     },
     { once: true }
   );
   modalBack.addEventListener(
     "click",
     () => {
-      modalClose(date, modalContent.value, id);
+      modalClose(date, modalContent.value, id, false);
     },
     { once: true }
   );
 };
 
-const modalClose = (date, content, id) => {
-  if (id !== null) {
-  }
-  //수정
-  else {
-    if (content !== "")
-      memoMockData.push({ date: date, memo: content, id: memoMockData.length }); //삽입
+const modalClose = (date, content, id, save) => {
+  console.log("모달 닫기");
+  if (save) {
+    if (id !== null) {
+      //수정
+    } else {
+      //삽입
+      fetch("/calendar/write", {
+        method: "post", // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          date: date,
+          memo: content,
+          id: id,
+        }),
+      });
+    }
   }
   modal.classList.add("hidden");
   renderMemo();
