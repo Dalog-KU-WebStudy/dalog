@@ -4,6 +4,7 @@ const modalBack = document.querySelector(".modal_background");
 const modalDate = document.querySelector(".modal_date");
 const modalContent = document.querySelector(".modal_content");
 const closeBtn = document.querySelector(".modal_closeBtn");
+let memoMockData = [];
 
 const memoData = async () => {
   const response = await fetch("/calendar/memo");
@@ -19,7 +20,7 @@ const renderMemo = async () => {
       ul.removeChild(ul.firstChild);
     }
   }
-  const memoMockData = await memoData();
+  memoMockData = await memoData();
   memoMockData?.map((data) => {
     const thisMemoUl = document.getElementById(`${data.cal_date}`);
     if (thisMemoUl) {
@@ -119,15 +120,15 @@ const renderCalendar = () => {
         <div class="dateTop">
             <div class = "flex">
                 <button class="plus" 
-                value="${viewYear}-${numberFormat(viewMonth)}-${numberFormat(
-        date
-      )}">+</button>
+                value="${viewYear}-${numberFormat(
+        viewMonth + 1
+      )}-${numberFormat(date)}">+</button>
                 <img class="diaryImg" src="./media/diary.svg"/>
             </div>
             <div class="${condition} dateNum">${date}</div>
         </div>
         <ul class="memo" id ="${viewYear}-${numberFormat(
-        viewMonth
+        viewMonth + 1
       )}-${numberFormat(date)}" ></ul>
     </div>`;
     } else {
