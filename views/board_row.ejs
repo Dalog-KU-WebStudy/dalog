@@ -4,7 +4,7 @@
     <title>달:로그</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="../css/index.css" />
-    <link rel="stylesheet" type="text/css" href="../css/board_grid.css" />
+    <link rel="stylesheet" type="text/css" href="../css/board_row.css" />
     <link
       href="https://spoqa.github.io/spoqa-han-sans/"
       rel="stylesheet"
@@ -17,7 +17,17 @@
     />
   </head>
   <body>
-    <script src="./board_grid.js" defer></script>
+    <script>
+        console.dir('<%=profile%>')
+        let profile = "<%=JSON.stringify(profile)%>";
+        if(profile){
+          profile = profile.replaceAll('&#34;','\"');
+          profile = JSON.parse(profile);
+          console.dir(profile);
+        }
+    </script>
+    <script src="./board_row.js" defer></script>
+    <script src="../user/title.js" defer></script>
     <header class="header">
       <div class="wrapper">
         <img
@@ -26,7 +36,24 @@
           onclick="location.href='/'"
           style="cursor: pointer"
         />
-        <input class="dalog-title" type="text" value="여기를 눌러 타이틀을 수정하세요!" />
+        <form action="/" method="post" id="title_form">
+            <input
+              id="titleInput"
+              name="titleInput"
+              class="dalog-title"
+              type="text"
+              value="여기를 눌러 타이틀을 수정하세요!"
+              onfocus="document.getElementById('title-submit').style.display='block';document.getElementById('title-submit').style.opacity=1;"
+              onblur="document.getElementById('title-submit').style.opacity=0;"
+            />
+            <input type="image" id="title-submit" class="title-submit" src="../media/title-edit.png" value="" />
+        </form>
+        <script>
+            if(profile){
+              if("<%=title%>" != "")
+                document.getElementById("titleInput").value = "<%=title%>";
+            }
+        </script>
         <nav>
           <ul class="main-menu">
             <li>
@@ -44,7 +71,7 @@
             </li>
             <li>
               <a
-                href="/diary/board_grid"
+                href="/diary/board_row"
                 target="_self"
                 style="text-decoration: none; cursor: pointer"
               >

@@ -55,14 +55,17 @@ function isEmailCorrect() {
     if(email.value === ""){ 
         error[0].innerHTML = "필수 정보입니다."; 
         error[0].style.display = "block";
-        join.disabled = true;
+        // join.disabled = true;
+        return false;
     } else if(!emailPattern.test(email.value)) {
         error[0].innerHTML = "이메일 형식이 올바르지 않습니다. (ex. username@dalog.com)"
         error[0].style.display = "block";
-        join.disabled = true;
+        // join.disabled = true;
+        return false;
     } else {
         error[0].style.display = "none"; 
-        join.disabled = false;
+        // join.disabled = false;
+        return true;
     }
 
 }
@@ -75,7 +78,8 @@ function checkPw(){
         pwMsg.style.display = "block";
         pwMsgArea.style.paddingRight = "4rem";
         error[1].style.display = "block";
-        join.disabled = true;
+        // join.disabled = true;
+        return false;
     }
     else if(!pwPattern.test(pw1.value)) {
         error[1].innerHTML = "8~16자 영문 대/소문자, 숫자, 특수문자를 사용하세요.";
@@ -85,7 +89,8 @@ function checkPw(){
         error[1].style.display = "block";
         pwMsg.style.color = "red";
         pwMsg.style.display = "block";
-        join.disabled = true;
+        // join.disabled = true;
+        return false;
     } 
     else if(pw1.value == email.value){
         error[1].innerHTML = "이메일과 같은 비밀번호는 사용할 수 없습니다.";
@@ -95,7 +100,8 @@ function checkPw(){
         error[1].style.display = "block";
         pwMsg.style.color = "red";
         pwMsg.style.display = "block";
-        join.disabled = true;
+        // join.disabled = true;
+        return false;
     }
     else {
         error[1].style.display = "none";
@@ -103,25 +109,28 @@ function checkPw(){
         pwMsgArea.style.paddingRight = "9.3rem";
         pwMsg.style.color = "#03c75a";
         pwMsg.style.display = "block";
-        join.disabled = false;
+        // join.disabled = false;
+        return true;
     }
 }
 
 function comparePw() {
-    if(pw2.value === pw1.value) {
-        error[2].style.display = "none";
-        join.disabled = false;
-    } else if(pw2.value !== pw1.value) {
-        error[2].innerHTML = "비밀번호가 일치하지 않습니다.";
-        error[2].style.display = "block";
-        join.disabled = true;
-    } 
-
     if(pw2.value === "") {
         error[2].innerHTML = "필수 정보입니다.";
         error[2].style.display = "block";
-        join.disabled = true;
+        // join.disabled = true;
+        return false;
     }
+    if(pw2.value === pw1.value) {
+        error[2].style.display = "none";
+        // join.disabled = false;
+        return true;
+    } else if(pw2.value !== pw1.value) {
+        error[2].innerHTML = "비밀번호가 일치하지 않습니다.";
+        error[2].style.display = "block";
+        // join.disabled = true;
+        return false;
+    } 
 }
 
 function checkName() {
@@ -129,14 +138,17 @@ function checkName() {
     if(userName.value === "") {
         error[3].innerHTML = "필수 정보입니다.";
         error[3].style.display = "block";
-        join.disabled = true;
+        // join.disabled = true;
+        return false;
     } else if(!namePattern.test(userName.value) || userName.value.indexOf(" ") > -1) {
         error[3].innerHTML = "한글과 영문 대/소문자를 사용하세요. (특수기호, 공백 사용 불가)";
         error[3].style.display = "block";
-        join.disabled = true;
+        // join.disabled = true;
+        return false;
     } else {
         error[3].style.display = "none";
-        join.disabled = false;
+        // join.disabled = false;
+        return true;
     }
 }
 
@@ -201,14 +213,14 @@ function checkAll(){
 
         if(email.value == "" || pw1.value == "" || pw2.value == "" || userName.value == ""){
             alert("필수 정보를 모두 입력해주세요.");
-            // return false;
+            return false;
         }
-        else if(join.getAttribute("disabled") == "true"){
+        else if(!isEmailCorrect() || !checkPw() || !comparePw() || !checkName()){
             alert("정보를 올바르게 입력해주세요.");
-            // return false;
+            return false;
         }
         else{
-            alert("가입이 완료되었습니다. 새로운 아이디로 다시 로그인해주세요. ");
+            // alert("가입이 완료되었습니다. 새로운 아이디로 다시 로그인해주세요. ");
             console.log("email : " + email.value);
             console.log("pw : " + pw1.value);
             console.log("name : " + userName.value);

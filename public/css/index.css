@@ -66,8 +66,8 @@ body {
   position: absolute;
   top: 7%;
   left: 50%;
-  margin-left: -20rem;
-  width: 40rem;
+  margin-left: -25rem;
+  width: 50rem;
   height: 7rem;
   font-size: 3rem;
   font-family: "Noto Serif KR", sans-serif;
@@ -81,6 +81,26 @@ body {
   outline: none;
   border-bottom: 0.2rem solid #104c7c;
 }
+
+.title-submit {
+  position: absolute;
+  display: none;
+  width: 2rem;
+  height: 2rem;
+  top: 55%;
+  left: 66%;
+}
+
+/*
+.dalog-title:focus > .title-submit{
+  position: absolute;
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  top: 40%;
+  left: 69%;
+}  */
+
 header {
   background-color: #fcf8bd;
   border-bottom: 1px solid #fcf8bd;

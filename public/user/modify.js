@@ -167,6 +167,9 @@ function isBirthRight() {
     else if(!datePattern.test(dd.value) || Number(dd.value)<1 || Number(dd.value)>31) {
         error[3].innerHTML = "생년월일이 올바르지 않습니다. 다시 확인해주세요.";
     }
+    else{
+        error[3].style.display = "none";
+    }
 }
 
 
@@ -193,6 +196,4 @@ function checkAll(){
     if(new_pw1.value === "" || new_pw2.value === "" || new_pw1.value !== new_pw2.value){
         // -> 비밀번호는 기존 비밀번호 그대로. (DB) 이부분은 나중에 router에서 처리해주면 될듯
     }
-    // alert("수정완료");
-    // location.href = "../index.html";
 }
