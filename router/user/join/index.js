@@ -58,7 +58,7 @@ module.exports = function(passport){
 
                     profile.user_id = email;
                     profile.user_pw = password;
-                    profile.user_name = name;
+                    profile.name = name;
                     profile.birth = birth;
                     profile.phone = phone;
                     profile.provider = 'local';
@@ -67,11 +67,15 @@ module.exports = function(passport){
                         if(err) { throw err;}
                         console.log("Data inserted!");
                         // console.log(rows);
+                        // done(null, profile);
+                    })
+
+                    var query2 = connection.query('insert into title (user_id, title) values ("' + email + '","' + "여기를 눌러 타이틀을 수정하세요!" + '")', function(err, rows){
+                        if(err) { throw err;}
+                        console.log("Title inserted!");
+                        profile.title = "여기를 눌러 타이틀을 수정하세요!";
                         return done(null, profile);
                     })
-    
-                    // 가입이 되었다면 메인페이지로
-                    // res.redirect('/');
                 } // end...if
     
             });

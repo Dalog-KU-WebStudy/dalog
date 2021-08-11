@@ -1,8 +1,9 @@
-const express= require('express');
-const static = require('serve-static');
 const multer = require('multer');
 const path = require('path');
-const router = express.Router();
+const dbconfig = require('../../config/dbconfig');
+const mysql = require('mysql');
+const connection = mysql.createConnection(dbconfig);
+connection.connect();
 
 
 module.exports = function(router) {
@@ -48,7 +49,27 @@ module.exports = function(router) {
             }
         }
 
-        res.redirect('/diary/view');
+        const date=req.body.date;
+        const weather=req.body.weather;
+        const temp_high=req.body.temp_high;
+        const temp_low=req.body.temp_low;
+        const title=req.body.title;
+        const content=req.body.content;
+
+        console.log(date, weather, temp_high, temp_low, title, content);
+
+        if(req.user){
+            const query = connection.query(`insert into diary (user_id, diary_date, diary_title, diary_content, image_dir, weather, temp_high, temp_low) values (?,?,?,?,?,?,?,?)`,[req.user.user_id, date, title, content, filename, weather, temp_high, temp_low], (err,result)=>{
+                if(err){
+                    return done(err);
+                } else {
+                    res.redirect('/diary/view');
+                }
+            })
+        } else {
+            res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
+        }
+
     })
 
 }

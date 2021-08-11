@@ -10,13 +10,40 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet" />
     <script src="./view.js" defer></script>
+    <script src="../user/title.js" defer></script>
 </head>
 
 <body>
+    <script>
+        console.dir('<%=profile%>')
+        let profile = "<%=JSON.stringify(profile)%>";
+        if(profile){
+          profile = profile.replaceAll('&#34;','\"');
+          profile = JSON.parse(profile);
+          console.dir(profile);
+        }
+    </script>
     <header class="header">
         <div class="wrapper">
             <img src="../media/logo4.jpg" class="logo" onclick="location.href='/'" style="cursor: pointer" />
-            <input class="dalog-title" type="text" value="여기를 눌러 타이틀을 수정하세요!" />
+            <form action="/" method="post" id="title_form">
+                <input
+                  id="titleInput"
+                  name="titleInput"
+                  class="dalog-title"
+                  type="text"
+                  value="여기를 눌러 타이틀을 수정하세요!"
+                  onfocus="document.getElementById('title-submit').style.display='block';document.getElementById('title-submit').style.opacity=1;"
+                  onblur="document.getElementById('title-submit').style.opacity=0;"
+                />
+                <input type="image" id="title-submit" class="title-submit" src="../media/title-edit.png" value="" />
+            </form>
+            <script>
+                if(profile){
+                  if("<%=title%>" != "")
+                    document.getElementById("titleInput").value = "<%=title%>";
+                }
+            </script>
             <nav>
                 <ul class="main-menu">
                     <li>
