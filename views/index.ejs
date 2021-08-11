@@ -136,10 +136,13 @@
     </header>
 
     <div class="Area">
+
+      <form action="/" method="POST" id="simple_write" enctype="multipart/form-data">
+
       <div class="Box">
         <div class="Question">
          
-          <select name="selectQuestion" id="selectQuestion">
+          <select name="selectQuestion" id="selectQuestion" name ="title">
             <option value="" selected="selected">질문을 선택해주세요</option>
             <option value="">오늘 맛있게 먹은 음식이 있나요?</option>
             <option value="">지금 어떤 음식이 먹고 싶나요?</option>
@@ -168,9 +171,11 @@
         </div>
         <div class="Answer">
           <p><input type="text" placeholder="A. " class="WriteAnswer" /></p>
-          <input type="button" value="등록" class="buttons" />
+          <input type="button" value="등록" class="buttons" name="content" />
         </div>
       </div>
+
+      </form>
     </div>
 
     <div class="calendar">

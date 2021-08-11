@@ -6,6 +6,7 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="../css/index.css" />
     <link rel="stylesheet" type="text/css" href="../css/write.css">
+    <link rel="stylesheet" href="../css/weather.css">
     <link href="https://spoqa.github.io/spoqa-han-sans/" rel="stylesheet" type="text/css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet" />
@@ -20,6 +21,9 @@
     <link rel="stylesheet" href="../css/jquery-ui.css">
     <!--<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
     <script src="./write.js"></script>
+    <script src="./weather.js"></script>
+    <script src="https://rawgithub.com/darkskyapp/skycons/master/skycons.js"></script>
+
     <script>
         $(function(){
             $('#input_photo').change(function(){
@@ -83,6 +87,30 @@
                     <div id="date">
                         <input type="text" id="datepicker" name="date">
                     </div>
+
+                    <!--<div class="weather">
+                        <div class="horizon weather_top">
+                            <canvas id="icon"></canvas>
+                             
+                            <div class="mainweather">
+                                <div class=main></div>
+                                <div class=temp></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="horizon">
+                                <p class="feel details"></p>
+                                <p class="min details"></p>
+                                <p class="max details"></p>
+                            </div>
+                            <div class="horizon">
+                                <p class="rain details"></p>
+                                <p class="humidity details"></p>
+                                <p class="wind details"></p>
+                            </div>
+                        </div>
+                    </div> -->   
+
                     <div id="weather_box">
                         <div id="weather_icon">
                             <div id="temperature">
@@ -106,7 +134,7 @@
                         <div id="manual_button">
                             <button type="button" onclick="changeWeather()">변경</button>
                         </div>
-                    </div>
+                    </div> 
                 </div>
                 <div id="write_title">
                     <input type="text" id="input_title" name="title" placeholder="제목을 입력해주세요">
