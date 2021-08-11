@@ -61,7 +61,7 @@ module.exports = function(router) {
         if(req.user){
             const query = connection.query(`insert into diary (user_id, diary_date, diary_title, diary_content, image_dir, weather, temp_high, temp_low) values (?,?,?,?,?,?,?,?)`,[req.user.user_id, date, title, content, filename, weather, temp_high, temp_low], (err,result)=>{
                 if(err){
-                    return done(err);
+                    return res.status(500).json(err);
                 } else {
                     res.redirect('/diary/view');
                 }

@@ -18,10 +18,25 @@
         console.dir('<%=profile%>')
         let profile = "<%=JSON.stringify(profile)%>";
         if(profile){
-          profile = profile.replaceAll('&#34;','\"');
-          profile = JSON.parse(profile);
-          console.dir(profile);
+        profile = profile.replaceAll('&#34;','\"');
+        profile = JSON.parse(profile);
+        console.dir(profile);
         }
+        
+        let diary ="<%=JSON.stringify(diary)%>";
+        if(diary){
+        diary = diary.replaceAll('&#34;','\"');
+        diary = JSON.parse(diary);
+        console.dir(diary);
+        }
+
+        
+        let diary_content=diary.diary_content;
+        diary_content = diary_content.replaceAll('&lt;','<');
+        diary_content = diary_content.replaceAll('&gt;','>');
+        
+        console.dir(diary_content);
+
     </script>
     <header class="header">
         <div class="wrapper">
@@ -48,16 +63,16 @@
                 <ul class="main-menu">
                     <li>
                         <a href="/diary/write" target="_self" style="text-decoration: none; cursor: pointer">
-                            <img src="../media/write.png" class="write" style="cursor: pointer;" alt="글쓰기" />
+                            <img src="/media/write.png" class="write" style="cursor: pointer;" alt="글쓰기" />
                         </a>
                     </li>
                     <li>
                         <a href="/diary/board_grid" target="_self" style="text-decoration: none; cursor: pointer">
-                            <img src="../media/board.png" class="board" style="cursor: pointer;" alt="게시판" />
+                            <img src="/media/board.png" class="board" style="cursor: pointer;" alt="게시판" />
                         </a>
                     </li>
                     <li>
-                        <a href="#"><img src="../media/profile.png" style="cursor: pointer;" /></a>
+                        <a href="#"><img src="/media/profile.png" style="cursor: pointer;" /></a>
                         <ul class="sub-menu">
                             <li>
                                 <a href="/user/modify" target="_self"
@@ -117,5 +132,28 @@
         </div>
     </div>
 </body>
+<script>
+    document.getElementById("date").childNodes[1].innerText =
+    diary.diary_date;
+    document.getElementById("title").childNodes[1].innerText =
+    diary.diary_title;
+    document.getElementById("temper_night").childNodes[1].innerText =
+    diary.temp_low;
+    document.getElementById("temper_day").childNodes[1].innerText =
+    diary.temp_high;
+    document.getElementById(
+    "weather"
+    ).childNodes[1].src = `/media/icon_${diary.weather}.png`;
+    document.getElementById("weather").childNodes[1].title =
+    diary.weather;
+    if (diary.image_dir != "") {
+    document.getElementById("photo").childNodes[1].src =
+        diary.image_dir;
+    } else {
+    document.getElementById("photo").style = "display : none";
+    }
 
+    document.getElementById("content").childNodes[1].innerHTML =
+    diary_content;
+</script>
 </html>
