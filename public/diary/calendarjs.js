@@ -37,7 +37,7 @@ const renderMemo = async () => {
 
 const openModal = (date, content, id) => {
   modal.classList.remove("hidden");
-  modalDate.value = date;
+  modalDate.innerText = date;
   modalContent.value = content;
   closeBtn.addEventListener(
     "click",
@@ -55,6 +55,20 @@ const openModal = (date, content, id) => {
   );
 };
 
+const postMemo = (date, content, id) => {
+  fetch("/calendar/write", {
+    method: "post", // *GET, POST, PUT, DELETE, etc.
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      date: date,
+      memo: content,
+      id: id,
+    }),
+  });
+};
+
 const modalClose = (date, content, id, save) => {
   console.log("모달 닫기");
   if (save) {
@@ -62,17 +76,7 @@ const modalClose = (date, content, id, save) => {
       //수정
     } else {
       //삽입
-      fetch("/calendar/write", {
-        method: "post", // *GET, POST, PUT, DELETE, etc.
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          date: date,
-          memo: content,
-          id: id,
-        }),
-      });
+      if (content !== "") postMemo(date, content, id);
     }
   }
   modal.classList.add("hidden");
@@ -158,7 +162,7 @@ const renderCalendar = () => {
   for (const plus of plusBtns) {
     plus.addEventListener("click", (event) => {
       const memoNum = memoMockData.filter((value) => {
-        return value.date === event.target.value;
+        return value.cal_date === event.target.value;
       }).length;
       if (memoNum >= 3) {
         alert("3개이상의 메모를 입력할 수 없습니다");
