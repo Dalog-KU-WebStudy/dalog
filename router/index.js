@@ -307,6 +307,9 @@ module.exports = function (app, router, passport) {
   const logout = require("./user/logout");
   router.use("/user/logout", logout);
 
+  const diary_write = require('./diary/write');
+  diary_write(router);
+
   const diary_view = require("./diary/view");
   router.use("/diary/view", diary_view);
 
