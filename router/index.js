@@ -317,7 +317,12 @@ module.exports = function (app, router, passport) {
   const title_change = require("./user/title");
   title_change(router);
 
+<<<<<<< HEAD
   const simple_write = require('./diary/simple_write');
   simple_write(router);
 
+=======
+  const diary_simple_write = require("./diary/simple_write");
+  diary_simple_write(router);
+>>>>>>> hwijeong
 };
