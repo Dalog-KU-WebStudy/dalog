@@ -203,6 +203,4 @@ function checkAll(){
     if(new_pw1.value === "" || new_pw2.value === "" || new_pw1.value !== new_pw2.value){
         // -> 비밀번호는 기존 비밀번호 그대로. (DB) 이부분은 나중에 router에서 처리해주면 될듯
     }
-    alert("수정완료");
-    location.href = "../index.html";
 }
