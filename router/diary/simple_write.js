@@ -7,7 +7,17 @@ const { Router } = require('express');
 
 Router.get('/',(req,res)=>{
 
-    const date = req.body.date;
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth();
+    var yyyy = today.getFullYear();
+    if(dd<10){
+        dd = '0'+dd;
+    }
+    if(mm<10){
+        mm = '0'+mm;
+    }
+    var date = yyyy+'-'+mm+'-'+dd;
     const title = req.body.title;
     const content = req.body.content;
 
