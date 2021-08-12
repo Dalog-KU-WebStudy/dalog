@@ -3,16 +3,10 @@ const mysql = require('mysql');
 const connection = mysql.createConnection(dbconfig);
 connection.connect();
 const path = require('path');
-<<<<<<< HEAD
+
 
 module.exports=function(router){
     router.post('/question',(req,res)=>{
-=======
-const router = require('./view');
-
-module.exports=function(router){
-    router.post('/',(req,res)=>{
->>>>>>> hwijeong
         console.log("simple_diary");
         var today = new Date();
         var dd = today.getDate();
@@ -25,7 +19,7 @@ module.exports=function(router){
             mm = '0'+mm;
         }
         var date = yyyy+'-'+mm+'-'+dd;
-<<<<<<< HEAD
+
         const simple_title = req.body.selectQuestion;
         console.log("simple title : " + simple_title);
         console.log("=== req.body ===");
@@ -36,14 +30,6 @@ module.exports=function(router){
             var query = connection.query('insert into diary (user_id, diary_date, diary_title,diary_content) values(?,?,?,?)'
             ,[req.user.user_id,date,simple_title,content],(err,result)=>{
 
-=======
-        const title = req.body.title;
-        const content = req.body.content;
-    
-        if(req.user){
-            var query = connection.query('insert into diary (user_id, diary_date, diary_title,diary_content) values(?,?,?,?)'
-            ,[req.user.user_id,date,title,content],(err,result)=>{
->>>>>>> hwijeong
                 if(err){
                     return res.status(500).json(err);
                 }else{
@@ -51,7 +37,7 @@ module.exports=function(router){
                 }
             })        
         }
-<<<<<<< HEAD
+
 
         else {
             res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
@@ -62,12 +48,3 @@ module.exports=function(router){
 
     
 
-=======
-    
-        else {
-            res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
-        }
-    
-    })    
-}
->>>>>>> hwijeong

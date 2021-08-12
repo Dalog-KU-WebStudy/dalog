@@ -139,14 +139,12 @@
 
       
       <div class="Box">
-<<<<<<< HEAD
-        <form action="/question" method="POST" id="simple_write" onclick="document.getElementById('simple-submit').submit();">
-=======
-        <form action="/" method="POST" id="simple_write" >
->>>>>>> hwijeong
+
+        <form action="/question" method="POST" id="simple_write" enctype="application/json">
+
         <div class="Question">
          
-          <select name="selectQuestion" id="selectQuestion" name ="simple_title">
+          <select name="selectQuestion" id="selectQuestion" >
             <option value="" selected="selected">질문을 선택해주세요</option>
             <option value="오늘 맛있게 먹은 음식이 있나요?">오늘 맛있게 먹은 음식이 있나요?</option>
             <option value="지금 어떤 음식이 먹고 싶나요?">지금 어떤 음식이 먹고 싶나요?</option>
@@ -174,12 +172,10 @@
           </select>
         </div>
         <div class="Answer">
-<<<<<<< HEAD
+
           <p><input type="text" placeholder="A. " class="WriteAnswer"  name="answer"/></p>
-=======
-          <p><input type="text" placeholder="A. " class="WriteAnswer"  name="content"/></p>
->>>>>>> hwijeong
-          <input type="submit" value="등록" class="buttons" />
+
+          <input type="submit" id="simple-submit" value="등록" class="buttons" name="content" onclick="document.getElementById('simple-submit').submit();" />
         </div>
         </form>
       </div>
@@ -229,5 +225,9 @@
       document.getElementById("before_login").style.display = "none";
       document.getElementById("after_login").style.display = "block";
     }
+  </script>
+  <script>
+    var info = document.querySelector('#hello');
+    console.log(info.style.color);
   </script>
 </html>
