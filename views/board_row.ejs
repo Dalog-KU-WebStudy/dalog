@@ -122,12 +122,85 @@
           </a>
         </div>
         <div class="searchContainer">
-          <img src="../media/icon_search.png" class="searchIcon" />
-          <input class="searchInput" placeholder="검색" />
+          <form action='/diary/search_row' method='post' id='search_form'>
+            <img src="../media/icon_search.png" class="searchIcon" />
+            <input class="searchInput" name="search" placeholder="검색" onchange="document.getElementsById('search_form').submit();"/>
+          </form>
         </div>
       </div>
 
       <div class="body__contents" id="contents"></div>
+      <div class="error__contents" id="error-search"></div>
+
+      <script>
+        var msg = "<%=msg%>";
+        if(msg != ""){
+          console.dir("<%=msg%>");
+
+          const errorContainer = document.getElementById("error-search");
+
+          document.getElementById("contents").style.display = "none";
+          const diaryFragment = document.createDocumentFragment();
+          const diaryDom = document.createElement("p");
+          diaryDom.id = "no_result";
+          diaryDom.innerText = msg;
+
+          diaryDom.style.fontFamily = "Spoqa Han Sans Neo, sans-serif";
+          diaryDom.style.fontSize = "5rem";
+          diaryDom.style.marginTop = "20rem";
+          diaryDom.style.color = "#A4A4A4";
+          diaryDom.style.textAlign = "center";
+
+          diaryFragment.appendChild(diaryDom);
+          errorContainer.appendChild(diaryFragment);
+        }
+        let rows = "<%=JSON.stringify(row)%>";
+        if(rows) {
+          rows = rows.replaceAll('&#34;','\"');
+          rows = JSON.parse(rows);
+          console.dir(rows);
+          // const diaryArr = [];
+          // var i;
+          // for(i=0 ; i<rows.length ; i++){
+          //   const diaryElement = document.createDocumentFragment();
+          //   const diaryDom = document.createElement("a");
+          //   diaryDom.setAttribute("href", "view.html?" + diary.id);
+          //   diaryDom.className = "diary";
+          //   diaryDom.setAttribute("name", "diary#" + diary.id);
+
+          //   if (diary.img != "") {
+          //     const imgdom = document.createElement("img");
+          //     imgdom.className = "diary__img";
+          //     imgdom.setAttribute("src", diary.img);
+          //     diaryDom.appendChild(imgdom);
+          //   } else {
+          //     diaryDom.appendChild(noneImg(diary.id));
+          //   }
+
+          //   const flex = document.createElement("div");
+          //   flex.className = "flex";
+          //   diaryDom.appendChild(flex);
+
+          //   const titledom = document.createElement("div");
+          //   titledom.className = "diary__title";
+          //   titledom.innerText = diary.title;
+          //   flex.appendChild(titledom);
+
+          //   const weatherdom = document.createElement("img");
+          //   weatherdom.className = "diary__weather";
+          //   weatherdom.setAttribute("src", `../media/icon_${diary.weather}.png`);
+          //   flex.appendChild(weatherdom);
+
+          //   const datedom = document.createElement("div");
+          //   datedom.className = "diary__date";
+          //   datedom.innerText = diary.date;
+          //   diaryDom.appendChild(datedom);
+
+          //   diaryElement.appendChild(diaryDom);
+          //   diaryArr.appendChild(diaryElement);
+          // }
+        }
+      </script>
     </div>
   </body>
 </html>

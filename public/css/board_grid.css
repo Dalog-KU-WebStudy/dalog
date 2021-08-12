@@ -54,6 +54,14 @@ a {
   place-items: center;
 }
 
+.error-search {
+  width : 100%;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
 .diary {
   margin: 2rem;
   min-width: 220px;

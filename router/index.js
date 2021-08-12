@@ -19,9 +19,8 @@ module.exports = function (app, router, passport) {
     passport.authenticate("kakao-login", {
       successRedirect: "/profile",
       failureRedirect: "/login",
-    })
-  );
-
+  }));
+    
   router.get("/", function (req, res) {
     console.log("main page");
     if (req.user) {
@@ -44,7 +43,7 @@ module.exports = function (app, router, passport) {
       );
     } else res.render("index.ejs", { profile: req.user, title: "여기를 눌러 타이틀을 수정하세요!" });
   });
-
+  
   //메모부분
 
   router.post("/calendar/write", function (req, res) {
@@ -115,7 +114,7 @@ module.exports = function (app, router, passport) {
     } else res.render("write.ejs", { profile: req.user, title: "여기를 눌러 타이틀을 수정하세요!" });
     // res.sendFile(path.join(__dirname, '../public/diary/write.html'));
   });
-
+  
   router.get("/diary/view", function (req, res) {
     // if(!req.user){
     //     res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
@@ -141,7 +140,7 @@ module.exports = function (app, router, passport) {
     //     res.render('view.ejs',{profile:req.user, title:"여기를 눌러 타이틀을 수정하세요!"});
     res.sendFile(path.join(__dirname, "../public/diary/view.html"));
   });
-
+  
   router.get("/diary/edit", function (req, res) {
     // if(!req.user){
     //     res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
@@ -170,7 +169,7 @@ module.exports = function (app, router, passport) {
     } else res.render("edit.ejs", { profile: req.user, title: "여기를 눌러 타이틀을 수정하세요!" });
     // res.sendFile(path.join(__dirname, '../public/diary/edit.html'));
   });
-
+  
   router.get("/diary/board_grid", function (req, res) {
     // if(!req.user){
     //     res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
@@ -196,13 +195,15 @@ module.exports = function (app, router, passport) {
           res.render("board_grid.ejs", {
             profile: req.user,
             title: req.user.title,
+            msg:"" ,
+            row:""
           });
         }
       );
-    } else res.render("board_grid.ejs", { profile: req.user, title: "여기를 눌러 타이틀을 수정하세요!" });
+    } else res.render("board_grid.ejs", { profile: req.user, title: "여기를 눌러 타이틀을 수정하세요!", msg:"" , row:""});
     // res.sendFile(path.join(__dirname, '../public/diary/board_grid.html'));
   });
-
+  
   router.get("/diary/board_row", function (req, res) {
     // if(!req.user){
     //     res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
@@ -228,55 +229,55 @@ module.exports = function (app, router, passport) {
           res.render("board_row.ejs", {
             profile: req.user,
             title: req.user.title,
+            msg:"" ,
+            row:""
           });
         }
       );
-    } else res.render("board_row.ejs", { profile: req.user, title: "여기를 눌러 타이틀을 수정하세요!" });
+    } else res.render("board_row.ejs", { profile: req.user, title: "여기를 눌러 타이틀을 수정하세요!", msg:"", row:"" });
     // res.sendFile(path.join(__dirname, '../public/diary/board_row.html'));
   });
 
-  const user_join = require("./user/join");
-  // router.use(user_join);
-  user_join(passport);
+    const user_join = require('./user/join');
+    // router.use(user_join);
+    user_join(passport);
 
-  router.get("/user/join", (req, res) => {
-    console.log("get join url");
-    var msg;
-    var errMsg = req.flash("error");
-    if (errMsg) msg = errMsg;
-    res.render("join.ejs", { message: msg });
-  });
+    router.get('/user/join', (req, res)=>{
+        console.log('get join url');
+        var msg; 
+        var errMsg = req.flash('error'); 
+        if(errMsg) msg = errMsg; 
+        res.render('join.ejs', {'message' : msg});
+    }); 
+    
+    router.post('/user/join', passport.authenticate('local-join',{             
+            successRedirect : '/profile', //인증성공시 이동하는화면주소 
+            failureRedirect : '/user/join', //인증실패시 이동하는화면주소 
+            failureFlash : true //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨. 
+    }));
 
-  router.post(
-    "/user/join",
-    passport.authenticate("local-join", {
-      successRedirect: "/profile", //인증성공시 이동하는화면주소
-      failureRedirect: "/user/join", //인증실패시 이동하는화면주소
-      failureFlash: true, //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨.
-    })
-  );
 
-  // naver 로그인
-  router.get("/login/naver", passport.authenticate("naver"));
-  // naver 로그인 연동 콜백
-  router.get(
-    "/login/naver/callback",
-    passport.authenticate("naver", {
-      successRedirect: "/profile",
-      failureRedirect: "/user/login",
-    })
-  );
-
-  router.get("/profile", function (req, res) {
-    console.log("router get profile");
-    console.log(req.user);
-    res.send(
-      "<script>alert('" +
-        req.user.name +
-        "님, 환영합니다.');location.href='/';</script>"
+    // naver 로그인
+    router.get('/login/naver',
+        passport.authenticate('naver')
     );
-    // res.redirect('/');
-  });
+    // naver 로그인 연동 콜백
+    router.get('/login/naver/callback',
+        passport.authenticate('naver', {
+            successRedirect: '/profile',
+            failureRedirect: '/user/login'
+    }));
+               
+    router.get("/profile", function (req, res) {
+      console.log("router get profile");
+      console.log(req.user);
+      res.send(
+        "<script>alert('" +
+          req.user.name +
+          "님, 환영합니다.');location.href='/';</script>"
+      );
+      // res.redirect('/');
+    });
 
   // naver 로그인
   router.get("/login/naver", passport.authenticate("naver"));
@@ -318,4 +319,10 @@ module.exports = function (app, router, passport) {
 
   const simple_write = require('./diary/simple_write');
   simple_write(router);
+
+  const diary_search_grid = require('./diary/search_grid');
+  diary_search_grid(router);
+
+  const diary_search_row = require('./diary/search_row');
+  diary_search_row(router);
 };
