@@ -51,12 +51,16 @@ const diaryArr = [
 ];
 
 function onEdit() {
-  location.href = `/diary/edit`;
+  let url = window.location.href;
+  url = url.split('/');
+  location.href = `/diary/edit/${url[url.length-1]}`;
 }
 function onDelete() {
   if (confirm("일기를 삭제하시겠습니까?")) {
     //삭제 구현
-    location.href = `/diary/board_grid`;
+    let url = window.location.href;
+    url = url.split('/');
+    location.href = `/diary/delete/${url[url.length-1]}`;
   }
 }
 
@@ -78,44 +82,3 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure magnam ea archite
 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint vero, numquam labore cum dignissimos doloremque itaque earum non quis nisi quasi sequi blanditiis, eius enim sapiente quam adipisci eligendi doloribus.
 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus, esse, alias pariatur, optio velit recusandae commodi atque minus distinctio dolor tempora ad deserunt fugiat. Quidem perspiciatis omnis voluptate mollitia quasi!`,
 };
-
-const url = location.href;
-const diaryId = url.slice(url.indexOf("?") + 1, url.length);
-
-document.getElementById("date").childNodes[1].innerText =
-  diaryArr[diaryId - 1].date;
-document.getElementById("title").childNodes[1].innerText =
-  diaryArr[diaryId - 1].title;
-document.getElementById("temper_night").childNodes[1].innerText =
-  diaryContent.temper_night;
-document.getElementById("temper_day").childNodes[1].innerText =
-  diaryContent.temper_day;
-document.getElementById(
-  "weather"
-).childNodes[1].src = `../media/icon_${diaryContent.weather}.png`;
-document.getElementById("weather").childNodes[1].title =
-  diaryArr[diaryId - 1].weather;
-if (diaryArr[diaryId - 1].img != "") {
-  document.getElementById("photo").childNodes[1].src =
-    diaryArr[diaryId - 1].img;
-} else {
-  document.getElementById("photo").style = "display : none";
-}
-
-document.getElementById("content").childNodes[1].innerText =
-  diaryArr[diaryId - 1].content;
-
-// document.getElementById("date").childNodes[1].innerText = diaryContent.date;
-// document.getElementById("title").childNodes[1].innerText = diaryContent.title;
-// document.getElementById("temper_night").childNodes[1].innerText =
-//   diaryContent.temper_night;
-// document.getElementById("temper_day").childNodes[1].innerText =
-//   diaryContent.temper_day;
-// document.getElementById(
-//   "weather"
-// ).childNodes[1].src = `../media/icon_${diaryContent.weather}.png`;
-// document.getElementById("weather").childNodes[1].title =
-//   weatherType[diaryContent.weather];
-// document.getElementById("photo").childNodes[1].src = diaryContent.img;
-// document.getElementById("content").childNodes[1].innerText =
-//   diaryContent.content;

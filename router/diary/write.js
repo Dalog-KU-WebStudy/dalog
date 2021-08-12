@@ -63,7 +63,8 @@ module.exports = function(router) {
                 if(err){
                     return res.status(500).json(err);
                 } else {
-                    res.redirect('/diary/view');
+                    console.log('result:  '+result.insertId);
+                    res.redirect(`/diary/view/${result.insertId}`);
                 }
             })
         } else {
