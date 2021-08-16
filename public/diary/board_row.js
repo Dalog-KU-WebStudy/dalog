@@ -49,9 +49,12 @@ const renderInit = async () => {
     contentwrapper.className = "contentwrapper";
     right.appendChild(contentwrapper);
 
+    //미리보기에서는 스타일 적용X
+    const extractTextPattern = /(<([^>]+)>)/gi;
+    const extractedText = diary.diary_content.replace(extractTextPattern, "");
     const contentdom = document.createElement("div");
     contentdom.className = "diary__content";
-    contentdom.innerText = diary.diary_content;
+    contentdom.innerText = extractedText;
     contentwrapper.appendChild(contentdom);
 
     diaryFragment.appendChild(diaryDom);

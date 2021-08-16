@@ -66,9 +66,12 @@ const noneImg = (content) => {
   noneImgdom.className = "diary__noneimg";
   noneImgdom.setAttribute("src", "../media/noneImg_back.jpg");
 
+  //미리보기에서는 스타일 적용X
+  const extractTextPattern = /(<([^>]+)>)/gi;
+  const extractedText = content.replace(extractTextPattern, "");
   const contentPrevdom = document.createElement("div");
   contentPrevdom.className = "diary__none_contentprev";
-  contentPrevdom.innerText = content;
+  contentPrevdom.innerText = extractedText;
 
   noneContainer.appendChild(noneImgdom);
   noneContainer.appendChild(contentPrevdom);
