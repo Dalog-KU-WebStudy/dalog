@@ -55,14 +55,7 @@ function onEdit() {
   url = url.split('/');
   location.href = `/diary/edit/${url[url.length-1]}`;
 }
-function onDelete() {
-  if (confirm("일기를 삭제하시겠습니까?")) {
-    //삭제 구현
-    let url = window.location.href;
-    url = url.split('/');
-    location.href = `/diary/delete/${url[url.length-1]}`;
-  }
-}
+
 
 const weatherType = {
   sun: "맑음",

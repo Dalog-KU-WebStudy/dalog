@@ -121,9 +121,10 @@
             <div id="edit">
                 <button id="edit_btn" onclick="onEdit()">수정</button>
             </div>
-            <div id="delete">
+            <form id="delete" method="POST" action="/diary/delete" onsubmit="return confirm('정말로 삭제하시겠습니까?')">
+                <input type="hidden" value="<%=diary.diary_id%>" name="diary_id">
                 <button id="delete_btn" onclick="onDelete()">삭제</button>
-            </div>
+            </form>
         </div>
     </div>
 </body>

@@ -5,9 +5,19 @@ const mysql = require('mysql');
 const connection = mysql.createConnection(dbconfig);
 connection.connect();
 
-router.get('/:id', (req,res)=>{
+router.post('/', (req,res)=>{
     console.log('delete/:id 호출');
-    res.redirect('/diary/board_grid');
+
+    const diary_id = req.body.diary_id;
+    connection.query(`delete from diary where user_id=? and diary_id=?`, [req.user.user_id, diary_id], (err,result)=>{
+        if(err){
+            return done(err);
+        } else {
+            console.log(`${req.user.user_id} 회원의 ${diary_id}번째 글 삭제`);
+
+            res.redirect('/diary/board_grid');
+        }
+    })
 })
 
 module.exports = router;
