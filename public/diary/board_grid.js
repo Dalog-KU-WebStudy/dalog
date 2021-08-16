@@ -17,7 +17,6 @@ const weatherType = {
 };
 
 const renderInit = async () => {
-  console.log("아악");
   diaryArr = await getdiaryArr();
   console.log(diaryArr);
   diaryArr.map((diary) => {
