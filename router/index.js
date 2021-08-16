@@ -22,7 +22,6 @@ module.exports = function (app, router, passport) {
   }));
 
   router.use(function(req,res,next){
-    console.log("router use!!");
     if (req.user) {
       var query = connection.query(
         "select title from title where user_id=?",
@@ -36,7 +35,6 @@ module.exports = function (app, router, passport) {
           } else {
             req.user.title = "여기를 눌러 타이틀을 수정하세요!";
           }
-          console.log("router use : profile\n " + req.user);
           app.locals.profile = req.user;
           next();
         }
@@ -225,7 +223,7 @@ module.exports = function (app, router, passport) {
   router.use("/diary/view", diary_view);
 
   const title_change = require("./user/title");
-  title_change(router);
+  title_change(app, router);
 
   const simple_write = require('./diary/simple_write');
   simple_write(router);

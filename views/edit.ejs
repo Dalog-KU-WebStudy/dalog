@@ -36,13 +36,15 @@
             <img src="../media/logo4.jpg" class="logo" onclick="location.href='/'" style="cursor: pointer" />
             <form action="/" method="post" id="title_form">
                 <input
-                  id="titleInput"
-                  name="titleInput"
-                  class="dalog-title"
-                  type="text"
-                  value="여기를 눌러 타이틀을 수정하세요!"
-                  onfocus="document.getElementById('title-submit').style.visibility='visible';document.getElementById('title-submit').style.opacity=1;"
-                  onblur="document.getElementById('title-submit').style.opacity=0;"
+                    id="titleInput"
+                    name="titleInput"
+                    class="dalog-title"
+                    type="text"
+                    value="메인페이지에서만 수정이 가능합니다!"
+                    onfocus="document.getElementById('title-submit').style.visibility='visible';document.getElementById('title-submit').style.opacity=1;"
+                    onblur="document.getElementById('title-submit').style.opacity=0;"
+                    title="메인페이지에서만 수정이 가능합니다."
+                    disabled
                 />
                 <input type="image" id="title-submit" class="title-submit" src="../media/title-edit.png" value="" onclick="document.getElementById('title_form').submit();"/>
             </form>
