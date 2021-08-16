@@ -45,6 +45,28 @@ module.exports = function (app, router, passport) {
     } else res.render("index.ejs", { profile: req.user, title: "여기를 눌러 타이틀을 수정하세요!" });
   });
 
+  router.get("/diary/get", function (req, res) {
+    console.log("diary get 실행");
+    if (req.user) {
+      connection.query(
+        "select * from diary where user_id=?",
+        [req.user.user_id],
+        function (err, rows) {
+          if (err) {
+            throw err;
+          }
+          if (rows) {
+            res.send(rows);
+          }
+        }
+      );
+    } else {
+      res.send(
+        "<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>"
+      );
+    }
+  });
+
   //메모부분
 
   router.post("/calendar/write", function (req, res) {
@@ -357,6 +379,6 @@ module.exports = function (app, router, passport) {
   const title_change = require("./user/title");
   title_change(router);
 
-  const simple_write = require('./diary/simple_write');
+  const simple_write = require("./diary/simple_write");
   simple_write(router);
 };
