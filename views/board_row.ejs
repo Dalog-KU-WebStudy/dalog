@@ -27,7 +27,6 @@
         }
     </script>
     <script src="./board_row.js" defer></script>
-    <script src="../user/title.js" defer></script>
     <header class="header">
       <div class="wrapper">
         <img
@@ -43,10 +42,10 @@
               class="dalog-title"
               type="text"
               value="여기를 눌러 타이틀을 수정하세요!"
-              onfocus="document.getElementById('title-submit').style.display='block';document.getElementById('title-submit').style.opacity=1;"
+              onfocus="document.getElementById('title-submit').style.visibility='visible';document.getElementById('title-submit').style.opacity=1;"
               onblur="document.getElementById('title-submit').style.opacity=0;"
             />
-            <input type="image" id="title-submit" class="title-submit" src="../media/title-edit.png" value="" />
+            <input type="image" id="title-submit" class="title-submit" src="../media/title-edit.png" value="" onclick="document.getElementById('title_form').submit();"/>
         </form>
         <script>
             if(profile){
@@ -172,13 +171,22 @@
             diaryDom.className = "diary";
             diaryDom.setAttribute("name", "diary#" + rows[i].diary_id);
 
-            if (rows[0].image_dir != "") {
+            if (rows[0].image_dir != null) {
               const imgdom = document.createElement("img");
               imgdom.className = "diary__img";
               imgdom.setAttribute("src", rows[0].image_dir);
               diaryDom.appendChild(imgdom);
             } else {
-              diaryDom.appendChild(noneImg());
+              const background = document.createElement("div");
+              background.className = "diary__noneBackground";
+              background.setAttribute("src", "../media/noneImg_back.jpg");
+
+              const noneImg = document.createElement("img");
+              noneImg.className = "diary__noneImg";
+              noneImg.setAttribute("src", "../media/noneImg_row.svg");
+
+              background.appendChild(noneImg);
+              diaryDom.appendChild(background);
             }
 
             const right = document.createElement("div");

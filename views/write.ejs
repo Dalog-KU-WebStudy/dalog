@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="../css/jquery-ui.css">
     <!--<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
     <script src="./write.js"></script>
-    <script src="../user/title.js" defer></script>
     <script>
         $(function () {
             $('#input_photo').change(function () {
@@ -55,10 +54,16 @@
         <div class="wrapper">
             <img src="../media/logo4.jpg" class="logo" onclick="location.href='/'" style="cursor: pointer" />
             <form action="/" method="post" id="title_form">
-                <input id="titleInput" name="titleInput" class="dalog-title" type="text" value="여기를 눌러 타이틀을 수정하세요!"
-                    onfocus="document.getElementById('title-submit').style.display='block';document.getElementById('title-submit').style.opacity=1;"
-                    onblur="document.getElementById('title-submit').style.opacity=0;" />
-                <input type="image" id="title-submit" class="title-submit" src="../media/title-edit.png" value="" />
+                <input
+                  id="titleInput"
+                  name="titleInput"
+                  class="dalog-title"
+                  type="text"
+                  value="여기를 눌러 타이틀을 수정하세요!"
+                  onfocus="document.getElementById('title-submit').style.visibility='visible';document.getElementById('title-submit').style.opacity=1;"
+                  onblur="document.getElementById('title-submit').style.opacity=0;"
+                />
+                <input type="image" id="title-submit" class="title-submit" src="../media/title-edit.png" value="" onclick="document.getElementById('title_form').submit();"/>
             </form>
             <script>
                 if (profile) {
