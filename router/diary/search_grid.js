@@ -15,12 +15,12 @@ module.exports = function(router){
                     console.log(rows);
                     if(!rows[0]){
                         console.log("Diary Search : Not exists...");
-                        res.render('board_grid.ejs', {profile: req.user, title:req.user.title, msg : "검색결과를 찾을 수 없습니다.", row: rows});
+                        res.render('board_grid.ejs', {profile: req.user, msg : "검색결과를 찾을 수 없습니다.", row: rows});
                     }
                     else {
                         console.log("Diary Search : Found!!");
                         console.log(rows.length);
-                        res.render('board_grid.ejs', {profile: req.user, title:req.user.title, msg : "" , row: rows})
+                        res.render('board_grid.ejs', {profile: req.user, msg : "" , row: rows})
                     }
                 }
             });
