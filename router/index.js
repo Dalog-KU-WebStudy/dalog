@@ -20,9 +20,9 @@ module.exports = function (app, router, passport) {
       successRedirect: "/profile",
       failureRedirect: "/login",
   }));
-    
-  router.get("/", function (req, res) {
-    console.log("main page");
+
+  router.use(function(req,res,next){
+    console.log("router use!!");
     if (req.user) {
       var query = connection.query(
         "select title from title where user_id=?",
@@ -36,11 +36,21 @@ module.exports = function (app, router, passport) {
           } else {
             req.user.title = "여기를 눌러 타이틀을 수정하세요!";
           }
-          console.log(req.user);
-          res.render("index.ejs", { profile: req.user});
+          console.log("router use : profile\n " + req.user);
+          app.locals.profile = req.user;
+          next();
         }
       );
-    } else res.render("index.ejs", { profile: req.user});
+    } else {
+      app.locals.profile = req.user;
+      next();
+    }
+  });
+    
+  router.get("/", function (req, res) {
+    console.log("main page");
+    console.log(app.locals.profile);
+    res.render('index.ejs', {profile : app.locals.profile});
   });
   
   //메모부분
@@ -92,26 +102,7 @@ module.exports = function (app, router, passport) {
     //     res.sendFile(path.join(__dirname, '../public/diary/write.html'));
     // }
     console.log("write get");
-    if (req.user) {
-      var query = connection.query(
-        "select title from title where user_id=?",
-        [req.user.user_id],
-        function (err, rows) {
-          if (err) {
-            throw err;
-          }
-          if (rows[0]) {
-            console.log(rows[0]);
-            req.user.title = rows[0].title;
-          } else {
-            req.user.title = "여기를 눌러 타이틀을 수정하세요!";
-          }
-          console.log(req.user);
-          res.render("write.ejs", { profile: req.user});
-        }
-      );
-    } else res.render("write.ejs", { profile: req.user});
-    // res.sendFile(path.join(__dirname, '../public/diary/write.html'));
+    res.render('write.ejs', {profile : app.locals.profile});
   });
   
   router.get("/diary/view", function (req, res) {
@@ -120,23 +111,7 @@ module.exports = function (app, router, passport) {
     // } else {
     //     res.sendFile(path.join(__dirname, '../public/diary/view.html'));
     // }
-    // console.log("view get");
-    // if(req.user){
-    //     var query = connection.query("select title from title where user_id=?", [req.user.user_id], function(err, rows){
-    //         if(err) { throw err; }
-    //         if(rows[0]){
-    //             console.log(rows[0]);
-    //             req.user.title = rows[0].title;
-    //         }
-    //         else{
-    //             req.user.title = "여기를 눌러 타이틀을 수정하세요!";
-    //         }
-    //         console.log(req.user);
-    //         res.render('view.ejs', {profile:req.user, title:req.user.title});
-    //     })
-    // }
-    // else
-    //     res.render('view.ejs',{profile:req.user, title:"여기를 눌러 타이틀을 수정하세요!"});
+    console.log("view get");
     res.sendFile(path.join(__dirname, "../public/diary/view.html"));
   });
   
@@ -147,25 +122,7 @@ module.exports = function (app, router, passport) {
     //     res.sendFile(path.join(__dirname, '../public/diary/edit.html'));
     // }
     console.log("edit get");
-    if (req.user) {
-      var query = connection.query(
-        "select title from title where user_id=?",
-        [req.user.user_id],
-        function (err, rows) {
-          if (err) {
-            throw err;
-          }
-          if (rows[0]) {
-            console.log(rows[0]);
-            req.user.title = rows[0].title;
-          } else {
-            req.user.title = "여기를 눌러 타이틀을 수정하세요!";
-          }
-          console.log(req.user);
-          res.render("edit.ejs", { profile: req.user});
-        }
-      );
-    } else res.render("edit.ejs", { profile: req.user});
+    res.render('edit.ejs', {profile : app.locals.profile});
     // res.sendFile(path.join(__dirname, '../public/diary/edit.html'));
   });
   
@@ -176,29 +133,7 @@ module.exports = function (app, router, passport) {
     //     res.sendFile(path.join(__dirname, '../public/diary/board_grid.html'));
     // }
     console.log("board grid get");
-    if (req.user) {
-      var query = connection.query(
-        "select title from title where user_id=?",
-        [req.user.user_id],
-        function (err, rows) {
-          if (err) {
-            throw err;
-          }
-          if (rows[0]) {
-            console.log(rows[0]);
-            req.user.title = rows[0].title;
-          } else {
-            req.user.title = "여기를 눌러 타이틀을 수정하세요!";
-          }
-          console.log(req.user);
-          res.render("board_grid.ejs", {
-            profile: req.user,
-            msg:"" ,
-            row:""
-          });
-        }
-      );
-    } else res.render("board_grid.ejs", { profile: req.user, msg:"" , row:""});
+    res.render('board_grid.ejs', {profile : app.locals.profile, msg:"" , row:""});
     // res.sendFile(path.join(__dirname, '../public/diary/board_grid.html'));
   });
   
@@ -209,29 +144,7 @@ module.exports = function (app, router, passport) {
     //     res.sendFile(path.join(__dirname, '../public/diary/board_row.html'));
     // }
     console.log("board row get");
-    if (req.user) {
-      var query = connection.query(
-        "select title from title where user_id=?",
-        [req.user.user_id],
-        function (err, rows) {
-          if (err) {
-            throw err;
-          }
-          if (rows[0]) {
-            console.log(rows[0]);
-            req.user.title = rows[0].title;
-          } else {
-            req.user.title = "여기를 눌러 타이틀을 수정하세요!";
-          }
-          console.log(req.user);
-          res.render("board_row.ejs", {
-            profile: req.user,
-            msg:"" ,
-            row:""
-          });
-        }
-      );
-    } else res.render("board_row.ejs", { profile: req.user, msg:"", row:"" });
+    res.render('board_row.ejs', {profile : app.locals.profile, msg:"" , row:""});
     // res.sendFile(path.join(__dirname, '../public/diary/board_row.html'));
   });
 
