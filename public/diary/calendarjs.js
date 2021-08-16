@@ -4,6 +4,7 @@ const modalBack = document.querySelector(".modal_background");
 const modalDate = document.querySelector(".modal_date");
 const modalContent = document.querySelector(".modal_content");
 const closeBtn = document.querySelector(".modal_closeBtn");
+const deleteBtn = document.querySelector(".deleteBtn");
 let memoMockData = [];
 
 const memoData = async () => {
@@ -53,6 +54,14 @@ const openModal = (date, content, id) => {
     },
     { once: true }
   );
+  deleteBtn.addEventListener(
+    "click",
+    () => {
+      deleteMemo(id);
+      modalClose(null, null, id, false);
+    },
+    { once: true }
+  );
 };
 
 const postMemo = (date, content, id) => {
@@ -77,6 +86,18 @@ const editMemo = (content, id) => {
     },
     body: JSON.stringify({
       newMemo: content,
+      memoId: id,
+    }),
+  });
+};
+
+const deleteMemo = (id) => {
+  fetch("/calendar/delete", {
+    method: "delete", // *GET, POST, PUT, DELETE, etc.
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
       memoId: id,
     }),
   });

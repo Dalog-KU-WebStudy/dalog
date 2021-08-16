@@ -90,6 +90,27 @@ module.exports = function (app, router, passport) {
     }
   });
 
+  router.delete("/calendar/delete", function (req, res) {
+    console.log("calendar/delete 실행");
+    if (req.user) {
+      const query = connection.query(
+        `delete from calendar where cal_id= '${req.body.memoId}'`,
+        (err, result) => {
+          if (err) {
+            return done(err);
+          } else {
+            console.log("메모 delete 성공");
+            res.redirect("/");
+          }
+        }
+      );
+    } else {
+      res.send(
+        "<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>"
+      );
+    }
+  });
+
   router.get("/calendar/memo", function (req, res) {
     console.log("calendar/memo get 실행");
     req.user &&
