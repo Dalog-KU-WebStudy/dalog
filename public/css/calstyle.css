@@ -265,14 +265,6 @@ ul {
   justify-content: center;
 }
 
-.modal_date {
-  font-size: 4rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #104c7c;
-  text-align: center;
-}
-
 .modal_content {
   font-size: 2.5rem;
   line-height: 1.6;
@@ -298,4 +290,26 @@ ul {
   background-color: #104c7c;
   color: white;
   font-size: 3.2rem;
+}
+
+.modal_date {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #104c7c;
+  text-align: center;
+  position: relative;
+  height: 5rem;
+}
+
+.deleteBtn {
+  width: 3.5rem;
+  height: 3.5rem;
+  position: relative;
+  top: -4.7rem;
+  left: 110%;
+  cursor: pointer;
+}
+
+.modaltop_container {
+  margin-bottom: 20px;
 }
