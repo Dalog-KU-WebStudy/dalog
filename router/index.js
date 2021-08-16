@@ -49,7 +49,6 @@ module.exports = function (app, router, passport) {
 
   router.post("/calendar/write", function (req, res) {
     console.log("calendar write post router 호출");
-    console.log(req.body);
     if (req.user) {
       const query = connection.query(
         `insert into calendar (user_id, cal_date, memo) values (?,?,?)`,
@@ -59,6 +58,27 @@ module.exports = function (app, router, passport) {
             return done(err);
           } else {
             console.log("메모 post 성공");
+            res.redirect("/");
+          }
+        }
+      );
+    } else {
+      res.send(
+        "<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>"
+      );
+    }
+  });
+
+  router.post("/calendar/edit", function (req, res) {
+    console.log("calendar/edit 실행");
+    if (req.user) {
+      const query = connection.query(
+        `update calendar set memo = '${req.body.newMemo}' where cal_id= '${req.body.memoId}'`,
+        (err, result) => {
+          if (err) {
+            return done(err);
+          } else {
+            console.log("메모 edit 성공");
             res.redirect("/");
           }
         }

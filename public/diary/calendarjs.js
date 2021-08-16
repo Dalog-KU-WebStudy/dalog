@@ -69,11 +69,25 @@ const postMemo = (date, content, id) => {
   });
 };
 
+const editMemo = (content, id) => {
+  fetch("/calendar/edit", {
+    method: "post", // *GET, POST, PUT, DELETE, etc.
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      newMemo: content,
+      memoId: id,
+    }),
+  });
+};
+
 const modalClose = (date, content, id, save) => {
   console.log("모달 닫기");
   if (save) {
     if (id !== null) {
       //수정
+      if (content !== "") editMemo(content, id);
     } else {
       //삽입
       if (content !== "") postMemo(date, content, id);
