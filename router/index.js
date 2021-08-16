@@ -32,16 +32,15 @@ module.exports = function (app, router, passport) {
             throw err;
           }
           if (rows[0]) {
-            console.log(rows[0]);
             req.user.title = rows[0].title;
           } else {
             req.user.title = "여기를 눌러 타이틀을 수정하세요!";
           }
           console.log(req.user);
-          res.render("index.ejs", { profile: req.user, title: req.user.title });
+          res.render("index.ejs", { profile: req.user});
         }
       );
-    } else res.render("index.ejs", { profile: req.user, title: "여기를 눌러 타이틀을 수정하세요!" });
+    } else res.render("index.ejs", { profile: req.user});
   });
   
   //메모부분
@@ -108,10 +107,10 @@ module.exports = function (app, router, passport) {
             req.user.title = "여기를 눌러 타이틀을 수정하세요!";
           }
           console.log(req.user);
-          res.render("write.ejs", { profile: req.user, title: req.user.title });
+          res.render("write.ejs", { profile: req.user});
         }
       );
-    } else res.render("write.ejs", { profile: req.user, title: "여기를 눌러 타이틀을 수정하세요!" });
+    } else res.render("write.ejs", { profile: req.user});
     // res.sendFile(path.join(__dirname, '../public/diary/write.html'));
   });
   
@@ -163,10 +162,10 @@ module.exports = function (app, router, passport) {
             req.user.title = "여기를 눌러 타이틀을 수정하세요!";
           }
           console.log(req.user);
-          res.render("edit.ejs", { profile: req.user, title: req.user.title });
+          res.render("edit.ejs", { profile: req.user});
         }
       );
-    } else res.render("edit.ejs", { profile: req.user, title: "여기를 눌러 타이틀을 수정하세요!" });
+    } else res.render("edit.ejs", { profile: req.user});
     // res.sendFile(path.join(__dirname, '../public/diary/edit.html'));
   });
   
@@ -194,13 +193,12 @@ module.exports = function (app, router, passport) {
           console.log(req.user);
           res.render("board_grid.ejs", {
             profile: req.user,
-            title: req.user.title,
             msg:"" ,
             row:""
           });
         }
       );
-    } else res.render("board_grid.ejs", { profile: req.user, title: "여기를 눌러 타이틀을 수정하세요!", msg:"" , row:""});
+    } else res.render("board_grid.ejs", { profile: req.user, msg:"" , row:""});
     // res.sendFile(path.join(__dirname, '../public/diary/board_grid.html'));
   });
   
@@ -228,13 +226,12 @@ module.exports = function (app, router, passport) {
           console.log(req.user);
           res.render("board_row.ejs", {
             profile: req.user,
-            title: req.user.title,
             msg:"" ,
             row:""
           });
         }
       );
-    } else res.render("board_row.ejs", { profile: req.user, title: "여기를 눌러 타이틀을 수정하세요!", msg:"", row:"" });
+    } else res.render("board_row.ejs", { profile: req.user, msg:"", row:"" });
     // res.sendFile(path.join(__dirname, '../public/diary/board_row.html'));
   });
 

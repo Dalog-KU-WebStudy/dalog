@@ -22,7 +22,7 @@ module.exports = function(router){
                             console.log("Title Inserted!");
                             req.user.title = req.body.titleInput;
                             console.log(req.user);
-                            res.render('index.ejs', {profile:req.user, title:req.user.title});
+                            res.render('index.ejs', {profile:req.user});
                         })
                     }
                     else {
@@ -32,7 +32,7 @@ module.exports = function(router){
                             console.log("Title Changed!");
                             req.user.title = req.body.titleInput;
                             console.log(req.user);
-                            res.render('index.ejs', {profile:req.user, title:req.user.title});
+                            res.render('index.ejs', {profile:req.user});
                         })
                     }
                 }

@@ -49,8 +49,7 @@
         </form>
         <script>
           if(profile){
-            if("<%=title%>" != "")
-              document.getElementById("titleInput").value = "<%=title%>";
+            document.getElementById("titleInput").value = profile.title;
           }
         </script>
         <nav>
