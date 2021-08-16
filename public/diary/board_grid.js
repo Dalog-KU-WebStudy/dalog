@@ -18,44 +18,46 @@ const weatherType = {
 
 const renderInit = async () => {
   diaryArr = await getdiaryArr();
-  console.log(diaryArr);
-  diaryArr.map((diary) => {
-    const diaryFragment = document.createDocumentFragment();
-    const diaryDom = document.createElement("a");
-    diaryDom.setAttribute("href", "view.html?" + diary.diary_id);
-    diaryDom.className = "diary";
+  diaryArr
+    .slice(0)
+    .reverse()
+    .map((diary) => {
+      const diaryFragment = document.createDocumentFragment();
+      const diaryDom = document.createElement("a");
+      diaryDom.setAttribute("href", "view.html?" + diary.diary_id);
+      diaryDom.className = "diary";
 
-    if (diary.image_dir != "") {
-      const imgdom = document.createElement("img");
-      imgdom.className = "diary__img";
-      imgdom.setAttribute("src", diary.image_dir);
-      diaryDom.appendChild(imgdom);
-    } else {
-      diaryDom.appendChild(noneImg(diary.diary_content));
-    }
+      if (diary.image_dir != "") {
+        const imgdom = document.createElement("img");
+        imgdom.className = "diary__img";
+        imgdom.setAttribute("src", diary.image_dir);
+        diaryDom.appendChild(imgdom);
+      } else {
+        diaryDom.appendChild(noneImg(diary.diary_content));
+      }
 
-    const flex = document.createElement("div");
-    flex.className = "flex";
-    diaryDom.appendChild(flex);
+      const flex = document.createElement("div");
+      flex.className = "flex";
+      diaryDom.appendChild(flex);
 
-    const titledom = document.createElement("div");
-    titledom.className = "diary__title";
-    titledom.innerText = diary.diary_title;
-    flex.appendChild(titledom);
+      const titledom = document.createElement("div");
+      titledom.className = "diary__title";
+      titledom.innerText = diary.diary_title;
+      flex.appendChild(titledom);
 
-    const weatherdom = document.createElement("img");
-    weatherdom.className = "diary__weather";
-    weatherdom.setAttribute("src", `../media/icon_${diary.weather}.png`);
-    flex.appendChild(weatherdom);
+      const weatherdom = document.createElement("img");
+      weatherdom.className = "diary__weather";
+      weatherdom.setAttribute("src", `../media/icon_${diary.weather}.png`);
+      flex.appendChild(weatherdom);
 
-    const datedom = document.createElement("div");
-    datedom.className = "diary__date";
-    datedom.innerText = diary.diary_date;
-    diaryDom.appendChild(datedom);
+      const datedom = document.createElement("div");
+      datedom.className = "diary__date";
+      datedom.innerText = diary.diary_date;
+      diaryDom.appendChild(datedom);
 
-    diaryFragment.appendChild(diaryDom);
-    contentsContainer.appendChild(diaryFragment);
-  });
+      diaryFragment.appendChild(diaryDom);
+      contentsContainer.appendChild(diaryFragment);
+    });
 };
 
 const noneImg = (content) => {
