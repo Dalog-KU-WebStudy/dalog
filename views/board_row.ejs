@@ -172,10 +172,10 @@
             diaryDom.className = "diary";
             diaryDom.setAttribute("name", "diary#" + rows[i].diary_id);
 
-            if (rows[0].image_dir != null) {
+            if (rows[i].image_dir != null) {
               const imgdom = document.createElement("img");
               imgdom.className = "diary__img";
-              imgdom.setAttribute("src", rows[0].image_dir);
+              imgdom.setAttribute("src", rows[i].image_dir);
               diaryDom.appendChild(imgdom);
             } else {
               const background = document.createElement("div");
