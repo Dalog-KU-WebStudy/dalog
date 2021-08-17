@@ -50,11 +50,7 @@ const diaryArr = [
   },
 ];
 
-function onEdit() {
-  let url = window.location.href;
-  url = url.split('/');
-  location.href = `/diary/edit/${url[url.length-1]}`;
-}
+
 
 
 const weatherType = {
