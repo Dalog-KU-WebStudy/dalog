@@ -3,7 +3,7 @@ const modal = document.querySelector(".modal");
 const modalBack = document.querySelector(".modal_background");
 const modalDate = document.querySelector(".modal_date");
 const modalContent = document.querySelector(".modal_content");
-const closeBtn = document.querySelector(".modal_closeBtn");
+const saveBtn = document.querySelector(".modal_closeBtn");
 const deleteBtn = document.querySelector(".deleteBtn");
 let memoMockData = [];
 
@@ -36,32 +36,29 @@ const renderMemo = async () => {
   });
 };
 
+let saveBtnListener = () => {};
+let deleteBtnListener = () => {};
+let closeBtnListener = () => {};
+
 const openModal = (date, content, id) => {
   modal.classList.remove("hidden");
   modalDate.innerText = date;
   modalContent.value = content;
-  closeBtn.addEventListener(
-    "click",
-    () => {
-      modalClose(date, modalContent.value, id, true);
-    },
-    { once: true }
-  );
-  modalBack.addEventListener(
-    "click",
-    () => {
-      modalClose(date, modalContent.value, id, false);
-    },
-    { once: true }
-  );
-  deleteBtn.addEventListener(
-    "click",
-    () => {
-      deleteMemo(id);
-      modalClose(null, null, id, false);
-    },
-    { once: true }
-  );
+
+  saveBtnListener = () => {
+    modalClose(date, modalContent.value, id, true);
+  };
+  closeBtnListener = () => {
+    modalClose(null, null, id, false);
+  };
+  deleteBtnListener = () => {
+    deleteMemo(id);
+    modalClose(null, null, id, false);
+  };
+
+  saveBtn.addEventListener("click", saveBtnListener, { once: true });
+  modalBack.addEventListener("click", closeBtnListener, { once: true });
+  deleteBtn.addEventListener("click", deleteBtnListener, { once: true });
 };
 
 const postMemo = (date, content, id) => {
@@ -114,6 +111,9 @@ const modalClose = (date, content, id, save) => {
       if (content !== "") postMemo(date, content, id);
     }
   }
+  saveBtn.removeEventListener("click", saveBtnListener, { once: true });
+  deleteBtn.removeEventListener("click", deleteBtnListener, { once: true });
+  modalBack.removeEventListener("click", closeBtnListener, { once: true });
   modal.classList.add("hidden");
   renderMemo();
 };
