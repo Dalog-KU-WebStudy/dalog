@@ -25,9 +25,12 @@ passport.use(new NaverStrategy({
     //svcType: 0  // optional. see http://gamedev.naver.com/index.php/%EC%98%A8%EB%9D%BC%EC%9D%B8%EA%B2%8C%EC%9E%84:OAuth_2.0_API
 }, function (accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
-        const str = profile._json.birthday;
-        const output = [str.slice(0, 2), '-', str.slice(2)].join('');
-        const birth = "0000-" + output;
+        let birth;
+        if(profile._json.birthday) {
+            console.log(profile._json.birthday);
+            birth = "0000-" + profile._json.birthday;
+        }
+        
         user = {
             user_id: profile.emails[0].value,
             name: profile.name,

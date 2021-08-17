@@ -9,8 +9,8 @@
     <link href="https://spoqa.github.io/spoqa-han-sans/" rel="stylesheet" type="text/css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet" />
-
-    <script src="../user/title.js" defer></script>
+    <script src="/diary/view.js"></script>
+    
 </head>
 
 <body>
@@ -29,12 +29,9 @@
         diary = JSON.parse(diary);
         console.dir(diary);
         }
-
-        
         let diary_content=diary.diary_content;
         diary_content = diary_content.replaceAll('&lt;','<');
         diary_content = diary_content.replaceAll('&gt;','>');
-        
         console.dir(diary_content);
 
     </script>
@@ -53,12 +50,7 @@
                 />
                 <input type="image" id="title-submit" class="title-submit" src="/media/title-edit.png" value="" />
             </form>
-            <script>
-                if(profile){
-                    if("<%=title%>" != "")
-                        document.getElementById("titleInput").value = "<%=title%>";
-                    }        
-            </script>
+
             <nav>
                 <ul class="main-menu">
                     <li>
@@ -124,11 +116,12 @@
         </div>
         <div id="edit_delete">
             <div id="edit">
-                <button id="edit_btn" onclick="onEdit()">수정</button>
+                <button id="edit_btn" onclick="location.href=`/diary/edit/<%=diary.diary_id%>`">수정</button>
             </div>
-            <div id="delete">
+            <form id="delete" method="POST" action="/diary/delete" onsubmit="return confirm('정말로 삭제하시겠습니까?')">
+                <input type="hidden" value="<%=diary.diary_id%>" name="diary_id">
                 <button id="delete_btn" onclick="onDelete()">삭제</button>
-            </div>
+            </form>
         </div>
     </div>
 </body>
@@ -137,23 +130,27 @@
     diary.diary_date;
     document.getElementById("title").childNodes[1].innerText =
     diary.diary_title;
-    document.getElementById("temper_night").childNodes[1].innerText =
-    diary.temp_low;
-    document.getElementById("temper_day").childNodes[1].innerText =
-    diary.temp_high;
-    document.getElementById(
-    "weather"
-    ).childNodes[1].src = `/media/icon_${diary.weather}.png`;
-    document.getElementById("weather").childNodes[1].title =
-    diary.weather;
-    if (diary.image_dir != "") {
-    document.getElementById("photo").childNodes[1].src =
-        diary.image_dir;
+    if(diary.weather){
+        document.getElementById("temper_night").childNodes[1].innerText =
+        diary.temp_low;
+        document.getElementById("temper_day").childNodes[1].innerText =
+        diary.temp_high;
+        document.getElementById(
+        "weather"
+        ).childNodes[1].src = `/media/icon_${diary.weather}.png`;
+        document.getElementById("weather").childNodes[1].title =
+        diary.weather;
+    } else {
+        document.getElementById('weather_box').style= "display:none";
+    }
+    if (diary.image_dir) {
+        document.getElementById("photo").childNodes[1].src = `/${diary.image_dir}`;
     } else {
     document.getElementById("photo").style = "display : none";
     }
 
     document.getElementById("content").childNodes[1].innerHTML =
     diary_content;
+
 </script>
 </html>

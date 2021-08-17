@@ -94,13 +94,12 @@ module.exports = function (app, router, passport) {
   });
 
   router.get("/diary/write", function (req, res) {
-    // if(!req.user){
-    //     res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
-    // } else {
-    //     res.sendFile(path.join(__dirname, '../public/diary/write.html'));
-    // }
-    console.log("write get");
-    res.render('write.ejs', {profile : app.locals.profile});
+    if(!req.user){
+        res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
+    } else {
+      console.log("write get");
+      res.render('write.ejs', {profile : app.locals.profile});
+    }
   });
   
   router.get("/diary/view", function (req, res) {
@@ -221,6 +220,12 @@ module.exports = function (app, router, passport) {
 
   const diary_view = require("./diary/view");
   router.use("/diary/view", diary_view);
+
+  const diary_edit = require('./diary/edit');
+  diary_edit(app, router);
+
+  const diary_delete = require('./diary/delete');
+  router.use('/diary/delete', diary_delete);
 
   const title_change = require("./user/title");
   title_change(app, router);

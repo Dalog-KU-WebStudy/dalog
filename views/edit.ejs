@@ -23,13 +23,17 @@
 
 <body>
     <script>
+        
+
         console.dir('<%=profile%>')
         let profile = "<%=JSON.stringify(profile)%>";
         if(profile){
-          profile = profile.replaceAll('&#34;','\"');
-          profile = JSON.parse(profile);
-          console.dir(profile);
+            profile = profile.replaceAll('&#34;','\"');
+            profile = JSON.parse(profile);
+            console.dir(profile);
         }
+
+        
     </script>
     <header class="header">
         <div class="wrapper">
@@ -50,7 +54,7 @@
             </form>
             <script>
                 if(profile){
-                  document.getElementById("titleInput").value = profile.title;
+                    document.getElementById("titleInput").value = profile.title;
                 }
             </script>
             <nav>
@@ -102,7 +106,7 @@
                                 </div>
                             </div>
                             <div id="weather">
-                                <img src="../media/icon_sun.png" title="맑음">
+                                <img src="../media/icon_sun.png" title="맑음" id="weather_img">
                                 <select id="weather_select" onchange="weather_select_change()">
                                     <option value="sun">맑음</option>
                                     <option value="cloud">흐림</option>
@@ -125,33 +129,6 @@
                     <img alt="오늘의 사진" title="오늘의 사진" id="today_photo">
                 </div>
                 <div id="write_content">
-                    <!-- <div id="text_deco">
-                        <select id="select_fontSize">
-                            <option>10</option>
-                            <option>12</option>
-                            <option>14</option>
-                            <option>16</option>
-                        </select>
-                        <div id="select_fontColor">
-                            <span>T</span>
-                            <span id="selected_color"></span>
-                            <div id="color_select_box">
-                                <button style="background-color: #000;"></button>
-                                <button style="background-color: #444;" id="checked"></button>
-                                <button style="background-color: #888;"></button>
-                                <button style="background-color: #bbb;"></button>
-                                <button style="background-color: #fff;" class="white"></button>
-                                <button style="background-color: red;"></button>
-                                <button style="background-color: yellow;"></button>
-                                <button style="background-color: green;"></button>
-                                <button style="background-color: blue;"></button>
-                                <button style="background-color: purple;"></button>
-                            </div>
-                        </div>
-                        <div id="select_bold"></div>
-                        <div id="select_italic"></div>
-                        <div id="select_underline"></div>
-                    </div> -->
                     <textarea name="content" id="input_content" placeholder="내용을 입력해주세요"></textarea>
                 </div>
             </form>
@@ -162,4 +139,8 @@
     </div>
 </body>
 <script src="./edit.js"></script>
+<script>
+    
+
+</script>
 </html>
