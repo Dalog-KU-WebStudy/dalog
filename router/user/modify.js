@@ -18,7 +18,6 @@ router.get('/user/modify', function(req,res){
             } 
             if(result) {
                 console.log('modify query 실행');
-                console.dir(result[0]);
 
                 // profile 객체에 값 넣기
                 const profile= {
@@ -78,13 +77,24 @@ router.post('/user/modify', function(req,res){
                         console.log('현재 비밀번호 일치하지 않음');
                         res.send("<script>alert('현재 비밀번호가 일치하지 않습니다.');location.href='/user/modify';</script>");
                     } else {
-                        const query = connection.query(`update dalog_user set user_pw=?,user_name=?, birth=?, phone=? where user_id=?;`, [user_pw, user_name, birth, phone, req.user.user_id], (err,result)=>{
-                            if(err){
-                                return done(err);
-                            } else {
-                                res.send("<script>alert('정보수정이 완료되었습니다.');location.href='/user/modify';</script>");
-                            }
-                        })
+                        if(!user_pw){
+                            console.log('현재 비밀번호 입력하지 않음');
+                            connection.query(`update dalog_user set user_name=?, birth=?, phone=? where user_id=?;`, [user_name, birth, phone, req.user.user_id], (err,result)=>{
+                                if(err){
+                                    return done(err);
+                                } else {
+                                    res.send("<script>alert('정보수정이 완료되었습니다.');location.href='/user/modify';</script>");
+                                }
+                            })
+                        } else {
+                            const query = connection.query(`update dalog_user set user_pw=?,user_name=?, birth=?, phone=? where user_id=?;`, [user_pw, user_name, birth, phone, req.user.user_id], (err,result)=>{
+                                if(err){
+                                    return done(err);
+                                } else {
+                                    res.send("<script>alert('정보수정이 완료되었습니다.');location.href='/user/modify';</script>");
+                                }
+                            })
+                        }
                     }
                 }
             })
