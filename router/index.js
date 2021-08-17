@@ -44,13 +44,35 @@ module.exports = function (app, router, passport) {
       next();
     }
   });
+
+  router.get("/diary/get", function (req, res) {
+    console.log("diary get 실행");
+    if (req.user) {
+      connection.query(
+        "select * from diary where user_id=?",
+        [req.user.user_id],
+        function (err, rows) {
+          if (err) {
+            throw err;
+          }
+          if (rows) {
+            res.send(rows);
+          }
+        }
+      );
+    } else {
+      res.send(
+        "<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>"
+      );
+    }
+  });
     
   router.get("/", function (req, res) {
     console.log("main page");
     console.log(app.locals.profile);
     res.render('index.ejs', {profile : app.locals.profile});
   });
-  
+ 
   //메모부분
 
   router.post("/calendar/write", function (req, res) {
@@ -58,7 +80,7 @@ module.exports = function (app, router, passport) {
     if (req.user) {
       const query = connection.query(
         `insert into calendar (user_id, cal_date, memo) values (?,?,?)`,
-        [req.user.user_id, req.body.date, req.body.content],
+        [req.user.user_id, req.body.date, req.body.memo],
         (err, result) => {
           if (err) {
             return done(err);
@@ -75,7 +97,49 @@ module.exports = function (app, router, passport) {
     }
   });
 
-  app.get("/calendar/memo", function (req, res) {
+  router.post("/calendar/edit", function (req, res) {
+    console.log("calendar/edit 실행");
+    if (req.user) {
+      const query = connection.query(
+        `update calendar set memo = '${req.body.newMemo}' where cal_id= '${req.body.memoId}'`,
+        (err, result) => {
+          if (err) {
+            return done(err);
+          } else {
+            console.log("메모 edit 성공");
+            res.redirect("/");
+          }
+        }
+      );
+    } else {
+      res.send(
+        "<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>"
+      );
+    }
+  });
+
+  router.delete("/calendar/delete", function (req, res) {
+    console.log("calendar/delete 실행");
+    if (req.user) {
+      const query = connection.query(
+        `delete from calendar where cal_id= '${req.body.memoId}'`,
+        (err, result) => {
+          if (err) {
+            return done(err);
+          } else {
+            console.log("메모 delete 성공");
+            res.redirect("/");
+          }
+        }
+      );
+    } else {
+      res.send(
+        "<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>"
+      );
+    }
+  });
+
+  router.get("/calendar/memo", function (req, res) {
     console.log("calendar/memo get 실행");
     req.user &&
       connection.query(
@@ -86,7 +150,6 @@ module.exports = function (app, router, passport) {
             throw err;
           }
           if (rows) {
-            console.log(rows);
             res.send(rows);
           }
         }
@@ -215,7 +278,7 @@ module.exports = function (app, router, passport) {
   const logout = require("./user/logout");
   router.use("/user/logout", logout);
 
-  const diary_write = require('./diary/write');
+  const diary_write = require("./diary/write");
   diary_write(router);
 
   const diary_view = require("./diary/view");
@@ -231,7 +294,7 @@ module.exports = function (app, router, passport) {
   title_change(app, router);
 
 
-  const simple_write = require('./diary/simple_write');
+  const simple_write = require("./diary/simple_write");
   simple_write(router);
 
   const diary_search_grid = require('./diary/search_grid');

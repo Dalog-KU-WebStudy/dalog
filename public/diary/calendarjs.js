@@ -4,6 +4,7 @@ const modalBack = document.querySelector(".modal_background");
 const modalDate = document.querySelector(".modal_date");
 const modalContent = document.querySelector(".modal_content");
 const closeBtn = document.querySelector(".modal_closeBtn");
+const deleteBtn = document.querySelector(".deleteBtn");
 let memoMockData = [];
 
 const memoData = async () => {
@@ -37,31 +38,81 @@ const renderMemo = async () => {
 
 const openModal = (date, content, id) => {
   modal.classList.remove("hidden");
-  modalDate.value = date;
+  modalDate.innerText = date;
   modalContent.value = content;
   closeBtn.addEventListener(
     "click",
     () => {
-      modalClose(date, modalContent.value, id);
+      modalClose(date, modalContent.value, id, true);
     },
     { once: true }
   );
   modalBack.addEventListener(
     "click",
     () => {
-      modalClose(date, modalContent.value, id);
+      modalClose(date, modalContent.value, id, false);
+    },
+    { once: true }
+  );
+  deleteBtn.addEventListener(
+    "click",
+    () => {
+      deleteMemo(id);
+      modalClose(null, null, id, false);
     },
     { once: true }
   );
 };
 
-const modalClose = (date, content, id) => {
-  if (id !== null) {
-  }
-  //수정
-  else {
-    if (content !== "")
-      memoMockData.push({ date: date, memo: content, id: memoMockData.length }); //삽입
+const postMemo = (date, content, id) => {
+  fetch("/calendar/write", {
+    method: "post", // *GET, POST, PUT, DELETE, etc.
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      date: date,
+      memo: content,
+      id: id,
+    }),
+  });
+};
+
+const editMemo = (content, id) => {
+  fetch("/calendar/edit", {
+    method: "post", // *GET, POST, PUT, DELETE, etc.
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      newMemo: content,
+      memoId: id,
+    }),
+  });
+};
+
+const deleteMemo = (id) => {
+  fetch("/calendar/delete", {
+    method: "delete", // *GET, POST, PUT, DELETE, etc.
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      memoId: id,
+    }),
+  });
+};
+
+const modalClose = (date, content, id, save) => {
+  console.log("모달 닫기");
+  if (save) {
+    if (id !== null) {
+      //수정
+      if (content !== "") editMemo(content, id);
+    } else {
+      //삽입
+      if (content !== "") postMemo(date, content, id);
+    }
   }
   modal.classList.add("hidden");
   renderMemo();
@@ -146,7 +197,7 @@ const renderCalendar = () => {
   for (const plus of plusBtns) {
     plus.addEventListener("click", (event) => {
       const memoNum = memoMockData.filter((value) => {
-        return value.date === event.target.value;
+        return value.cal_date === event.target.value;
       }).length;
       if (memoNum >= 3) {
         alert("3개이상의 메모를 입력할 수 없습니다");
