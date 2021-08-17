@@ -6,6 +6,7 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="../css/index.css" />
     <link rel="stylesheet" type="text/css" href="../css/write.css">
+ 
     <link href="https://spoqa.github.io/spoqa-han-sans/" rel="stylesheet" type="text/css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet" />
@@ -21,6 +22,7 @@
     <link rel="stylesheet" href="../css/jquery-ui.css">
     <!--<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
     <script src="./write.js"></script>
+    <script src="./weather.js"></script>
     <script>
         $(function () {
             $('#input_photo').change(function () {
@@ -111,30 +113,38 @@
                         <div id="date">
                             <input type="text" id="datepicker" name="date">
                         </div>
+
                         <div id="weather_box">
-                            <div id="weather_icon">
+                            
+                            <div id="weather_icon">                             
                                 <div id="temperature">
                                     <div id="temper_night">
-                                        <input type="text" value="-10" name="temp_low" id="input_temper_night" readonly>
+                                        <input class="min" type="text" value="-10" name="temp_low" id="input_temper_night" readonly />
                                     </div>
                                     <div id="temper_day">
-                                        <input type="text" value="20" name="temp_high" id="input_temper_day" readonly>
+                                        <input class="max" type="text" value="20" name="temp_high" id="input_temper_day" readonly />
                                     </div>
-                                </div>
-                                <div id="weather">
-                                    <img src="../media/icon_sun.png" title="맑음">
+                                </div>                                
+                                
+                                <div id="weather" class>
+                                    <img class="main" id="currentWeather" src="" title="" alt="사진없음">
                                     <select id="weather_select" name="weather" onchange="weather_select_change()">
                                         <option value="sun">맑음</option>
                                         <option value="cloud">흐림</option>
                                         <option value="rain">비</option>
                                         <option value="snow">눈</option>
+                                        <option value="thunderstorm">천둥 번개</option>
                                     </select>
                                 </div>
+
                             </div>
+
                             <div id="manual_button">
                                 <button type="button" onclick="changeWeather()">변경</button>
                             </div>
+
                         </div>
+                        
                     </div>
                     <div id="write_title">
                         <input type="text" id="input_title" name="title" placeholder="제목을 입력해주세요">
