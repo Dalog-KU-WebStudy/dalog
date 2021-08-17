@@ -19,6 +19,21 @@ router.get('/user/modify', function(req,res){
             if(result) {
                 console.log('modify query 실행');
 
+                const query2 = connection.query(
+                    "select title from title where user_id=?",
+                    [req.user.user_id],
+                    function (err, rows) {
+                      if (err) {
+                        throw err;
+                      }
+                      if (rows[0]) {
+                        req.user.title = rows[0].title;
+                      } else {
+                        req.user.title = "여기를 눌러 타이틀을 수정하세요!";
+                      }
+                    }
+                );
+
                 // profile 객체에 값 넣기
                 const profile= {
                     user_id : req.user.user_id,
@@ -26,8 +41,10 @@ router.get('/user/modify', function(req,res){
                     user_name : result[0].user_name,
                     birth : result[0].birth,
                     phone : result[0].phone,
-                    provider : req.user.provider
+                    provider : req.user.provider,
+                    title: req.user.title
                 }
+
                 
                 console.dir(profile);
                 res.render('modify.ejs', {profile:profile});

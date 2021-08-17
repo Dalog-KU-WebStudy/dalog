@@ -17,7 +17,7 @@ const renderInit = async () => {
     .map((diary) => {
       const diaryFragment = document.createDocumentFragment();
       const diaryDom = document.createElement("a");
-      diaryDom.setAttribute("href", "view.html?" + diary.diary_id);
+      diaryDom.setAttribute("href", "view/" + diary.diary_id);
       diaryDom.className = "diary";
 
       if (diary.image_dir != "") {
