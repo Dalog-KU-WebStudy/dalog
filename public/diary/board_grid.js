@@ -65,6 +65,7 @@ const renderInit = () => {
     const diaryDom = document.createElement("a");
     diaryDom.setAttribute("href", "view.html?" + diary.id);
     diaryDom.className = "diary";
+    diaryDom.setAttribute("name", "diary#" + diary.id);
 
     if (diary.img != "") {
       const imgdom = document.createElement("img");
