@@ -46,7 +46,8 @@ const weatherType ={
     sun:"맑음",
     cloud:"흐림",
     rain:"비",
-    snow:"눈"
+    snow:"눈",
+    thunderstorm:"천둥 번개"
 }
 function weather_select_change() {
     let select = document.getElementById('weather_select');

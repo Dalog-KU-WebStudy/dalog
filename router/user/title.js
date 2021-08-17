@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const connection = mysql.createConnection(dbconfig);
 connection.connect();
 
-module.exports = function(router){
+module.exports = function(app, router){
     router.post('/', function(req, res){
         console.log("title edit");
         console.log(req.user);
@@ -22,7 +22,8 @@ module.exports = function(router){
                             console.log("Title Inserted!");
                             req.user.title = req.body.titleInput;
                             console.log(req.user);
-                            res.render('index.ejs', {profile:req.user, title:req.user.title});
+                            app.locals.profile = req.user;
+                            res.render('index.ejs', {profile:req.user});
                         })
                     }
                     else {
@@ -32,11 +33,13 @@ module.exports = function(router){
                             console.log("Title Changed!");
                             req.user.title = req.body.titleInput;
                             console.log(req.user);
-                            res.render('index.ejs', {profile:req.user, title:req.user.title});
+                            app.locals.profile = req.user;
+                            res.render('index.ejs', {profile:req.user});
                         })
                     }
                 }
             })
+            // res.send("<script>if(self.name != 'reload'){self.name = 'reload'; history.back();}else self.name= '';</script>")
         }
         else {
             console.log("no user");
