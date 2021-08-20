@@ -20,10 +20,10 @@ const renderInit = async () => {
       diaryDom.setAttribute("href", "view/" + diary.diary_id);
       diaryDom.className = "diary";
 
-      if (diary.image_dir != "") {
+      if (diary.image_dir) {
         const imgdom = document.createElement("img");
         imgdom.className = "diary__img";
-        imgdom.setAttribute("src", diary.image_dir);
+        imgdom.setAttribute("src", `/${diary.image_dir}`);
         diaryDom.appendChild(imgdom);
       } else {
         diaryDom.appendChild(noneImg());
