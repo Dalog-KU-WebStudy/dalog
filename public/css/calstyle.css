@@ -311,5 +311,19 @@ ul {
 }
 
 .modaltop_container {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  height: 30px;
+}
+
+.modal_colorContainer {
+  display: flex;
+  margin-bottom: 25px;
+}
+
+.color {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 5px;
+  border-radius: 100%;
+  cursor: pointer;
 }

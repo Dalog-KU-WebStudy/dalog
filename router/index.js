@@ -80,8 +80,8 @@ module.exports = function (app, router, passport) {
     console.log("calendar write post router 호출");
     if (req.user) {
       const query = connection.query(
-        `insert into calendar (user_id, cal_date, memo) values (?,?,?)`,
-        [req.user.user_id, req.body.date, req.body.memo],
+        `insert into calendar (user_id, cal_date, memo, color) values (?,?,?,?)`,
+        [req.user.user_id, req.body.date, req.body.memo, req.body.color],
         (err, result) => {
           if (err) {
             return done(err);
@@ -102,7 +102,7 @@ module.exports = function (app, router, passport) {
     console.log("calendar/edit 실행");
     if (req.user) {
       const query = connection.query(
-        `update calendar set memo = '${req.body.newMemo}' where cal_id= '${req.body.memoId}'`,
+        `update calendar set memo = '${req.body.newMemo}', color = '${req.body.color}' where cal_id= '${req.body.memoId}'`,
         (err, result) => {
           if (err) {
             return done(err);
