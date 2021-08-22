@@ -27,7 +27,7 @@ router.post('/:id', (req,res)=>{
             if(err) return res.status(500).json(err);
             if(!result[0]){
                 console.log('잘못된 접근');
-                res.send("<script>alert('잘못된 접근입니다.');location.href='/';</script>");
+                res.send("wrongId");
             } else {
                 console.dir(result[0]);
                 res.json(result[0]);

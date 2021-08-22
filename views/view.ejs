@@ -113,10 +113,10 @@
         </div>
         <div id="edit_delete">
             <div id="edit">
-                <button id="edit_btn">수정</button>
+                <button id="edit_btn" onclick="location.href=`/diary/edit/<%=id%>`">수정</button>
             </div>
             <form id="delete" method="POST" action="/diary/delete" onsubmit="return confirm('정말로 삭제하시겠습니까?')">
-                <input type="hidden" name="diary_id">
+                <input type="hidden" name="diary_id" value="<%=id%>">
                 <button id="delete_btn">삭제</button>
             </form>
         </div>

@@ -285,7 +285,7 @@ module.exports = function (app, router, passport) {
   router.use("/diary/view", diary_view);
 
   const diary_edit = require('./diary/edit');
-  diary_edit(app, router);
+  router.use("diary/edit", diary_edit);
 
   const diary_delete = require('./diary/delete');
   router.use('/diary/delete', diary_delete);

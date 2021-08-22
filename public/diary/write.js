@@ -1,8 +1,6 @@
-function onsubmit() {
+function onSubmit() {
     const title = document.getElementById('input_title').value;
-    const content = document.getElementById('input_content').innerHTML;
-
-    console.log(title, content);
+    const content = document.getElementsByClassName('note-editable')[0].innerHTML;
 
     if(title===''){
         alert('제목을 입력해주세요');
@@ -11,9 +9,8 @@ function onsubmit() {
         alert('내용을 입력해주세요.');
         return false;
     } else {
+        return true;
     }
-    
-    return false;
 }
 
 let changeWeather_flag = 0;

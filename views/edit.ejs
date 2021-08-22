@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../summernote/summernote-lite.css">
     <!--<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
     <link rel="stylesheet" href="../css/jquery-ui.css">
-    <script src="./write.js"></script>
+    <script src="./weather.js"></script>
 </head>
 
 <body>
@@ -46,16 +46,6 @@
             console.dir(profile);
         }
 
-        let diary ="<%=JSON.stringify(diary)%>";
-        if(diary){
-        diary = diary.replaceAll('&#34;','\"');
-        diary = JSON.parse(diary);
-        console.dir(diary);
-        }
-        let diary_content=diary.diary_content;
-        diary_content = diary_content.replaceAll('&lt;','<');
-        diary_content = diary_content.replaceAll('&gt;','>');
-        console.dir(diary_content);
     </script>
     <header class="header">
         <div class="wrapper">
@@ -112,7 +102,7 @@
 
     <div id="container">
         <div id="wrap">
-            <form action="" method="POST" id="write_form">
+            <form action="" method="POST" id="write_form" onsubmit="return onSubmit()">
                 <div id="write_date">
                     <div id="date">
                         <input type="text" id="datepicker-date">
@@ -121,19 +111,20 @@
                         <div id="weather_icon">
                             <div id="temperature">
                                 <div id="temper_night">
-                                    <input type="text" id="input_temper_night" readonly>
+                                    <input type="text" class="min" name="temp_low" id="input_temper_night" readonly>
                                 </div>
                                 <div id="temper_day">
-                                    <input type="text" id="input_temper_day" readonly>
+                                    <input type="text" class="max" name="temp_high" id="input_temper_day" readonly>
                                 </div>
                             </div>
                             <div id="weather">
-                                <img src="../media/icon_sun.png" title="맑음" id="weather_img">
-                                <select id="weather_select" onchange="weather_select_change()">
+                                <img class="main" src="" title="" id="currentWeather">
+                                <select id="weather_select" name="weather" onchange="weather_select_change()">
                                     <option value="sun">맑음</option>
                                     <option value="cloud">흐림</option>
                                     <option value="rain">비</option>
                                     <option value="snow">눈</option>
+                                    <option value="thunderstorm">천둥 번개</option>
                                 </select>
                             </div>
                         </div>
@@ -160,23 +151,40 @@
         </div>
     </div>
 </body>
+<script src="./write.js"></script>
 <script src="./edit.js"></script>
 <script>
-    document.getElementById('datepicker-date').value=diary.diary_date;
-    document.getElementById('input_temper_night').value=diary.temp_low;
-    document.getElementById('input_temper_day').value=diary.temp_high;
-    if(diary.weather){
-        document.getElementById('weather_img').src=`/media/icon_${diary.weather}.png`;
-        let weather_select = document.getElementById('weather_select');
-        for(let i=0; i<4; i++){
-            if(weather_select.options[i].value==diary.diary_weather){
-                weather_select.options[i].selected=true;
-            }
-        }
-    }
-    document.getElementById('input_title').value=diary.diary_title;
-    document.getElementById('today_photo').src=`\${diary.image_dir}`;
-    document.getElementById('input_content').innerHTML=diary_content;
+    const url = `http://localhost:3000/diary/edit/${id}`;
+    const xhr = new XMLHttpRequest();
+    xhr.open('post', url);
+    xhr.send();
+    console.log('post 호출');
 
+    xhr.addEventListener('load', function () {
+
+        if (xhr.responseText!="wrongId") {
+            diary = JSON.parse(xhr.responseText);
+            console.dir(diary);
+
+            document.getElementById('datepicker-date').value=diary.diary_date;
+            document.getElementById('input_temper_night').value=diary.temp_low;
+            document.getElementById('input_temper_day').value=diary.temp_high;
+            if(diary.weather){
+                document.getElementById('weather_img').src=`/media/icon_${diary.weather}.png`;
+                let weather_select = document.getElementById('weather_select');
+                for(let i=0; i<4; i++){
+                    if(weather_select.options[i].value==diary.diary_weather){
+                        weather_select.options[i].selected=true;
+                    }
+                }
+            }
+            document.getElementById('input_title').value=diary.diary_title;
+            document.getElementById('today_photo').src=`/${diary.image_dir}`;
+            document.getElementById('input_content').innerHTML=diary_content;
+        } else {
+            alert('잘못된 접근입니다.'); location.href = '/';
+        }
+
+    })
 </script>
 </html>
