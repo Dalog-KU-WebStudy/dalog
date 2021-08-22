@@ -9,7 +9,6 @@
     <link href="https://spoqa.github.io/spoqa-han-sans/" rel="stylesheet" type="text/css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet" />
-    <script src="/diary/view.js"></script>
     
 </head>
 
@@ -23,16 +22,7 @@
         console.dir(profile);
         }
         
-        let diary ="<%=JSON.stringify(diary)%>";
-        if(diary){
-        diary = diary.replaceAll('&#34;','\"');
-        diary = JSON.parse(diary);
-        console.dir(diary);
-        }
-        let diary_content=diary.diary_content;
-        diary_content = diary_content.replaceAll('&lt;','<');
-        diary_content = diary_content.replaceAll('&gt;','>');
-        console.dir(diary_content);
+        const id = '<%=id%>';
 
     </script>
     <header class="header">
@@ -40,17 +30,17 @@
             <img src="/media/logo4.jpg" class="logo" onclick="location.href='/'" style="cursor: pointer" />
             <form action="/" method="post" id="title_form">
                 <input
-                  id="titleInput"
-                  name="titleInput"
-                  class="dalog-title"
-                  type="text"
-                  value="메인페이지에서만 수정이 가능합니다!"
-                  onfocus="document.getElementById('title-submit').style.visibility='visible';document.getElementById('title-submit').style.opacity=1;"
-                  onblur="document.getElementById('title-submit').style.opacity=0;"
-                  title="메인페이지에서만 수정이 가능합니다."
-                  disabled
+                    id="titleInput"
+                    name="titleInput"
+                    class="dalog-title"
+                    type="text"
+                    value="메인페이지에서만 수정이 가능합니다!"
+                    onfocus="document.getElementById('title-submit').style.visibility='visible';document.getElementById('title-submit').style.opacity=1;"
+                    onblur="document.getElementById('title-submit').style.opacity=0;"
+                    title="메인페이지에서만 수정이 가능합니다."
+                    disabled
                 />
-                <input type="image" id="title-submit" class="title-submit" src="../media/title-edit.png" value="" onclick="document.getElementById('title_form').submit();"/>
+                <input type="image" id="title-submit" class="title-submit" src="/media/title-edit.png" value="" onclick="document.getElementById('title_form').submit();"/>
             </form>
             <script>
             if(profile){
@@ -123,41 +113,17 @@
         </div>
         <div id="edit_delete">
             <div id="edit">
-                <button id="edit_btn" onclick="location.href=`/diary/edit/<%=diary.diary_id%>`">수정</button>
+                <button id="edit_btn">수정</button>
             </div>
             <form id="delete" method="POST" action="/diary/delete" onsubmit="return confirm('정말로 삭제하시겠습니까?')">
-                <input type="hidden" value="<%=diary.diary_id%>" name="diary_id">
-                <button id="delete_btn" onclick="onDelete()">삭제</button>
+                <input type="hidden" name="diary_id">
+                <button id="delete_btn">삭제</button>
             </form>
         </div>
     </div>
 </body>
 <script>
-    document.getElementById("date").childNodes[1].innerText =
-    diary.diary_date;
-    document.getElementById("title").childNodes[1].innerText =
-    diary.diary_title;
-    if(diary.weather){
-        document.getElementById("temper_night").childNodes[1].innerText =
-        diary.temp_low;
-        document.getElementById("temper_day").childNodes[1].innerText =
-        diary.temp_high;
-        document.getElementById(
-        "weather"
-        ).childNodes[1].src = `/media/icon_${diary.weather}.png`;
-        document.getElementById("weather").childNodes[1].title =
-        diary.weather;
-    } else {
-        document.getElementById('weather_box').style= "display:none";
-    }
-    if (diary.image_dir) {
-        document.getElementById("photo").childNodes[1].src = `/${diary.image_dir}`;
-    } else {
-    document.getElementById("photo").style = "display : none";
-    }
-
-    document.getElementById("content").childNodes[1].innerHTML =
-    diary_content;
-
+    let url = `http://localhost:3000/diary/view/${id}`;
 </script>
+<script src="/diary/view.js"></script>
 </html>

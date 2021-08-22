@@ -23,7 +23,20 @@
 
 <body>
     <script>
-        
+        $(function () {
+            $('#input_photo').change(function () {
+                readURL(this);
+            })
+        });
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#today_photo').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
 
         console.dir('<%=profile%>')
         let profile = "<%=JSON.stringify(profile)%>";
@@ -33,7 +46,16 @@
             console.dir(profile);
         }
 
-        
+        let diary ="<%=JSON.stringify(diary)%>";
+        if(diary){
+        diary = diary.replaceAll('&#34;','\"');
+        diary = JSON.parse(diary);
+        console.dir(diary);
+        }
+        let diary_content=diary.diary_content;
+        diary_content = diary_content.replaceAll('&lt;','<');
+        diary_content = diary_content.replaceAll('&gt;','>');
+        console.dir(diary_content);
     </script>
     <header class="header">
         <div class="wrapper">
@@ -140,7 +162,21 @@
 </body>
 <script src="./edit.js"></script>
 <script>
-    
+    document.getElementById('datepicker-date').value=diary.diary_date;
+    document.getElementById('input_temper_night').value=diary.temp_low;
+    document.getElementById('input_temper_day').value=diary.temp_high;
+    if(diary.weather){
+        document.getElementById('weather_img').src=`/media/icon_${diary.weather}.png`;
+        let weather_select = document.getElementById('weather_select');
+        for(let i=0; i<4; i++){
+            if(weather_select.options[i].value==diary.diary_weather){
+                weather_select.options[i].selected=true;
+            }
+        }
+    }
+    document.getElementById('input_title').value=diary.diary_title;
+    document.getElementById('today_photo').src=`\${diary.image_dir}`;
+    document.getElementById('input_content').innerHTML=diary_content;
 
 </script>
 </html>
