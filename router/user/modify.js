@@ -109,7 +109,8 @@ router.post('/user/modify', function(req,res){
                                 }
                             })
                         } else {
-                            const query = connection.query(`update dalog_user set user_pw=?,user_name=?, birth=?, phone=? where user_id=?;`, [user_pw, user_name, birth, phone, req.user.user_id], (err,result)=>{
+                            const new_userpw = bcrypt.hashSync(user_pw, saltRounds);
+                            const query = connection.query(`update dalog_user set user_pw=?,user_name=?, birth=?, phone=? where user_id=?;`, [new_userpw, user_name, birth, phone, req.user.user_id], (err,result)=>{
                                 if(err){
                                     return done(err);
                                 } else {
