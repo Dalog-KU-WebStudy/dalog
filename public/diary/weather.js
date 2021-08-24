@@ -1,6 +1,9 @@
 const main = document.getElementsByClassName("main");
 const min = document.getElementsByClassName("min"); 
 const max = document.getElementsByClassName("max"); 
+const datepicker = document.getElementsByClassName("datepicker");
+
+
 
 // 위치정보를 얻어오는 함수
 function getLocation() {
@@ -28,7 +31,7 @@ const getWeatherData = async (lat, lon) => {
   // 전체적인 날씨 정보 출력
   const weatherData = await data.json(); 
   console.log(weatherData) 
-
+  console.log(datepicker[0].value);
   // 이 API에서는 온도에 절대영도를 사용하기 때문에 상수로 지정
   const ABS_ZERO = 273.15;
 
