@@ -1,11 +1,12 @@
+
 function onSubmit() {
     const title = document.getElementById('input_title').value;
-    const content = document.getElementsByClassName('note-editable')[0].innerHTML;
+    const content = document.getElementById('note-editable').innerText;
 
     if(title===''){
         alert('제목을 입력해주세요');
         return false;
-    } else if(content ===''){
+    } else if(content===''){
         alert('내용을 입력해주세요.');
         return false;
     } else {
@@ -49,12 +50,12 @@ const weatherType ={
 function weather_select_change() {
     let select = document.getElementById('weather_select');
     selected_weather = select.options[select.selectedIndex].value;
-    document.getElementById('weather').childNodes[1].src=`../media/icon_${selected_weather}.png`;
+    document.getElementById('weather').childNodes[1].src=`/media/icon_${selected_weather}.png`;
     document.getElementById('weather').childNodes[1].title=weatherType[selected_weather];
 }
 
 
-document.write('<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script><script src="../summernote/summernote-lite.js"></script><script src="../summernote/summernote-ko-KR.js"></script>');
+
 $(document).ready(function() {
     $('#input_content').summernote({
         focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
@@ -100,4 +101,3 @@ $(function() {
     $('#write_date #date #datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
     
 });
-
