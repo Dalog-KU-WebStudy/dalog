@@ -28,6 +28,11 @@
           phone = profile.phone.replaceAll('-','');
         }
         const provider = profile.provider;
+        
+        let board = '<%=board%>';
+        if(!board){
+          board = 'grid';
+        }
       </script>
 
         <header class="header">
@@ -75,7 +80,7 @@
                   </li>
                   <li>
                     <a
-                      href="/diary/board_grid"
+                      href="/diary/board_<%=board%>"
                       target="_self"
                       style="text-decoration: none; cursor: pointer"
                     >

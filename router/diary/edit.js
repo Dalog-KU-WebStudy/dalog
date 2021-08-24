@@ -12,7 +12,7 @@ router.get('/:id', (req,res)=>{
     
     if(req.user){
         const id = req.params.id;
-        res.render('edit.ejs',{profile:req.user, id:id});
+        res.render('edit.ejs',{profile:req.user, id:id, board: req.cookies['board']});
 
     } else {
         res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");

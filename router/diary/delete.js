@@ -15,7 +15,9 @@ router.post('/', (req,res)=>{
         } else {
             console.log(`${req.user.user_id} 회원의 ${diary_id}번째 글 삭제`);
 
-            res.redirect('/diary/board_grid');
+            console.log(req.cookies['board']);
+            let board = req.cookies['board'];
+            res.redirect(`/diary/board_${board}`);
         }
     })
 })

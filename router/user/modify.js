@@ -47,7 +47,7 @@ router.get('/user/modify', function(req,res){
 
                 
                 console.dir(profile);
-                res.render('modify.ejs', {profile:profile});
+                res.render('modify.ejs', {profile:profile, board: req.cookies['board']});
 
             } else {
                 res.send("<script>alert('회원가입이 필요합니다.');location.href='/user/join';</script>");

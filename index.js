@@ -56,4 +56,3 @@ router_index(app, router, passport);
 
 google_login(app);
 
-app.use(cookieParser);
