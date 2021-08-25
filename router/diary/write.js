@@ -51,15 +51,13 @@ module.exports = function(router) {
 
         const date=req.body.date;
         const weather=req.body.weather;
-        const temp_high=req.body.temp_high;
-        const temp_low=req.body.temp_low;
         const title=req.body.title;
         const content=req.body.content;
 
         const extractTextPattern = /(<([^>]+)>)/gi;
         const extractedText = content.replace(extractTextPattern, "");
 
-        console.log(date, weather, temp_high, temp_low, title, content);
+        console.log(date, weather, title, content);
 
         if(title===''){
             return res.send("<script>alert('제목을 입력해주세요.');history.go(-1);</script>");
@@ -68,7 +66,7 @@ module.exports = function(router) {
         }
 
         if(req.user){
-            const query = connection.query(`insert into diary (user_id, diary_date, diary_title, diary_content, image_dir, weather, temp_high, temp_low) values (?,?,?,?,?,?,?,?)`,[req.user.user_id, date, title, content, filename, weather, temp_high, temp_low], (err,result)=>{
+            const query = connection.query(`insert into diary (user_id, diary_date, diary_title, diary_content, image_dir, weather) values (?,?,?,?,?,?)`,[req.user.user_id, date, title, content, filename, weather], (err,result)=>{
                 if(err){
                     return res.status(500).json(err);
                 } else {

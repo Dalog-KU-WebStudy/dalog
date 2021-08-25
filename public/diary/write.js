@@ -48,7 +48,6 @@ function weather_select_change() {
 }
 
 
-
 $(document).ready(function() {
     $('#input_content').summernote({
         focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
@@ -94,3 +93,26 @@ $(function() {
     $('#write_date #date #datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
     
 });
+
+function changeDate() {
+    console.log(datepicker[0].value);  
+    
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = ('0' + (today.getMonth() + 1)).slice(-2);
+    const day = ('0' + today.getDate()).slice(-2);
+
+    const dateString = year + '-' + month  + '-' + day;
+    console.log(dateString);
+
+    if(datepicker[0].value==dateString){
+        console.log('오늘날짜 선택')
+        changeWeather_flag=0;
+        getLocation();
+    } else {
+        console.log('과거날짜 선택');
+        changeWeather_flag=1;
+        let select = document.getElementById('weather_select');
+        select.options[0].selected = true;
+    }
+}

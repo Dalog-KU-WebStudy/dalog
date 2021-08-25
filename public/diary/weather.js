@@ -1,10 +1,6 @@
 const main = document.getElementsByClassName("main");
 const datepicker = document.getElementsByClassName("datepicker");
 
-function changeDate() {
-  console.log(datepicker[0].value);  
-}
-
 // 위치정보를 얻어오는 함수
 function getLocation() {
   if (navigator.geolocation) { // GPS를 지원하면

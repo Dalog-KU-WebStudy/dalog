@@ -12,10 +12,6 @@ xhr.addEventListener('load', function () {
     document.getElementById("date").childNodes[1].innerText = diary.diary_date;
     document.getElementById("title").childNodes[1].innerText = diary.diary_title;
     if (diary.weather) {
-      document.getElementById("temper_night").childNodes[1].innerText =
-        diary.temp_low;
-      document.getElementById("temper_day").childNodes[1].innerText =
-        diary.temp_high;
       document.getElementById(
         "weather"
       ).childNodes[1].src = `/media/icon_${diary.weather}.png`;

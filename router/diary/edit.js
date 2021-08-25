@@ -83,15 +83,13 @@ router.route('/post/:id').post(upload.array('photo',1), (req,res)=>{
     const user_id = req.user.user_id;
     const date=req.body.date;
     const weather=req.body.weather;
-    const temp_high=req.body.temp_high;
-    const temp_low=req.body.temp_low;
     const title=req.body.title;
     const content=req.body.content;
 
     const extractTextPattern = /(<([^>]+)>)/gi;
     const extractedText = content.replace(extractTextPattern, "");
 
-    console.log(date, weather, temp_high, temp_low, title, content, extractedText);
+    console.log(date, weather, title, content, extractedText);
 
         
     if(req.user){
@@ -102,7 +100,7 @@ router.route('/post/:id').post(upload.array('photo',1), (req,res)=>{
         }
         if(files[0]){
             console.log('파일있음');
-            connection.query(`update diary set diary_date=?,weather=?,temp_high=?,temp_low=?,diary_title=?,diary_content=?,image_dir=? where user_id=? and diary_id=?;`,[date,weather,temp_high, temp_low, title, content, filename, user_id, id], (err,result)=>{
+            connection.query(`update diary set diary_date=?,weather=?,diary_title=?,diary_content=?,image_dir=? where user_id=? and diary_id=?;`,[date,weather, title, content, filename, user_id, id], (err,result)=>{
                 if(err){
                     return res.status(500).json(err);
                 } else {
@@ -111,7 +109,7 @@ router.route('/post/:id').post(upload.array('photo',1), (req,res)=>{
             })
         } else {
             console.log('파일없음');
-            connection.query(`update diary set diary_date=?,weather=?,temp_high=?,temp_low=?,diary_title=?,diary_content=? where user_id=? and diary_id=?;`,[date,weather,temp_high, temp_low, title, content, user_id, id], (err,result)=>{
+            connection.query(`update diary set diary_date=?,weather=?,diary_title=?,diary_content=? where user_id=? and diary_id=?;`,[date,weather, title, content, user_id, id], (err,result)=>{
                 if(err){
                     return res.status(500).json(err);
                 } else {

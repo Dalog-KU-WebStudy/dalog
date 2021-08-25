@@ -114,7 +114,7 @@
                 <div id="inner_wrap">
                 <div id="write_date">
                     <div id="date">
-                        <input type="text" id="datepicker-date" name="date">
+                        <input type="text" id="datepicker-date" name="date" onchange="changeDate()">
                     </div>
                     <div id="weather_box">
                         <div id="weather_icon">
@@ -129,6 +129,7 @@
                             <div id="weather">
                                 <img class="main" src="" title="" id="currentWeather">
                                 <select id="weather_select" name="weather" onchange="weather_select_change()">
+                                    <option value="weather_none">선택안함</option>
                                     <option value="sun">맑음</option>
                                     <option value="cloud">흐림</option>
                                     <option value="rain">비</option>
@@ -138,7 +139,7 @@
                             </div>
                         </div>
                         <div id="manual_button">
-                            <button type="button" onclick="changeWeather()">변경</button>
+                            <button type="button" onclick="changeWeather()">날씨 변경</button>
                         </div>
                     </div>
                 </div>
