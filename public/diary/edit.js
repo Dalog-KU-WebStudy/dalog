@@ -39,13 +39,11 @@ const fillContent = async function(){
             console.dir(diary);
 
             document.getElementById('datepicker-date').value=diary.diary_date;
-            document.getElementById('input_temper_night').value=diary.temp_low;
-            document.getElementById('input_temper_day').value=diary.temp_high;
             if(diary.weather){
                 document.getElementById('currentWeather').src=`/media/icon_${diary.weather}.png`;
                 let weather_select = document.getElementById('weather_select');
-                for(let i=0; i<4; i++){
-                    if(weather_select.options[i].value==diary.diary_weather){
+                for(let i=0; i<6; i++){
+                    if(weather_select.options[i].value==diary.weather){
                         weather_select.options[i].selected=true;
                     }
                 }

@@ -19,7 +19,7 @@
     <script src="../summernote/summernote-ko-KR.js"></script>
     <link rel="stylesheet" href="../summernote/summernote-lite.css">
 
-    <link rel="stylesheet" href="../css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
     <!--<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
     <script src="./weather.js"></script>
     <script>
@@ -133,6 +133,7 @@
                                 <div id="weather" class>
                                     <img class="main" id="currentWeather" src="" title="" alt="사진없음">
                                     <select id="weather_select" name="weather" onchange="weather_select_change()">
+                                        <option id="weather_none" value="weather_none">선택안함</option>
                                         <option id = "sun" value="sun">맑음</option>
                                         <option id = "cloud" value="cloud">흐림</option>
                                         <option id = "rain" value="rain">비</option>
@@ -144,7 +145,7 @@
                             </div>
 
                             <div id="manual_button">
-                                <button type="button" onclick="changeWeather()">변경</button>
+                                <button type="button" onclick="changeWeather()">날씨 변경</button>
                             </div>
 
                         </div>
