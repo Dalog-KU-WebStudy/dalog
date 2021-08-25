@@ -222,7 +222,7 @@ module.exports = function (app, router, passport) {
     router.get('/user/join', (req, res)=>{
         console.log('get join url');
         var msg; 
-        var errMsg = req.flash('error'); 
+        var errMsg = req.flash('joinMessage'); 
         if(errMsg) msg = errMsg; 
         if(!req.user){
           res.render('join.ejs', {'message' : msg});
@@ -236,14 +236,6 @@ module.exports = function (app, router, passport) {
             failureRedirect : '/user/join', //인증실패시 이동하는화면주소 
             failureFlash : true //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨. 
     }));
-
-
-    // naver 로그인
-    router.get('/login/naver',
-        passport.authenticate('naver')
-    );
-    // res.redirect('/');
-  });
 
   // naver 로그인
   router.get("/login/naver", passport.authenticate("naver"));
