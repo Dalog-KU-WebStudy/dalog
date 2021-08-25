@@ -1,6 +1,5 @@
 const contentsContainer = document.getElementById("contents");
-
-let diaryArr = [];
+const searchInput = document.getElementById("searchInput");
 
 const getdiaryArr = async () => {
   const response = await fetch("/diary/get");
@@ -9,8 +8,28 @@ const getdiaryArr = async () => {
   return data;
 };
 
+const doSearch = async (search) => {
+  const response = await fetch("/diary/search", {
+    method: "post", // *GET, POST, PUT, DELETE, etc.
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      search: search,
+    }),
+  });
+  const data = await response.json();
+  console.log(data);
+  return data;
+};
+
 const renderInit = async () => {
-  diaryArr = await getdiaryArr();
+  const diaryArr = await getdiaryArr();
+  render(diaryArr);
+};
+
+const render = async (diaryArr) => {
+  console.log(diaryArr);
   diaryArr
     .slice(0)
     .reverse()
@@ -20,10 +39,10 @@ const renderInit = async () => {
       diaryDom.setAttribute("href", "view/" + diary.diary_id);
       diaryDom.className = "diary";
 
-      if (diary.image_dir != "") {
+      if (diary.image_dir) {
         const imgdom = document.createElement("img");
         imgdom.className = "diary__img";
-        imgdom.setAttribute("src", diary.image_dir);
+        imgdom.setAttribute("src", `/${diary.image_dir}`);
         diaryDom.appendChild(imgdom);
       } else {
         diaryDom.appendChild(noneImg());
@@ -78,4 +97,17 @@ const noneImg = () => {
   return background;
 };
 
+const deleteNodes = () => {
+  while (contentsContainer.firstChild) {
+    contentsContainer.removeChild(contentsContainer.lastChild);
+  }
+};
+
 renderInit();
+
+searchInput.addEventListener("change", async () => {
+  console.log(searchInput.value);
+  const diaryArr = await doSearch(searchInput.value);
+  deleteNodes();
+  render(diaryArr);
+});

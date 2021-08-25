@@ -18,13 +18,13 @@
   </head>
   <body>
     <script>
-        console.dir('<%=profile%>')
-        let profile = "<%=JSON.stringify(profile)%>";
-        if(profile){
-          profile = profile.replaceAll('&#34;','\"');
-          profile = JSON.parse(profile);
-          console.dir(profile);
-        }
+      console.dir("<%=profile%>");
+      let profile = "<%=JSON.stringify(profile)%>";
+      if (profile) {
+        profile = profile.replaceAll("&#34;", '"');
+        profile = JSON.parse(profile);
+        console.dir(profile);
+      }
     </script>
     <script src="./board_grid.js" defer></script>
     <header class="header">
@@ -47,10 +47,17 @@
             title="메인페이지에서만 수정이 가능합니다."
             disabled
           />
-          <input type="image" id="title-submit" class="title-submit" src="../media/title-edit.png" value="" onclick="document.getElementById('title_form').submit();"/>
+          <input
+            type="image"
+            id="title-submit"
+            class="title-submit"
+            src="../media/title-edit.png"
+            value=""
+            onclick="document.getElementById('title_form').submit();"
+          />
         </form>
         <script>
-          if(profile){
+          if (profile) {
             document.getElementById("titleInput").value = profile.title;
           }
         </script>
@@ -64,7 +71,7 @@
               >
                 <img
                   src="../media/write.png"
-                  style="cursor: pointer;"
+                  style="cursor: pointer"
                   alt="글쓰기"
                 />
               </a>
@@ -77,16 +84,14 @@
               >
                 <img
                   src="../media/board.png"
-                  style="cursor: pointer;"
+                  style="cursor: pointer"
                   alt="게시판"
                 />
               </a>
             </li>
             <li>
               <a href="#"
-                ><img
-                  src="../media/profile.png"
-                  style="cursor: pointer;"
+                ><img src="../media/profile.png" style="cursor: pointer"
               /></a>
               <ul class="sub-menu">
                 <li>
@@ -122,102 +127,18 @@
           </a>
         </div>
         <div class="searchContainer">
-          <form action='/diary/search_grid' method='post' id='search_form'>
-            <img src="../media/icon_search.png" class="searchIcon" />
-            <input class="searchInput" name="search" placeholder="검색" onchange="document.getElementsById('search_form').submit();"/>
-          </form>
+          <img src="../media/icon_search.png" class="searchIcon" />
+          <input
+            class="searchInput"
+            id="searchInput"
+            name="search"
+            placeholder="검색"
+          />
         </div>
       </div>
 
       <div class="body__contents" id="contents"></div>
       <div class="error__contents" id="error-search"></div>
-
-      <script>
-        var msg = "<%=msg%>";
-        if(msg != ""){
-          console.dir("<%=msg%>");
-
-          const errorContainer = document.getElementById("error-search");
-
-          document.getElementById("contents").style.display = "none";
-          const diaryFragment = document.createDocumentFragment();
-          const diaryDom = document.createElement("p");
-          diaryDom.id = "no_result";
-          diaryDom.innerText = msg;
-
-          diaryDom.style.fontFamily = "Spoqa Han Sans Neo, sans-serif";
-          diaryDom.style.fontSize = "6rem";
-          diaryDom.style.color = "#A4A4A4";
-          diaryDom.style.marginTop = "20rem";
-          diaryDom.style.textAlign = "center";
-
-          diaryFragment.appendChild(diaryDom);
-          errorContainer.appendChild(diaryFragment);
-        }
-        let rows = "<%=JSON.stringify(row)%>";
-        if(rows) {
-          rows = rows.replaceAll('&#34;','\"');
-          rows = JSON.parse(rows);
-          console.dir(rows);
-          const diaryArr = [];
-          var i;
-
-          // diary.id --> rows[i].diary_id
-          for(i=0 ; i<rows.length ; i++){
-            const contentsContainer = document.getElementById("contents");
-            
-            const diaryElement = document.createDocumentFragment();
-            const diaryDom = document.createElement("a");
-            diaryDom.setAttribute("href", "view/" + rows[i].diary_id);
-            diaryDom.className = "diary";
-            diaryDom.setAttribute("name", "diary#" + rows[i].diary_id);
-
-            if (rows[i].image_dir != null) {
-              const imgdom = document.createElement("img");
-              imgdom.className = "diary__img";
-              imgdom.setAttribute("src", rows[i].image_dir);
-              diaryDom.appendChild(imgdom);
-            } else {
-              const noneContainer = document.createElement("div");
-              noneContainer.className = "diary__noneContainer";
-
-              const noneImgdom = document.createElement("img");
-              noneImgdom.className = "diary__noneimg";
-              noneImgdom.setAttribute("src", "../media/noneImg_back.jpg");
-
-              const contentPrevdom = document.createElement("div");
-              contentPrevdom.className = "diary__none_contentprev";
-              contentPrevdom.innerText = rows[i].diary_content;
-
-              noneContainer.appendChild(noneImgdom);
-              noneContainer.appendChild(contentPrevdom);
-              diaryDom.appendChild(noneContainer);
-            }
-
-            const flex = document.createElement("div");
-            flex.className = "flex";
-            diaryDom.appendChild(flex);
-
-            const titledom = document.createElement("div");
-            titledom.className = "diary__title";
-            titledom.innerText = rows[i].diary_title;
-            flex.appendChild(titledom);
-
-            const weatherdom = document.createElement("img");
-            weatherdom.className = "diary__weather";
-            weatherdom.setAttribute("src", `../media/icon_${rows[i].weather}.png`);
-            flex.appendChild(weatherdom);
-
-            const datedom = document.createElement("div");
-            datedom.className = "diary__date";
-            datedom.innerText = rows[i].diary_date.replaceAll('-', '');
-            diaryDom.appendChild(datedom);
-
-            diaryElement.appendChild(diaryDom);
-            contentsContainer.appendChild(diaryElement);
-          }
-        }
-      </script>
     </div>
   </body>
 </html>

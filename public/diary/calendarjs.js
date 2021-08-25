@@ -5,12 +5,28 @@ const modalDate = document.querySelector(".modal_date");
 const modalContent = document.querySelector(".modal_content");
 const saveBtn = document.querySelector(".modal_closeBtn");
 const deleteBtn = document.querySelector(".deleteBtn");
+
 let memoMockData = [];
+let selectedColor = "";
+
+const colorArr = {
+  white: "#ffffff",
+  pink: "#FCD5DD",
+  orange: "#fddbc8",
+  yellow: "#FCF8BC",
+  green: "#cdf4d4",
+  blue: "#cde2fe",
+  purple: "#E3D2F9",
+};
+
+const ColorBtnOnClick = (color) => {
+  selectedColor = color;
+  modalContent.style.backgroundColor = colorArr[selectedColor];
+};
 
 const memoData = async () => {
   const response = await fetch("/calendar/memo");
   const data = await response.json();
-  console.log(data);
   return data;
 };
 
@@ -28,8 +44,9 @@ const renderMemo = async () => {
       const memoli = document.createElement("li");
       memoli.innerText = data.memo;
       memoli.className = "memo_one";
+      memoli.style.backgroundColor = colorArr[data.color];
       memoli.addEventListener("click", () => {
-        openModal(data.cal_date, data.memo, data.cal_id);
+        openModal(data.cal_date, data.memo, data.color, data.cal_id);
       });
       thisMemoUl.appendChild(memoli);
     }
@@ -40,20 +57,22 @@ let saveBtnListener = () => {};
 let deleteBtnListener = () => {};
 let closeBtnListener = () => {};
 
-const openModal = (date, content, id) => {
+const openModal = (date, content, color, id) => {
   modal.classList.remove("hidden");
   modalDate.innerText = date;
   modalContent.value = content;
+  color ? (selectedColor = color) : (selectedColor = "white");
+  modalContent.style.backgroundColor = colorArr[selectedColor];
 
   saveBtnListener = () => {
-    modalClose(date, modalContent.value, id, true);
+    modalClose(date, modalContent.value, selectedColor, id, true);
   };
   closeBtnListener = () => {
-    modalClose(null, null, id, false);
+    modalClose(null, null, null, id, false);
   };
   deleteBtnListener = () => {
     deleteMemo(id);
-    modalClose(null, null, id, false);
+    modalClose(null, null, null, id, false);
   };
 
   saveBtn.addEventListener("click", saveBtnListener, { once: true });
@@ -61,7 +80,8 @@ const openModal = (date, content, id) => {
   deleteBtn.addEventListener("click", deleteBtnListener, { once: true });
 };
 
-const postMemo = (date, content, id) => {
+const postMemo = (date, content, color) => {
+  console.log(date + " " + content + " " + color + " ");
   fetch("/calendar/write", {
     method: "post", // *GET, POST, PUT, DELETE, etc.
     headers: {
@@ -70,12 +90,12 @@ const postMemo = (date, content, id) => {
     body: JSON.stringify({
       date: date,
       memo: content,
-      id: id,
+      color: color,
     }),
   });
 };
 
-const editMemo = (content, id) => {
+const editMemo = (content, color, id) => {
   fetch("/calendar/edit", {
     method: "post", // *GET, POST, PUT, DELETE, etc.
     headers: {
@@ -83,6 +103,7 @@ const editMemo = (content, id) => {
     },
     body: JSON.stringify({
       newMemo: content,
+      color: color,
       memoId: id,
     }),
   });
@@ -100,15 +121,15 @@ const deleteMemo = (id) => {
   });
 };
 
-const modalClose = (date, content, id, save) => {
-  console.log("모달 닫기");
+const modalClose = (date, content, color, id, save) => {
+  console.log(color);
   if (save) {
     if (id !== null) {
       //수정
-      if (content !== "") editMemo(content, id);
+      if (content !== "") editMemo(content, color, id);
     } else {
       //삽입
-      if (content !== "") postMemo(date, content, id);
+      if (content !== "") postMemo(date, content, color, id);
     }
   }
   saveBtn.removeEventListener("click", saveBtnListener, { once: true });
@@ -202,7 +223,7 @@ const renderCalendar = () => {
       if (memoNum >= 3) {
         alert("3개이상의 메모를 입력할 수 없습니다");
       } else {
-        openModal(event.target.value, null, null);
+        openModal(event.target.value, null, null, null);
       }
     });
   }
@@ -220,6 +241,7 @@ const renderCalendar = () => {
 };
 
 renderCalendar();
+setColorBtnOnClick();
 
 const prevMonth = () => {
   date.setMonth(date.getMonth() - 1);

@@ -3,7 +3,9 @@ const min = document.getElementsByClassName("min");
 const max = document.getElementsByClassName("max"); 
 const datepicker = document.getElementsByClassName("datepicker");
 
-
+function changeDate() {
+  console.log(datepicker[0].value);  
+}
 
 // 위치정보를 얻어오는 함수
 function getLocation() {
@@ -56,41 +58,57 @@ const drawWeather = (weather) => {
   
   //날씨에 따라서 아이콘이 달라야하므로 조건문으로 처리해주고
   if(weather.main == "Clouds"){
-    document.getElementById("currentWeather").src = "../media/icon_cloud.png";
+    document.getElementById("currentWeather").src = "/media/icon_cloud.png";
     document.getElementById("currentWeather").title = "흐림";
   }
   else if(weather.main == "Atmosphere"){
-    document.getElementById("currentWeather").src = "../media/icon_cloud.png";
+    document.getElementById("currentWeather").src = "/media/icon_cloud.png";
     document.getElementById("currentWeather").title = "흐림";
   }
   else if(weather.main == "Clear"){
-    document.getElementById("currentWeather").src = "../media/icon_sun.png";
+    document.getElementById("currentWeather").src = "/media/icon_sun.png";
     document.getElementById("currentWeather").title = "맑음";
   }
   else if(weather.main == "Snow"){
-    document.getElementById("currentWeather").src = "../media/icon_snow.png";
+    document.getElementById("currentWeather").src = "/media/icon_snow.png";
     document.getElementById("currentWeather").title = "눈";
   }
   else if(weather.main == "Rain"){
-    document.getElementById("currentWeather").src = "../media/icon_rain.png";
+    document.getElementById("currentWeather").src = "/media/icon_rain.png";
     document.getElementById("currentWeather").title = "비";
   }
   else if(weather.main == "Drizzle"){
-    document.getElementById("currentWeather").src = "../media/icon_rain.png";
+    document.getElementById("currentWeather").src = "/media/icon_rain.png";
     document.getElementById("currentWeather").title = "비";
   }
   else if(weather.main == "Thunderstorm"){
-    document.getElementById("currentWeather").src = "../media/icon_thunderstorm.png";
+    document.getElementById("currentWeather").src = "/media/icon_thunderstorm.png";
     document.getElementById("currentWeather").title = "천둥번개";
   }
   else{
     main[0].innerHTML = "정보불러오기 실패";
   }
-
+  
+  if(document.getElementById("currentWeather").title == "흐림"){
+    document.getElementById("cloud").selected = "selected";
+  }
+  else  if(document.getElementById("currentWeather").title == "맑음"){
+    document.getElementById("sun").selected = "selected";
+  }
+  else  if(document.getElementById("currentWeather").title == "비"){
+    document.getElementById("rain").selected = "selected";
+  }
+  else  if(document.getElementById("currentWeather").title == "눈"){
+    document.getElementById("snow").selected = "selected";
+  }  
+  else  if(document.getElementById("currentWeather").title == "천둥 번개"){
+    document.getElementById("thunderstorm").selected = "selected";
+  }
   // 최고 최저 기온도 받아오자
   min[0].value =weather.min;
   max[0].value =weather.max;
 };
 
 // 위치 받으면 함수 내부에서 위에 있는 것들이 모두 처리된다.
-getLocation();
+//write, edit.js 안에서 실행
+//getLocation();
