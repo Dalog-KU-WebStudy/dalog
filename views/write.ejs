@@ -21,7 +21,6 @@
 
     <link rel="stylesheet" href="../css/jquery-ui.css">
     <!--<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
-    <script src="./write.js"></script>
     <script src="./weather.js"></script>
     <script>
         $(function () {
@@ -107,7 +106,7 @@
 
     <div id="container">
         <div id="wrap">
-            <form action="/diary/write" method="POST" id="write_form" enctype="multipart/form-data">
+            <form action="/diary/write" method="POST" id="write_form" enctype="multipart/form-data" onsubmit="return onSubmit()">
                 <div id="inner_wrap">
                     <div id="write_date">
                         <div id="date">
@@ -119,10 +118,10 @@
                             <div id="weather_icon">                             
                                 <div id="temperature">
                                     <div id="temper_night">
-                                        <input class="min" type="text" value="-10" name="temp_low" id="input_temper_night" readonly />
+                                        <input class="min" type="text" name="temp_low" id="input_temper_night" readonly />
                                     </div>
                                     <div id="temper_day">
-                                        <input class="max" type="text" value="20" name="temp_high" id="input_temper_day" readonly />
+                                        <input class="max" type="text" name="temp_high" id="input_temper_day" readonly />
                                     </div>
                                 </div>                                
                                 
@@ -165,5 +164,5 @@
         </div>
     </div>
 </body>
-
+<script src="./write.js"></script>
 </html>
