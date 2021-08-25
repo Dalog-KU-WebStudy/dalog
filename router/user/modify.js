@@ -3,6 +3,9 @@ const bodyParser = require('body-parser');
 const dbconfig = require('../../config/dbconfig');
 const mysql = require('mysql');
 const connection = mysql.createConnection(dbconfig);
+
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 connection.connect();
 
 
@@ -89,8 +92,10 @@ router.post('/user/modify', function(req,res){
                     return done(err);
                 }
                 if(result){
-                    console.log(result[0].user_pw, now_userpw)
-                    if(result[0].user_pw != now_userpw){
+                    console.log(result[0].user_pw, now_userpw);
+                    const same = bcrypt.compareSync(now_userpw, result[0].user_pw);
+                    console.log(same);
+                    if(!same){
                         console.log('현재 비밀번호 일치하지 않음');
                         res.send("<script>alert('현재 비밀번호가 일치하지 않습니다.');location.href='/user/modify';</script>");
                     } else {
@@ -104,7 +109,8 @@ router.post('/user/modify', function(req,res){
                                 }
                             })
                         } else {
-                            const query = connection.query(`update dalog_user set user_pw=?,user_name=?, birth=?, phone=? where user_id=?;`, [user_pw, user_name, birth, phone, req.user.user_id], (err,result)=>{
+                            const new_userpw = bcrypt.hashSync(user_pw, saltRounds);
+                            const query = connection.query(`update dalog_user set user_pw=?,user_name=?, birth=?, phone=? where user_id=?;`, [new_userpw, user_name, birth, phone, req.user.user_id], (err,result)=>{
                                 if(err){
                                     return done(err);
                                 } else {

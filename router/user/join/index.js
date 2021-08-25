@@ -3,6 +3,8 @@ const dbconfig = require('../../../config/dbconfig');
 const passport = require('passport');
 const connection = mysql.createConnection(dbconfig);
 const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 connection.connect();
 
@@ -55,6 +57,9 @@ module.exports = function(passport){
                 } else {
                     // 2. 등록되지 않은 경우
                     console.log("등록된 사용자가 없으므로 회원가입 진행");
+
+                    const encryptedPassword = bcrypt.hashSync(password, saltRounds);
+                    password = encryptedPassword;
 
                     profile.user_id = email;
                     profile.user_pw = password;

@@ -1,73 +1,38 @@
-const diaryArr = [
-  {
-    id: 1,
-    title: "일기1",
-    content: "내용내용1",
-    date: "20210607",
-    img: "https://images.velog.io/images/sukong/post/a85cd36f-9da3-48ad-87e3-044119fd8618/IMG_0910.JPG",
-    weather: "맑음",
-  },
-  {
-    id: 2,
-    weather: "맑음",
-    title: "일기2",
-    content:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure magnam ea architecto excepturi voluptatum omnis, magni obcaecati enim ad, laboriosam quia animi delectus ut similique consectetur culpa ducimus, aliquid dolores! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint vero, numquam labore cum dignissimos doloremque itaque earum non quis nisi quasi sequi blanditiis, eius enim sapiente quam adipisci eligendi doloribus Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus, esse, alias pariatur, optio velit recusandae commodi atque minus distinctio dolor tempora ad deserunt fugiat. Quidem perspiciatis omnis voluptate mollitia quasi! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure magnam ea architecto excepturi voluptatum omnis, magni obcaecati enim ad, laboriosam quia animi delectus ut similique consectetur culpa ducimus, aliquid dolores! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint vero, numquam labore cum dignissimos doloremque itaque earum non quis nisi quasi sequi blanditiis, eius enim sapiente quam adipisci eligendi doloribus Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus, esse, alias pariatur, optio velit recusandae commodi atque minus distinctio dolor tempora ad deserunt fugiat. Quidem perspiciatis omnis voluptate mollitia quasi!",
-    date: "20210607",
-    img: "",
-  },
-  {
-    id: 3,
-    weather: "맑음",
-    title: "일기3",
-    content: "내용내용3",
-    date: "20210607",
-    img: "https://images.velog.io/images/sukong/post/e82e3053-beb4-4fa9-b97e-88f46263fe78/Atto3.jpg",
-  },
-  {
-    id: 4,
-    weather: "맑음",
-    title: "일기4",
-    content: "내용내용4",
-    date: "20210607",
-    img: "https://images.velog.io/images/sukong/post/c9e731a5-ba8c-4782-9f6a-0a25dfef978e/Atto1.JPG",
-  },
-  {
-    id: 5,
-    weather: "맑음",
-    title: "일기5",
-    content: "내용내용4",
-    date: "20210607",
-    img: "https://images.velog.io/images/sukong/post/a85cd36f-9da3-48ad-87e3-044119fd8618/IMG_0910.JPG",
-  },
-  {
-    id: 6,
-    weather: "맑음",
-    title: "일기6",
-    content: "내용내용4",
-    date: "20210607",
-    img: "https://images.velog.io/images/sukong/post/c9e731a5-ba8c-4782-9f6a-0a25dfef978e/Atto1.JPG",
-  },
-];
+const xhr = new XMLHttpRequest();
+xhr.open('post', url);
+xhr.send();
+console.log('post 호출');
+xhr.addEventListener('load', function () {
+  console.log(xhr.responseText);
 
+  if (xhr.responseText!="wrongId") {
+    const diary = JSON.parse(xhr.responseText);
+    console.dir(diary);
 
+    document.getElementById("date").childNodes[1].innerText = diary.diary_date;
+    document.getElementById("title").childNodes[1].innerText = diary.diary_title;
+    if (diary.weather) {
+      document.getElementById("temper_night").childNodes[1].innerText =
+        diary.temp_low;
+      document.getElementById("temper_day").childNodes[1].innerText =
+        diary.temp_high;
+      document.getElementById(
+        "weather"
+      ).childNodes[1].src = `/media/icon_${diary.weather}.png`;
+      document.getElementById("weather").childNodes[1].title =
+        diary.weather;
+    } else {
+      document.getElementById('weather_box').style = "display:none";
+    }
+    if (diary.image_dir) {
+      document.getElementById("photo").childNodes[1].src = `/${diary.image_dir}`;
+    } else {
+      document.getElementById("photo").style = "display : none";
+    }
 
+    document.getElementById("content").innerHTML = diary.diary_content;
+  } else {
+    alert('잘못된 접근입니다.'); location.href = '/';
+  }
 
-const weatherType = {
-  sun: "맑음",
-  cloud: "흐림",
-  rain: "비",
-  snow: "눈",
-};
-const diaryContent = {
-  date: "2021-06-14",
-  temper_night: "-20",
-  temper_day: "10",
-  weather: "rain",
-  title: "오늘의 일기",
-  img: "../media/view_photo_example.jpg",
-  content: `에베베베베베베베베우아아아아아악
-Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure magnam ea architecto excepturi voluptatum omnis, magni obcaecati enim ad, laboriosam quia animi delectus ut similique consectetur culpa ducimus, aliquid dolores!
-Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint vero, numquam labore cum dignissimos doloremque itaque earum non quis nisi quasi sequi blanditiis, eius enim sapiente quam adipisci eligendi doloribus.
-Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus, esse, alias pariatur, optio velit recusandae commodi atque minus distinctio dolor tempora ad deserunt fugiat. Quidem perspiciatis omnis voluptate mollitia quasi!`,
-};
+})
