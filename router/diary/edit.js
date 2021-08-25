@@ -87,12 +87,17 @@ router.route('/post/:id').post(upload.array('photo',1), (req,res)=>{
     const temp_low=req.body.temp_low;
     const title=req.body.title;
     const content=req.body.content;
-    console.log(date, weather, temp_high, temp_low, filename, title, content);
 
+    const extractTextPattern = /(<([^>]+)>)/gi;
+    const extractedText = content.replace(extractTextPattern, "");
+
+    console.log(date, weather, temp_high, temp_low, title, content, extractedText);
+
+        
     if(req.user){
         if(title===''){
             return res.send("<script>alert('제목을 입력해주세요.');history.go(-1);</script>");
-        } else if(content===''){
+        } else if(extractedText===''){
             return res.send("<script>alert('내용을 입력해주세요.');history.go(-1);</script>");
         }
         if(files[0]){

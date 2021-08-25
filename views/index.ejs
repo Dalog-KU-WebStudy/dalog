@@ -148,7 +148,7 @@
         <div class="Question">
          
           <select name="selectQuestion" id="selectQuestion" >
-            <option value="" selected="selected">질문을 선택해주세요</option>
+            <option value="">질문을 선택해주세요</option>
             <option value="오늘 맛있게 먹은 음식이 있나요?">오늘 맛있게 먹은 음식이 있나요?</option>
             <option value="지금 어떤 음식이 먹고 싶나요?">지금 어떤 음식이 먹고 싶나요?</option>
             <option value="오늘 짜증나는 일이 있었나요?">오늘 짜증나는 일이 있었나요?</option>
@@ -272,5 +272,9 @@
       document.getElementById("before_login").style.display = "none";
       document.getElementById("after_login").style.display = "block";
     }
+
+    const selectBox = document.getElementById('selectQuestion');
+    const randomIdx = Math.floor(Math.random()*(selectBox.options.length -1))+1;
+    selectBox.options[randomIdx].selected=true;
   </script>
 </html>
