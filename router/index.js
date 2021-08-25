@@ -240,7 +240,7 @@ module.exports = function (app, router, passport) {
   router.get("/user/join", (req, res) => {
     console.log("get join url");
     var msg;
-    var errMsg = req.flash("error");
+    var errMsg = req.flash("joinMessage");
     if (errMsg) msg = errMsg;
     if (!req.user) {
       res.render("join.ejs", { message: msg });
