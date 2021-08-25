@@ -305,7 +305,7 @@ ul {
   width: 3.5rem;
   height: 3.5rem;
   position: relative;
-  top: -4.7rem;
+  top: -4.3rem;
   left: 110%;
   cursor: pointer;
 }
@@ -317,7 +317,8 @@ ul {
 
 .modal_colorContainer {
   display: flex;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
+  margin-top: 10px;
 }
 
 .color {

@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 const dbconfig = require("../config/dbconfig");
 const mysql = require("mysql");
 const connection = mysql.createConnection(dbconfig);
@@ -73,11 +73,14 @@ module.exports = function (app, router, passport) {
   router.get("/", function (req, res) {
     console.log("main page");
     console.log(app.locals.profile);
-    if(!req.cookies['board']) {
-      res.cookie('board','grid', {maxAge:1000*60*60*24*30});
+    if (!req.cookies["board"]) {
+      res.cookie("board", "grid", { maxAge: 1000 * 60 * 60 * 24 * 30 });
     }
-    console.log(req.cookies['board']);
-    res.render('index.ejs', {profile : app.locals.profile, board: req.cookies['board']});
+    console.log(req.cookies["board"]);
+    res.render("index.ejs", {
+      profile: app.locals.profile,
+      board: req.cookies["board"],
+    });
   });
 
   //메모부분
@@ -170,7 +173,10 @@ module.exports = function (app, router, passport) {
       );
     } else {
       console.log("write get");
-      res.render('write.ejs', {profile : app.locals.profile, board: req.cookies['board']});
+      res.render("write.ejs", {
+        profile: app.locals.profile,
+        board: req.cookies["board"],
+      });
     }
   });
 
@@ -196,53 +202,64 @@ module.exports = function (app, router, passport) {
   });
 
   router.get("/diary/board_grid", function (req, res) {
-    if(!req.user){
-        res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
+    if (!req.user) {
+      res.send(
+        "<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>"
+      );
     } else {
-        console.log("board grid get");
-        res.cookie('board','grid', {maxAge:1000*60*60*24*30});
-        res.render('board_grid.ejs', {profile : app.locals.profile, msg:"" , row:""});
+      console.log("board grid get");
+      res.cookie("board", "grid", { maxAge: 1000 * 60 * 60 * 24 * 30 });
+      res.render("board_grid.ejs", {
+        profile: app.locals.profile,
+        msg: "",
+        row: "",
+      });
     }
   });
 
   router.get("/diary/board_row", function (req, res) {
-    if(!req.user){
-        res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
+    if (!req.user) {
+      res.send(
+        "<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>"
+      );
     } else {
-        console.log("board row get");
-        res.cookie('board','row', {maxAge:1000*60*60*24*30});
-        res.render('board_row.ejs', {profile : app.locals.profile, msg:"" , row:""});
+      console.log("board row get");
+      res.cookie("board", "row", { maxAge: 1000 * 60 * 60 * 24 * 30 });
+      res.render("board_row.ejs", {
+        profile: app.locals.profile,
+        msg: "",
+        row: "",
+      });
     }
   });
 
-    const user_join = require('./user/join');
-    // router.use(user_join);
-    user_join(passport);
+  const user_join = require("./user/join");
+  // router.use(user_join);
+  user_join(passport);
 
-    router.get('/user/join', (req, res)=>{
-        console.log('get join url');
-        var msg; 
-        var errMsg = req.flash('error'); 
-        if(errMsg) msg = errMsg; 
-        if(!req.user){
-          res.render('join.ejs', {'message' : msg});
-        } else {
-          res.send("<script>alert('이미 로그인 되었습니다.');location.href='/';</script>")
-        }
-    }); 
-    
-    router.post('/user/join', passport.authenticate('local-join',{             
-            successRedirect : '/profile', //인증성공시 이동하는화면주소 
-            failureRedirect : '/user/join', //인증실패시 이동하는화면주소 
-            failureFlash : true //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨. 
-    }));
+  router.get("/user/join", (req, res) => {
+    console.log("get join url");
+    var msg;
+    var errMsg = req.flash("error");
+    if (errMsg) msg = errMsg;
+    if (!req.user) {
+      res.render("join.ejs", { message: msg });
+    } else {
+      res.send(
+        "<script>alert('이미 로그인 되었습니다.');location.href='/';</script>"
+      );
+    }
+  });
 
 
-    // naver 로그인
-    router.get('/login/naver',
-        passport.authenticate('naver')
-    );
-    // res.redirect('/');
+  router.post(
+    "/user/join",
+    passport.authenticate("local-join", {
+      successRedirect: "/profile", //인증성공시 이동하는화면주소
+      failureRedirect: "/user/join", //인증실패시 이동하는화면주소
+      failureFlash: true, //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨.
+    })
+  );
 
   // naver 로그인
   router.get("/login/naver", passport.authenticate("naver"));
@@ -279,7 +296,7 @@ module.exports = function (app, router, passport) {
   const diary_view = require("./diary/view");
   router.use("/diary/view", diary_view);
 
-  const diary_edit = require('./diary/edit');
+  const diary_edit = require("./diary/edit");
   router.use("/diary/edit", diary_edit);
 
   const diary_delete = require("./diary/delete");
