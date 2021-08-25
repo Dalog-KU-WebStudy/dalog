@@ -24,6 +24,10 @@
         
         const id = '<%=id%>';
 
+        let board = '<%=board%>';
+        if(!board){
+            board = 'grid';
+        }
     </script>
     <header class="header">
         <div class="wrapper">
@@ -56,7 +60,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/diary/board_grid" target="_self" style="text-decoration: none; cursor: pointer">
+                        <a href="/diary/board_<%=board%>" target="_self" style="text-decoration: none; cursor: pointer">
                             <img src="/media/board.png" class="board" style="cursor: pointer;" alt="게시판" />
                         </a>
                     </li>

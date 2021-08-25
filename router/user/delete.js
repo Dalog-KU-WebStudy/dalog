@@ -10,9 +10,24 @@ router.post('/', (req,res)=>{
     
     if(req.user){
         console.dir(req.user);
-        const query = connection.query(`delete from dalog_user where user_id=?`, req.user.user_id, (err,result)=>{
+        connection.query(`delete from title where user_id=?`, req.user.user_id, (err,result)=>{
             if(err){
-                return done(err);
+                throw err;
+            }
+        })
+        connection.query(`delete from diary where user_id=?`, req.user.user_id, (err,result)=>{
+            if(err){
+                throw err;
+            }
+        })
+        connection.query(`delete from calendar where user_id=?`, req.user.user_id, (err,result)=>{
+            if(err){
+                throw err;
+            }
+        })
+        connection.query(`delete from dalog_user where user_id=?`, req.user.user_id, (err,result)=>{
+            if(err){
+                throw err;
             } else {
                 console.log(req.user.user_id+ '회원 삭제');
 

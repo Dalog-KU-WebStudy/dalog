@@ -58,6 +58,12 @@ module.exports = function(router) {
 
         console.log(date, weather, temp_high, temp_low, title, content);
 
+        if(title===''){
+            return res.send("<script>alert('제목을 입력해주세요.');history.go(-1);</script>");
+        } else if(content===''){
+            return res.send("<script>alert('내용을 입력해주세요.');history.go(-1);</script>");
+        }
+
         if(req.user){
             const query = connection.query(`insert into diary (user_id, diary_date, diary_title, diary_content, image_dir, weather, temp_high, temp_low) values (?,?,?,?,?,?,?,?)`,[req.user.user_id, date, title, content, filename, weather, temp_high, temp_low], (err,result)=>{
                 if(err){

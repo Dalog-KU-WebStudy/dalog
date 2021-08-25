@@ -58,31 +58,31 @@ const drawWeather = (weather) => {
   
   //날씨에 따라서 아이콘이 달라야하므로 조건문으로 처리해주고
   if(weather.main == "Clouds"){
-    document.getElementById("currentWeather").src = "../media/icon_cloud.png";
+    document.getElementById("currentWeather").src = "/media/icon_cloud.png";
     document.getElementById("currentWeather").title = "흐림";
   }
   else if(weather.main == "Atmosphere"){
-    document.getElementById("currentWeather").src = "../media/icon_cloud.png";
+    document.getElementById("currentWeather").src = "/media/icon_cloud.png";
     document.getElementById("currentWeather").title = "흐림";
   }
   else if(weather.main == "Clear"){
-    document.getElementById("currentWeather").src = "../media/icon_sun.png";
+    document.getElementById("currentWeather").src = "/media/icon_sun.png";
     document.getElementById("currentWeather").title = "맑음";
   }
   else if(weather.main == "Snow"){
-    document.getElementById("currentWeather").src = "../media/icon_snow.png";
+    document.getElementById("currentWeather").src = "/media/icon_snow.png";
     document.getElementById("currentWeather").title = "눈";
   }
   else if(weather.main == "Rain"){
-    document.getElementById("currentWeather").src = "../media/icon_rain.png";
+    document.getElementById("currentWeather").src = "/media/icon_rain.png";
     document.getElementById("currentWeather").title = "비";
   }
   else if(weather.main == "Drizzle"){
-    document.getElementById("currentWeather").src = "../media/icon_rain.png";
+    document.getElementById("currentWeather").src = "/media/icon_rain.png";
     document.getElementById("currentWeather").title = "비";
   }
   else if(weather.main == "Thunderstorm"){
-    document.getElementById("currentWeather").src = "../media/icon_thunderstorm.png";
+    document.getElementById("currentWeather").src = "/media/icon_thunderstorm.png";
     document.getElementById("currentWeather").title = "천둥번개";
   }
   else{
@@ -110,4 +110,5 @@ const drawWeather = (weather) => {
 };
 
 // 위치 받으면 함수 내부에서 위에 있는 것들이 모두 처리된다.
-getLocation();
+//write, edit.js 안에서 실행
+//getLocation();
