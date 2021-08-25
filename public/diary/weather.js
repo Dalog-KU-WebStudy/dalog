@@ -1,6 +1,4 @@
 const main = document.getElementsByClassName("main");
-const min = document.getElementsByClassName("min"); 
-const max = document.getElementsByClassName("max"); 
 const datepicker = document.getElementsByClassName("datepicker");
 
 function changeDate() {
@@ -39,9 +37,7 @@ const getWeatherData = async (lat, lon) => {
 
   //날씨 정보 받기 시작
   const weather = {
-    main: weatherData.weather[0].main,
-    min: (weatherData.main.temp_max - ABS_ZERO).toFixed(2),
-    max: (weatherData.main.temp_min - ABS_ZERO).toFixed(2)
+    main: weatherData.weather[0].main
   }
   
   // 값 가져오기 시작!!
@@ -104,9 +100,7 @@ const drawWeather = (weather) => {
   else  if(document.getElementById("currentWeather").title == "천둥 번개"){
     document.getElementById("thunderstorm").selected = "selected";
   }
-  // 최고 최저 기온도 받아오자
-  min[0].value =weather.min;
-  max[0].value =weather.max;
+
 };
 
 // 위치 받으면 함수 내부에서 위에 있는 것들이 모두 처리된다.
