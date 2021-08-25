@@ -243,7 +243,6 @@ module.exports = function (app, router, passport) {
         passport.authenticate('naver')
     );
     // res.redirect('/');
-  });
 
   // naver 로그인
   router.get("/login/naver", passport.authenticate("naver"));

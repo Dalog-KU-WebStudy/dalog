@@ -23,7 +23,7 @@ module.exports = function(app, router){
                             req.user.title = req.body.titleInput;
                             console.log(req.user);
                             app.locals.profile = req.user;
-                            res.render('index.ejs', {profile:req.user});
+                            res.render('index.ejs', {profile:req.user, board: req.cookies['board']});
                         })
                     }
                     else {
@@ -34,7 +34,7 @@ module.exports = function(app, router){
                             req.user.title = req.body.titleInput;
                             console.log(req.user);
                             app.locals.profile = req.user;
-                            res.render('index.ejs', {profile:req.user});
+                            res.render('index.ejs', {profile:req.user, board: req.cookies['board']});
                         })
                     }
                 }
