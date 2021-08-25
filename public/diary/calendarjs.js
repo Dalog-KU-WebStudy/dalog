@@ -241,7 +241,6 @@ const renderCalendar = () => {
 };
 
 renderCalendar();
-setColorBtnOnClick();
 
 const prevMonth = () => {
   date.setMonth(date.getMonth() - 1);
