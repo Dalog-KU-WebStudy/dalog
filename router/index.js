@@ -180,27 +180,6 @@ module.exports = function (app, router, passport) {
     }
   });
 
-  router.get("/diary/view", function (req, res) {
-    // if(!req.user){
-    //     res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
-    // } else {
-    //     res.sendFile(path.join(__dirname, '../public/diary/view.html'));
-    // }
-    console.log("view get");
-    res.sendFile(path.join(__dirname, "../public/diary/view.html"));
-  });
-
-  router.get("/diary/edit", function (req, res) {
-    // if(!req.user){
-    //     res.send("<script>alert('로그인이 필요합니다.');location.href='/user/login';</script>");
-    // } else {
-    //     res.sendFile(path.join(__dirname, '../public/diary/edit.html'));
-    // }
-    console.log("edit get");
-    res.render("edit.ejs", { profile: app.locals.profile });
-    // res.sendFile(path.join(__dirname, '../public/diary/edit.html'));
-  });
-
   router.get("/diary/board_grid", function (req, res) {
     if (!req.user) {
       res.send(
