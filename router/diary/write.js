@@ -56,11 +56,14 @@ module.exports = function(router) {
         const title=req.body.title;
         const content=req.body.content;
 
+        const extractTextPattern = /(<([^>]+)>)/gi;
+        const extractedText = content.replace(extractTextPattern, "");
+
         console.log(date, weather, temp_high, temp_low, title, content);
 
         if(title===''){
             return res.send("<script>alert('제목을 입력해주세요.');history.go(-1);</script>");
-        } else if(content===''){
+        } else if(extractedText===''){
             return res.send("<script>alert('내용을 입력해주세요.');history.go(-1);</script>");
         }
 
