@@ -106,12 +106,13 @@ function changeDate() {
 
     if(datepicker[0].value==dateString){
         console.log('오늘날짜 선택')
-        changeWeather_flag=1;
+        changeWeather_flag=0;
         getLocation();
     } else {
         console.log('과거날짜 선택');
         changeWeather_flag=0;
         changeWeather();
         document.getElementById('weather_none').selected = true;
+        weather_select_change();
     }
 }
