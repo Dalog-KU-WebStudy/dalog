@@ -3,7 +3,6 @@ const kakao_config = require('../config/kakao_config');
 const dbconfig = require('../config/dbconfig');
 const mysql = require('mysql');
 const connection = mysql.createConnection(dbconfig);
-const sha256 = require('sha256');
 connection.connect();
 
 module.exports = function(passport){
@@ -23,7 +22,6 @@ module.exports = function(passport){
             user = {
                 user_id: profile._json.kakao_account.email,
                 name: profile.username,
-                password: String(sha256.x2(String(profile.id))),
                 birthday: NewUserBirth,
                 provider: 'kakao',
             };
@@ -35,8 +33,8 @@ module.exports = function(passport){
                     if (result.length == 0) {
                         // 신규 유저 회원가입 이후 로그인
                         console.log('new user')
-                        const sql = 'insert into dalog_user (user_id, user_pw, user_name, birth) values (?,?,?,?)';
-                        connection.query(sql, [user.user_id, user.password, user.name, user.birthday], (err, result) => {
+                        const sql = 'insert into dalog_user (user_id, user_name, birth) values (?,?,?)';
+                        connection.query(sql, [user.user_id, user.name, user.birthday], (err, result) => {
                             if (err) {
                                 return done(err);
                             } else {
