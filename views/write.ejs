@@ -110,7 +110,7 @@
                 <div id="inner_wrap">
                     <div id="write_date">
                         <div id="date">
-                            <input type="text" class="datepicker" id="datepicker" name="date" onchange="changeWeather()">
+                            <input type="text" class="datepicker" id="datepicker" name="date" onchange="changeDate()">
                         </div>
 
                         <div id="weather_box">
@@ -128,11 +128,11 @@
                                 <div id="weather" class>
                                     <img class="main" id="currentWeather" src="" title="" alt="사진없음">
                                     <select id="weather_select" name="weather" onchange="weather_select_change()">
-                                        <option value="sun">맑음</option>
-                                        <option value="cloud">흐림</option>
-                                        <option value="rain">비</option>
-                                        <option value="snow">눈</option>
-                                        <option value="thunderstorm">천둥 번개</option>
+                                        <option id = "sun" value="sun">맑음</option>
+                                        <option id = "cloud" value="cloud">흐림</option>
+                                        <option id = "rain" value="rain">비</option>
+                                        <option id = "snow" value="snow">눈</option>
+                                        <option id = "thunderstorm" value="thunderstorm">천둥 번개</option>
                                     </select>
                                 </div>
 

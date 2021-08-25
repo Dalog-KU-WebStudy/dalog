@@ -3,7 +3,9 @@ const min = document.getElementsByClassName("min");
 const max = document.getElementsByClassName("max"); 
 const datepicker = document.getElementsByClassName("datepicker");
 
-
+function changeDate() {
+  console.log(datepicker[0].value);  
+}
 
 // 위치정보를 얻어오는 함수
 function getLocation() {
@@ -86,7 +88,22 @@ const drawWeather = (weather) => {
   else{
     main[0].innerHTML = "정보불러오기 실패";
   }
-
+  
+  if(document.getElementById("currentWeather").title == "흐림"){
+    document.getElementById("cloud").selected = "selected";
+  }
+  else  if(document.getElementById("currentWeather").title == "맑음"){
+    document.getElementById("sun").selected = "selected";
+  }
+  else  if(document.getElementById("currentWeather").title == "비"){
+    document.getElementById("rain").selected = "selected";
+  }
+  else  if(document.getElementById("currentWeather").title == "눈"){
+    document.getElementById("snow").selected = "selected";
+  }  
+  else  if(document.getElementById("currentWeather").title == "천둥 번개"){
+    document.getElementById("thunderstorm").selected = "selected";
+  }
   // 최고 최저 기온도 받아오자
   min[0].value =weather.min;
   max[0].value =weather.max;
