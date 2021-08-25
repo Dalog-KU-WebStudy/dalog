@@ -114,18 +114,11 @@
                 <div id="inner_wrap">
                 <div id="write_date">
                     <div id="date">
-                        <input type="text" id="datepicker-date" name="date" onchange="changeDate()">
+                        <input type="text" class="datepicker" id="datepicker" name="date" onchange="changeDate()">
                     </div>
                     <div id="weather_box">
                         <div id="weather_icon">
-                            <div id="temperature">
-                                <div id="temper_night">
-                                    <input type="text" class="min" name="temp_low" id="input_temper_night" readonly>
-                                </div>
-                                <div id="temper_day">
-                                    <input type="text" class="max" name="temp_high" id="input_temper_day" readonly>
-                                </div>
-                            </div>
+                            
                             <div id="weather">
                                 <img class="main" src="" title="" id="currentWeather">
                                 <select id="weather_select" name="weather" onchange="weather_select_change()">

@@ -57,6 +57,10 @@ const drawWeather = (weather) => {
     document.getElementById("currentWeather").src = "/media/icon_cloud.png";
     document.getElementById("currentWeather").title = "흐림";
   }
+  else if(weather.main == "Mist"){
+    document.getElementById("currentWeather").src = "/media/icon_cloud.png";
+    document.getElementById("currentWeather").title = "흐림";
+  }
   else if(weather.main == "Clear"){
     document.getElementById("currentWeather").src = "/media/icon_sun.png";
     document.getElementById("currentWeather").title = "맑음";
