@@ -16,17 +16,15 @@ function onSubmit() {
 
 let changeWeather_flag = 0;
 function changeWeather() {
+    console.log('changeWeather 호출');
     if (changeWeather_flag==0) {
         document.getElementById('weather_select').style.display="block";
-            
-
         document.getElementById('manual_button').childNodes[1].innerText = "저장";
 
         changeWeather_flag=1;
     } else if (changeWeather_flag==1) {
         document.getElementById('weather_select').style.display="none";
-     
-        document.getElementById('manual_button').childNodes[1].innerText = "변경";
+        document.getElementById('manual_button').childNodes[1].innerText = "날씨 변경";
 
         changeWeather_flag=0;
     }
@@ -41,6 +39,7 @@ const weatherType ={
     thunderstorm:"천둥 번개"
 }
 function weather_select_change() {
+    console.log('weather_select_change 호출');
     let select = document.getElementById('weather_select');
     selected_weather = select.options[select.selectedIndex].value;
     document.getElementById('weather').childNodes[1].src=`/media/icon_${selected_weather}.png`;
@@ -87,15 +86,15 @@ $(function() {
     });
 
     //input을 datepicker로 선언
-    $("#write_date #date #datepicker").datepicker();                    
+    $("#write_date #date #datepicker-date").datepicker();                    
 
     //초기값을 오늘 날짜로 설정
-    $('#write_date #date #datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+    $('#write_date #date #datepicker-date').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
     
 });
 
 function changeDate() {
-    console.log(datepicker[0].value);  
+    console.log(datepicker[0].value);
     
     const today = new Date();
     const year = today.getFullYear();
@@ -107,12 +106,12 @@ function changeDate() {
 
     if(datepicker[0].value==dateString){
         console.log('오늘날짜 선택')
-        changeWeather_flag=0;
+        changeWeather_flag=1;
         getLocation();
     } else {
         console.log('과거날짜 선택');
-        changeWeather_flag=1;
-        let select = document.getElementById('weather_select');
-        select.options[0].selected = true;
+        changeWeather_flag=0;
+        changeWeather();
+        document.getElementById('weather_none').selected = true;
     }
 }
