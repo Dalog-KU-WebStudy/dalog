@@ -251,6 +251,7 @@ module.exports = function (app, router, passport) {
     }
   });
 
+
   router.post(
     "/user/join",
     passport.authenticate("local-join", {
