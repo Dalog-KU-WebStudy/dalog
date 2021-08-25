@@ -57,11 +57,12 @@ const render = async (diaryArr) => {
       titledom.innerText = diary.diary_title;
       flex.appendChild(titledom);
 
-      const weatherdom = document.createElement("img");
-      weatherdom.className = "diary__weather";
-      weatherdom.setAttribute("src", `../media/icon_${diary.weather}.png`);
-      flex.appendChild(weatherdom);
-
+      if (diary.weather) {
+        const weatherdom = document.createElement("img");
+        weatherdom.className = "diary__weather";
+        weatherdom.setAttribute("src", `../media/icon_${diary.weather}.png`);
+        flex.appendChild(weatherdom);
+      }
       const datedom = document.createElement("div");
       datedom.className = "diary__date";
       datedom.innerText = diary.diary_date;
