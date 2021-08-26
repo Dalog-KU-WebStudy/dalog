@@ -26,7 +26,7 @@ $(function() {
 });
 
 const fillContent = async function(){
-    const url = `http://ec2-13-124-209-233.ap-northeast-2.compute.amazonaws.com:3000/diary/edit/${id}`;
+    const url = `http://ec2-15-164-72-209.ap-northeast-2.compute.amazonaws.com:3000/diary/edit/${id}`;
     const xhr = new XMLHttpRequest();
     xhr.open('post', url);
     xhr.send();
