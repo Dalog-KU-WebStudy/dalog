@@ -49,7 +49,7 @@ const fillContent = async function(){
                 }
             }
             else {
-                getLocation();
+                getWeatherData();
             }
             document.getElementById('input_title').value=diary.diary_title;
             

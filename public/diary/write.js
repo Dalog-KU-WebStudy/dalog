@@ -107,7 +107,7 @@ function changeDate() {
     if(datepicker[0].value==dateString){
         console.log('오늘날짜 선택')
         changeWeather_flag=0;
-        getLocation();
+        getWeatherData();
     } else {
         console.log('과거날짜 선택');
         changeWeather_flag=0;
