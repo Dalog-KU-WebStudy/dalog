@@ -1,163 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>달:로그</title>
     <meta charset="utf-8" />
+    <meta
+      property="og:image"
+      content="https://images.velog.io/images/sukong/post/95c0e965-340a-47af-b7f6-c071ff45958e/image.png"
+    />
+    <meta property="og:description" content="간편하게 작성하는 일기, 달:로그" />
+    <meta property="og:title" content="달:로그" />
+    <meta property="og:site_name" content="달:로그" />
+    <meta property="og:type" content="website" />
     <link rel="stylesheet" type="text/css" href="/css/index.css" />
-    <link rel="stylesheet" type="text/css" href="/css/write.css">
-    <link href="https://spoqa.github.io/spoqa-han-sans/" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/css/write.css" />
+    <link
+      href="https://spoqa.github.io/spoqa-han-sans/"
+      rel="stylesheet"
+      type="text/css"
+    />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap"
+      rel="stylesheet"
+    />
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" defer></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
     <script src="/summernote/summernote-lite.js"></script>
     <script src="/summernote/summernote-ko-KR.js"></script>
-    <link rel="stylesheet" href="/summernote/summernote-lite.css">
+    <link rel="stylesheet" href="/summernote/summernote-lite.css" />
     <!--<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
-    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css" />
     <script src="/diary/weather.js"></script>
     <script>
-        $(function () {
-            $('#input_photo').change(function () {
-                readURL(this);
-            })
+      $(function () {
+        $("#input_photo").change(function () {
+          readURL(this);
         });
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#today_photo').attr('src', e.target.result);
-                    document.getElementById('today_photo').style='display:block;'
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
+      });
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            $("#today_photo").attr("src", e.target.result);
+            document.getElementById("today_photo").style = "display:block;";
+          };
+          reader.readAsDataURL(input.files[0]);
         }
+      }
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <script>
-        
-        console.dir('<%=profile%>')
-        let profile = "<%=JSON.stringify(profile)%>";
-        if(profile){
-            profile = profile.replaceAll('&#34;','\"');
-            profile = JSON.parse(profile);
-            console.dir(profile);
-        }
-        const id = '<%=id%>';
+      console.dir("<%=profile%>");
+      let profile = "<%=JSON.stringify(profile)%>";
+      if (profile) {
+        profile = profile.replaceAll("&#34;", '"');
+        profile = JSON.parse(profile);
+        console.dir(profile);
+      }
+      const id = "<%=id%>";
 
-        let board = '<%=board%>';
-        if(!board){
-            board = 'grid';
-        }
+      let board = "<%=board%>";
+      if (!board) {
+        board = "grid";
+      }
     </script>
     <header class="header">
-        <div class="wrapper">
-            <img src="/media/logo4.jpg" class="logo" onclick="location.href='/'" style="cursor: pointer" />
-            <form action="/" method="post" id="title_form">
-                <input
-                    id="titleInput"
-                    name="titleInput"
-                    class="dalog-title"
-                    type="text"
-                    value="메인페이지에서만 수정이 가능합니다!"
-                    onfocus="document.getElementById('title-submit').style.visibility='visible';document.getElementById('title-submit').style.opacity=1;"
-                    onblur="document.getElementById('title-submit').style.opacity=0;"
-                    title="메인페이지에서만 수정이 가능합니다."
-                    disabled
+      <div class="wrapper">
+        <img
+          src="/media/logo4.jpg"
+          class="logo"
+          onclick="location.href='/'"
+          style="cursor: pointer"
+        />
+        <form action="/" method="post" id="title_form">
+          <input
+            id="titleInput"
+            name="titleInput"
+            class="dalog-title"
+            type="text"
+            value="메인페이지에서만 수정이 가능합니다!"
+            onfocus="document.getElementById('title-submit').style.visibility='visible';document.getElementById('title-submit').style.opacity=1;"
+            onblur="document.getElementById('title-submit').style.opacity=0;"
+            title="메인페이지에서만 수정이 가능합니다."
+            disabled
+          />
+          <input
+            type="image"
+            id="title-submit"
+            class="title-submit"
+            src="/media/title-edit.png"
+            value=""
+            onclick="document.getElementById('title_form').submit();"
+          />
+        </form>
+        <script>
+          if (profile) {
+            document.getElementById("titleInput").value = profile.title;
+          }
+        </script>
+        <nav>
+          <ul class="main-menu">
+            <li>
+              <a
+                href="/diary/write"
+                target="_self"
+                style="text-decoration: none; cursor: pointer"
+              >
+                <img
+                  src="/media/write.png"
+                  class="write"
+                  style="cursor: pointer"
+                  alt="글쓰기"
                 />
-                <input type="image" id="title-submit" class="title-submit" src="/media/title-edit.png" value="" onclick="document.getElementById('title_form').submit();"/>
-            </form>
-            <script>
-                if(profile){
-                    document.getElementById("titleInput").value = profile.title;
-                }
-            </script>
-            <nav>
-                <ul class="main-menu">
-                    <li>
-                        <a href="/diary/write" target="_self" style="text-decoration: none; cursor: pointer">
-                            <img src="/media/write.png" class="write" style="cursor: pointer;" alt="글쓰기" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/diary/board_<%=board%>" target="_self" style="text-decoration: none; cursor: pointer">
-                            <img src="/media/board.png" class="board" style="cursor: pointer;" alt="게시판" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="/media/profile.png" style="cursor: pointer;" /></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="/user/modify" target="_self"
-                                    style="text-decoration: none; cursor: pointer">정보수정</a>
-                            </li>
-                            <li>
-                                <a href="/user/logout" target="_self"
-                                    style="text-decoration: none; cursor: pointer">로그아웃</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/diary/board_<%=board%>"
+                target="_self"
+                style="text-decoration: none; cursor: pointer"
+              >
+                <img
+                  src="/media/board.png"
+                  class="board"
+                  style="cursor: pointer"
+                  alt="게시판"
+                />
+              </a>
+            </li>
+            <li>
+              <a href="#"
+                ><img src="/media/profile.png" style="cursor: pointer"
+              /></a>
+              <ul class="sub-menu">
+                <li>
+                  <a
+                    href="/user/modify"
+                    target="_self"
+                    style="text-decoration: none; cursor: pointer"
+                    >정보수정</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/user/logout"
+                    target="_self"
+                    style="text-decoration: none; cursor: pointer"
+                    >로그아웃</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
-
     <div id="container">
-        <div id="wrap">
-            <form action="/diary/edit/post/<%=id%>" method="POST" id="write_form" onsubmit="return onSubmit()"  enctype="multipart/form-data">
-                <div id="inner_wrap">
-                <div id="write_date">
-                    <div id="date">
-                        <input type="text" class="datepicker" id="datepicker" name="date" onchange="changeDate()">
-                    </div>
-                    <div id="weather_box">
-                        <div id="weather_icon">
-                            
-                            <div id="weather">
-                                <img class="main" src="" title="" id="currentWeather">
-                                <select id="weather_select" name="weather" onchange="weather_select_change()">
-                                    <option id="weather_none" value="weather_none">선택안함</option>
-                                    <option id="sun" value="sun">맑음</option>
-                                    <option id="cloud" value="cloud">흐림</option>
-                                    <option id="rain" value="rain">비</option>
-                                    <option id="snow" value="snow">눈</option>
-                                    <option id="thunderstorm" value="thunderstorm">천둥 번개</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div id="manual_button">
-                            <button type="button" onclick="changeWeather()">날씨 변경</button>
-                        </div>
-                    </div>
+      <div id="wrap">
+        <form
+          action="/diary/edit/post/<%=id%>"
+          method="POST"
+          id="write_form"
+          onsubmit="return onSubmit()"
+          enctype="multipart/form-data"
+        >
+          <div id="inner_wrap">
+            <div id="write_date">
+              <div id="date">
+                <input
+                  type="text"
+                  class="datepicker"
+                  id="datepicker"
+                  name="date"
+                  onchange="changeDate()"
+                />
+              </div>
+              <div id="weather_box">
+                <div id="weather_icon">
+                  <div id="weather">
+                    <img class="main" src="" title="" id="currentWeather" />
+                    <select
+                      id="weather_select"
+                      name="weather"
+                      onchange="weather_select_change()"
+                    >
+                      <option id="weather_none" value="weather_none">
+                        선택안함
+                      </option>
+                      <option id="sun" value="sun">맑음</option>
+                      <option id="cloud" value="cloud">흐림</option>
+                      <option id="rain" value="rain">비</option>
+                      <option id="snow" value="snow">눈</option>
+                      <option id="thunderstorm" value="thunderstorm">
+                        천둥 번개
+                      </option>
+                    </select>
+                  </div>
                 </div>
-                <div id="write_title">
-                    <input type="text" id="input_title" name="title" placeholder="제목을 입력해주세요">
+                <div id="manual_button">
+                  <button type="button" onclick="changeWeather()">
+                    날씨 변경
+                  </button>
                 </div>
-                <div id="attach_photo">
-                    <label for="input_photo" title="사진 첨부"></label>
-                    <input type="file" id="input_photo" name="photo">
-                    <img id="today_photo" alt="오늘의 사진" title="오늘의 사진" >
-                </div>
-                <div id="write_content">
-                    <textarea name="content" id="input_content" placeholder="내용을 입력해주세요"></textarea>
-                </div>
+              </div>
             </div>
-            <div id="submit_button">
-                <input type="submit" id="submit_btn" value="등록">
+            <div id="write_title">
+              <input
+                type="text"
+                id="input_title"
+                name="title"
+                placeholder="제목을 입력해주세요"
+              />
             </div>
-            </form>
-        </div>
+            <div id="attach_photo">
+              <label for="input_photo" title="사진 첨부"></label>
+              <input type="file" id="input_photo" name="photo" />
+              <img id="today_photo" alt="오늘의 사진" title="오늘의 사진" />
+            </div>
+            <div id="write_content">
+              <textarea
+                name="content"
+                id="input_content"
+                placeholder="내용을 입력해주세요"
+              ></textarea>
+            </div>
+          </div>
+          <div id="submit_button">
+            <input type="submit" id="submit_btn" value="등록" />
+          </div>
+        </form>
+      </div>
     </div>
-</body>
-<script src="/diary/write.js" defer></script>
-<script src="/diary/edit.js" defer></script>
-<script>
-    console.log(document.getElementById('note-editable'));
-</script>
+  </body>
+  <script src="/diary/write.js" defer></script>
+  <script src="/diary/edit.js" defer></script>
+  <script>
+    console.log(document.getElementById("note-editable"));
+  </script>
 </html>

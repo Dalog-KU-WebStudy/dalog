@@ -3,6 +3,14 @@
   <head>
     <title>달:로그</title>
     <meta charset="utf-8" />
+    <meta
+      property="og:image"
+      content="https://images.velog.io/images/sukong/post/95c0e965-340a-47af-b7f6-c071ff45958e/image.png"
+    />
+    <meta property="og:description" content="간편하게 작성하는 일기, 달:로그" />
+    <meta property="og:title" content="달:로그" />
+    <meta property="og:site_name" content="달:로그" />
+    <meta property="og:type" content="website" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <link rel="stylesheet" type="text/css" href="css/Questyle.css" />
     <link rel="stylesheet" type="text/css" href="css/calstyle.css" />
@@ -19,18 +27,18 @@
   </head>
   <body>
     <script>
-        console.dir('<%=profile%>')
-        let profile = "<%=JSON.stringify(profile)%>";
-        if(profile){
-          profile = profile.replaceAll('&#34;','\"');
-          profile = JSON.parse(profile);
-          console.dir(profile);
-        }
-        let board = '<%=board%>';
-        if(!board){
-          board = 'grid';
-        }
-        console.log('<%=board%>');
+      console.dir("<%=profile%>");
+      let profile = "<%=JSON.stringify(profile)%>";
+      if (profile) {
+        profile = profile.replaceAll("&#34;", '"');
+        profile = JSON.parse(profile);
+        console.dir(profile);
+      }
+      let board = "<%=board%>";
+      if (!board) {
+        board = "grid";
+      }
+      console.log("<%=board%>");
     </script>
     <header class="header">
       <div class="wrapper">
@@ -50,10 +58,17 @@
             onfocus="document.getElementById('title-submit').style.visibility='visible'; document.getElementById('title-submit').style.opacity=1;"
             onblur="document.getElementById('title-submit').style.opacity=0;"
           />
-          <input type="image" id="title-submit" class="title-submit" src="./media/title-edit.png" value="" onclick="document.getElementById('title_form').submit();"/>
+          <input
+            type="image"
+            id="title-submit"
+            class="title-submit"
+            src="./media/title-edit.png"
+            value=""
+            onclick="document.getElementById('title_form').submit();"
+          />
         </form>
         <script>
-          if(profile){
+          if (profile) {
             document.getElementById("titleInput").value = profile.title;
           }
         </script>
@@ -139,50 +154,108 @@
     </header>
 
     <div class="Area">
-
-      
       <div class="Box">
+        <form
+          action="/question"
+          method="POST"
+          id="simple_write"
+          enctype="application/json"
+        >
+          <div class="Question">
+            <select name="selectQuestion" id="selectQuestion">
+              <option value="">질문을 선택해주세요</option>
+              <option value="오늘 맛있게 먹은 음식이 있나요?">
+                오늘 맛있게 먹은 음식이 있나요?
+              </option>
+              <option value="지금 어떤 음식이 먹고 싶나요?">
+                지금 어떤 음식이 먹고 싶나요?
+              </option>
+              <option value="오늘 짜증나는 일이 있었나요?">
+                오늘 짜증나는 일이 있었나요?
+              </option>
+              <option value="오늘 화나는 일이 있었나요?">
+                오늘 화나는 일이 있었나요?
+              </option>
+              <option value="오늘 기쁜 일이 있었나요?">
+                오늘 기쁜 일이 있었나요?
+              </option>
+              <option value="오늘 본 재밌었던 유튜브 영상은 무엇인가요?">
+                오늘 본 재밌었던 유튜브 영상은 무엇인가요?
+              </option>
+              <option value="최근에 본 영화는 무엇인가요? 어땠나요?">
+                최근에 본 영화는 무엇인가요? 어땠나요?
+              </option>
+              <option value="요즘 보고싶은 영화는 무엇인가요?">
+                요즘 보고싶은 영화는 무엇인가요?
+              </option>
+              <option value="최근에 본 드라마는 무엇인가요? 어땠나요?">
+                최근에 본 드라마는 무엇인가요? 어땠나요?
+              </option>
+              <option value="요즘 보고싶은 드라마는 무엇인가요?">
+                요즘 보고싶은 드라마는 무엇인가요?
+              </option>
+              <option value="요즘 유행하는 노래는 무엇인가요?">
+                요즘 유행하는 노래는 무엇인가요?
+              </option>
+              <option value="요즘 몰입하고 있는 일이 있나요?">
+                요즘 몰입하고 있는 일이 있나요?
+              </option>
+              <option value="요즘 꽂힌 노래는 무엇인가요?">
+                요즘 꽂힌 노래는 무엇인가요?
+              </option>
+              <option value="사고 싶은 물건이 있나요?">
+                사고 싶은 물건이 있나요?
+              </option>
+              <option value="오늘 산 물건은 마음에 드나요?">
+                오늘 산 물건은 마음에 드나요?
+              </option>
+              <option value="요즘 좋아하는 연예인이 있나요?">
+                요즘 좋아하는 연예인이 있나요?
+              </option>
+              <option value="요즘 인기 많은 연예인은 누구인가요?">
+                요즘 인기 많은 연예인은 누구인가요?
+              </option>
+              <option value="요즘 좋아하는 사람 있나요?( ͡° ͜ʖ ͡°)">
+                요즘 좋아하는 사람 있나요?( ͡° ͜ʖ ͡°)
+              </option>
+              <option value="현재 가장 큰 고민은 무엇인가요?">
+                현재 가장 큰 고민은 무엇인가요?
+              </option>
+              <option value="100억이 주어졌을 때 어떤 것을 제일 하고 싶나요?">
+                100억이 주어졌을 때 어떤 것을 제일 하고 싶나요?
+              </option>
+              <option value="오늘 컨디션이 좋았나요?">
+                오늘 컨디션이 좋았나요?
+              </option>
+              <option value="오늘 하루를 한 단어로 표현하자면?">
+                오늘 하루를 한 단어로 표현하자면?
+              </option>
+              <option value="오늘 누구를 만났나요?">
+                오늘 누구를 만났나요?
+              </option>
+            </select>
+          </div>
+          <div class="Answer">
+            <p>
+              <input
+                type="text"
+                placeholder="A. "
+                class="WriteAnswer"
+                name="answer"
+              />
+            </p>
 
-        <form action="/question" method="POST" id="simple_write" enctype="application/json">
-
-        <div class="Question">
-         
-          <select name="selectQuestion" id="selectQuestion" >
-            <option value="">질문을 선택해주세요</option>
-            <option value="오늘 맛있게 먹은 음식이 있나요?">오늘 맛있게 먹은 음식이 있나요?</option>
-            <option value="지금 어떤 음식이 먹고 싶나요?">지금 어떤 음식이 먹고 싶나요?</option>
-            <option value="오늘 짜증나는 일이 있었나요?">오늘 짜증나는 일이 있었나요?</option>
-            <option value="오늘 화나는 일이 있었나요?">오늘 화나는 일이 있었나요?</option>
-            <option value="오늘 기쁜 일이 있었나요?">오늘 기쁜 일이 있었나요?</option>
-            <option value="오늘 본 재밌었던 유튜브 영상은 무엇인가요?">오늘 본 재밌었던 유튜브 영상은 무엇인가요?</option>
-            <option value="최근에 본 영화는 무엇인가요? 어땠나요?">최근에 본 영화는 무엇인가요? 어땠나요?</option>
-            <option value="요즘 보고싶은 영화는 무엇인가요?">요즘 보고싶은 영화는 무엇인가요?</option>
-            <option value="최근에 본 드라마는 무엇인가요? 어땠나요?">최근에 본 드라마는 무엇인가요? 어땠나요?</option>
-            <option value="요즘 보고싶은 드라마는 무엇인가요?">요즘 보고싶은 드라마는 무엇인가요?</option>
-            <option value="요즘 유행하는 노래는 무엇인가요?">요즘 유행하는 노래는 무엇인가요?</option>
-            <option value="요즘 몰입하고 있는 일이 있나요?">요즘 몰입하고 있는 일이 있나요?</option>
-            <option value="요즘 꽂힌 노래는 무엇인가요?">요즘 꽂힌 노래는 무엇인가요?</option>
-            <option value="사고 싶은 물건이 있나요?">사고 싶은 물건이 있나요?</option>
-            <option value="오늘 산 물건은 마음에 드나요?">오늘 산 물건은 마음에 드나요?</option>
-            <option value="요즘 좋아하는 연예인이 있나요?">요즘 좋아하는 연예인이 있나요?</option>
-            <option value="요즘 인기 많은 연예인은 누구인가요?">요즘 인기 많은 연예인은 누구인가요?</option>
-            <option value="요즘 좋아하는 사람 있나요?( ͡° ͜ʖ ͡°)">요즘 좋아하는 사람 있나요?( ͡° ͜ʖ ͡°) </option>
-            <option value="현재 가장 큰 고민은 무엇인가요?">현재 가장 큰 고민은 무엇인가요?</option>
-            <option value="100억이 주어졌을 때 어떤 것을 제일 하고 싶나요?">100억이 주어졌을 때 어떤 것을 제일 하고 싶나요?</option>
-            <option value="오늘 컨디션이 좋았나요?">오늘 컨디션이 좋았나요?</option>
-            <option value="오늘 하루를 한 단어로 표현하자면?">오늘 하루를 한 단어로 표현하자면?</option>
-            <option value="오늘 누구를 만났나요?">오늘 누구를 만났나요?</option>
-          </select>
-        </div>
-        <div class="Answer">
-
-          <p><input type="text" placeholder="A. " class="WriteAnswer"  name="answer"/></p>
-
-          <input type="submit" id="simple-submit" value="등록" class="buttons" name="content" onclick="document.getElementById('simple-submit').submit();" />
-        </div>
+            <input
+              type="submit"
+              id="simple-submit"
+              value="등록"
+              class="buttons"
+              name="content"
+              onclick="document.getElementById('simple-submit').submit();"
+            />
+          </div>
         </form>
       </div>
-
     </div>
 
     <div class="calendar">
@@ -273,8 +346,9 @@
       document.getElementById("after_login").style.display = "block";
     }
 
-    const selectBox = document.getElementById('selectQuestion');
-    const randomIdx = Math.floor(Math.random()*(selectBox.options.length -1))+1;
-    selectBox.options[randomIdx].selected=true;
+    const selectBox = document.getElementById("selectQuestion");
+    const randomIdx =
+      Math.floor(Math.random() * (selectBox.options.length - 1)) + 1;
+    selectBox.options[randomIdx].selected = true;
   </script>
 </html>

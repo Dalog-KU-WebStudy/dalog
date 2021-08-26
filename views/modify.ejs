@@ -1,263 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>정보수정</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="../css/modify.css">
-        <link rel="stylesheet" type="text/css" href="../css/index.css">
-        <link href='https://spoqa.github.io/spoqa-han-sans/' rel='stylesheet' type='text/css'>
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-        <script src="./modify.js" defer></script>
-    </head>
-    <body>
-      <script>
-        console.dir('<%=profile%>')
-        let profile = "<%=JSON.stringify(profile)%>";
-        profile = profile.replaceAll('&#34;','\"');
-        profile = JSON.parse(profile);
-        console.dir(profile);
-        
-        let birth, phone;
-        if (profile.birth) {
-          birth = profile.birth.split('-');
-          console.log(birth);
-        }
-        if (profile.phone) {
-          phone = profile.phone.replaceAll('-','');
-        }
-        const provider = profile.provider;
-        
-        let board = '<%=board%>';
-        if(!board){
-          board = 'grid';
-        }
-      </script>
-
-        <header class="header">
-            <div class="wrapper">
-              <img
-                src="../media/logo4.jpg"
-                class="logo"
-                onclick="location.href='/'"
-                style="cursor: pointer"
-              />
-              <form action="/" method="post" id="title_form">
-                <input
-                  id="titleInput"
-                  name="titleInput"
-                  class="dalog-title"
-                  type="text"
-                  value="메인페이지에서만 수정이 가능합니다!"
-                  onfocus="document.getElementById('title-submit').style.visibility='visible';document.getElementById('title-submit').style.opacity=1;"
-                  onblur="document.getElementById('title-submit').style.opacity=0;"
-                  title="메인페이지에서만 수정이 가능합니다."
-                  disabled
-                />
-                <input type="image" id="title-submit" class="title-submit" src="../media/title-edit.png" value="" onclick="document.getElementById('title_form').submit();"/>
-              </form>
-              <script>
-                if(profile){
-                  document.getElementById("titleInput").value = profile.title;
-                }
-              </script>
-              <nav>
-                <ul class="main-menu">
-                  <li>
-                    <a
-                      href="/diary/write"
-                      target="_self"
-                      style="text-decoration: none; cursor: pointer"
-                    >
-                      <img
-                        src="../media/write.png"
-                        class="write"
-                        style="cursor: pointer;"
-                        alt="글쓰기"
-                      />
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/diary/board_<%=board%>"
-                      target="_self"
-                      style="text-decoration: none; cursor: pointer"
-                    >
-                      <img
-                        src="../media/board.png"
-                        class="board"
-                        style="cursor: pointer;"
-                        alt="게시판"
-                      />
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><img
-                        src="../media/profile.png"
-                        style="cursor: pointer;"
-                    /></a>
-                    <ul class="sub-menu">
-                      <li>
-                        <a
-                          href="/user/modify"
-                          target="_self"
-                          style="text-decoration: none; cursor: pointer"
-                          >정보수정</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="/user/logout"
-                          target="_self"
-                          style="text-decoration: none; cursor: pointer"
-                          >로그아웃</a
-                        >
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </header>
-          <div class="mod-form">
-            <p style="font-size: 3rem; color: #104c7c; font-weight: bold; font-family: 'Noto Serif KR', sans-serif; margin-bottom: 5rem;">회원정보 수정</p>
-            
-            <form action="/user/modify" method="post">
-              <!-- PW1 -->
-              <div class="password_area" id="pw1">
-                  <h3 class="join_title"><label for="pswd1">현재 비밀번호</label></h3>
-                  <span class="box int_pass">
-                      <input type="password" id="old_pswd1" name="now_password" class="int" maxlength="20" placeholder="현재 비밀번호" style="outline: none;">
-                      <i class="fa fa-eye fa-lg" id="togglePw1"></i>
-                      <span id="alertTxt">불일치</span>
-                  </span>
-                  <span class="error_next_box"></span>
-              </div>
-
-              <!-- PW2 -->
-              <div class="password_area" id="pw2">
-                  <h3 class="join_title"><label for="pswd1">새 비밀번호</label></h3>
-                  <span class="box int_pass">
-                      <input type="password" id="new_pswd1" class="int" name="new_password" maxlength="20" placeholder="새 비밀번호" style="outline: none;">
-                      <i class="fa fa-eye fa-lg" id="togglePw2"></i>
-                      <span id="alertTxt_new"></span>
-                  </span>
-                  <span class="error_next_box"></span>
-              </div>
-
-              <div class="password_area"  id="pw3">
-                  <h3 class="join_title"><label for="pswd2">비밀번호 재확인</label></h3>
-                  <span class="box int_pass_check">
-                      <input type="password" id="new_pswd2" class="int" maxlength="20" placeholder="비밀번호 확인" style="outline: none;">
-                      <i class="fa fa-eye fa-lg" id="togglePw3"></i>
-                  </span>
-                  <span class="error_next_box"></span>
-              </div>
-
-              <!-- BIRTH -->
-              <div>
-                  <h3 class="join_title"><label for="yy">생년월일</label></h3>
-
-                  <div id="bir_wrap">
-                      <!-- BIRTH_YY -->
-                      <div id="bir_yy">
-                          <span class="box">
-                              <input type="text" id="yy" class="int" name="yy" maxlength="4" placeholder="년(4자)" style="outline: none;">
-                          </span>
-                      </div>
-
-                      <!-- BIRTH_MM -->
-                      <div id="bir_mm">
-                          <span class="box">
-                              <select id="mm" class="sel" name="mm">
-                                  <option>월</option>
-                                  <option value="01">1</option>
-                                  <option value="02">2</option>
-                                  <option value="03">3</option>
-                                  <option value="04">4</option>
-                                  <option value="05">5</option>
-                                  <option value="06">6</option>
-                                  <option value="07">7</option>
-                                  <option value="08">8</option>
-                                  <option value="09">9</option>                                    
-                                  <option value="10">10</option>
-                                  <option value="11">11</option>
-                                  <option value="12">12</option>
-                              </select>
-                          </span>
-                      </div>
-
-                      <!-- BIRTH_DD -->
-                      <div id="bir_dd">
-                          <span class="box">
-                              <input type="text" id="dd" class="int" name="dd" maxlength="2" placeholder="일" style="outline: none;">
-                          </span>
-                      </div>
-
-                  </div>
-                  <span class="error_next_box"></span>    
-              </div>
-
-              <!-- NAME -->
-              <div>
-                  <h3 class="join_title"><label for="namel">이름</label></h3>
-                  <span class="box int_name">
-                      <input type="text" id="name" class="int" name="user_name" maxlength="20" placeholder="이름 입력" style="outline: none;" value="<%=profile.user_name%>">
-                  </span>
-                  <span class="error_next_box" id="pswd2Msg" style aria-live="assertive"></span>    
-              </div>
-
-              <!-- MOBILE -->
-              <div>
-                  <h3 class="join_title"><label for="phoneNo">휴대전화 ('-' 제외하고 입력)</label></h3>
-                  <span class="box int_mobile">
-                      <input type="tel" id="mobile" class="int" name="phone" maxlength="16" placeholder="전화번호 입력" style="outline: none;" >
-                  </span>
-                  <span class="error_next_box"></span>    
-              </div>
-
-
-              <!-- MODIFY BTN-->
-              <div class="btn_area">
-                  <input type="submit" id="btnMod" value="수정하기">
-              </div>
-            </form>
-
-            <div id="delete_area">
-              <form action="/user/delete" method="POST" onsubmit="return confirm('정말로 탈퇴하시겠습니까?')">
-                <input type="submit" id="delete_btn" value="회원탈퇴">
-              </form>
-            </div>
-        </div> 
-    </body>
+  <head>
+    <title>정보수정</title>
+    <meta charset="utf-8" />
+    <meta
+      property="og:image"
+      content="https://images.velog.io/images/sukong/post/95c0e965-340a-47af-b7f6-c071ff45958e/image.png"
+    />
+    <meta property="og:description" content="간편하게 작성하는 일기, 달:로그" />
+    <meta property="og:title" content="달:로그" />
+    <meta property="og:site_name" content="달:로그" />
+    <meta property="og:type" content="website" />
+    <link rel="stylesheet" type="text/css" href="../css/modify.css" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+    <link
+      href="https://spoqa.github.io/spoqa-han-sans/"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
+    <script src="./modify.js" defer></script>
+  </head>
+  <body>
     <script>
-      if(birth){
-        if(birth[0]!='0000'){
-          document.getElementById('yy').value = birth[0];
-        }
-        if(birth[2]!='00'){
-          document.getElementById('dd').value = birth[2];
-        }
-        const selectBox = document.getElementById('mm');
-        for (i=0; i<13; i++){
-          if(selectBox.options[i].value==birth[1]){
-            selectBox.options[i].selected=true;
-            console.log(i);
-          }
-        }
-      }
-      if(phone){
-        document.getElementById('mobile').value = phone;
-      }
-      if(provider=='naver' || provider=='kakao' || provider=='google'){
-        console.log('password_area 삭제' + provider);
-        const password_area = document.getElementsByClassName('password_area');
-        for(i=0; i<3; i++){
-          password_area[i].style.display = 'none';
-        }
-      }
+      console.dir("<%=profile%>");
+      let profile = "<%=JSON.stringify(profile)%>";
+      profile = profile.replaceAll("&#34;", '"');
+      profile = JSON.parse(profile);
+      console.dir(profile);
 
+      let birth, phone;
+      if (profile.birth) {
+        birth = profile.birth.split("-");
+        console.log(birth);
+      }
+      if (profile.phone) {
+        phone = profile.phone.replaceAll("-", "");
+      }
+      const provider = profile.provider;
+
+      let board = "<%=board%>";
+      if (!board) {
+        board = "grid";
+      }
     </script>
+
+    <header class="header">
+      <div class="wrapper">
+        <img
+          src="../media/logo4.jpg"
+          class="logo"
+          onclick="location.href='/'"
+          style="cursor: pointer"
+        />
+        <form action="/" method="post" id="title_form">
+          <input
+            id="titleInput"
+            name="titleInput"
+            class="dalog-title"
+            type="text"
+            value="메인페이지에서만 수정이 가능합니다!"
+            onfocus="document.getElementById('title-submit').style.visibility='visible';document.getElementById('title-submit').style.opacity=1;"
+            onblur="document.getElementById('title-submit').style.opacity=0;"
+            title="메인페이지에서만 수정이 가능합니다."
+            disabled
+          />
+          <input
+            type="image"
+            id="title-submit"
+            class="title-submit"
+            src="../media/title-edit.png"
+            value=""
+            onclick="document.getElementById('title_form').submit();"
+          />
+        </form>
+        <script>
+          if (profile) {
+            document.getElementById("titleInput").value = profile.title;
+          }
+        </script>
+        <nav>
+          <ul class="main-menu">
+            <li>
+              <a
+                href="/diary/write"
+                target="_self"
+                style="text-decoration: none; cursor: pointer"
+              >
+                <img
+                  src="../media/write.png"
+                  class="write"
+                  style="cursor: pointer"
+                  alt="글쓰기"
+                />
+              </a>
+            </li>
+            <li>
+              <a
+                href="/diary/board_<%=board%>"
+                target="_self"
+                style="text-decoration: none; cursor: pointer"
+              >
+                <img
+                  src="../media/board.png"
+                  class="board"
+                  style="cursor: pointer"
+                  alt="게시판"
+                />
+              </a>
+            </li>
+            <li>
+              <a href="#"
+                ><img src="../media/profile.png" style="cursor: pointer"
+              /></a>
+              <ul class="sub-menu">
+                <li>
+                  <a
+                    href="/user/modify"
+                    target="_self"
+                    style="text-decoration: none; cursor: pointer"
+                    >정보수정</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/user/logout"
+                    target="_self"
+                    style="text-decoration: none; cursor: pointer"
+                    >로그아웃</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="mod-form">
+      <p
+        style="
+          font-size: 3rem;
+          color: #104c7c;
+          font-weight: bold;
+          font-family: 'Noto Serif KR', sans-serif;
+          margin-bottom: 5rem;
+        "
+      >
+        회원정보 수정
+      </p>
+
+      <form action="/user/modify" method="post">
+        <!-- PW1 -->
+        <div class="password_area" id="pw1">
+          <h3 class="join_title"><label for="pswd1">현재 비밀번호</label></h3>
+          <span class="box int_pass">
+            <input
+              type="password"
+              id="old_pswd1"
+              name="now_password"
+              class="int"
+              maxlength="20"
+              placeholder="현재 비밀번호"
+              style="outline: none"
+            />
+            <i class="fa fa-eye fa-lg" id="togglePw1"></i>
+            <span id="alertTxt">불일치</span>
+          </span>
+          <span class="error_next_box"></span>
+        </div>
+
+        <!-- PW2 -->
+        <div class="password_area" id="pw2">
+          <h3 class="join_title"><label for="pswd1">새 비밀번호</label></h3>
+          <span class="box int_pass">
+            <input
+              type="password"
+              id="new_pswd1"
+              class="int"
+              name="new_password"
+              maxlength="20"
+              placeholder="새 비밀번호"
+              style="outline: none"
+            />
+            <i class="fa fa-eye fa-lg" id="togglePw2"></i>
+            <span id="alertTxt_new"></span>
+          </span>
+          <span class="error_next_box"></span>
+        </div>
+
+        <div class="password_area" id="pw3">
+          <h3 class="join_title"><label for="pswd2">비밀번호 재확인</label></h3>
+          <span class="box int_pass_check">
+            <input
+              type="password"
+              id="new_pswd2"
+              class="int"
+              maxlength="20"
+              placeholder="비밀번호 확인"
+              style="outline: none"
+            />
+            <i class="fa fa-eye fa-lg" id="togglePw3"></i>
+          </span>
+          <span class="error_next_box"></span>
+        </div>
+
+        <!-- BIRTH -->
+        <div>
+          <h3 class="join_title"><label for="yy">생년월일</label></h3>
+
+          <div id="bir_wrap">
+            <!-- BIRTH_YY -->
+            <div id="bir_yy">
+              <span class="box">
+                <input
+                  type="text"
+                  id="yy"
+                  class="int"
+                  name="yy"
+                  maxlength="4"
+                  placeholder="년(4자)"
+                  style="outline: none"
+                />
+              </span>
+            </div>
+
+            <!-- BIRTH_MM -->
+            <div id="bir_mm">
+              <span class="box">
+                <select id="mm" class="sel" name="mm">
+                  <option>월</option>
+                  <option value="01">1</option>
+                  <option value="02">2</option>
+                  <option value="03">3</option>
+                  <option value="04">4</option>
+                  <option value="05">5</option>
+                  <option value="06">6</option>
+                  <option value="07">7</option>
+                  <option value="08">8</option>
+                  <option value="09">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                </select>
+              </span>
+            </div>
+
+            <!-- BIRTH_DD -->
+            <div id="bir_dd">
+              <span class="box">
+                <input
+                  type="text"
+                  id="dd"
+                  class="int"
+                  name="dd"
+                  maxlength="2"
+                  placeholder="일"
+                  style="outline: none"
+                />
+              </span>
+            </div>
+          </div>
+          <span class="error_next_box"></span>
+        </div>
+
+        <!-- NAME -->
+        <div>
+          <h3 class="join_title"><label for="namel">이름</label></h3>
+          <span class="box int_name">
+            <input
+              type="text"
+              id="name"
+              class="int"
+              name="user_name"
+              maxlength="20"
+              placeholder="이름 입력"
+              style="outline: none"
+              value="<%=profile.user_name%>"
+            />
+          </span>
+          <span
+            class="error_next_box"
+            id="pswd2Msg"
+            style
+            aria-live="assertive"
+          ></span>
+        </div>
+
+        <!-- MOBILE -->
+        <div>
+          <h3 class="join_title">
+            <label for="phoneNo">휴대전화 ('-' 제외하고 입력)</label>
+          </h3>
+          <span class="box int_mobile">
+            <input
+              type="tel"
+              id="mobile"
+              class="int"
+              name="phone"
+              maxlength="16"
+              placeholder="전화번호 입력"
+              style="outline: none"
+            />
+          </span>
+          <span class="error_next_box"></span>
+        </div>
+
+        <!-- MODIFY BTN-->
+        <div class="btn_area">
+          <input type="submit" id="btnMod" value="수정하기" />
+        </div>
+      </form>
+
+      <div id="delete_area">
+        <form
+          action="/user/delete"
+          method="POST"
+          onsubmit="return confirm('정말로 탈퇴하시겠습니까?')"
+        >
+          <input type="submit" id="delete_btn" value="회원탈퇴" />
+        </form>
+      </div>
+    </div>
+  </body>
+  <script>
+    if (birth) {
+      if (birth[0] != "0000") {
+        document.getElementById("yy").value = birth[0];
+      }
+      if (birth[2] != "00") {
+        document.getElementById("dd").value = birth[2];
+      }
+      const selectBox = document.getElementById("mm");
+      for (i = 0; i < 13; i++) {
+        if (selectBox.options[i].value == birth[1]) {
+          selectBox.options[i].selected = true;
+          console.log(i);
+        }
+      }
+    }
+    if (phone) {
+      document.getElementById("mobile").value = phone;
+    }
+    if (provider == "naver" || provider == "kakao" || provider == "google") {
+      console.log("password_area 삭제" + provider);
+      const password_area = document.getElementsByClassName("password_area");
+      for (i = 0; i < 3; i++) {
+        password_area[i].style.display = "none";
+      }
+    }
+  </script>
 </html>

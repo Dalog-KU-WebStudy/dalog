@@ -1,126 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>달:로그</title>
     <meta charset="utf-8" />
+    <meta
+      property="og:image"
+      content="https://images.velog.io/images/sukong/post/95c0e965-340a-47af-b7f6-c071ff45958e/image.png"
+    />
+    <meta property="og:description" content="간편하게 작성하는 일기, 달:로그" />
+    <meta property="og:title" content="달:로그" />
+    <meta property="og:site_name" content="달:로그" />
+    <meta property="og:type" content="website" />
     <link rel="stylesheet" type="text/css" href="/css/index.css" />
-    <link rel="stylesheet" type="text/css" href="/css/view.css">
-    <link href="https://spoqa.github.io/spoqa-han-sans/" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/css/view.css" />
+    <link
+      href="https://spoqa.github.io/spoqa-han-sans/"
+      rel="stylesheet"
+      type="text/css"
+    />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet" />
-    
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
+  <body>
     <script>
-        console.dir('<%=profile%>')
-        let profile = "<%=JSON.stringify(profile)%>";
-        if(profile){
-        profile = profile.replaceAll('&#34;','\"');
+      console.dir("<%=profile%>");
+      let profile = "<%=JSON.stringify(profile)%>";
+      if (profile) {
+        profile = profile.replaceAll("&#34;", '"');
         profile = JSON.parse(profile);
         console.dir(profile);
-        }
-        
-        const id = '<%=id%>';
+      }
 
-        let board = '<%=board%>';
-        if(!board){
-            board = 'grid';
-        }
+      const id = "<%=id%>";
+
+      let board = "<%=board%>";
+      if (!board) {
+        board = "grid";
+      }
     </script>
     <header class="header">
-        <div class="wrapper">
-            <img src="/media/logo4.jpg" class="logo" onclick="location.href='/'" style="cursor: pointer" />
-            <form action="/" method="post" id="title_form">
-                <input
-                    id="titleInput"
-                    name="titleInput"
-                    class="dalog-title"
-                    type="text"
-                    value="메인페이지에서만 수정이 가능합니다!"
-                    onfocus="document.getElementById('title-submit').style.visibility='visible';document.getElementById('title-submit').style.opacity=1;"
-                    onblur="document.getElementById('title-submit').style.opacity=0;"
-                    title="메인페이지에서만 수정이 가능합니다."
-                    disabled
-                />
-                <input type="image" id="title-submit" class="title-submit" src="/media/title-edit.png" value="" onclick="document.getElementById('title_form').submit();"/>
-            </form>
-            <script>
-            if(profile){
-                document.getElementById("titleInput").value = profile.title;
-            }
-            </script>
+      <div class="wrapper">
+        <img
+          src="/media/logo4.jpg"
+          class="logo"
+          onclick="location.href='/'"
+          style="cursor: pointer"
+        />
+        <form action="/" method="post" id="title_form">
+          <input
+            id="titleInput"
+            name="titleInput"
+            class="dalog-title"
+            type="text"
+            value="메인페이지에서만 수정이 가능합니다!"
+            onfocus="document.getElementById('title-submit').style.visibility='visible';document.getElementById('title-submit').style.opacity=1;"
+            onblur="document.getElementById('title-submit').style.opacity=0;"
+            title="메인페이지에서만 수정이 가능합니다."
+            disabled
+          />
+          <input
+            type="image"
+            id="title-submit"
+            class="title-submit"
+            src="/media/title-edit.png"
+            value=""
+            onclick="document.getElementById('title_form').submit();"
+          />
+        </form>
+        <script>
+          if (profile) {
+            document.getElementById("titleInput").value = profile.title;
+          }
+        </script>
 
-            <nav>
-                <ul class="main-menu">
-                    <li>
-                        <a href="/diary/write" target="_self" style="text-decoration: none; cursor: pointer">
-                            <img src="/media/write.png" class="write" style="cursor: pointer;" alt="글쓰기" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/diary/board_<%=board%>" target="_self" style="text-decoration: none; cursor: pointer">
-                            <img src="/media/board.png" class="board" style="cursor: pointer;" alt="게시판" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="/media/profile.png" style="cursor: pointer;" /></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="/user/modify" target="_self"
-                                    style="text-decoration: none; cursor: pointer">정보수정</a>
-                            </li>
-                            <li>
-                                <a href="/user/logout" target="_self"
-                                    style="text-decoration: none; cursor: pointer">로그아웃</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+        <nav>
+          <ul class="main-menu">
+            <li>
+              <a
+                href="/diary/write"
+                target="_self"
+                style="text-decoration: none; cursor: pointer"
+              >
+                <img
+                  src="/media/write.png"
+                  class="write"
+                  style="cursor: pointer"
+                  alt="글쓰기"
+                />
+              </a>
+            </li>
+            <li>
+              <a
+                href="/diary/board_<%=board%>"
+                target="_self"
+                style="text-decoration: none; cursor: pointer"
+              >
+                <img
+                  src="/media/board.png"
+                  class="board"
+                  style="cursor: pointer"
+                  alt="게시판"
+                />
+              </a>
+            </li>
+            <li>
+              <a href="#"
+                ><img src="/media/profile.png" style="cursor: pointer"
+              /></a>
+              <ul class="sub-menu">
+                <li>
+                  <a
+                    href="/user/modify"
+                    target="_self"
+                    style="text-decoration: none; cursor: pointer"
+                    >정보수정</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/user/logout"
+                    target="_self"
+                    style="text-decoration: none; cursor: pointer"
+                    >로그아웃</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
-
     <div id="container">
-        <div id="wrap">
-            <div id="layout_head">
-                <div id="layout_left">
-                    <div id="date">
-                        <p></p>
-                    </div>
-                    <div id="title">
-                        <p></p>
-                    </div>
-                </div>
-                <div id="weather_box">
-                   
-                    <div id="weather">
-                        <img />
-                    </div>
-                </div>
+      <div id="wrap">
+        <div id="layout_head">
+          <div id="layout_left">
+            <div id="date">
+              <p></p>
             </div>
-            <div id="photo">
-                <img alt="오늘의 사진" title="오늘의 사진">
+            <div id="title">
+              <p></p>
             </div>
-            <div id="content">
-                <p></p>
+          </div>
+          <div id="weather_box">
+            <div id="weather">
+              <img />
             </div>
+          </div>
         </div>
-        <div id="edit_delete">
-            <div id="edit">
-                <button id="edit_btn" onclick="location.href=`/diary/edit/<%=id%>`">수정</button>
-            </div>
-            <form id="delete" method="POST" action="/diary/delete" onsubmit="return confirm('정말로 삭제하시겠습니까?')">
-                <input type="hidden" name="diary_id" value="<%=id%>">
-                <button id="delete_btn">삭제</button>
-            </form>
+        <div id="photo">
+          <img alt="오늘의 사진" title="오늘의 사진" />
         </div>
+        <div id="content">
+          <p></p>
+        </div>
+      </div>
+      <div id="edit_delete">
+        <div id="edit">
+          <button id="edit_btn" onclick="location.href=`/diary/edit/<%=id%>`">
+            수정
+          </button>
+        </div>
+        <form
+          id="delete"
+          method="POST"
+          action="/diary/delete"
+          onsubmit="return confirm('정말로 삭제하시겠습니까?')"
+        >
+          <input type="hidden" name="diary_id" value="<%=id%>" />
+          <button id="delete_btn">삭제</button>
+        </form>
+      </div>
     </div>
-</body>
-<script>
+  </body>
+  <script>
     let url = `http://ec2-13-124-209-233.ap-northeast-2.compute.amazonaws.com:3000/diary/view/${id}`;
-</script>
-<script src="/diary/view.js"></script>
+  </script>
+  <script src="/diary/view.js"></script>
 </html>

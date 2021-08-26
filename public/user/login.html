@@ -1,45 +1,98 @@
 <!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <title>로그인</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="../css/login.css">
-        <link href='https://spoqa.github.io/spoqa-han-sans/' rel='stylesheet' type='text/css'>
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <img src="../media/logo.jpg" style="margin-left: auto; margin-right: auto; display: block; width:350px; height:350px;"/>
-        <form action="/user/login" method="post" class="loginForm">
-            <div class="idForm">
-                <input type="text" class="id" placeholder="ID" name="email">
-            </div>
-            <div class="passForm">
-                <input type="password" class="pw" placeholder="PW" name="password">
-            </div>
-            <button type="submit" class="btn" >
-                로그인
-            </button>
-        </form>
-        <!--회원가입-->
-        <div class="join">
-            <a href="/user/join" target="_self" style="cursor: pointer; font-family: 'Noto Serif KR', sans-serif; font-size: 15px; margin-top: 18rem;">
-                회원가입
-            </a>
-        </div>
-        <!--소셜 로그인 -->
-        <div class="sns-login">
-            <a href="/login/naver" target="_self" style="text-decoration: none;">
-                <img src="../media/naver-login.png" style="width: 7rem; height: 7rem; display:inline-block;">
-            </a>
-            <a href="/login/kakao" target="_self" style="text-decoration: none;" class="kakao-login">
-                <img src="../media/kakao-login.png" style="width: 7rem; height: 7rem; display:inline-block; margin-left: 0.4rem;">
-            </a>
-            <a href="/login/google" target="_self" style="text-decoration: none;">
-                <img src="../media/google-login.png" style="width: 7rem; height: 7rem; display:inline-block; margin-left: 0.4rem;">
-            </a>
-        </div>
-    </body>
-
-
+<html lang="en">
+  <head>
+    <title>로그인</title>
+    <meta charset="utf-8" />
+    <meta
+      property="og:image"
+      content="https://images.velog.io/images/sukong/post/95c0e965-340a-47af-b7f6-c071ff45958e/image.png"
+    />
+    <meta property="og:description" content="간편하게 작성하는 일기, 달:로그" />
+    <meta property="og:title" content="달:로그" />
+    <meta property="og:site_name" content="달:로그" />
+    <meta property="og:type" content="website" />
+    <link rel="stylesheet" type="text/css" href="../css/login.css" />
+    <link
+      href="https://spoqa.github.io/spoqa-han-sans/"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <img
+      src="../media/logo.jpg"
+      style="
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        width: 350px;
+        height: 350px;
+      "
+    />
+    <form action="/user/login" method="post" class="loginForm">
+      <div class="idForm">
+        <input type="text" class="id" placeholder="ID" name="email" />
+      </div>
+      <div class="passForm">
+        <input type="password" class="pw" placeholder="PW" name="password" />
+      </div>
+      <button type="submit" class="btn">로그인</button>
+    </form>
+    <!--회원가입-->
+    <div class="join">
+      <a
+        href="/user/join"
+        target="_self"
+        style="
+          cursor: pointer;
+          font-family: 'Noto Serif KR', sans-serif;
+          font-size: 15px;
+          margin-top: 18rem;
+        "
+      >
+        회원가입
+      </a>
+    </div>
+    <!--소셜 로그인 -->
+    <div class="sns-login">
+      <a href="/login/naver" target="_self" style="text-decoration: none">
+        <img
+          src="../media/naver-login.png"
+          style="width: 7rem; height: 7rem; display: inline-block"
+        />
+      </a>
+      <a
+        href="/login/kakao"
+        target="_self"
+        style="text-decoration: none"
+        class="kakao-login"
+      >
+        <img
+          src="../media/kakao-login.png"
+          style="
+            width: 7rem;
+            height: 7rem;
+            display: inline-block;
+            margin-left: 0.4rem;
+          "
+        />
+      </a>
+      <a href="/login/google" target="_self" style="text-decoration: none">
+        <img
+          src="../media/google-login.png"
+          style="
+            width: 7rem;
+            height: 7rem;
+            display: inline-block;
+            margin-left: 0.4rem;
+          "
+        />
+      </a>
+    </div>
+  </body>
 </html>
