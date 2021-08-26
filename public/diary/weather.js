@@ -2,26 +2,26 @@ const main = document.getElementsByClassName("main");
 const datepicker = document.getElementsByClassName("datepicker");
 
 // 위치정보를 얻어오는 함수
-function getLocation() {
-  if (navigator.geolocation) { // GPS를 지원하면
-    navigator.geolocation.getCurrentPosition(function (position) {
-      let latitude = position.coords.latitude.toFixed(4),
-        longitude = position.coords.longitude.toFixed(4);
-      return getWeatherData(latitude, longitude);
-    }, function (error) {
-      console.error(error);
-    });
-  } else {
-    alert('GPS를 지원하지 않습니다');
-  }
-}
+// function getLocation() {
+//   if (navigator.geolocation) { // GPS를 지원하면
+//     navigator.geolocation.getCurrentPosition(function (position) {
+//       let latitude = position.coords.latitude.toFixed(4),
+//         longitude = position.coords.longitude.toFixed(4);
+//       return getWeatherData(latitude, longitude);
+//     }, function (error) {
+//       console.error(error);
+//     });
+//   } else {
+//     alert('GPS를 지원하지 않습니다');
+//   }
+// }
 
 // 해당 위치에 맞는 날씨 정보 받아오기
 const getWeatherData = async (lat, lon) => {
 
   key = '44e3a7220a403c04981ae33f1d716f4e';
   const data = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}`
+    `https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=${key}`
   );
 
   // 전체적인 날씨 정보 출력
