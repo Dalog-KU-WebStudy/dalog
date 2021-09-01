@@ -95,9 +95,12 @@ router.post('/user/modify', function(req,res){
                     console.log(result[0].user_pw, now_userpw);
                     const same = bcrypt.compareSync(now_userpw, result[0].user_pw);
                     console.log(same);
-                    if(!same){
+                    if(!now_userpw) {
+                        res.send("<script>alert('현재 비밀번호를 입력해주세요.');history.back();</script>");
+                    }
+                    else if(!same){
                         console.log('현재 비밀번호 일치하지 않음');
-                        res.send("<script>alert('현재 비밀번호가 일치하지 않습니다.');location.href='/user/modify';</script>");
+                        res.send("<script>alert('현재 비밀번호가 일치하지 않습니다.');history.back();</script>");
                     } else {
                         if(!user_pw){
                             console.log('현재 비밀번호 입력하지 않음');
